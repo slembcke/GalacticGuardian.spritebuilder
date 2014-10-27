@@ -17,24 +17,79 @@
 //#import "Asteroid.h"
 #import "Joystick.h"
 
+
+static CGSize GameSceneSize = {1024, 1024};
+
+enum ZORDER {
+	Z_SCROLL_NODE,
+	Z_NEBULA,
+	Z_PHYSICS,
+	Z_JOYSTICK,
+};
+
+
 @implementation GameScene
 {
-	NebulaBackground *_background;
-	CCTime _time;
-	CCParticleSystem *particles;
-	
+	CCNode *_scrollNode;
 	CCPhysicsNode *_physics;
-	
-	PlayerShip *_ship;
-	
-	NSMutableArray *_enemies;
-	NSMutableArray *_bullets;
+	NebulaBackground *_background;
 	
 	Joystick *_joystick;
+	PlayerShip *_playerShip;
 	
-	NSUInteger _destroyedCount;
+	NSMutableArray *_enemies;
+}
+
+-(instancetype)initWithShipType:(NSString *)shipType
+{
+	if((self = [super init])){
+		CGFloat joystickOffset = [CCDirector sharedDirector].viewSize.width/4.0;
+		_joystick = [[Joystick alloc] initWithSize:joystickOffset];
+		_joystick.position = ccp(joystickOffset, joystickOffset);
+		[self addChild:_joystick z:Z_JOYSTICK];
+		
+		_scrollNode = [CCNode node];
+		[self addChild:_scrollNode z:Z_SCROLL_NODE];
+		
+		NebulaBackground *nebula = [NebulaBackground node];
+		nebula.contentSize = GameSceneSize;
+		[_scrollNode addChild:nebula z:Z_NEBULA];
+		
+		_physics = [CCPhysicsNode node];
+		[_scrollNode addChild:_physics z:Z_PHYSICS];
+		
+		_enemies = [NSMutableArray array];
+		
+		// Use the gamescene as the collision delegate.
+		// See the ccPhysicsCollision* methods below.
+		_physics.collisionDelegate = self;
+		
+		// Enable to show debug outlines for Physics shapes.
+		_physics.debugDraw = YES;
+		
+		// Add a ship in the middle of the screen.
+		_playerShip = (PlayerShip *)[CCBReader load:shipType];
+		_playerShip.position = ccp(GameSceneSize.width/2.0, GameSceneSize.height/2.0);
+		[_physics addChild:_playerShip];
+		
+		// Enable touch events.
+		// The entire scene is used as a shoot button.
+		self.userInteractionEnabled = YES;
+	}
 	
-	CCLabelTTF *_warningLabel, *_scoreLabel;
+	return self;
+}
+
+-(void)fixedUpdate:(CCTime)delta
+{
+	// Fly the ship using the joystick controls.
+//	[_playerShip fixedUpdate:delta withInput:_joystick.value];
+	
+	
+	for (EnemyShip *e in _enemies) {
+		[e fixedUpdate:delta towardsPlayer:_playerShip.position];
+	}
+	
 }
 
 /*
@@ -64,49 +119,6 @@
 }
  */
 
--(void)onEnter
-{	
-	CGSize size = self.contentSizeInPoints;
-	CGPoint center = ccp(size.width/2, size.height/2);
-	
-	// Add a ship in the middle of the screen.
-	_ship = (PlayerShip *)[CCBReader load:_selectedPlayerShip];
-	_ship.position = center;
-	[_physics addChild:_ship];
-	
-	// Reset the bullets and asteroids.
-	_enemies = [NSMutableArray array];
-	_bullets = [NSMutableArray array];
-	
-	CGFloat joystickOffset = [CCDirector sharedDirector].viewSize.width/4.0;
-	_joystick = [[Joystick alloc] initWithSize:joystickOffset];
-	_joystick.position = ccp(joystickOffset, joystickOffset);
-	[self addChild:_joystick];
-	
-	// Use the gamescene as the collision delegate.
-	// See the ccPhysicsCollision* methods below.
-//	_physics.collisionDelegate = self;
-	
-	// Enable to show debug outlines for Physics shapes.
-	//	_physics.debugDraw = YES;
-	
-	// Enable touch events.
-	// The entire scene is used as a shoot button.
-	self.userInteractionEnabled = YES;
-	
-	[super onEnter];
-}
-
--(void)fixedUpdate:(CCTime)delta
-{
-	// Fly the ship using the joystick controls.
-	[_ship fixedUpdate:delta withInput:_joystick.value];
-	
-	for (EnemyShip *e in _enemies) {
-		[e fixedUpdate:delta towardsPlayer:_ship.position];
-	}
-	
-}
 
 /*
 -(void)destroyBullet:(Bullet *)bullet
@@ -217,12 +229,6 @@ InitDebris(CCNode *node, CGPoint velocity)
 	NSLog(@"BANG BANG BANG!");
 //	[self fireBullet];
 }
-
--(void)update:(CCTime)delta
-{
-	_time += delta;
-}
-
 
 //MARK CCPhysicsCollisionDelegate methods
 

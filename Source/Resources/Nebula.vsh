@@ -11,6 +11,7 @@ void main(){
 	// Use UV2 for the screen space distortion map tex coords.
 	cc_FragTexCoord2 = 0.5 + gl_Position.xy*(0.5/gl_Position.w);
 	
+	// TODO doesn't respect the view's aspect ratio.
 	// Use a custom varying to pass the parallax offset.
 	v_ParallaxOffset = gl_Position.xy*(u_ParallaxAmount/gl_Position.w);
 	
