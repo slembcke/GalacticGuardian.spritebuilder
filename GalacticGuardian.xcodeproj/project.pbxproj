@@ -12,6 +12,10 @@
 		5B12102A197484DD004C1E1D /* GalacticGuardianActivity.java in Sources */ = {isa = PBXBuildFile; fileRef = 5B12101B19748413004C1E1D /* GalacticGuardianActivity.java */; };
 		5B121030197484FA004C1E1D /* GalacticGuardianActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B12102F197484FA004C1E1D /* GalacticGuardianActivity.m */; };
 		5B121038197487F2004C1E1D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B737893E1807617C0076A88C /* AppDelegate.m */; };
+		75058A3119FEC27F001AA9C6 /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 75058A3019FEC27F001AA9C6 /* GameScene.m */; };
+		75058A3219FEC27F001AA9C6 /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 75058A3019FEC27F001AA9C6 /* GameScene.m */; };
+		75058A3319FEC27F001AA9C6 /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 75058A3019FEC27F001AA9C6 /* GameScene.m */; };
+		75058A3419FEC27F001AA9C6 /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 75058A3019FEC27F001AA9C6 /* GameScene.m */; };
 		7A046D8C19E8A20E004C4763 /* MainMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = B7378993180767190076A88C /* MainMenu.m */; };
 		7A40360419DDEE84007B6E8F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A40360319DDEE84007B6E8F /* main.m */; };
 		7A4036E819DE3F33007B6E8F /* MainMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = B7378993180767190076A88C /* MainMenu.m */; };
@@ -205,6 +209,8 @@
 		5B121033197485FE004C1E1D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Platforms/Android/Info.plist; sourceTree = "<group>"; };
 		5B121034197485FE004C1E1D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Platforms/iOS/Info.plist; sourceTree = "<group>"; };
 		5BA4619E1974C88900785744 /* AndroidManifest.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = AndroidManifest.xml; path = Platforms/Android/AndroidManifest.xml; sourceTree = "<group>"; };
+		75058A2F19FEC27F001AA9C6 /* GameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameScene.h; path = Source/GameScene.h; sourceTree = "<group>"; };
+		75058A3019FEC27F001AA9C6 /* GameScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameScene.m; path = Source/GameScene.m; sourceTree = "<group>"; };
 		7A4035FF19DDEE84007B6E8F /* GalacticGuardian Mac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GalacticGuardian Mac.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A40360219DDEE84007B6E8F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Platforms/Mac/Info.plist; sourceTree = "<group>"; };
 		7A40360319DDEE84007B6E8F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Source/Platforms/Mac/main.m; sourceTree = "<group>"; };
@@ -494,6 +500,8 @@
 				D352B48019EC608A00829775 /* MetalShaders */,
 				B7378992180767190076A88C /* MainMenu.h */,
 				B7378993180767190076A88C /* MainMenu.m */,
+				75058A2F19FEC27F001AA9C6 /* GameScene.h */,
+				75058A3019FEC27F001AA9C6 /* GameScene.m */,
 				D3937FBD19FDD9AB0074009E /* NebulaBackground.h */,
 				D3A7E8D919FDC86000695965 /* NebulaBackground.m */,
 			);
@@ -897,6 +905,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				75058A3319FEC27F001AA9C6 /* GameScene.m in Sources */,
 				5B12102A197484DD004C1E1D /* GalacticGuardianActivity.java in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -907,6 +916,7 @@
 			files = (
 				D3A7E8DC19FDC86000695965 /* NebulaBackground.m in Sources */,
 				7A4036E819DE3F33007B6E8F /* MainMenu.m in Sources */,
+				75058A3419FEC27F001AA9C6 /* GameScene.m in Sources */,
 				7A40360419DDEE84007B6E8F /* main.m in Sources */,
 				7A59498E19E3941300F65F90 /* AppDelegate.m in Sources */,
 			);
@@ -918,6 +928,7 @@
 			files = (
 				D3A7E8DB19FDC86000695965 /* NebulaBackground.m in Sources */,
 				927F619E196C771E000F43EF /* MainMenu.m in Sources */,
+				75058A3219FEC27F001AA9C6 /* GameScene.m in Sources */,
 				5B121030197484FA004C1E1D /* GalacticGuardianActivity.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -929,6 +940,7 @@
 				D3A7E8DA19FDC86000695965 /* NebulaBackground.m in Sources */,
 				B73789871807631A0076A88C /* main.m in Sources */,
 				7A046D8C19E8A20E004C4763 /* MainMenu.m in Sources */,
+				75058A3119FEC27F001AA9C6 /* GameScene.m in Sources */,
 				5B121038197487F2004C1E1D /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
