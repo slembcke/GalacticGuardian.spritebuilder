@@ -243,18 +243,19 @@ InitDebris(CCNode *node, CGPoint velocity)
 //	[self fireBullet];
 }
 
-//MARK CCPhysicsCollisionDelegate methods
+#pragma mark - CCPhysicsCollisionDelegate methods
 
-// "Begin" methods are only called once when objects begin to collide.
-// Note how the last two parameters "ship" and "asteroid" are the same string as the collisionType values set in those classes.
-/*
--(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair ship:(CCNode *)ship asteroid:(Asteroid *)asteroid
+
+-(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair ship:(PlayerShip *)player enemy:(EnemyShip *)enemy
 {
-	if([_ship takeDamage]){
+	if([_playerShip takeDamage]){
 		//The ship was destroyed!
 		
-		[_ship removeFromParent];
+		[_playerShip removeFromParent];
 		
+		// TODO: player destroyed effects
+		/*
+		 
 		CCNode *debris = [CCBReader load:@"CrashedShip"];
 		debris.position = _ship.position;
 		debris.rotation = _ship.rotation;
@@ -267,27 +268,29 @@ InitDebris(CCNode *node, CGPoint velocity)
 		[self addChild:explosion];
 		
 		_ship = nil;
+		*/
 		
 		[self scheduleBlock:^(CCTimer *timer){
 			// Go back to the menu after a short delay.
 			[[CCDirector sharedDirector] replaceScene:[CCBReader loadAsScene:@"MainScene"]];
-		} delay:3.0];
+		} delay:0.0]; // TODO: nonzero delay needed for optimal fun
 		
-		// Don't process the collision so the debris will get a chance to collide with the asteroid.
+		// Don't process the collision so the enemy spaceship will survive and mock you.
 		return NO;
-	} else {
-		// The ship still had it's shield, destroy the asteroid instead.
-		[self destroyAsteroid:asteroid];
-		
-		// Process the collision normally so the ship will bounce off the asteroid.
+	}else{
+		// Player took damage, the enemy should self destruct.
+		[enemy dieNow];
 		return YES;
+		
 	}
+	
+	
 }
-
--(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair bullet:(Bullet *)bullet asteroid:(Asteroid *)asteroid
+/*
+-(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair bullet:(Bullet *)bullet enemy:(EnemyShip *)enemy
 {
-	[self destroyBullet:bullet];
-	[self destroyAsteroid:asteroid];
+//	[self destroyBullet:bullet];
+//	[self destroyAsteroid:asteroid];
 	
 	return NO;
 }
