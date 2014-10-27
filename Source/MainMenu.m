@@ -30,7 +30,7 @@
 {
 	_time += delta;
 	
-	// There is a simple hack in the vertex shader to make the nebula scroll.
+	// There is a simple hack in the vertex shader to make the nebula scroll. d
 	_background.shaderUniforms[@"u_ScrollOffset"] = [NSValue valueWithCGPoint:ccp(0.0, fmod(_time/4.0, 1.0))];
 }
 
