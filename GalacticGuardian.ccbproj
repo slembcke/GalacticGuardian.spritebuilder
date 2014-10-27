@@ -53,11 +53,11 @@
 	<key>publishResolution_android_tablethd</key>
 	<true/>
 	<key>publishResolution_ios_phone</key>
-	<true/>
+	<false/>
 	<key>publishResolution_ios_phonehd</key>
 	<true/>
 	<key>publishResolution_ios_tablet</key>
-	<true/>
+	<false/>
 	<key>publishResolution_ios_tablethd</key>
 	<true/>
 	<key>publishToZipFile</key>
@@ -78,8 +78,15 @@
 			<key>previewFolderHidden</key>
 			<true/>
 		</dict>
-		<key>Sprites</key>
+		<key>ShipParts/ShipParts/beam0.png</key>
 		<dict/>
+		<key>ShipParts/ShipParts/wingYellow_2.png</key>
+		<dict/>
+		<key>Sprites</key>
+		<dict>
+			<key>isDirty</key>
+			<true/>
+		</dict>
 		<key>ccbResources</key>
 		<dict>
 			<key>previewFolderHidden</key>
