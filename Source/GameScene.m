@@ -217,20 +217,23 @@ enum ZORDER {
 	float pitch = pow(2.0f, half_steps/12.0f);
 	[[OALSimpleAudio sharedInstance] playEffect:@"Laser.wav" volume:1.0 pitch:pitch pan:0.0 loop:NO];
 }
+*/
 
-// A static string used as a group identifier for the debris.
-static NSString *debrisIdentifier = @"debris";
+//// A static string used as a group identifier for the debris.
+//static NSString *debrisIdentifier = @"debris";
 
 // Recursive helper function to set up physics on the debris child nodes.
 static void
-InitDebris(CCNode *node, CGPoint velocity)
+InitDebris(CCNode *root, CCNode *node, CGPoint velocity)
 {
 	// If the node has a body, set some properties.
 	CCPhysicsBody *body = node.physicsBody;
 	if(body){
 		// Bodies with the same group reference don't collide.
 		// Any type of object will do. It's the object reference that is important.
-		body.collisionGroup = debrisIdentifier;
+		// In this case, I want the debris to collide with everything except other debris from the same ship.
+		// I'll use a reference to the root node since that is unique for each explosion.
+		body.collisionGroup = root;
 		
 		// Copy the velocity onto the body + a little random.
 		body.velocity = ccpAdd(velocity, ccpMult(CCRANDOM_IN_UNIT_CIRCLE(), 10.0));
@@ -238,9 +241,8 @@ InitDebris(CCNode *node, CGPoint velocity)
 	}
 	
 	// Recurse on the children.
-	for(CCNode *child in node.children) InitDebris(child, velocity);
+	for(CCNode *child in node.children) InitDebris(root, child, velocity);
 }
-*/
 
 //MARK CCResponder methods
 
@@ -257,26 +259,24 @@ InitDebris(CCNode *node, CGPoint velocity)
 {
 	if([_playerShip takeDamage]){
 		//The ship was destroyed!
-		NSLog(@"You are dead");
-		
 		[_playerShip removeFromParent];
 		
-		// TODO: player destroyed effects
-		/*
-		 
-		CCNode *debris = [CCBReader load:@"CrashedShip"];
-		debris.position = _ship.position;
-		debris.rotation = _ship.rotation;
-		InitDebris(debris, _ship.physicsBody.velocity);
+		CCNode *debris = [CCBReader load:_playerShip.debris];
+		debris.position = _playerShip.position;
+		debris.rotation = _playerShip.rotation;
+		InitDebris(debris, debris, _playerShip.physicsBody.velocity);
 		[_physics addChild:debris];
 		
-		// Add a lame particle effect.
-		CCNode *explosion = [CCBReader load:@"Explosion"];
-		explosion.position = _ship.position;
-		[self addChild:explosion];
+		[debris scheduleBlock:^(CCTimer *timer) {
+			[debris removeFromParent];
+		} delay:5];
 		
-		_ship = nil;
-		*/
+		// Add a lame particle effect.
+//		CCNode *explosion = [CCBReader load:@"Explosion"];
+//		explosion.position = _ship.position;
+//		[self addChild:explosion];
+//		
+//		_playerShip = nil;
 		
 		[self scheduleBlock:^(CCTimer *timer){
 			// Go back to the menu after a short delay.

@@ -1039,6 +1039,16 @@
 				<key>value</key>
 				<string>0.250000</string>
 			</dict>
+			<dict>
+				<key>name</key>
+				<string>_debris</string>
+				<key>optimized</key>
+				<false/>
+				<key>type</key>
+				<integer>3</integer>
+				<key>value</key>
+				<string>AndySpaceshipDebris</string>
+			</dict>
 		</array>
 		<key>displayName</key>
 		<string>CCNode</string>

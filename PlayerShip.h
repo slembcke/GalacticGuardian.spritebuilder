@@ -10,6 +10,8 @@
 
 @interface PlayerShip : CCNode
 
+@property(nonatomic, readonly) NSString *debris;
+
 @property(nonatomic, readonly) CGAffineTransform gunPortTransform;
 
 -(void)fixedUpdate:(CCTime)delta withInput:(CGPoint)joystickValue;
