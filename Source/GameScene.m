@@ -20,7 +20,7 @@
 {
 	NebulaBackground *_background;
 	CCTime _time;
-	
+	NSString *selectedPlayerShip;
 	CCParticleSystem *particles;
 	
 	CCPhysicsNode *_physics;
@@ -66,11 +66,14 @@
 
 -(void)onEnter
 {
+	// temporary:
+	selectedPlayerShip = @"AndySpaceship.ccb";
+	
 	CGSize size = self.contentSizeInPoints;
 	CGPoint center = ccp(size.width/2, size.height/2);
 	
 	// Add a ship in the middle of the screen.
-	_ship = (MyShip *)[CCBReader load:@"Ship"];
+	_ship = (MyShip *)[CCBReader load:selectedPlayerShip];
 	_ship.position = center;
 	[_physics addChild:_ship];
 	
