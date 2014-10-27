@@ -92,6 +92,21 @@
 		B77F1B4017B978D7009739AE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B77F1B3F17B978D7009739AE /* CoreGraphics.framework */; };
 		B77F1B4217B978D7009739AE /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B77F1B4117B978D7009739AE /* CoreText.framework */; };
 		B78A0B10198AF87200C63841 /* Published-Android in Resources */ = {isa = PBXBuildFile; fileRef = B78A0B0F198AF87200C63841 /* Published-Android */; };
+		D3A7E8DA19FDC86000695965 /* NebulaBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A7E8D919FDC86000695965 /* NebulaBackground.m */; };
+		D3A7E8DB19FDC86000695965 /* NebulaBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A7E8D919FDC86000695965 /* NebulaBackground.m */; };
+		D3A7E8DC19FDC86000695965 /* NebulaBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A7E8D919FDC86000695965 /* NebulaBackground.m */; };
+		D3A7E8DF19FDC88600695965 /* Nebula.png in Resources */ = {isa = PBXBuildFile; fileRef = D3A7E8DD19FDC88600695965 /* Nebula.png */; };
+		D3A7E8E019FDC88600695965 /* Nebula.png in Resources */ = {isa = PBXBuildFile; fileRef = D3A7E8DD19FDC88600695965 /* Nebula.png */; };
+		D3A7E8E119FDC88600695965 /* Nebula.png in Resources */ = {isa = PBXBuildFile; fileRef = D3A7E8DD19FDC88600695965 /* Nebula.png */; };
+		D3A7E8E219FDC88600695965 /* NebulaDepth.png in Resources */ = {isa = PBXBuildFile; fileRef = D3A7E8DE19FDC88600695965 /* NebulaDepth.png */; };
+		D3A7E8E319FDC88600695965 /* NebulaDepth.png in Resources */ = {isa = PBXBuildFile; fileRef = D3A7E8DE19FDC88600695965 /* NebulaDepth.png */; };
+		D3A7E8E419FDC88600695965 /* NebulaDepth.png in Resources */ = {isa = PBXBuildFile; fileRef = D3A7E8DE19FDC88600695965 /* NebulaDepth.png */; };
+		D3A7E8F219FDCABE00695965 /* Nebula.vsh in Resources */ = {isa = PBXBuildFile; fileRef = D3A7E8F119FDCABE00695965 /* Nebula.vsh */; };
+		D3A7E8F319FDCABE00695965 /* Nebula.vsh in Resources */ = {isa = PBXBuildFile; fileRef = D3A7E8F119FDCABE00695965 /* Nebula.vsh */; };
+		D3A7E8F419FDCABE00695965 /* Nebula.vsh in Resources */ = {isa = PBXBuildFile; fileRef = D3A7E8F119FDCABE00695965 /* Nebula.vsh */; };
+		D3A7E8F619FDCB5E00695965 /* Nebula.fsh in Resources */ = {isa = PBXBuildFile; fileRef = D3A7E8F519FDCB5E00695965 /* Nebula.fsh */; };
+		D3A7E8F719FDCB5E00695965 /* Nebula.fsh in Resources */ = {isa = PBXBuildFile; fileRef = D3A7E8F519FDCB5E00695965 /* Nebula.fsh */; };
+		D3A7E8F819FDCB5E00695965 /* Nebula.fsh in Resources */ = {isa = PBXBuildFile; fileRef = D3A7E8F519FDCB5E00695965 /* Nebula.fsh */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -229,6 +244,11 @@
 		B78A0B0F198AF87200C63841 /* Published-Android */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Published-Android"; sourceTree = "<group>"; };
 		B7B3713D180358F1007369CC /* libObjectiveChipmunk.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libObjectiveChipmunk.a; path = "../libs/cocos2d-iphone/external/Chipmunk/xcode/build/Debug-iphoneos/libObjectiveChipmunk.a"; sourceTree = "<group>"; };
 		D352B48019EC608A00829775 /* MetalShaders */ = {isa = PBXFileReference; lastKnownFileType = folder; name = MetalShaders; path = Source/MetalShaders; sourceTree = "<group>"; };
+		D3A7E8D919FDC86000695965 /* NebulaBackground.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NebulaBackground.m; path = Source/NebulaBackground.m; sourceTree = "<group>"; };
+		D3A7E8DD19FDC88600695965 /* Nebula.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Nebula.png; sourceTree = "<group>"; };
+		D3A7E8DE19FDC88600695965 /* NebulaDepth.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NebulaDepth.png; sourceTree = "<group>"; };
+		D3A7E8F119FDCABE00695965 /* Nebula.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Nebula.vsh; sourceTree = "<group>"; };
+		D3A7E8F519FDCB5E00695965 /* Nebula.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Nebula.fsh; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -458,9 +478,10 @@
 			isa = PBXGroup;
 			children = (
 				7A40362019DDEF0D007B6E8F /* Platforms */,
+				D352B48019EC608A00829775 /* MetalShaders */,
 				B7378992180767190076A88C /* MainMenu.h */,
 				B7378993180767190076A88C /* MainMenu.m */,
-				D352B48019EC608A00829775 /* MetalShaders */,
+				D3A7E8D919FDC86000695965 /* NebulaBackground.m */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -535,6 +556,10 @@
 		B77F1B4617B978D7009739AE /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D3A7E8DD19FDC88600695965 /* Nebula.png */,
+				D3A7E8DE19FDC88600695965 /* NebulaDepth.png */,
+				D3A7E8F119FDCABE00695965 /* Nebula.vsh */,
+				D3A7E8F519FDCB5E00695965 /* Nebula.fsh */,
 				7A40366119DDF8C2007B6E8F /* Platforms */,
 				5B12100D197483EE004C1E1D /* res */,
 				B73789911807667A0076A88C /* Icons */,
@@ -719,15 +744,19 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3A7E8F419FDCABE00695965 /* Nebula.vsh in Resources */,
 				7A4036F719DE401F007B6E8F /* iPad-old.png in Resources */,
 				7A4036F819DE401F007B6E8F /* iPad-old@2x.png in Resources */,
 				7A4036F919DE401F007B6E8F /* iPad.png in Resources */,
+				D3A7E8F819FDCB5E00695965 /* Nebula.fsh in Resources */,
 				7A4036FA19DE401F007B6E8F /* iPad@2x.png in Resources */,
+				D3A7E8E119FDC88600695965 /* Nebula.png in Resources */,
 				7A4036FB19DE401F007B6E8F /* iPhone-old.png in Resources */,
 				7A4036FC19DE401F007B6E8F /* iPhone-old@2x.png in Resources */,
 				7A4036FD19DE401F007B6E8F /* iPhone.png in Resources */,
 				7A59498B19E38E4A00F65F90 /* MainMenu.xib in Resources */,
 				7A4036FE19DE401F007B6E8F /* iPhone@2x.png in Resources */,
+				D3A7E8E419FDC88600695965 /* NebulaDepth.png in Resources */,
 				7A4036FF19DE401F007B6E8F /* Settings.png in Resources */,
 				7A40370019DE401F007B6E8F /* Settings@2x.png in Resources */,
 				7A40370119DE401F007B6E8F /* Default-568h@2x.png in Resources */,
@@ -743,17 +772,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				927F61AD196C771E000F43EF /* Settings.png in Resources */,
+				D3A7E8E319FDC88600695965 /* NebulaDepth.png in Resources */,
 				927F61AE196C771E000F43EF /* Default@2x.png in Resources */,
 				927F61AF196C771E000F43EF /* iPad@2x.png in Resources */,
 				927F61B0196C771E000F43EF /* iPad.png in Resources */,
+				D3A7E8E019FDC88600695965 /* Nebula.png in Resources */,
 				927F61B1196C771E000F43EF /* iPad-old@2x.png in Resources */,
 				927F61B2196C771E000F43EF /* iPhone-old@2x.png in Resources */,
+				D3A7E8F319FDCABE00695965 /* Nebula.vsh in Resources */,
 				927F61B4196C771E000F43EF /* Settings@2x.png in Resources */,
 				927F61B5196C771E000F43EF /* Default-Landscape~ipad.png in Resources */,
 				B78A0B10198AF87200C63841 /* Published-Android in Resources */,
 				927F61B6196C771E000F43EF /* iPhone-old.png in Resources */,
 				927F61B7196C771E000F43EF /* iPhone.png in Resources */,
 				927F61B8196C771E000F43EF /* Default-568h@2x.png in Resources */,
+				D3A7E8F719FDCB5E00695965 /* Nebula.fsh in Resources */,
 				927F61B9196C771E000F43EF /* iPhone@2x.png in Resources */,
 				927F61BA196C771E000F43EF /* Default.png in Resources */,
 				927F61BB196C771E000F43EF /* iPad-old.png in Resources */,
@@ -765,17 +798,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				B71F5919188484E7003F4D28 /* Settings.png in Resources */,
+				D3A7E8E219FDC88600695965 /* NebulaDepth.png in Resources */,
 				B7378978180762440076A88C /* Default@2x.png in Resources */,
 				B71F5914188484E7003F4D28 /* iPad@2x.png in Resources */,
 				B71F5913188484E7003F4D28 /* iPad.png in Resources */,
+				D3A7E8DF19FDC88600695965 /* Nebula.png in Resources */,
 				B71F5912188484E7003F4D28 /* iPad-old@2x.png in Resources */,
 				B71F5916188484E7003F4D28 /* iPhone-old@2x.png in Resources */,
+				D3A7E8F219FDCABE00695965 /* Nebula.vsh in Resources */,
 				B737893B180761570076A88C /* Published-iOS in Resources */,
 				B71F591A188484E7003F4D28 /* Settings@2x.png in Resources */,
 				B7378976180762440076A88C /* Default-Landscape~ipad.png in Resources */,
 				B71F5915188484E7003F4D28 /* iPhone-old.png in Resources */,
 				B71F5917188484E7003F4D28 /* iPhone.png in Resources */,
 				B7378975180762440076A88C /* Default-568h@2x.png in Resources */,
+				D3A7E8F619FDCB5E00695965 /* Nebula.fsh in Resources */,
 				B71F5918188484E7003F4D28 /* iPhone@2x.png in Resources */,
 				B7378977180762440076A88C /* Default.png in Resources */,
 				B71F5911188484E7003F4D28 /* iPad-old.png in Resources */,
@@ -842,6 +879,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3A7E8DC19FDC86000695965 /* NebulaBackground.m in Sources */,
 				7A4036E819DE3F33007B6E8F /* MainMenu.m in Sources */,
 				7A40360419DDEE84007B6E8F /* main.m in Sources */,
 				7A59498E19E3941300F65F90 /* AppDelegate.m in Sources */,
@@ -852,6 +890,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3A7E8DB19FDC86000695965 /* NebulaBackground.m in Sources */,
 				927F619E196C771E000F43EF /* MainMenu.m in Sources */,
 				5B121030197484FA004C1E1D /* GalacticGuardianActivity.m in Sources */,
 			);
@@ -861,6 +900,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3A7E8DA19FDC86000695965 /* NebulaBackground.m in Sources */,
 				B73789871807631A0076A88C /* main.m in Sources */,
 				7A046D8C19E8A20E004C4763 /* MainMenu.m in Sources */,
 				5B121038197487F2004C1E1D /* AppDelegate.m in Sources */,
