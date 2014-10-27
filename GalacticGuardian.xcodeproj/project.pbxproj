@@ -20,6 +20,9 @@
 		75058A4719FECF95001AA9C6 /* Bullet.m in Sources */ = {isa = PBXBuildFile; fileRef = 75058A4619FECF95001AA9C6 /* Bullet.m */; };
 		75058A4819FECF95001AA9C6 /* Bullet.m in Sources */ = {isa = PBXBuildFile; fileRef = 75058A4619FECF95001AA9C6 /* Bullet.m */; };
 		75058A4919FECF95001AA9C6 /* Bullet.m in Sources */ = {isa = PBXBuildFile; fileRef = 75058A4619FECF95001AA9C6 /* Bullet.m */; };
+		75058A5219FEE7B7001AA9C6 /* EnemyShip.m in Sources */ = {isa = PBXBuildFile; fileRef = 75058A5119FEE7B7001AA9C6 /* EnemyShip.m */; };
+		75058A5319FEE7B7001AA9C6 /* EnemyShip.m in Sources */ = {isa = PBXBuildFile; fileRef = 75058A5119FEE7B7001AA9C6 /* EnemyShip.m */; };
+		75058A5419FEE7B7001AA9C6 /* EnemyShip.m in Sources */ = {isa = PBXBuildFile; fileRef = 75058A5119FEE7B7001AA9C6 /* EnemyShip.m */; };
 		7A046D8C19E8A20E004C4763 /* MainMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = B7378993180767190076A88C /* MainMenu.m */; };
 		7A40360419DDEE84007B6E8F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A40360319DDEE84007B6E8F /* main.m */; };
 		7A4036E819DE3F33007B6E8F /* MainMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = B7378993180767190076A88C /* MainMenu.m */; };
@@ -222,6 +225,8 @@
 		75058A4419FECE7D001AA9C6 /* PlayerShip.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayerShip.h; sourceTree = "<group>"; };
 		75058A4519FECF95001AA9C6 /* Bullet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bullet.h; sourceTree = "<group>"; };
 		75058A4619FECF95001AA9C6 /* Bullet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bullet.m; sourceTree = "<group>"; };
+		75058A5019FEE7B7001AA9C6 /* EnemyShip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnemyShip.h; sourceTree = "<group>"; };
+		75058A5119FEE7B7001AA9C6 /* EnemyShip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnemyShip.m; sourceTree = "<group>"; };
 		7A4035FF19DDEE84007B6E8F /* GalacticGuardian Mac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GalacticGuardian Mac.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A40360219DDEE84007B6E8F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Platforms/Mac/Info.plist; sourceTree = "<group>"; };
 		7A40360319DDEE84007B6E8F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Source/Platforms/Mac/main.m; sourceTree = "<group>"; };
@@ -523,6 +528,8 @@
 				75058A4419FECE7D001AA9C6 /* PlayerShip.h */,
 				75058A4519FECF95001AA9C6 /* Bullet.h */,
 				75058A4619FECF95001AA9C6 /* Bullet.m */,
+				75058A5019FEE7B7001AA9C6 /* EnemyShip.h */,
+				75058A5119FEE7B7001AA9C6 /* EnemyShip.m */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -769,7 +776,7 @@
 		};
 		7A97910219E62E40001FFC4D /* cocos2dJava.jar */ = {
 			isa = PBXReferenceProxy;
-			fileType = compiled.java.jar;
+			fileType = archive.jar;
 			path = cocos2dJava.jar;
 			remoteRef = 7A97910119E62E40001FFC4D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -933,6 +940,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				75058A5419FEE7B7001AA9C6 /* EnemyShip.m in Sources */,
 				75058A4919FECF95001AA9C6 /* Bullet.m in Sources */,
 				D3A7E8DC19FDC86000695965 /* NebulaBackground.m in Sources */,
 				D304DD3C19FEC85F0042180F /* Joystick.m in Sources */,
@@ -951,6 +959,7 @@
 				D3A7E8DB19FDC86000695965 /* NebulaBackground.m in Sources */,
 				927F619E196C771E000F43EF /* MainMenu.m in Sources */,
 				75058A3219FEC27F001AA9C6 /* GameScene.m in Sources */,
+				75058A5319FEE7B7001AA9C6 /* EnemyShip.m in Sources */,
 				5B121030197484FA004C1E1D /* GalacticGuardianActivity.m in Sources */,
 				75058A4819FECF95001AA9C6 /* Bullet.m in Sources */,
 			);
@@ -962,6 +971,7 @@
 			files = (
 				D3A7E8DA19FDC86000695965 /* NebulaBackground.m in Sources */,
 				D304DD3A19FEC85F0042180F /* Joystick.m in Sources */,
+				75058A5219FEE7B7001AA9C6 /* EnemyShip.m in Sources */,
 				B73789871807631A0076A88C /* main.m in Sources */,
 				75058A4719FECF95001AA9C6 /* Bullet.m in Sources */,
 				7A046D8C19E8A20E004C4763 /* MainMenu.m in Sources */,

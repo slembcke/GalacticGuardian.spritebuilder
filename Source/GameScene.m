@@ -12,6 +12,7 @@
 #import "GameScene.h"
 
 #import "PlayerShip.h"
+#import "EnemyShip.h"
 //#import "Bullet.h"
 //#import "Asteroid.h"
 #import "Joystick.h"
@@ -36,6 +37,8 @@ enum ZORDER {
 	
 	Joystick *_joystick;
 	PlayerShip *_playerShip;
+	
+	NSMutableArray *_enemies;
 }
 
 -(instancetype)initWithShipType:(NSString *)shipType
@@ -60,6 +63,8 @@ enum ZORDER {
 		_physics = [CCPhysicsNode node];
 		[_scrollNode addChild:_physics z:Z_PHYSICS];
 		
+		_enemies = [NSMutableArray array];
+		
 		// Use the gamescene as the collision delegate.
 		// See the ccPhysicsCollision* methods below.
 		_physics.collisionDelegate = self;
@@ -71,6 +76,19 @@ enum ZORDER {
 		_playerShip = (PlayerShip *)[CCBReader load:shipType];
 		_playerShip.position = ccp(GameSceneSize.width/2.0, GameSceneSize.height/2.0);
 		[_physics addChild:_playerShip z:Z_PLAYER];
+		
+		
+		[self scheduleBlock:^(CCTimer *timer) {
+			
+			EnemyShip *enemy = (EnemyShip *)[CCBReader load:@"BadGuy1"];
+			enemy.position = ccp(CCRANDOM_0_1() > 0.5f ? 0 : 512.0f, 256.0f);
+			[self addChild:enemy];
+			[_enemies addObject:enemy];
+			
+			[timer repeatOnceWithInterval:1.0f];
+			
+		} delay:1.0f];
+		
 		
 		// Enable touch events.
 		// The entire scene is used as a shoot button.
@@ -84,6 +102,10 @@ enum ZORDER {
 {
 	// Fly the ship using the joystick controls.
 	[_playerShip fixedUpdate:delta withInput:_joystick.value];
+	
+	for (EnemyShip *e in _enemies) {
+		[e fixedUpdate:delta towardsPlayer:_playerShip.position];
+	}
 }
 
 -(void)update:(CCTime)delta
@@ -117,6 +139,7 @@ enum ZORDER {
 	}
 }
  */
+
 
 /*
 -(void)destroyBullet:(Bullet *)bullet
