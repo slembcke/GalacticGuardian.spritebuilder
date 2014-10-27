@@ -28,10 +28,9 @@ static CCTexture *DistortionTexture;
 	[DistortionTexture generateMipmap];
 }
 
-+(void)DistortionTexture
++(CCTexture *)distortionTexture
 {
-	if(DistortionTexture == nil){
-	}
+	return DistortionTexture;
 }
 
 -(id)init
@@ -46,6 +45,10 @@ static CCTexture *DistortionTexture;
 		_distortionMap.contentScale /= 2.0;
 		_distortionMap.texture.antialiased = YES;
 		
+		[_distortionMap beginWithClear:0.5 g:0.5 b:0.0 a:0.0];
+		[_distortionMap end];
+
+		
 		// Apply the Nebula shader that applies some subtle parallax mapping and distortions.
 		self.shader = [CCShader shaderNamed:@"Nebula"];
 		self.shaderUniforms[@"u_ParallaxAmount"] = @(0.08);
@@ -54,18 +57,15 @@ static CCTexture *DistortionTexture;
 		self.shaderUniforms[@"u_DistortionAmount"] = @(-0.5);
 		
 		_distortionNode = [CCNode node];
-		
-		// TEMP
-		{
-			CCSprite *sprite = [CCSprite spriteWithTexture:DistortionTexture];
-			sprite.position = ccp(192, 128);
-			sprite.scale = 0.25;
-			
-			[_distortionNode addChild:sprite];
-		}
 	}
 	
 	return self;
+}
+
+-(void)setContentSize:(CGSize)contentSize
+{
+	[super setContentSize:contentSize];
+	[_distortionNode setContentSize:contentSize];
 }
 
 -(void)onEnter
@@ -74,7 +74,16 @@ static CCTexture *DistortionTexture;
 	CGRect rect = {CGPointZero, self.contentSizeInPoints};
 	self.textureRect = rect;
 	
+	// Forward onEnter to the distortion node.
+	[_distortionNode onEnter];
 	[super onEnter];
+}
+
+-(void)onExit
+{
+	// Forward onExit to the distortion node.
+	[_distortionNode onExit];
+	[super onExit];
 }
 
 -(void)draw:(CCRenderer *)renderer transform:(const GLKMatrix4 *)transform
