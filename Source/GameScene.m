@@ -33,6 +33,8 @@ enum ZORDER {
 @implementation GameScene
 {
 	CCNode *_scrollNode;
+	CGPoint _minScrollPos, _maxScrollPos;
+	
 	CCPhysicsNode *_physics;
 	NebulaBackground *_background;
 	
@@ -47,7 +49,7 @@ enum ZORDER {
 	if((self = [super init])){
 		CGSize viewSize = [CCDirector sharedDirector].viewSize;
 		
-		CGFloat joystickOffset = viewSize.width/4.0;
+		CGFloat joystickOffset = viewSize.width/8.0;
 		_joystick = [[Joystick alloc] initWithSize:joystickOffset];
 		_joystick.position = ccp(joystickOffset, joystickOffset);
 		[self addChild:_joystick z:Z_JOYSTICK];
@@ -56,6 +58,9 @@ enum ZORDER {
 		_scrollNode.contentSize = CGSizeMake(1.0, 1.0);
 		_scrollNode.position = ccp(viewSize.width/2.0, viewSize.height/2.0);
 		[self addChild:_scrollNode z:Z_SCROLL_NODE];
+		
+		_minScrollPos = ccp(viewSize.width/2.0, viewSize.height/2.0);
+		_maxScrollPos = ccp(GameSceneSize.width - _minScrollPos.x, GameSceneSize.height - _minScrollPos.y);
 		
 		NebulaBackground *nebula = [NebulaBackground node];
 		nebula.contentSize = GameSceneSize;
@@ -78,6 +83,8 @@ enum ZORDER {
 		_playerShip.position = ccp(GameSceneSize.width/2.0, GameSceneSize.height/2.0);
 		[_physics addChild:_playerShip z:Z_PLAYER];
 		
+		// Center on the player.
+		_scrollNode.anchorPoint = _playerShip.position;
 		
 		[self scheduleBlock:^(CCTimer *timer) {
 			
@@ -111,7 +118,13 @@ enum ZORDER {
 
 -(void)update:(CCTime)delta
 {
-	_scrollNode.anchorPoint = _playerShip.position;
+	CGPoint pos = _playerShip.position;
+	
+	// Clamp the scrolling position so you can't see outside of the game area.
+	_scrollNode.anchorPoint = ccp(
+		MAX(_minScrollPos.x, MIN(pos.x, _maxScrollPos.x)),
+		MAX(_minScrollPos.y, MIN(pos.y, _maxScrollPos.y))
+	);
 }
 
 /*

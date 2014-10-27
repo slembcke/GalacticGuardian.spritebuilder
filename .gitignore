@@ -43,3 +43,4 @@ xcuserdata
 *.orig
 *.ninja_log
 GalacticGuardian.xcodeproj/project.xcworkspace/contents.xcworkspacedata
+Packages/SpriteBuilder Resources.sbpack/Sprites/ShipParts/intermediateFileLookup.plist
