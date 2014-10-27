@@ -25,8 +25,8 @@
 {
 	CCPhysicsBody *body = self.physicsBody;
 	
-	_hp = 10;
-	_speed = 35;
+	_hp = 5;
+	_speed = 25;
 	
 	// This is used to pick which collision delegate method to call, see GameScene.m for more info.
 	body.collisionType = @"enemy";
