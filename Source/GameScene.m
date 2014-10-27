@@ -24,6 +24,7 @@ enum ZORDER {
 	Z_SCROLL_NODE,
 	Z_NEBULA,
 	Z_PHYSICS,
+	Z_ENEMY,
 	Z_PLAYER,
 	Z_JOYSTICK,
 };
@@ -82,7 +83,7 @@ enum ZORDER {
 			
 			EnemyShip *enemy = (EnemyShip *)[CCBReader load:@"BadGuy1"];
 			enemy.position = ccp(CCRANDOM_0_1() > 0.5f ? 0 : 512.0f, 256.0f);
-			[self addChild:enemy];
+			[_physics addChild:enemy z:Z_ENEMY];
 			[_enemies addObject:enemy];
 			
 			[timer repeatOnceWithInterval:1.0f];
@@ -258,6 +259,7 @@ InitDebris(CCNode *node, CGPoint velocity)
 {
 	if([_playerShip takeDamage]){
 		//The ship was destroyed!
+		NSLog(@"You are dead");
 		
 		[_playerShip removeFromParent];
 		
@@ -280,8 +282,8 @@ InitDebris(CCNode *node, CGPoint velocity)
 		
 		[self scheduleBlock:^(CCTimer *timer){
 			// Go back to the menu after a short delay.
-			[[CCDirector sharedDirector] replaceScene:[CCBReader loadAsScene:@"MainScene"]];
-		} delay:0.0]; // TODO: nonzero delay needed for optimal fun
+			[[CCDirector sharedDirector] replaceScene:[CCBReader loadAsScene:@"MainMenu"]];
+		} delay:1.0]; // TODO: nonzero delay needed for optimal fun
 		
 		// Don't process the collision so the enemy spaceship will survive and mock you.
 		return NO;
