@@ -72,6 +72,19 @@ enum ZORDER {
 		_playerShip.position = ccp(GameSceneSize.width/2.0, GameSceneSize.height/2.0);
 		[_physics addChild:_playerShip];
 		
+		
+		[self scheduleBlock:^(CCTimer *timer) {
+			
+			EnemyShip *enemy = (EnemyShip *)[CCBReader load:@"BadGuy1"];
+			enemy.position = ccp(CCRANDOM_0_1() > 0.5f ? 0 : 512.0f, 256.0f);
+			[self addChild:enemy];
+			[_enemies addObject:enemy];
+			
+			[timer repeatOnceWithInterval:1.0f];
+			
+		} delay:1.0f];
+		
+		
 		// Enable touch events.
 		// The entire scene is used as a shoot button.
 		self.userInteractionEnabled = YES;

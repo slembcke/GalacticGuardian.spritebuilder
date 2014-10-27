@@ -689,9 +689,9 @@
 			</dict>
 		</array>
 		<key>customClass</key>
-		<string></string>
+		<string>EnemyShip</string>
 		<key>displayName</key>
-		<string>CCNode</string>
+		<string>BadGuyNode</string>
 		<key>memberVarAssignmentName</key>
 		<string></string>
 		<key>memberVarAssignmentType</key>
@@ -704,7 +704,7 @@
 				<key>type</key>
 				<string>StringSimple</string>
 				<key>value</key>
-				<string></string>
+				<string>BadGuy1</string>
 			</dict>
 			<dict>
 				<key>name</key>
@@ -758,6 +758,8 @@
 				</array>
 			</dict>
 		</array>
+		<key>selected</key>
+		<true/>
 	</dict>
 	<key>notes</key>
 	<array/>
