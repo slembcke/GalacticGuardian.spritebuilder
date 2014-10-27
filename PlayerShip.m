@@ -8,7 +8,7 @@
 
 #import "OALSimpleAudio.h"
 
-#import "MyShip.h"
+#import "PlayerShip.h"
 
 // To access some of Chipmunk's handy vector functions like cpvlerpconst().
 #import "ObjectiveChipmunk/ObjectiveChipmunk.h"
@@ -16,7 +16,7 @@
 // TODO
 #import "CCPhysics+ObjectiveChipmunk.h"
 
-@implementation MyShip
+@implementation PlayerShip
 {
 	CCNode *_mainThruster;
 	id<ALSoundSource> _engineNoise;

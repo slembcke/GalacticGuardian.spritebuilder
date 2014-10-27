@@ -8,7 +8,7 @@
 
 #import "CCNode.h"
 
-@interface MyShip : CCNode
+@interface PlayerShip : CCNode
 
 @property(nonatomic, readonly) CGAffineTransform gunPortTransform;
 

@@ -11,7 +11,7 @@
 
 #import "GameScene.h"
 
-#import "MyShip.h"
+#import "PlayerShip.h"
 //#import "Bullet.h"
 //#import "Asteroid.h"
 #import "Joystick.h"
@@ -25,7 +25,7 @@
 	
 	CCPhysicsNode *_physics;
 	
-	MyShip *_ship;
+	PlayerShip *_ship;
 	
 	NSMutableArray *_enemies;
 	NSMutableArray *_bullets;
@@ -73,7 +73,7 @@
 	CGPoint center = ccp(size.width/2, size.height/2);
 	
 	// Add a ship in the middle of the screen.
-	_ship = (MyShip *)[CCBReader load:selectedPlayerShip];
+	_ship = (PlayerShip *)[CCBReader load:selectedPlayerShip];
 	_ship.position = center;
 	[_physics addChild:_ship];
 	

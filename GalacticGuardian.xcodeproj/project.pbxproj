@@ -16,7 +16,7 @@
 		75058A3219FEC27F001AA9C6 /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 75058A3019FEC27F001AA9C6 /* GameScene.m */; };
 		75058A3319FEC27F001AA9C6 /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 75058A3019FEC27F001AA9C6 /* GameScene.m */; };
 		75058A3419FEC27F001AA9C6 /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 75058A3019FEC27F001AA9C6 /* GameScene.m */; };
-		75058A4219FECE64001AA9C6 /* MyShip.m in Sources */ = {isa = PBXBuildFile; fileRef = 75058A4119FECE64001AA9C6 /* MyShip.m */; };
+		75058A4219FECE64001AA9C6 /* PlayerShip.m in Sources */ = {isa = PBXBuildFile; fileRef = 75058A4119FECE64001AA9C6 /* PlayerShip.m */; };
 		75058A4719FECF95001AA9C6 /* Bullet.m in Sources */ = {isa = PBXBuildFile; fileRef = 75058A4619FECF95001AA9C6 /* Bullet.m */; };
 		75058A4819FECF95001AA9C6 /* Bullet.m in Sources */ = {isa = PBXBuildFile; fileRef = 75058A4619FECF95001AA9C6 /* Bullet.m */; };
 		75058A4919FECF95001AA9C6 /* Bullet.m in Sources */ = {isa = PBXBuildFile; fileRef = 75058A4619FECF95001AA9C6 /* Bullet.m */; };
@@ -218,8 +218,8 @@
 		5BA4619E1974C88900785744 /* AndroidManifest.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = AndroidManifest.xml; path = Platforms/Android/AndroidManifest.xml; sourceTree = "<group>"; };
 		75058A2F19FEC27F001AA9C6 /* GameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameScene.h; path = Source/GameScene.h; sourceTree = "<group>"; };
 		75058A3019FEC27F001AA9C6 /* GameScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameScene.m; path = Source/GameScene.m; sourceTree = "<group>"; };
-		75058A4119FECE64001AA9C6 /* MyShip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyShip.m; sourceTree = "<group>"; };
-		75058A4419FECE7D001AA9C6 /* MyShip.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyShip.h; sourceTree = "<group>"; };
+		75058A4119FECE64001AA9C6 /* PlayerShip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerShip.m; sourceTree = "<group>"; };
+		75058A4419FECE7D001AA9C6 /* PlayerShip.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayerShip.h; sourceTree = "<group>"; };
 		75058A4519FECF95001AA9C6 /* Bullet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bullet.h; sourceTree = "<group>"; };
 		75058A4619FECF95001AA9C6 /* Bullet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bullet.m; sourceTree = "<group>"; };
 		7A4035FF19DDEE84007B6E8F /* GalacticGuardian Mac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GalacticGuardian Mac.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -519,8 +519,8 @@
 				D3A7E8D919FDC86000695965 /* NebulaBackground.m */,
 				D304DD3819FEC85F0042180F /* Joystick.h */,
 				D304DD3919FEC85F0042180F /* Joystick.m */,
-				75058A4119FECE64001AA9C6 /* MyShip.m */,
-				75058A4419FECE7D001AA9C6 /* MyShip.h */,
+				75058A4119FECE64001AA9C6 /* PlayerShip.m */,
+				75058A4419FECE7D001AA9C6 /* PlayerShip.h */,
 				75058A4519FECF95001AA9C6 /* Bullet.h */,
 				75058A4619FECF95001AA9C6 /* Bullet.m */,
 			);
@@ -769,7 +769,7 @@
 		};
 		7A97910219E62E40001FFC4D /* cocos2dJava.jar */ = {
 			isa = PBXReferenceProxy;
-			fileType = archive.jar;
+			fileType = compiled.java.jar;
 			path = cocos2dJava.jar;
 			remoteRef = 7A97910119E62E40001FFC4D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -967,7 +967,7 @@
 				7A046D8C19E8A20E004C4763 /* MainMenu.m in Sources */,
 				75058A3119FEC27F001AA9C6 /* GameScene.m in Sources */,
 				5B121038197487F2004C1E1D /* AppDelegate.m in Sources */,
-				75058A4219FECE64001AA9C6 /* MyShip.m in Sources */,
+				75058A4219FECE64001AA9C6 /* PlayerShip.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
