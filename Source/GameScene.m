@@ -12,6 +12,7 @@
 #import "GameScene.h"
 
 #import "PlayerShip.h"
+#import "EnemyShip.h"
 //#import "Bullet.h"
 //#import "Asteroid.h"
 #import "Joystick.h"
@@ -100,7 +101,13 @@
 {
 	// Fly the ship using the joystick controls.
 	[_ship fixedUpdate:delta withInput:_joystick.value];
+	
+	for (EnemyShip *e in _enemies) {
+		[e fixedUpdate:delta towardsPlayer:_ship.position];
+	}
+	
 }
+
 /*
 -(void)destroyBullet:(Bullet *)bullet
 {
