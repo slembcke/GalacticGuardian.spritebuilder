@@ -17,6 +17,16 @@
 	__unsafe_unretained CCTouch *_trackingTouch;
 }
 
+-(instancetype)initWithSize:(CGSize)size
+{
+	if((self = [super init])){
+		self.contentSize = size;
+		self.anchorPoint = ccp(0.5, 0.5);
+	}
+	
+	return self;
+}
+
 -(void)onEnter
 {
 	[super onEnter];

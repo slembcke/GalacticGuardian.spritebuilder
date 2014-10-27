@@ -13,4 +13,6 @@
 @property(nonatomic, readonly) CGPoint value;
 @property(nonatomic, assign) float deadZone;
 
+-(instancetype)initWithSize:(CGSize)size;
+
 @end
