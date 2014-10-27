@@ -41,6 +41,7 @@ enum ZORDER {
 	PlayerShip *_playerShip;
 	
 	NSMutableArray *_enemies;
+	NSMutableArray *_bullets;
 	
 	int _enemies_killed;
 }
@@ -71,6 +72,7 @@ enum ZORDER {
 		[_scrollNode addChild:_physics z:Z_PHYSICS];
 		
 		_enemies = [NSMutableArray array];
+		_bullets = [NSMutableArray array];
 		
 		// Use the gamescene as the collision delegate.
 		// See the ccPhysicsCollision* methods below.
@@ -140,43 +142,43 @@ enum ZORDER {
 }
 
 
-/*
+
 -(void)destroyBullet:(Bullet *)bullet
 {
 	[bullet removeFromParent];
 	[_bullets removeObject:bullet];
 	
 	// Draw a little flash at it's last position
-	CCSprite *sprite = [CCSprite spriteWithImageNamed:@"ShipParts/laserGreenShot.png"];
-	sprite.position = bullet.position;
-	[self addChild:sprite];
+//	CCSprite *sprite = [CCSprite spriteWithImageNamed:@"ShipParts/laserBlue08.png"];
+//	sprite.position = bullet.position;
+//	[self addChild:sprite];
 	
-	float duration = 0.15;
-	[sprite runAction:[CCActionSequence actions:
-										 [CCActionSpawn actions:
-											[CCActionFadeOut actionWithDuration:duration],
-											[CCActionScaleTo actionWithDuration:duration scale:0.25],
-											nil
-											],
-										 [CCActionRemove action],
-										 nil
-										 ]];
+//	float duration = 0.15;
+//	[sprite runAction:[CCActionSequence actions:
+//										 [CCActionSpawn actions:
+//											[CCActionFadeOut actionWithDuration:duration],
+//											[CCActionScaleTo actionWithDuration:duration scale:0.25],
+//											nil
+//											],
+//										 [CCActionRemove action],
+//										 nil
+//										 ]];
 	
 	// Make some noise. Add a little chromatically tuned pitch bending to make it more musical.
-	int half_steps = (arc4random()%(2*4 + 1) - 4);
-	float pitch = pow(2.0f, half_steps/12.0f);
-	[[OALSimpleAudio sharedInstance] playEffect:@"Fizzle.wav" volume:1.0 pitch:pitch pan:0.0 loop:NO];
+//	int half_steps = (arc4random()%(2*4 + 1) - 4);
+//	float pitch = pow(2.0f, half_steps/12.0f);
+//	[[OALSimpleAudio sharedInstance] playEffect:@"Fizzle.wav" volume:1.0 pitch:pitch pan:0.0 loop:NO];
 }
 
 -(void)fireBullet
 {
 	// Don't fire bullets if the ship is destroyed.
-	if(_ship == nil) return;
+	if(_playerShip == nil) return;
 	
 	// This is sort of a fancy math way to figure out where to fire the bullet from.
 	// You could figure this out with more code, but I wanted to have fun with some maths.
 	// This gets the transform of one of the "gunports" that I marked in the CCB file with a special node.
-	CGAffineTransform transform = _ship.gunPortTransform;
+	CGAffineTransform transform = _playerShip.gunPortTransform;
 	
 	// An affine transform looks like this when written as a matrix:
 	// | a, c, tx |
@@ -187,11 +189,9 @@ enum ZORDER {
 	
 	// The position of the gunport is just the matrix's origin point (tx, ty).
 	CGPoint position = ccp(transform.tx, transform.ty);
-	
-	// The original sprite pointed downwards on the y-axis.
-	// So the transform's y-axis, (c, d), will point in the opposite direction of the gunport.
-	// We just need to flip it around.
-	CGPoint direction = ccp(-transform.c, -transform.d);
+
+	// The transform's x-axis, (c, d), will point in the direction of the gunport.
+	CGPoint direction = ccp(transform.d, -transform.c);
 	
 	// So by "fancy math" I really just meant knowing what the numbers in a CGAffineTransform are. ;)
 	// When I make my own art, I like to align things on the positive x-axis to make the code "prettier".
@@ -199,7 +199,7 @@ enum ZORDER {
 	// Now we can create the bullet with the position and direction.
 	Bullet *bullet = (Bullet *)[CCBReader load:@"Bullet"];
 	bullet.position = position;
-	bullet.rotation = -CC_RADIANS_TO_DEGREES(ccpToAngle(direction));
+	bullet.rotation = -CC_RADIANS_TO_DEGREES(ccpToAngle(direction)) + 90.0f;
 	
 	// Make the bullet move in the direction it's pointed.
 	bullet.physicsBody.velocity = ccpMult(direction, bullet.speed);
@@ -213,14 +213,10 @@ enum ZORDER {
 	} delay:bullet.duration];
 	
 	// Make some noise. Add a little chromatically tuned pitch bending to make it more musical.
-	int half_steps = (arc4random()%(2*4 + 1) - 4);
-	float pitch = pow(2.0f, half_steps/12.0f);
-	[[OALSimpleAudio sharedInstance] playEffect:@"Laser.wav" volume:1.0 pitch:pitch pan:0.0 loop:NO];
+//	int half_steps = (arc4random()%(2*4 + 1) - 4);
+//	float pitch = pow(2.0f, half_steps/12.0f);
+//	[[OALSimpleAudio sharedInstance] playEffect:@"Laser.wav" volume:1.0 pitch:pitch pan:0.0 loop:NO];
 }
-*/
-
-//// A static string used as a group identifier for the debris.
-//static NSString *debrisIdentifier = @"debris";
 
 // Recursive helper function to set up physics on the debris child nodes.
 static void
@@ -249,7 +245,7 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity)
 -(void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event
 {
 	NSLog(@"BANG BANG BANG!");
-//	[self fireBullet];
+	[self fireBullet];
 }
 
 #pragma mark - CCPhysicsCollisionDelegate methods
