@@ -11,14 +11,6 @@
 	
 }
 
--(id)init
-{
-	if((self = [super init])){
-	}
-	
-	return self;
-}
-
 -(void)didLoadFromCCB
 {
 	CCParticleSystem *particles = (CCParticleSystem *)[CCBReader load:@"MenuParticles"];
@@ -40,28 +32,20 @@
 }
 
 
+-(void)play:(NSString *)selectedShip
+{
+	GameScene *scene = [[GameScene alloc] initWithShipType:selectedShip];
+	[[CCDirector sharedDirector] replaceScene:scene];
+}
+
 -(void)ship1Selected
 {
-	CCDirector *director = [CCDirector sharedDirector];
-	
-	GameScene *node = (GameScene *) [CCBReader load:@"GameScene"];
-	node.selectedPlayerShip = @"AndySpaceship";
-	
-	CCScene *scene = [CCScene node];
-	[scene addChild:node];
-	[director replaceScene:scene];
+	[self play:@"AndySpaceship"];
 }
 
 -(void)ship2Selected
 {
-	CCDirector *director = [CCDirector sharedDirector];
-	
-	GameScene *node = (GameScene *) [CCBReader load:@"GameScene"];
-	node.selectedPlayerShip = @"ScottSpaceship";
-	
-	CCScene *scene = [CCScene node];
-	[scene addChild:node];
-	[director replaceScene:scene];
+	[self play:@"ScottSpaceship"];
 }
 
 

@@ -1,5 +1,5 @@
-@interface GameScene : CCNode
+@interface GameScene : CCScene<CCPhysicsCollisionDelegate>
 
-@property(nonatomic, assign) NSString* selectedPlayerShip;
+-(instancetype)initWithShipType:(NSString *)shipType;
 
 @end
