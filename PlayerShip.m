@@ -78,16 +78,16 @@
 	if(cpvlengthsq(velocity)){
 		self.rotation = -CC_RADIANS_TO_DEGREES(atan2f(velocity.y, velocity.x));
 		
-		_mainThruster.visible = YES;
-		
-		if(!_engineNoise){
-			_engineNoise = [[OALSimpleAudio sharedInstance] playEffect:@"Engine.wav" loop:YES];
-		}
-		
-		_engineNoise.volume = ccpLength(joystickValue);
+//		_mainThruster.visible = YES;
+//		
+//		if(!_engineNoise){
+//			_engineNoise = [[OALSimpleAudio sharedInstance] playEffect:@"Engine.wav" loop:YES];
+//		}
+//		
+//		_engineNoise.volume = ccpLength(joystickValue);
 	} else {
-		_mainThruster.visible = NO;
-		[_engineNoise stop]; _engineNoise = nil;
+//		_mainThruster.visible = NO;
+//		[_engineNoise stop]; _engineNoise = nil;
 	}
 }
 

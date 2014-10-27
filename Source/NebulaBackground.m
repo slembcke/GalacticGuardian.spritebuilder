@@ -36,6 +36,8 @@ static CCTexture *DistortionTexture;
 -(id)init
 {
 	if((self = [super initWithTexture:NebulaTexture])){
+		self.anchorPoint = CGPointZero;
+		
 		// Disable alpha blending to save some fillrate.
 		self.blendMode = [CCBlendMode disabledMode];
 		
@@ -45,9 +47,9 @@ static CCTexture *DistortionTexture;
 		_distortionMap.contentScale /= 2.0;
 		_distortionMap.texture.antialiased = YES;
 		
+		// Set the distortion map to no offset. 
 		[_distortionMap beginWithClear:0.5 g:0.5 b:0.0 a:0.0];
 		[_distortionMap end];
-
 		
 		// Apply the Nebula shader that applies some subtle parallax mapping and distortions.
 		self.shader = [CCShader shaderNamed:@"Nebula"];

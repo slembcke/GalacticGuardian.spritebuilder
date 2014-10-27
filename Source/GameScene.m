@@ -23,6 +23,7 @@ enum ZORDER {
 	Z_SCROLL_NODE,
 	Z_NEBULA,
 	Z_PHYSICS,
+	Z_PLAYER,
 	Z_JOYSTICK,
 };
 
@@ -40,12 +41,16 @@ enum ZORDER {
 -(instancetype)initWithShipType:(NSString *)shipType
 {
 	if((self = [super init])){
-		CGFloat joystickOffset = [CCDirector sharedDirector].viewSize.width/4.0;
+		CGSize viewSize = [CCDirector sharedDirector].viewSize;
+		
+		CGFloat joystickOffset = viewSize.width/4.0;
 		_joystick = [[Joystick alloc] initWithSize:joystickOffset];
 		_joystick.position = ccp(joystickOffset, joystickOffset);
 		[self addChild:_joystick z:Z_JOYSTICK];
 		
 		_scrollNode = [CCNode node];
+		_scrollNode.contentSize = CGSizeMake(1.0, 1.0);
+		_scrollNode.position = ccp(viewSize.width/2.0, viewSize.height/2.0);
 		[self addChild:_scrollNode z:Z_SCROLL_NODE];
 		
 		NebulaBackground *nebula = [NebulaBackground node];
@@ -65,7 +70,7 @@ enum ZORDER {
 		// Add a ship in the middle of the screen.
 		_playerShip = (PlayerShip *)[CCBReader load:shipType];
 		_playerShip.position = ccp(GameSceneSize.width/2.0, GameSceneSize.height/2.0);
-		[_physics addChild:_playerShip];
+		[_physics addChild:_playerShip z:Z_PLAYER];
 		
 		// Enable touch events.
 		// The entire scene is used as a shoot button.
@@ -78,7 +83,12 @@ enum ZORDER {
 -(void)fixedUpdate:(CCTime)delta
 {
 	// Fly the ship using the joystick controls.
-//	[_playerShip fixedUpdate:delta withInput:_joystick.value];
+	[_playerShip fixedUpdate:delta withInput:_joystick.value];
+}
+
+-(void)update:(CCTime)delta
+{
+	_scrollNode.anchorPoint = _playerShip.position;
 }
 
 /*
