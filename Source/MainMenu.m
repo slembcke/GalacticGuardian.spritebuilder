@@ -1,7 +1,8 @@
 #import "MainMenu.h"
+#import "NebulaBackground.h"
 
 @implementation MainMenu {
-	CCNode<CCShaderProtocol> *_background;
+	NebulaBackground *_background;
 	CCTime _time;
 }
 

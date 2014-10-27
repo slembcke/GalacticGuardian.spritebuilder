@@ -92,6 +92,7 @@
 		B77F1B4017B978D7009739AE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B77F1B3F17B978D7009739AE /* CoreGraphics.framework */; };
 		B77F1B4217B978D7009739AE /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B77F1B4117B978D7009739AE /* CoreText.framework */; };
 		B78A0B10198AF87200C63841 /* Published-Android in Resources */ = {isa = PBXBuildFile; fileRef = B78A0B0F198AF87200C63841 /* Published-Android */; };
+		D3937FC019FE074F0074009E /* DistortionTexture.png in Resources */ = {isa = PBXBuildFile; fileRef = D3937FBF19FE074F0074009E /* DistortionTexture.png */; };
 		D3A7E8DA19FDC86000695965 /* NebulaBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A7E8D919FDC86000695965 /* NebulaBackground.m */; };
 		D3A7E8DB19FDC86000695965 /* NebulaBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A7E8D919FDC86000695965 /* NebulaBackground.m */; };
 		D3A7E8DC19FDC86000695965 /* NebulaBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A7E8D919FDC86000695965 /* NebulaBackground.m */; };
@@ -244,6 +245,8 @@
 		B78A0B0F198AF87200C63841 /* Published-Android */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Published-Android"; sourceTree = "<group>"; };
 		B7B3713D180358F1007369CC /* libObjectiveChipmunk.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libObjectiveChipmunk.a; path = "../libs/cocos2d-iphone/external/Chipmunk/xcode/build/Debug-iphoneos/libObjectiveChipmunk.a"; sourceTree = "<group>"; };
 		D352B48019EC608A00829775 /* MetalShaders */ = {isa = PBXFileReference; lastKnownFileType = folder; name = MetalShaders; path = Source/MetalShaders; sourceTree = "<group>"; };
+		D3937FBD19FDD9AB0074009E /* NebulaBackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NebulaBackground.h; sourceTree = "<group>"; };
+		D3937FBF19FE074F0074009E /* DistortionTexture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DistortionTexture.png; sourceTree = "<group>"; };
 		D3A7E8D919FDC86000695965 /* NebulaBackground.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NebulaBackground.m; path = Source/NebulaBackground.m; sourceTree = "<group>"; };
 		D3A7E8DD19FDC88600695965 /* Nebula.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Nebula.png; sourceTree = "<group>"; };
 		D3A7E8DE19FDC88600695965 /* NebulaDepth.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NebulaDepth.png; sourceTree = "<group>"; };
@@ -481,6 +484,7 @@
 				D352B48019EC608A00829775 /* MetalShaders */,
 				B7378992180767190076A88C /* MainMenu.h */,
 				B7378993180767190076A88C /* MainMenu.m */,
+				D3937FBD19FDD9AB0074009E /* NebulaBackground.h */,
 				D3A7E8D919FDC86000695965 /* NebulaBackground.m */,
 			);
 			name = Source;
@@ -556,6 +560,7 @@
 		B77F1B4617B978D7009739AE /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D3937FBF19FE074F0074009E /* DistortionTexture.png */,
 				D3A7E8DD19FDC88600695965 /* Nebula.png */,
 				D3A7E8DE19FDC88600695965 /* NebulaDepth.png */,
 				D3A7E8F119FDCABE00695965 /* Nebula.vsh */,
@@ -725,7 +730,7 @@
 		};
 		7A97910219E62E40001FFC4D /* cocos2dJava.jar */ = {
 			isa = PBXReferenceProxy;
-			fileType = compiled.java.jar;
+			fileType = archive.jar;
 			path = cocos2dJava.jar;
 			remoteRef = 7A97910119E62E40001FFC4D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -801,6 +806,7 @@
 				D3A7E8E219FDC88600695965 /* NebulaDepth.png in Resources */,
 				B7378978180762440076A88C /* Default@2x.png in Resources */,
 				B71F5914188484E7003F4D28 /* iPad@2x.png in Resources */,
+				D3937FC019FE074F0074009E /* DistortionTexture.png in Resources */,
 				B71F5913188484E7003F4D28 /* iPad.png in Resources */,
 				D3A7E8DF19FDC88600695965 /* Nebula.png in Resources */,
 				B71F5912188484E7003F4D28 /* iPad-old@2x.png in Resources */,
