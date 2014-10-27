@@ -13,8 +13,7 @@
 
 #import "PlayerShip.h"
 #import "EnemyShip.h"
-//#import "Bullet.h"
-//#import "Asteroid.h"
+#import "Bullet.h"
 #import "Joystick.h"
 
 
@@ -40,6 +39,8 @@ enum ZORDER {
 	PlayerShip *_playerShip;
 	
 	NSMutableArray *_enemies;
+	
+	int _enemies_killed;
 }
 
 -(instancetype)initWithShipType:(NSString *)shipType
@@ -82,7 +83,7 @@ enum ZORDER {
 		[self scheduleBlock:^(CCTimer *timer) {
 			
 			EnemyShip *enemy = (EnemyShip *)[CCBReader load:@"BadGuy1"];
-			enemy.position = ccp(CCRANDOM_0_1() > 0.5f ? 0 : 512.0f, 256.0f);
+			enemy.position = ccp(CCRANDOM_0_1() > 0.5f ? 0 + 128.0f : 1024.0f - 128.0f, 512.0f);
 			[_physics addChild:enemy z:Z_ENEMY];
 			[_enemies addObject:enemy];
 			
@@ -114,32 +115,16 @@ enum ZORDER {
 	_scrollNode.anchorPoint = _playerShip.position;
 }
 
-/*
--(void)destroyBadGuy:(Asteroid *)asteroid
+
+-(void)enemyDeath:(EnemyShip *)enemy
 {
-	[asteroid removeFromParent];
-	[_enemies removeObject:asteroid];
+	[enemy removeFromParent];
+	[_enemies removeObject:enemy];
+	_enemies_killed += 1;
 	
-	// Make some noise. Add a little chromatically tuned pitch bending to make it more musical.
-	int half_steps = (arc4random()%(2*4 + 1) - 4);
-	float pitch = pow(2.0f, half_steps/12.0f);
-	[[OALSimpleAudio sharedInstance] playEffect:@"Explosion.wav" volume:1.0 pitch:pitch pan:0.0 loop:NO];
+	// TODO Explosion!
 	
-	// Update the score.
-	_destroyedCount++;
-	_scoreLabel.string = [NSString stringWithFormat:@"Score: %d", _destroyedCount*100];
-	
-	// If all the asteroids are destroyed, move to the next level.
-	if(_asteroids.count == 0){
-		[_warningLabel runAction:[CCActionBlink actionWithDuration:2.0 blinks:4]];
-		
-		// Add some more asteroids after a short delay
-		[self scheduleBlock:^(CCTimer *timer){
-			[self addAsteroids];
-		} delay:2.0];
-	}
 }
- */
 
 
 /*
@@ -289,21 +274,23 @@ InitDebris(CCNode *node, CGPoint velocity)
 		return NO;
 	}else{
 		// Player took damage, the enemy should self destruct.
-		[enemy dieNow];
+		[self enemyDeath: enemy];
 		return YES;
-		
 	}
 	
 	
 }
-/*
+
 -(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair bullet:(Bullet *)bullet enemy:(EnemyShip *)enemy
 {
 //	[self destroyBullet:bullet];
-//	[self destroyAsteroid:asteroid];
+	
+	if([enemy takeDamage]){
+		[self enemyDeath:enemy];
+	}
 	
 	return NO;
 }
-*/
+
 
 @end

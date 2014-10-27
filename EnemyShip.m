@@ -26,15 +26,16 @@
 	CCPhysicsBody *body = self.physicsBody;
 	
 	_hp = 10;
+	_speed = 35;
 	
 	// This is used to pick which collision delegate method to call, see GameScene.m for more info.
 	body.collisionType = @"enemy";
 	
 	// This sets up simple collision rules.
 	// First you list the categories (strings) that the object belongs to.
-	body.collisionCategories = @[@"enemy"];
+//	body.collisionCategories = @[@"enemy"];
 	// Then you list which categories its allowed to collide with.
-	body.collisionMask = @[@"ship"];
+//	body.collisionMask = @[@"ship"];
 	
 	// Make the thruster pulse
 	float scaleX = _mainThruster.scaleX;
@@ -73,10 +74,6 @@
 	return _hp <= 0;
 }
 
--(void) dieNow;
-{
-	_hp = 0;
-}
 
 
 @end

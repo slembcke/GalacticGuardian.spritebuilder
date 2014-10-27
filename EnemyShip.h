@@ -7,7 +7,6 @@
 @interface EnemyShip : CCNode
 
 -(void)fixedUpdate:(CCTime)delta towardsPlayer:(CGPoint)playerPos;
--(void) dieNow;
 -(BOOL) takeDamage;
 
 @end
