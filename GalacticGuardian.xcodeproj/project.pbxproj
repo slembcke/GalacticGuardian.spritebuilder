@@ -96,6 +96,9 @@
 		B77F1B4017B978D7009739AE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B77F1B3F17B978D7009739AE /* CoreGraphics.framework */; };
 		B77F1B4217B978D7009739AE /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B77F1B4117B978D7009739AE /* CoreText.framework */; };
 		B78A0B10198AF87200C63841 /* Published-Android in Resources */ = {isa = PBXBuildFile; fileRef = B78A0B0F198AF87200C63841 /* Published-Android */; };
+		D304DD3A19FEC85F0042180F /* Joystick.m in Sources */ = {isa = PBXBuildFile; fileRef = D304DD3919FEC85F0042180F /* Joystick.m */; };
+		D304DD3B19FEC85F0042180F /* Joystick.m in Sources */ = {isa = PBXBuildFile; fileRef = D304DD3919FEC85F0042180F /* Joystick.m */; };
+		D304DD3C19FEC85F0042180F /* Joystick.m in Sources */ = {isa = PBXBuildFile; fileRef = D304DD3919FEC85F0042180F /* Joystick.m */; };
 		D3937FC019FE074F0074009E /* DistortionTexture.png in Resources */ = {isa = PBXBuildFile; fileRef = D3937FBF19FE074F0074009E /* DistortionTexture.png */; };
 		D3937FC219FE1B2A0074009E /* DistortionParticle.fsh in Resources */ = {isa = PBXBuildFile; fileRef = D3937FC119FE1B2A0074009E /* DistortionParticle.fsh */; };
 		D3937FC319FE1B2A0074009E /* DistortionParticle.fsh in Resources */ = {isa = PBXBuildFile; fileRef = D3937FC119FE1B2A0074009E /* DistortionParticle.fsh */; };
@@ -258,6 +261,8 @@
 		B77F1B4117B978D7009739AE /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		B78A0B0F198AF87200C63841 /* Published-Android */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Published-Android"; sourceTree = "<group>"; };
 		B7B3713D180358F1007369CC /* libObjectiveChipmunk.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libObjectiveChipmunk.a; path = "../libs/cocos2d-iphone/external/Chipmunk/xcode/build/Debug-iphoneos/libObjectiveChipmunk.a"; sourceTree = "<group>"; };
+		D304DD3819FEC85F0042180F /* Joystick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Joystick.h; sourceTree = "<group>"; };
+		D304DD3919FEC85F0042180F /* Joystick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Joystick.m; sourceTree = "<group>"; };
 		D352B48019EC608A00829775 /* MetalShaders */ = {isa = PBXFileReference; lastKnownFileType = folder; name = MetalShaders; path = Source/MetalShaders; sourceTree = "<group>"; };
 		D3937FBD19FDD9AB0074009E /* NebulaBackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NebulaBackground.h; sourceTree = "<group>"; };
 		D3937FBF19FE074F0074009E /* DistortionTexture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DistortionTexture.png; sourceTree = "<group>"; };
@@ -504,6 +509,8 @@
 				75058A3019FEC27F001AA9C6 /* GameScene.m */,
 				D3937FBD19FDD9AB0074009E /* NebulaBackground.h */,
 				D3A7E8D919FDC86000695965 /* NebulaBackground.m */,
+				D304DD3819FEC85F0042180F /* Joystick.h */,
+				D304DD3919FEC85F0042180F /* Joystick.m */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -750,7 +757,7 @@
 		};
 		7A97910219E62E40001FFC4D /* cocos2dJava.jar */ = {
 			isa = PBXReferenceProxy;
-			fileType = archive.jar;
+			fileType = compiled.java.jar;
 			path = cocos2dJava.jar;
 			remoteRef = 7A97910119E62E40001FFC4D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -915,6 +922,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D3A7E8DC19FDC86000695965 /* NebulaBackground.m in Sources */,
+				D304DD3C19FEC85F0042180F /* Joystick.m in Sources */,
 				7A4036E819DE3F33007B6E8F /* MainMenu.m in Sources */,
 				75058A3419FEC27F001AA9C6 /* GameScene.m in Sources */,
 				7A40360419DDEE84007B6E8F /* main.m in Sources */,
@@ -926,6 +934,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D304DD3B19FEC85F0042180F /* Joystick.m in Sources */,
 				D3A7E8DB19FDC86000695965 /* NebulaBackground.m in Sources */,
 				927F619E196C771E000F43EF /* MainMenu.m in Sources */,
 				75058A3219FEC27F001AA9C6 /* GameScene.m in Sources */,
@@ -938,6 +947,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D3A7E8DA19FDC86000695965 /* NebulaBackground.m in Sources */,
+				D304DD3A19FEC85F0042180F /* Joystick.m in Sources */,
 				B73789871807631A0076A88C /* main.m in Sources */,
 				7A046D8C19E8A20E004C4763 /* MainMenu.m in Sources */,
 				75058A3119FEC27F001AA9C6 /* GameScene.m in Sources */,
