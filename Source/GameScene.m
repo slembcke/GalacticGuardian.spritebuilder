@@ -78,6 +78,11 @@
 	_enemies = [NSMutableArray array];
 	_bullets = [NSMutableArray array];
 	
+	_joystick = [[Joystick alloc] init];
+	_joystick.contentSize = CGSizeMake(100, 100);
+	_joystick.position = ccp(120, 120);
+	[self addChild:_joystick];
+	
 	// Use the gamescene as the collision delegate.
 	// See the ccPhysicsCollision* methods below.
 //	_physics.collisionDelegate = self;
