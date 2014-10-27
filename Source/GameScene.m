@@ -81,9 +81,9 @@
 	_enemies = [NSMutableArray array];
 	_bullets = [NSMutableArray array];
 	
-	_joystick = [[Joystick alloc] init];
-	_joystick.contentSize = CGSizeMake(100, 100);
-	_joystick.position = ccp(120, 120);
+	CGFloat joystickOffset = [CCDirector sharedDirector].viewSize.width/4.0;
+	_joystick = [[Joystick alloc] initWithSize:joystickOffset];
+	_joystick.position = ccp(joystickOffset, joystickOffset);
 	[self addChild:_joystick];
 	
 	// Use the gamescene as the collision delegate.

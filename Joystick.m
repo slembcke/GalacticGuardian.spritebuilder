@@ -17,10 +17,10 @@
 	__unsafe_unretained CCTouch *_trackingTouch;
 }
 
--(instancetype)initWithSize:(CGSize)size
+-(instancetype)initWithSize:(CGFloat)size
 {
 	if((self = [super init])){
-		self.contentSize = size;
+		self.contentSize = CGSizeMake(size, size);
 		self.anchorPoint = ccp(0.5, 0.5);
 	}
 	
