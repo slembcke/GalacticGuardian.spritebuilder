@@ -67,6 +67,16 @@
 	}
 }
 
+-(BOOL) takeDamage
+{
+	_hp -= 1;
+	return _hp <= 0;
+}
+
+-(void) dieNow;
+{
+	_hp = 0;
+}
 
 
 @end
