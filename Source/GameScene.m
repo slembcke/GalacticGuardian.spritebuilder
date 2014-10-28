@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Apportable. All rights reserved.
 //
 
-#import "OALSimpleAudio.h"
+//#import "OALSimpleAudio.h"
 #import "NebulaBackground.h"
 
 #import "GameScene.h"
@@ -285,7 +285,7 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity)
 
 //MARK CCResponder methods
 
--(void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event
+-(void)touchBegan:(CCTouch *)touch withEvent:(CCTouchEvent *)event
 {
 	[self fireBullet];
 }

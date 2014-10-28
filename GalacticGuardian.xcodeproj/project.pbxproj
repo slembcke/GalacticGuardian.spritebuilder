@@ -14,7 +14,6 @@
 		5B121038197487F2004C1E1D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B737893E1807617C0076A88C /* AppDelegate.m */; };
 		75058A3119FEC27F001AA9C6 /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 75058A3019FEC27F001AA9C6 /* GameScene.m */; };
 		75058A3219FEC27F001AA9C6 /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 75058A3019FEC27F001AA9C6 /* GameScene.m */; };
-		75058A3319FEC27F001AA9C6 /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 75058A3019FEC27F001AA9C6 /* GameScene.m */; };
 		75058A3419FEC27F001AA9C6 /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 75058A3019FEC27F001AA9C6 /* GameScene.m */; };
 		75058A4219FECE64001AA9C6 /* PlayerShip.m in Sources */ = {isa = PBXBuildFile; fileRef = 75058A4119FECE64001AA9C6 /* PlayerShip.m */; };
 		75058A4719FECF95001AA9C6 /* Bullet.m in Sources */ = {isa = PBXBuildFile; fileRef = 75058A4619FECF95001AA9C6 /* Bullet.m */; };
@@ -136,6 +135,8 @@
 		D3ED616E19FF3B8000DF3A43 /* BurnSprite.vsh in Resources */ = {isa = PBXBuildFile; fileRef = D3ED616D19FF3B8000DF3A43 /* BurnSprite.vsh */; };
 		D3ED616F19FF3B8000DF3A43 /* BurnSprite.vsh in Resources */ = {isa = PBXBuildFile; fileRef = D3ED616D19FF3B8000DF3A43 /* BurnSprite.vsh */; };
 		D3ED617019FF3B8000DF3A43 /* BurnSprite.vsh in Resources */ = {isa = PBXBuildFile; fileRef = D3ED616D19FF3B8000DF3A43 /* BurnSprite.vsh */; };
+		D3ED617119FF57A000DF3A43 /* PlayerShip.m in Sources */ = {isa = PBXBuildFile; fileRef = 75058A4119FECE64001AA9C6 /* PlayerShip.m */; };
+		D3ED617219FF57A100DF3A43 /* PlayerShip.m in Sources */ = {isa = PBXBuildFile; fileRef = 75058A4119FECE64001AA9C6 /* PlayerShip.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -944,7 +945,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				75058A3319FEC27F001AA9C6 /* GameScene.m in Sources */,
 				5B12102A197484DD004C1E1D /* GalacticGuardianActivity.java in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -955,6 +955,7 @@
 			files = (
 				75058A5419FEE7B7001AA9C6 /* EnemyShip.m in Sources */,
 				75058A4919FECF95001AA9C6 /* Bullet.m in Sources */,
+				D3ED617219FF57A100DF3A43 /* PlayerShip.m in Sources */,
 				D3A7E8DC19FDC86000695965 /* NebulaBackground.m in Sources */,
 				D304DD3C19FEC85F0042180F /* Joystick.m in Sources */,
 				7A4036E819DE3F33007B6E8F /* MainMenu.m in Sources */,
@@ -969,6 +970,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3ED617119FF57A000DF3A43 /* PlayerShip.m in Sources */,
 				D304DD3B19FEC85F0042180F /* Joystick.m in Sources */,
 				D3A7E8DB19FDC86000695965 /* NebulaBackground.m in Sources */,
 				927F619E196C771E000F43EF /* MainMenu.m in Sources */,
