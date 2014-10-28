@@ -159,7 +159,7 @@
 						<key>value</key>
 						<array>
 							<real>120</real>
-							<real>120</real>
+							<real>84</real>
 							<integer>3</integer>
 							<integer>0</integer>
 							<integer>0</integer>
@@ -451,6 +451,8 @@
 						</array>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -485,7 +487,7 @@
 						<key>value</key>
 						<array>
 							<real>120</real>
-							<real>120</real>
+							<real>84</real>
 							<integer>0</integer>
 							<integer>0</integer>
 							<integer>0</integer>
@@ -777,6 +779,8 @@
 						</array>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -1056,7 +1060,7 @@
 						<key>value</key>
 						<array>
 							<real>120</real>
-							<real>120</real>
+							<real>84</real>
 							<integer>0</integer>
 							<integer>0</integer>
 							<integer>0</integer>
@@ -1092,6 +1096,8 @@
 						<string>AndySpaceship.ccb</string>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -1159,7 +1165,7 @@
 						<key>value</key>
 						<array>
 							<real>120</real>
-							<real>120</real>
+							<real>84</real>
 							<integer>3</integer>
 							<integer>0</integer>
 							<integer>0</integer>
