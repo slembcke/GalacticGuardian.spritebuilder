@@ -174,7 +174,10 @@ enum ZORDER {
 	CCNode *debris = [CCBReader load:enemy.debris];
 	debris.position = pos;
 	debris.rotation = enemy.rotation;
-	InitDebris(debris, debris, enemy.physicsBody.velocity);
+	
+	CCColor *weaponColor = [CCColor colorWithRed:0.3f green:0.8f blue:1.0f];
+	
+	InitDebris(debris, debris, enemy.physicsBody.velocity, weaponColor);
 	[_physics addChild:debris];
 	
 	CCNode *explosion = [CCBReader load:@"Particles/ShipExplosion"];
@@ -290,7 +293,7 @@ enum ZORDER {
 
 // Recursive helper function to set up physics on the debris child nodes.
 static void
-InitDebris(CCNode *root, CCNode *node, CGPoint velocity)
+InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 {
 	// If the node has a body, set some properties.
 	CCPhysicsBody *body = node.physicsBody;
@@ -309,13 +312,14 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity)
 		
 		// Nodes with bodies should also be sprites.
 		// This is a convenient place to add the fade action.
+		node.color = burnColor;
 		[node runAction: [CCActionSequence actions:
 		 [CCActionDelay actionWithDuration:0.5],
 		 [CCActionFadeOut actionWithDuration:2.0], nil]];
 	}
 	
 	// Recurse on the children.
-	for(CCNode *child in node.children) InitDebris(root, child, velocity);
+	for(CCNode *child in node.children) InitDebris(root, child, velocity, burnColor);
 }
 
 //MARK CCResponder methods
@@ -346,7 +350,7 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity)
 	CCNode *debris = [CCBReader load:_playerShip.debris];
 	debris.position = pos;
 	debris.rotation = _playerShip.rotation;
-	InitDebris(debris, debris, _playerShip.physicsBody.velocity);
+	InitDebris(debris, debris, _playerShip.physicsBody.velocity, [CCColor colorWithRed:1.0f green:1.0f blue:0.3f]);
 	[_physics addChild:debris];
 	
 	CCNode *explosion = [CCBReader load:@"Particles/ShipExplosion"];
