@@ -288,6 +288,7 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity)
 
 -(void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event
 {
+	
 	[self fireBullet];
 }
 
