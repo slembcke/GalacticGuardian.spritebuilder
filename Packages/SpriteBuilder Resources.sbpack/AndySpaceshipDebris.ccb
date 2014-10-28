@@ -57,8 +57,6 @@
 						<string>BurnSprite</string>
 						<key>displayName</key>
 						<string>wingRed_0</string>
-						<key>hidden</key>
-						<true/>
 						<key>memberVarAssignmentName</key>
 						<string></string>
 						<key>memberVarAssignmentType</key>
@@ -224,8 +222,6 @@
 						<string>BurnSprite</string>
 						<key>displayName</key>
 						<string>wingRed_0</string>
-						<key>hidden</key>
-						<true/>
 						<key>memberVarAssignmentName</key>
 						<string></string>
 						<key>memberVarAssignmentType</key>
@@ -391,8 +387,6 @@
 						<string>BurnSprite</string>
 						<key>displayName</key>
 						<string>wingRed_3</string>
-						<key>hidden</key>
-						<true/>
 						<key>memberVarAssignmentName</key>
 						<string></string>
 						<key>memberVarAssignmentType</key>
@@ -574,8 +568,6 @@
 						<string>BurnSprite</string>
 						<key>displayName</key>
 						<string>wingRed_3</string>
-						<key>hidden</key>
-						<true/>
 						<key>memberVarAssignmentName</key>
 						<string></string>
 						<key>memberVarAssignmentType</key>
@@ -757,8 +749,6 @@
 						<string>BurnSprite</string>
 						<key>displayName</key>
 						<string>gun03</string>
-						<key>hidden</key>
-						<true/>
 						<key>memberVarAssignmentName</key>
 						<string></string>
 						<key>memberVarAssignmentType</key>
@@ -932,8 +922,6 @@
 						<string>BurnSprite</string>
 						<key>displayName</key>
 						<string>gun03</string>
-						<key>hidden</key>
-						<true/>
 						<key>memberVarAssignmentName</key>
 						<string></string>
 						<key>memberVarAssignmentType</key>
@@ -1107,8 +1095,6 @@
 						<string>BurnSprite</string>
 						<key>displayName</key>
 						<string>engine2</string>
-						<key>hidden</key>
-						<true/>
 						<key>memberVarAssignmentName</key>
 						<string></string>
 						<key>memberVarAssignmentType</key>
@@ -1270,6 +1256,8 @@
 								<array/>
 							</dict>
 						</array>
+						<key>selected</key>
+						<true/>
 					</dict>
 					<dict>
 						<key>UUID</key>
@@ -1475,8 +1463,6 @@
 								<array/>
 							</dict>
 						</array>
-						<key>selected</key>
-						<true/>
 					</dict>
 				</array>
 				<key>customClass</key>
@@ -1560,7 +1546,7 @@
 			</dict>
 		</array>
 		<key>customClass</key>
-		<string>PlayerShip</string>
+		<string></string>
 		<key>customProperties</key>
 		<array>
 			<dict>
