@@ -29,7 +29,7 @@
 	
 	float _speed;
 	float _accelTime;
-
+	int _hp;
 }
 
 -(void)onEnter
@@ -57,6 +57,7 @@
 	// Make the shield spin
 	[_shield runAction:[CCActionRepeatForever actionWithAction:[CCActionRotateBy actionWithDuration:1.0 angle:360.0]]];
 	
+	_hp = 4;
 	
 	_gunPorts = [NSMutableArray array];
 	for (CCNode* node in [_children[0] children]) {
@@ -136,8 +137,16 @@
 	} else {
 		[[OALSimpleAudio sharedInstance] playEffect:@"Crash.wav"];
 		
-		return YES;
+		_hp -= 1;
+		
+		return _hp <= 0;
 	}
 }
+
+-(BOOL) isDead
+{
+	return _hp <= 0;
+}
+
 
 @end

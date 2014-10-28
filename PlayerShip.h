@@ -20,5 +20,6 @@
 -(void)fixedUpdate:(CCTime)delta withInput:(CGPoint)joystickValue;
 
 -(BOOL)takeDamage;
+-(BOOL)isDead;
 
 @end

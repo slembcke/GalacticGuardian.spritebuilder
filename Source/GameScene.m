@@ -135,7 +135,7 @@ enum ZORDER {
 
 	
 	for (EnemyShip *e in _enemies) {
-		[e fixedUpdate:delta towardsPlayer:_playerShip.position];
+		[e fixedUpdate:delta towardsPlayer:_playerShip];
 	}
 }
 
@@ -230,7 +230,7 @@ enum ZORDER {
 -(void)fireBullet
 {
 	// Don't fire bullets if the ship is destroyed.
-	if(_playerShip == nil) return;
+	if([_playerShip isDead]) return;
 	_playerShip.lastFireTime = _fixedTime;
 	
 	// This is sort of a fancy math way to figure out where to fire the bullet from.
