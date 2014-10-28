@@ -111,6 +111,11 @@ enum ZORDER {
 			
 		} delay:1.0f];
 		
+		for(int i = 0; i < 20; i++){
+			// maybe this spoke/circle pattern will be cool.
+			float angle = (M_PI * 2.0f / 20.0f) * i;
+			[self addWallAt: ccpAdd(ccpMult(ccpForAngle(angle), 200.0f + 100 * CCRANDOM_0_1() ), ccp(512, 512))];
+		}
 		
 		// Enable touch events.
 		// The entire scene is used as a shoot button.
@@ -118,6 +123,13 @@ enum ZORDER {
 	}
 	
 	return self;
+}
+
+-(void)addWallAt:(CGPoint) pos
+{
+	CCNode *wall = (CCNode *)[CCBReader load:@"Asteroid"];
+	wall.position = pos;
+	[_physics addChild:wall z:Z_ENEMY];
 }
 
 -(void)fixedUpdate:(CCTime)delta
