@@ -25,6 +25,7 @@ enum ZORDER {
 	Z_PHYSICS,
 	Z_ENEMY,
 	Z_PLAYER,
+	Z_PARTICLES,
 	Z_JOYSTICK,
 };
 
@@ -64,9 +65,9 @@ enum ZORDER {
 		_minScrollPos = ccp(viewSize.width/2.0, viewSize.height/2.0);
 		_maxScrollPos = ccp(GameSceneSize.width - _minScrollPos.x, GameSceneSize.height - _minScrollPos.y);
 		
-		NebulaBackground *nebula = [NebulaBackground node];
-		nebula.contentSize = GameSceneSize;
-		[_scrollNode addChild:nebula z:Z_NEBULA];
+		_background = [NebulaBackground node];
+		_background.contentSize = GameSceneSize;
+		[_scrollNode addChild:_background z:Z_NEBULA];
 		
 		_physics = [CCPhysicsNode node];
 		[_scrollNode addChild:_physics z:Z_PHYSICS];
@@ -79,7 +80,7 @@ enum ZORDER {
 		_physics.collisionDelegate = self;
 		
 		// Enable to show debug outlines for Physics shapes.
-		_physics.debugDraw = YES;
+//		_physics.debugDraw = YES;
 		
 		// Add a ship in the middle of the screen.
 		_playerShip = (PlayerShip *)[CCBReader load:shipType];
@@ -244,7 +245,6 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity)
 
 -(void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event
 {
-	NSLog(@"BANG BANG BANG!");
 	[self fireBullet];
 }
 
@@ -257,14 +257,26 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity)
 		//The ship was destroyed!
 		[_playerShip removeFromParent];
 		
+		CGPoint pos = _playerShip.position;
+		
 		CCNode *debris = [CCBReader load:_playerShip.debris];
-		debris.position = _playerShip.position;
+		debris.position = pos;
 		debris.rotation = _playerShip.rotation;
 		InitDebris(debris, debris, _playerShip.physicsBody.velocity);
 		[_physics addChild:debris];
 		
-		[debris scheduleBlock:^(CCTimer *timer) {
+		CCNode *explosion = [CCBReader load:@"Particles/ShipExplosion"];
+		explosion.position = pos;
+		[_physics addChild:explosion z:Z_PARTICLES];
+		
+		CCNode *distortion = [CCBReader load:@"DistortionParticles/LargeRing"];
+		distortion.position = pos;
+		[_background.distortionNode addChild:distortion];
+		
+		[self scheduleBlock:^(CCTimer *timer) {
 			[debris removeFromParent];
+			[explosion removeFromParent];
+			[distortion removeFromParent];
 		} delay:5];
 		
 		// Add a lame particle effect.
@@ -277,7 +289,7 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity)
 		[self scheduleBlock:^(CCTimer *timer){
 			// Go back to the menu after a short delay.
 			[[CCDirector sharedDirector] replaceScene:[CCBReader loadAsScene:@"MainMenu"]];
-		} delay:1.0]; // TODO: nonzero delay needed for optimal fun
+		} delay:5.0]; // TODO: nonzero delay needed for optimal fun
 		
 		// Don't process the collision so the enemy spaceship will survive and mock you.
 		return NO;

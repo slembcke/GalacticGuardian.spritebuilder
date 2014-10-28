@@ -13,9 +13,8 @@
 
 -(void)didLoadFromCCB
 {
-	CCParticleSystem *particles = (CCParticleSystem *)[CCBReader load:@"MenuParticles"];
+	CCParticleSystem *particles = (CCParticleSystem *)[CCBReader load:@"DistortionParticles/Menu"];
 	particles.shader = [CCShader shaderNamed:@"DistortionParticle"];
-	particles.texture = [NebulaBackground distortionTexture];
 	particles.positionType = CCPositionTypeNormalized;
 	particles.position = ccp(0.5, 0.5);
 	[_background.distortionNode addChild:particles];

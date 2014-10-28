@@ -106,12 +106,9 @@
 		D304DD3A19FEC85F0042180F /* Joystick.m in Sources */ = {isa = PBXBuildFile; fileRef = D304DD3919FEC85F0042180F /* Joystick.m */; };
 		D304DD3B19FEC85F0042180F /* Joystick.m in Sources */ = {isa = PBXBuildFile; fileRef = D304DD3919FEC85F0042180F /* Joystick.m */; };
 		D304DD3C19FEC85F0042180F /* Joystick.m in Sources */ = {isa = PBXBuildFile; fileRef = D304DD3919FEC85F0042180F /* Joystick.m */; };
-		D3937FC019FE074F0074009E /* DistortionTexture.png in Resources */ = {isa = PBXBuildFile; fileRef = D3937FBF19FE074F0074009E /* DistortionTexture.png */; };
 		D3937FC219FE1B2A0074009E /* DistortionParticle.fsh in Resources */ = {isa = PBXBuildFile; fileRef = D3937FC119FE1B2A0074009E /* DistortionParticle.fsh */; };
 		D3937FC319FE1B2A0074009E /* DistortionParticle.fsh in Resources */ = {isa = PBXBuildFile; fileRef = D3937FC119FE1B2A0074009E /* DistortionParticle.fsh */; };
 		D3937FC419FE1B2A0074009E /* DistortionParticle.fsh in Resources */ = {isa = PBXBuildFile; fileRef = D3937FC119FE1B2A0074009E /* DistortionParticle.fsh */; };
-		D3937FC519FE1B310074009E /* DistortionTexture.png in Resources */ = {isa = PBXBuildFile; fileRef = D3937FBF19FE074F0074009E /* DistortionTexture.png */; };
-		D3937FC619FE1B310074009E /* DistortionTexture.png in Resources */ = {isa = PBXBuildFile; fileRef = D3937FBF19FE074F0074009E /* DistortionTexture.png */; };
 		D3937FC819FE1C410074009E /* DistortionParticle.vsh in Resources */ = {isa = PBXBuildFile; fileRef = D3937FC719FE1C410074009E /* DistortionParticle.vsh */; };
 		D3937FC919FE1C410074009E /* DistortionParticle.vsh in Resources */ = {isa = PBXBuildFile; fileRef = D3937FC719FE1C410074009E /* DistortionParticle.vsh */; };
 		D3937FCA19FE1C410074009E /* DistortionParticle.vsh in Resources */ = {isa = PBXBuildFile; fileRef = D3937FC719FE1C410074009E /* DistortionParticle.vsh */; };
@@ -278,7 +275,6 @@
 		D304DD3919FEC85F0042180F /* Joystick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Joystick.m; sourceTree = "<group>"; };
 		D352B48019EC608A00829775 /* MetalShaders */ = {isa = PBXFileReference; lastKnownFileType = folder; name = MetalShaders; path = Source/MetalShaders; sourceTree = "<group>"; };
 		D3937FBD19FDD9AB0074009E /* NebulaBackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NebulaBackground.h; sourceTree = "<group>"; };
-		D3937FBF19FE074F0074009E /* DistortionTexture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DistortionTexture.png; sourceTree = "<group>"; };
 		D3937FC119FE1B2A0074009E /* DistortionParticle.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = DistortionParticle.fsh; sourceTree = "<group>"; };
 		D3937FC719FE1C410074009E /* DistortionParticle.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = DistortionParticle.vsh; sourceTree = "<group>"; };
 		D3A7E8D919FDC86000695965 /* NebulaBackground.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NebulaBackground.m; path = Source/NebulaBackground.m; sourceTree = "<group>"; };
@@ -608,7 +604,6 @@
 				D3A7E8DE19FDC88600695965 /* NebulaDepth.png */,
 				D3A7E8F119FDCABE00695965 /* Nebula.vsh */,
 				D3A7E8F519FDCB5E00695965 /* Nebula.fsh */,
-				D3937FBF19FE074F0074009E /* DistortionTexture.png */,
 				D3937FC719FE1C410074009E /* DistortionParticle.vsh */,
 				D3937FC119FE1B2A0074009E /* DistortionParticle.fsh */,
 				7A40366119DDF8C2007B6E8F /* Platforms */,
@@ -810,7 +805,6 @@
 				7A59498B19E38E4A00F65F90 /* MainMenu.xib in Resources */,
 				7A4036FE19DE401F007B6E8F /* iPhone@2x.png in Resources */,
 				D3A7E8E419FDC88600695965 /* NebulaDepth.png in Resources */,
-				D3937FC619FE1B310074009E /* DistortionTexture.png in Resources */,
 				7A4036FF19DE401F007B6E8F /* Settings.png in Resources */,
 				7A40370019DE401F007B6E8F /* Settings@2x.png in Resources */,
 				7A40370119DE401F007B6E8F /* Default-568h@2x.png in Resources */,
@@ -836,7 +830,6 @@
 				D3A7E8F319FDCABE00695965 /* Nebula.vsh in Resources */,
 				927F61B4196C771E000F43EF /* Settings@2x.png in Resources */,
 				927F61B5196C771E000F43EF /* Default-Landscape~ipad.png in Resources */,
-				D3937FC519FE1B310074009E /* DistortionTexture.png in Resources */,
 				B78A0B10198AF87200C63841 /* Published-Android in Resources */,
 				927F61B6196C771E000F43EF /* iPhone-old.png in Resources */,
 				927F61B7196C771E000F43EF /* iPhone.png in Resources */,
@@ -859,7 +852,6 @@
 				B7378978180762440076A88C /* Default@2x.png in Resources */,
 				D3937FC219FE1B2A0074009E /* DistortionParticle.fsh in Resources */,
 				B71F5914188484E7003F4D28 /* iPad@2x.png in Resources */,
-				D3937FC019FE074F0074009E /* DistortionTexture.png in Resources */,
 				B71F5913188484E7003F4D28 /* iPad.png in Resources */,
 				D3A7E8DF19FDC88600695965 /* Nebula.png in Resources */,
 				B71F5912188484E7003F4D28 /* iPad-old@2x.png in Resources */,

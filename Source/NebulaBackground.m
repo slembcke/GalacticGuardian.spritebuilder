@@ -28,11 +28,6 @@ static CCTexture *DistortionTexture;
 	[DistortionTexture generateMipmap];
 }
 
-+(CCTexture *)distortionTexture
-{
-	return DistortionTexture;
-}
-
 -(id)init
 {
 	if((self = [super initWithTexture:NebulaTexture])){
@@ -56,7 +51,7 @@ static CCTexture *DistortionTexture;
 		self.shaderUniforms[@"u_ParallaxAmount"] = @(0.08);
 		self.shaderUniforms[@"u_DepthMap"] = DepthMap;
 		self.shaderUniforms[@"u_DistortionMap"] = _distortionMap.texture;
-		self.shaderUniforms[@"u_DistortionAmount"] = @(-0.5);
+		self.shaderUniforms[@"u_DistortionAmount"] = @(-0.2);
 		
 		_distortionNode = [CCNode node];
 	}
