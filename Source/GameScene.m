@@ -26,6 +26,7 @@ enum ZORDER {
 	Z_ENEMY,
 	Z_PLAYER,
 	Z_PARTICLES,
+	Z_FLASH,
 	Z_JOYSTICK,
 };
 
@@ -149,21 +150,39 @@ enum ZORDER {
 	[bullet removeFromParent];
 	[_bullets removeObject:bullet];
 	
-	// Draw a little flash at it's last position
-//	CCSprite *sprite = [CCSprite spriteWithImageNamed:@"ShipParts/laserBlue08.png"];
-//	sprite.position = bullet.position;
-//	[self addChild:sprite];
+	float duration = 0.15;
+	CGPoint pos = bullet.position;
 	
-//	float duration = 0.15;
-//	[sprite runAction:[CCActionSequence actions:
-//										 [CCActionSpawn actions:
-//											[CCActionFadeOut actionWithDuration:duration],
-//											[CCActionScaleTo actionWithDuration:duration scale:0.25],
-//											nil
-//											],
-//										 [CCActionRemove action],
-//										 nil
-//										 ]];
+	// Draw a little flash at it's last position
+	CCSprite *flash = [CCSprite spriteWithImageNamed:@"Sprites/Bullets/laserBlue08.png"];
+	flash.position = pos;
+	[_physics addChild:flash z:Z_FLASH];
+	
+	[flash runAction:[CCActionSequence actions:
+		[CCActionSpawn actions:
+			[CCActionFadeOut actionWithDuration:duration],
+			[CCActionScaleTo actionWithDuration:duration scale:0.25],
+			nil
+		],
+		[CCActionRemove action],
+		nil
+	]];
+	
+	// Draw a little distortion too
+	CCSprite *distortion = [CCSprite spriteWithImageNamed:@"DistortionTexture.png"];
+	distortion.position = pos;
+	distortion.scale = 0.25;
+	[_background.distortionNode addChild:distortion];
+	
+	[distortion runAction:[CCActionSequence actions:
+		[CCActionSpawn actions:
+			[CCActionFadeOut actionWithDuration:duration],
+			[CCActionScaleTo actionWithDuration:duration scale:1.0],
+			nil
+		],
+		[CCActionRemove action],
+		nil
+	]];
 	
 	// Make some noise. Add a little chromatically tuned pitch bending to make it more musical.
 //	int half_steps = (arc4random()%(2*4 + 1) - 4);
@@ -304,7 +323,7 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity)
 
 -(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair bullet:(Bullet *)bullet enemy:(EnemyShip *)enemy
 {
-//	[self destroyBullet:bullet];
+	[self destroyBullet:bullet];
 	
 	if([enemy takeDamage]){
 		[self enemyDeath:enemy];

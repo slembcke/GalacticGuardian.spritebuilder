@@ -51,7 +51,7 @@ static CCTexture *DistortionTexture;
 		self.shaderUniforms[@"u_ParallaxAmount"] = @(0.08);
 		self.shaderUniforms[@"u_DepthMap"] = DepthMap;
 		self.shaderUniforms[@"u_DistortionMap"] = _distortionMap.texture;
-		self.shaderUniforms[@"u_DistortionAmount"] = @(-0.2);
+		self.shaderUniforms[@"u_DistortionAmount"] = @(-0.5);
 		
 		_distortionNode = [CCNode node];
 	}

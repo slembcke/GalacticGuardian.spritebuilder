@@ -200,8 +200,8 @@
 				<string>FloatVar</string>
 				<key>value</key>
 				<array>
-					<real>90</real>
-					<real>10</real>
+					<real>0.0</real>
+					<real>0.0</real>
 				</array>
 			</dict>
 			<dict>
