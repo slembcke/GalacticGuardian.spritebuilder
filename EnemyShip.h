@@ -6,6 +6,8 @@
 
 @interface EnemyShip : CCNode
 
+@property(nonatomic, readonly) NSString *debris;
+
 -(void)fixedUpdate:(CCTime)delta towardsPlayer:(CGPoint)playerPos;
 -(BOOL) takeDamage;
 

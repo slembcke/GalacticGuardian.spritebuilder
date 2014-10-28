@@ -139,8 +139,27 @@ enum ZORDER {
 	[_enemies removeObject:enemy];
 	_enemies_killed += 1;
 	
-	// TODO Explosion!
+	CGPoint pos = enemy.position;
 	
+	CCNode *debris = [CCBReader load:enemy.debris];
+	debris.position = pos;
+	debris.rotation = enemy.rotation;
+	InitDebris(debris, debris, enemy.physicsBody.velocity);
+	[_physics addChild:debris];
+	
+	CCNode *explosion = [CCBReader load:@"Particles/ShipExplosion"];
+	explosion.position = pos;
+	[_physics addChild:explosion z:Z_PARTICLES];
+	
+	CCNode *distortion = [CCBReader load:@"DistortionParticles/SmallRing"];
+	distortion.position = pos;
+	[_background.distortionNode addChild:distortion];
+	
+	[self scheduleBlock:^(CCTimer *timer) {
+		[debris removeFromParent];
+		[explosion removeFromParent];
+		[distortion removeFromParent];
+	} delay:5];
 }
 
 

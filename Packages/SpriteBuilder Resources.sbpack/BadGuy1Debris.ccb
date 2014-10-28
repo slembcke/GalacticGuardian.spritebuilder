@@ -54,13 +54,78 @@
 						<key>children</key>
 						<array/>
 						<key>customClass</key>
-						<string></string>
+						<string>BurnSprite</string>
 						<key>displayName</key>
 						<string>gun00</string>
 						<key>memberVarAssignmentName</key>
 						<string></string>
 						<key>memberVarAssignmentType</key>
 						<integer>1</integer>
+						<key>physicsBody</key>
+						<dict>
+							<key>affectedByGravity</key>
+							<true/>
+							<key>allowsRotation</key>
+							<true/>
+							<key>bodyShape</key>
+							<integer>0</integer>
+							<key>collisionCategories</key>
+							<array/>
+							<key>collisionMask</key>
+							<array/>
+							<key>collisionType</key>
+							<string></string>
+							<key>cornerRadius</key>
+							<real>0.0</real>
+							<key>density</key>
+							<real>1</real>
+							<key>dynamic</key>
+							<true/>
+							<key>elasticity</key>
+							<real>0.30000001192092896</real>
+							<key>friction</key>
+							<real>0.30000001192092896</real>
+							<key>points</key>
+							<array>
+								<array>
+									<real>0.42544370889663696</real>
+									<real>0.26288804411888123</real>
+								</array>
+								<array>
+									<real>0.0</real>
+									<real>9</real>
+								</array>
+								<array>
+									<real>4</real>
+									<real>9</real>
+								</array>
+								<array>
+									<real>3.2458610534667969</real>
+									<real>0.073245033621788025</real>
+								</array>
+							</array>
+							<key>polygons</key>
+							<array>
+								<array>
+									<array>
+										<real>3.2458610534667969</real>
+										<real>0.073245033621788025</real>
+									</array>
+									<array>
+										<real>4</real>
+										<real>9</real>
+									</array>
+									<array>
+										<real>0.0</real>
+										<real>9</real>
+									</array>
+									<array>
+										<real>0.42544370889663696</real>
+										<real>0.26288804411888123</real>
+									</array>
+								</array>
+							</array>
+						</dict>
 						<key>properties</key>
 						<array>
 							<dict>
@@ -162,13 +227,78 @@
 						<key>children</key>
 						<array/>
 						<key>customClass</key>
-						<string></string>
+						<string>BurnSprite</string>
 						<key>displayName</key>
 						<string>gun00</string>
 						<key>memberVarAssignmentName</key>
 						<string></string>
 						<key>memberVarAssignmentType</key>
 						<integer>1</integer>
+						<key>physicsBody</key>
+						<dict>
+							<key>affectedByGravity</key>
+							<true/>
+							<key>allowsRotation</key>
+							<true/>
+							<key>bodyShape</key>
+							<integer>0</integer>
+							<key>collisionCategories</key>
+							<array/>
+							<key>collisionMask</key>
+							<array/>
+							<key>collisionType</key>
+							<string></string>
+							<key>cornerRadius</key>
+							<real>0.0</real>
+							<key>density</key>
+							<real>1</real>
+							<key>dynamic</key>
+							<true/>
+							<key>elasticity</key>
+							<real>0.30000001192092896</real>
+							<key>friction</key>
+							<real>0.30000001192092896</real>
+							<key>points</key>
+							<array>
+								<array>
+									<real>0.41030311584472656</real>
+									<real>0.23336191475391388</real>
+								</array>
+								<array>
+									<real>0.0</real>
+									<real>9</real>
+								</array>
+								<array>
+									<real>4</real>
+									<real>9</real>
+								</array>
+								<array>
+									<real>3.3692619800567627</real>
+									<real>0.26705083250999451</real>
+								</array>
+							</array>
+							<key>polygons</key>
+							<array>
+								<array>
+									<array>
+										<real>3.3692619800567627</real>
+										<real>0.26705083250999451</real>
+									</array>
+									<array>
+										<real>4</real>
+										<real>9</real>
+									</array>
+									<array>
+										<real>0.0</real>
+										<real>9</real>
+									</array>
+									<array>
+										<real>0.41030311584472656</real>
+										<real>0.23336191475391388</real>
+									</array>
+								</array>
+							</array>
+						</dict>
 						<key>properties</key>
 						<array>
 							<dict>
@@ -270,13 +400,86 @@
 						<key>children</key>
 						<array/>
 						<key>customClass</key>
-						<string></string>
+						<string>BurnSprite</string>
 						<key>displayName</key>
 						<string>wingYellow_0</string>
 						<key>memberVarAssignmentName</key>
 						<string></string>
 						<key>memberVarAssignmentType</key>
 						<integer>1</integer>
+						<key>physicsBody</key>
+						<dict>
+							<key>affectedByGravity</key>
+							<true/>
+							<key>allowsRotation</key>
+							<true/>
+							<key>bodyShape</key>
+							<integer>0</integer>
+							<key>collisionCategories</key>
+							<array/>
+							<key>collisionMask</key>
+							<array/>
+							<key>collisionType</key>
+							<string></string>
+							<key>cornerRadius</key>
+							<real>0.0</real>
+							<key>density</key>
+							<real>1</real>
+							<key>dynamic</key>
+							<true/>
+							<key>elasticity</key>
+							<real>0.30000001192092896</real>
+							<key>friction</key>
+							<real>0.30000001192092896</real>
+							<key>points</key>
+							<array>
+								<array>
+									<real>1.0440911054611206</real>
+									<real>4.8896551132202148</real>
+								</array>
+								<array>
+									<real>0.0</real>
+									<real>19.5</real>
+								</array>
+								<array>
+									<real>4.8411130905151367</real>
+									<real>19.6431884765625</real>
+								</array>
+								<array>
+									<real>10.969870567321777</real>
+									<real>11.010085105895996</real>
+								</array>
+								<array>
+									<real>7.3587064743041992</real>
+									<real>0.095588736236095428</real>
+								</array>
+							</array>
+							<key>polygons</key>
+							<array>
+								<array>
+									<array>
+										<real>7.3587064743041992</real>
+										<real>0.095588736236095428</real>
+									</array>
+									<array>
+										<real>10.969870567321777</real>
+										<real>11.010085105895996</real>
+									</array>
+									<array>
+										<real>4.8411130905151367</real>
+										<real>19.6431884765625</real>
+									</array>
+									<array>
+										<real>0.0</real>
+										<real>19.5</real>
+									</array>
+									<array>
+										<real>1.0440911054611206</real>
+										<real>4.8896551132202148</real>
+									</array>
+								</array>
+							</array>
+						</dict>
 						<key>properties</key>
 						<array>
 							<dict>
@@ -378,13 +581,86 @@
 						<key>children</key>
 						<array/>
 						<key>customClass</key>
-						<string></string>
+						<string>BurnSprite</string>
 						<key>displayName</key>
 						<string>wingYellow_0</string>
 						<key>memberVarAssignmentName</key>
 						<string></string>
 						<key>memberVarAssignmentType</key>
 						<integer>1</integer>
+						<key>physicsBody</key>
+						<dict>
+							<key>affectedByGravity</key>
+							<true/>
+							<key>allowsRotation</key>
+							<true/>
+							<key>bodyShape</key>
+							<integer>0</integer>
+							<key>collisionCategories</key>
+							<array/>
+							<key>collisionMask</key>
+							<array/>
+							<key>collisionType</key>
+							<string></string>
+							<key>cornerRadius</key>
+							<real>0.0</real>
+							<key>density</key>
+							<real>1</real>
+							<key>dynamic</key>
+							<true/>
+							<key>elasticity</key>
+							<real>0.30000001192092896</real>
+							<key>friction</key>
+							<real>0.30000001192092896</real>
+							<key>points</key>
+							<array>
+								<array>
+									<real>0.92334097623825073</real>
+									<real>5.0910325050354004</real>
+								</array>
+								<array>
+									<real>0.0</real>
+									<real>19.5</real>
+								</array>
+								<array>
+									<real>5.027348518371582</real>
+									<real>19.466037750244141</real>
+								</array>
+								<array>
+									<real>11.151943206787109</real>
+									<real>11.190265655517578</real>
+								</array>
+								<array>
+									<real>6.564176082611084</real>
+									<real>-0.056957587599754333</real>
+								</array>
+							</array>
+							<key>polygons</key>
+							<array>
+								<array>
+									<array>
+										<real>6.564176082611084</real>
+										<real>-0.056957587599754333</real>
+									</array>
+									<array>
+										<real>11.151943206787109</real>
+										<real>11.190265655517578</real>
+									</array>
+									<array>
+										<real>5.027348518371582</real>
+										<real>19.466037750244141</real>
+									</array>
+									<array>
+										<real>0.0</real>
+										<real>19.5</real>
+									</array>
+									<array>
+										<real>0.92334097623825073</real>
+										<real>5.0910325050354004</real>
+									</array>
+								</array>
+							</array>
+						</dict>
 						<key>properties</key>
 						<array>
 							<dict>
@@ -486,13 +762,78 @@
 						<key>children</key>
 						<array/>
 						<key>customClass</key>
-						<string></string>
+						<string>BurnSprite</string>
 						<key>displayName</key>
 						<string>engine1</string>
 						<key>memberVarAssignmentName</key>
 						<string></string>
 						<key>memberVarAssignmentType</key>
 						<integer>1</integer>
+						<key>physicsBody</key>
+						<dict>
+							<key>affectedByGravity</key>
+							<true/>
+							<key>allowsRotation</key>
+							<true/>
+							<key>bodyShape</key>
+							<integer>0</integer>
+							<key>collisionCategories</key>
+							<array/>
+							<key>collisionMask</key>
+							<array/>
+							<key>collisionType</key>
+							<string></string>
+							<key>cornerRadius</key>
+							<real>0.0</real>
+							<key>density</key>
+							<real>1</real>
+							<key>dynamic</key>
+							<true/>
+							<key>elasticity</key>
+							<real>0.30000001192092896</real>
+							<key>friction</key>
+							<real>0.30000001192092896</real>
+							<key>points</key>
+							<array>
+								<array>
+									<real>0.7137487530708313</real>
+									<real>0.35193154215812683</real>
+								</array>
+								<array>
+									<real>0.0</real>
+									<real>5.5</real>
+								</array>
+								<array>
+									<real>9.5</real>
+									<real>5.5</real>
+								</array>
+								<array>
+									<real>8.5807104110717773</real>
+									<real>0.25502786040306091</real>
+								</array>
+							</array>
+							<key>polygons</key>
+							<array>
+								<array>
+									<array>
+										<real>8.5807104110717773</real>
+										<real>0.25502786040306091</real>
+									</array>
+									<array>
+										<real>9.5</real>
+										<real>5.5</real>
+									</array>
+									<array>
+										<real>0.0</real>
+										<real>5.5</real>
+									</array>
+									<array>
+										<real>0.7137487530708313</real>
+										<real>0.35193154215812683</real>
+									</array>
+								</array>
+							</array>
+						</dict>
 						<key>properties</key>
 						<array>
 							<dict>
@@ -594,13 +935,102 @@
 						<key>children</key>
 						<array/>
 						<key>customClass</key>
-						<string></string>
+						<string>BurnSprite</string>
 						<key>displayName</key>
 						<string>cockpitYellow_4</string>
 						<key>memberVarAssignmentName</key>
 						<string></string>
 						<key>memberVarAssignmentType</key>
 						<integer>1</integer>
+						<key>physicsBody</key>
+						<dict>
+							<key>affectedByGravity</key>
+							<true/>
+							<key>allowsRotation</key>
+							<true/>
+							<key>bodyShape</key>
+							<integer>0</integer>
+							<key>collisionCategories</key>
+							<array/>
+							<key>collisionMask</key>
+							<array/>
+							<key>collisionType</key>
+							<string></string>
+							<key>cornerRadius</key>
+							<real>0.0</real>
+							<key>density</key>
+							<real>1</real>
+							<key>dynamic</key>
+							<true/>
+							<key>elasticity</key>
+							<real>0.30000001192092896</real>
+							<key>friction</key>
+							<real>0.30000001192092896</real>
+							<key>points</key>
+							<array>
+								<array>
+									<real>3.4485814571380615</real>
+									<real>0.15857061743736267</real>
+								</array>
+								<array>
+									<real>0.26212728023529053</real>
+									<real>6.6616935729980469</real>
+								</array>
+								<array>
+									<real>1.3693240880966187</real>
+									<real>14.21826171875</real>
+								</array>
+								<array>
+									<real>5.3722653388977051</real>
+									<real>16.461801528930664</real>
+								</array>
+								<array>
+									<real>9.8002939224243164</real>
+									<real>13.666745185852051</real>
+								</array>
+								<array>
+									<real>10.17465877532959</real>
+									<real>7.0750465393066406</real>
+								</array>
+								<array>
+									<real>7.0517964363098145</real>
+									<real>0.095356158912181854</real>
+								</array>
+							</array>
+							<key>polygons</key>
+							<array>
+								<array>
+									<array>
+										<real>7.0517964363098145</real>
+										<real>0.095356158912181854</real>
+									</array>
+									<array>
+										<real>10.17465877532959</real>
+										<real>7.0750465393066406</real>
+									</array>
+									<array>
+										<real>9.8002939224243164</real>
+										<real>13.666745185852051</real>
+									</array>
+									<array>
+										<real>5.3722653388977051</real>
+										<real>16.461801528930664</real>
+									</array>
+									<array>
+										<real>1.3693240880966187</real>
+										<real>14.21826171875</real>
+									</array>
+									<array>
+										<real>0.26212728023529053</real>
+										<real>6.6616935729980469</real>
+									</array>
+									<array>
+										<real>3.4485814571380615</real>
+										<real>0.15857061743736267</real>
+									</array>
+								</array>
+							</array>
+						</dict>
 						<key>properties</key>
 						<array>
 							<dict>
@@ -693,6 +1123,8 @@
 								<array/>
 							</dict>
 						</array>
+						<key>selected</key>
+						<true/>
 					</dict>
 				</array>
 				<key>customClass</key>
@@ -777,59 +1209,12 @@
 		</array>
 		<key>customClass</key>
 		<string>EnemyShip</string>
-		<key>customProperties</key>
-		<array>
-			<dict>
-				<key>name</key>
-				<string>_debris</string>
-				<key>optimized</key>
-				<false/>
-				<key>type</key>
-				<integer>3</integer>
-				<key>value</key>
-				<string>BadGuy1Debris</string>
-			</dict>
-		</array>
 		<key>displayName</key>
 		<string>BadGuyNode</string>
 		<key>memberVarAssignmentName</key>
 		<string></string>
 		<key>memberVarAssignmentType</key>
 		<integer>1</integer>
-		<key>physicsBody</key>
-		<dict>
-			<key>affectedByGravity</key>
-			<true/>
-			<key>allowsRotation</key>
-			<true/>
-			<key>bodyShape</key>
-			<integer>1</integer>
-			<key>collisionCategories</key>
-			<array/>
-			<key>collisionMask</key>
-			<array/>
-			<key>collisionType</key>
-			<string></string>
-			<key>cornerRadius</key>
-			<real>12</real>
-			<key>density</key>
-			<real>1</real>
-			<key>dynamic</key>
-			<true/>
-			<key>elasticity</key>
-			<real>0.30000001192092896</real>
-			<key>friction</key>
-			<real>0.30000001192092896</real>
-			<key>points</key>
-			<array>
-				<array>
-					<real>0.0</real>
-					<real>0.0</real>
-				</array>
-			</array>
-			<key>polygons</key>
-			<array/>
-		</dict>
 		<key>properties</key>
 		<array>
 			<dict>
