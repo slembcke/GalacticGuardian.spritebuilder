@@ -33,9 +33,9 @@
 	
 	// This sets up simple collision rules.
 	// First you list the categories (strings) that the object belongs to.
-//	body.collisionCategories = @[@"enemy"];
+	body.collisionCategories = @[@"enemy"];
 	// Then you list which categories its allowed to collide with.
-//	body.collisionMask = @[@"ship"];
+	body.collisionMask = @[@"ship", @"debris", @"bullet"];
 	
 	// Make the thruster pulse
 	float scaleX = _mainThruster.scaleX;

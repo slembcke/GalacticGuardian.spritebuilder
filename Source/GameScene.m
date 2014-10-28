@@ -282,6 +282,8 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity)
 {
 	// If the node has a body, set some properties.
 	CCPhysicsBody *body = node.physicsBody;
+	body.collisionCategories = @[@"debris"];
+	
 	if(body){
 		// Bodies with the same group reference don't collide.
 		// Any type of object will do. It's the object reference that is important.
