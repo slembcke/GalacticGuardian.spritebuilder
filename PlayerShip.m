@@ -106,6 +106,8 @@
 	CGPoint velocity = cpvlerpconst(body.velocity, targetVelocity, newSpeed/_accelTime*delta);
 	body.velocity = velocity;
 
+	// Certain collisions can add to this. We want this to dampen off pretty quickly. (if not instantly)
+	body.angularVelocity *= 0.9f;
 
 }
 
