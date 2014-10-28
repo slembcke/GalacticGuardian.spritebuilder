@@ -114,7 +114,7 @@ enum ZORDER {
 		for(int i = 0; i < 20; i++){
 			// maybe this spoke/circle pattern will be cool.
 			float angle = (M_PI * 2.0f / 20.0f) * i;
-			[self addWallAt: ccpAdd(ccpMult(ccpForAngle(angle), 200.0f + 100 * CCRANDOM_0_1() ), ccp(512, 512))];
+			[self addWallAt: ccpAdd(ccpMult(ccpForAngle(angle), 150.0f + 250.0f * CCRANDOM_0_1() ), ccp(512, 512))];
 		}
 		
 		// Enable touch events.
@@ -335,42 +335,56 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity)
 	_firing = false;
 }
 
+-(void)playerDestroyed;
+{
+	
+	//The ship was destroyed!
+	[_playerShip removeFromParent];
+	
+	CGPoint pos = _playerShip.position;
+	
+	CCNode *debris = [CCBReader load:_playerShip.debris];
+	debris.position = pos;
+	debris.rotation = _playerShip.rotation;
+	InitDebris(debris, debris, _playerShip.physicsBody.velocity);
+	[_physics addChild:debris];
+	
+	CCNode *explosion = [CCBReader load:@"Particles/ShipExplosion"];
+	explosion.position = pos;
+	[_physics addChild:explosion z:Z_PARTICLES];
+	
+	CCNode *distortion = [CCBReader load:@"DistortionParticles/LargeRing"];
+	distortion.position = pos;
+	[_background.distortionNode addChild:distortion];
+	
+	[self scheduleBlock:^(CCTimer *timer) {
+		[debris removeFromParent];
+		[explosion removeFromParent];
+		[distortion removeFromParent];
+	} delay:5];
+	
+	[self scheduleBlock:^(CCTimer *timer){
+		// Go back to the menu after a short delay.
+		[[CCDirector sharedDirector] replaceScene:[CCBReader loadAsScene:@"MainMenu"]];
+	} delay:7.0];
+	
+
+	for (EnemyShip * e in _enemies) {
+		// explode based on distance from player.
+		float dist = ccpLength(ccpSub(_playerShip.position, e.position));
+		[e scheduleBlock:^(CCTimer *timer) {
+			[self enemyDeath:e];
+		} delay:dist / 200.0f];
+	}
+}
+
 #pragma mark - CCPhysicsCollisionDelegate methods
 
 
 -(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair ship:(PlayerShip *)player enemy:(EnemyShip *)enemy
 {
 	if([_playerShip takeDamage]){
-		//The ship was destroyed!
-		[_playerShip removeFromParent];
-		
-		CGPoint pos = _playerShip.position;
-		
-		CCNode *debris = [CCBReader load:_playerShip.debris];
-		debris.position = pos;
-		debris.rotation = _playerShip.rotation;
-		InitDebris(debris, debris, _playerShip.physicsBody.velocity);
-		[_physics addChild:debris];
-		
-		CCNode *explosion = [CCBReader load:@"Particles/ShipExplosion"];
-		explosion.position = pos;
-		[_physics addChild:explosion z:Z_PARTICLES];
-		
-		CCNode *distortion = [CCBReader load:@"DistortionParticles/LargeRing"];
-		distortion.position = pos;
-		[_background.distortionNode addChild:distortion];
-		
-		[self scheduleBlock:^(CCTimer *timer) {
-			[debris removeFromParent];
-			[explosion removeFromParent];
-			[distortion removeFromParent];
-		} delay:5];
-		
-		[self scheduleBlock:^(CCTimer *timer){
-			// Go back to the menu after a short delay.
-			[[CCDirector sharedDirector] replaceScene:[CCBReader loadAsScene:@"MainMenu"]];
-		} delay:5.0];
-		
+		[self playerDestroyed];
 		// Don't process the collision so the enemy spaceship will survive and mock you.
 		return NO;
 	}else{
@@ -390,6 +404,12 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity)
 		[self enemyDeath:enemy];
 	}
 	
+	return NO;
+}
+
+-(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair bullet:(Bullet *)bullet wall:(CCNode *)wall
+{
+	[self destroyBullet:bullet];
 	return NO;
 }
 

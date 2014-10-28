@@ -52,14 +52,11 @@
 // This method is called from [GameScene fixedUpdate:], not from Cocos2D.
 -(void)fixedUpdate:(CCTime)delta towardsPlayer:(PlayerShip *)player
 {
+	if(_hp == 0 || [player isDead]) return;
+	
 	CCPhysicsBody *body = self.physicsBody;
 	
 	CGPoint targetVelocity = ccpMult(ccpNormalize(ccpSub(player.position, self.position)), _speed);
-	
-	if([player isDead]){
-		targetVelocity = ccpMult(targetVelocity, -1.0f);
-		// move away from the player.
-	}
 	
 	CGPoint velocity = cpvlerpconst(body.velocity, targetVelocity, _speed/_accelTime*delta);
 	
