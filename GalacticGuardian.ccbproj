@@ -84,6 +84,11 @@
 		<dict/>
 		<key>Sprites</key>
 		<dict/>
+		<key>Sprites/ShipParts</key>
+		<dict>
+			<key>isSmartSpriteSheet</key>
+			<true/>
+		</dict>
 		<key>ccbResources</key>
 		<dict>
 			<key>previewFolderHidden</key>

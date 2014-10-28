@@ -54,7 +54,7 @@
 						<key>children</key>
 						<array/>
 						<key>customClass</key>
-						<string></string>
+						<string>BurnSprite</string>
 						<key>displayName</key>
 						<string>wingRed_0</string>
 						<key>hidden</key>
@@ -221,7 +221,7 @@
 						<key>children</key>
 						<array/>
 						<key>customClass</key>
-						<string></string>
+						<string>BurnSprite</string>
 						<key>displayName</key>
 						<string>wingRed_0</string>
 						<key>hidden</key>
@@ -388,7 +388,7 @@
 						<key>children</key>
 						<array/>
 						<key>customClass</key>
-						<string></string>
+						<string>BurnSprite</string>
 						<key>displayName</key>
 						<string>wingRed_3</string>
 						<key>hidden</key>
@@ -571,7 +571,7 @@
 						<key>children</key>
 						<array/>
 						<key>customClass</key>
-						<string></string>
+						<string>BurnSprite</string>
 						<key>displayName</key>
 						<string>wingRed_3</string>
 						<key>hidden</key>
@@ -754,7 +754,7 @@
 						<key>children</key>
 						<array/>
 						<key>customClass</key>
-						<string></string>
+						<string>BurnSprite</string>
 						<key>displayName</key>
 						<string>gun03</string>
 						<key>hidden</key>
@@ -929,7 +929,7 @@
 						<key>children</key>
 						<array/>
 						<key>customClass</key>
-						<string></string>
+						<string>BurnSprite</string>
 						<key>displayName</key>
 						<string>gun03</string>
 						<key>hidden</key>
@@ -1104,7 +1104,7 @@
 						<key>children</key>
 						<array/>
 						<key>customClass</key>
-						<string></string>
+						<string>BurnSprite</string>
 						<key>displayName</key>
 						<string>engine2</string>
 						<key>hidden</key>
@@ -1279,7 +1279,7 @@
 						<key>children</key>
 						<array/>
 						<key>customClass</key>
-						<string></string>
+						<string>BurnSprite</string>
 						<key>displayName</key>
 						<string>cockpitRed_6</string>
 						<key>memberVarAssignmentName</key>

@@ -252,8 +252,12 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity)
 		body.collisionGroup = root;
 		
 		// Copy the velocity onto the body + a little random.
-		body.velocity = ccpAdd(velocity, ccpMult(CCRANDOM_IN_UNIT_CIRCLE(), 10.0));
-		body.angularVelocity = 2.0*CCRANDOM_MINUS1_1();
+		body.velocity = ccpAdd(velocity, ccpMult(CCRANDOM_IN_UNIT_CIRCLE(), 150.0));
+		body.angularVelocity = 5.0*CCRANDOM_MINUS1_1();
+		
+		// Nodes with bodies should also be sprites.
+		// This is a convenient place to add the fade action.
+		[node runAction:[CCActionFadeOut actionWithDuration:2.0]];
 	}
 	
 	// Recurse on the children.
@@ -297,13 +301,6 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity)
 			[explosion removeFromParent];
 			[distortion removeFromParent];
 		} delay:5];
-		
-		// Add a lame particle effect.
-//		CCNode *explosion = [CCBReader load:@"Explosion"];
-//		explosion.position = _ship.position;
-//		[self addChild:explosion];
-//		
-//		_playerShip = nil;
 		
 		[self scheduleBlock:^(CCTimer *timer){
 			// Go back to the menu after a short delay.

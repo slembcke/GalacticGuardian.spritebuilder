@@ -52,6 +52,10 @@
     // Do any extra configuration of Cocos2d here (the example line changes the pixel format for faster rendering, but with less colors)
     //[cocos2dSetup setObject:kEAGLColorFormatRGB565 forKey:CCConfigPixelFormat];
     
+		if(getenv("SHOW_STATS")){
+			cocos2dSetup[CCSetupShowDebugStats] = @(YES);
+		}
+		
     [self setupCocos2dWithOptions:cocos2dSetup];
     
     return YES;

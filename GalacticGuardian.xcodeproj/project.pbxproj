@@ -127,6 +127,15 @@
 		D3A7E8F619FDCB5E00695965 /* Nebula.fsh in Resources */ = {isa = PBXBuildFile; fileRef = D3A7E8F519FDCB5E00695965 /* Nebula.fsh */; };
 		D3A7E8F719FDCB5E00695965 /* Nebula.fsh in Resources */ = {isa = PBXBuildFile; fileRef = D3A7E8F519FDCB5E00695965 /* Nebula.fsh */; };
 		D3A7E8F819FDCB5E00695965 /* Nebula.fsh in Resources */ = {isa = PBXBuildFile; fileRef = D3A7E8F519FDCB5E00695965 /* Nebula.fsh */; };
+		D3ED616519FF327C00DF3A43 /* BurnSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = D3ED616419FF327C00DF3A43 /* BurnSprite.m */; };
+		D3ED616619FF327C00DF3A43 /* BurnSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = D3ED616419FF327C00DF3A43 /* BurnSprite.m */; };
+		D3ED616719FF327C00DF3A43 /* BurnSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = D3ED616419FF327C00DF3A43 /* BurnSprite.m */; };
+		D3ED616A19FF3B7400DF3A43 /* BurnSprite.fsh in Resources */ = {isa = PBXBuildFile; fileRef = D3ED616919FF3B7400DF3A43 /* BurnSprite.fsh */; };
+		D3ED616B19FF3B7400DF3A43 /* BurnSprite.fsh in Resources */ = {isa = PBXBuildFile; fileRef = D3ED616919FF3B7400DF3A43 /* BurnSprite.fsh */; };
+		D3ED616C19FF3B7400DF3A43 /* BurnSprite.fsh in Resources */ = {isa = PBXBuildFile; fileRef = D3ED616919FF3B7400DF3A43 /* BurnSprite.fsh */; };
+		D3ED616E19FF3B8000DF3A43 /* BurnSprite.vsh in Resources */ = {isa = PBXBuildFile; fileRef = D3ED616D19FF3B8000DF3A43 /* BurnSprite.vsh */; };
+		D3ED616F19FF3B8000DF3A43 /* BurnSprite.vsh in Resources */ = {isa = PBXBuildFile; fileRef = D3ED616D19FF3B8000DF3A43 /* BurnSprite.vsh */; };
+		D3ED617019FF3B8000DF3A43 /* BurnSprite.vsh in Resources */ = {isa = PBXBuildFile; fileRef = D3ED616D19FF3B8000DF3A43 /* BurnSprite.vsh */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -282,6 +291,9 @@
 		D3A7E8DE19FDC88600695965 /* NebulaDepth.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NebulaDepth.png; sourceTree = "<group>"; };
 		D3A7E8F119FDCABE00695965 /* Nebula.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Nebula.vsh; sourceTree = "<group>"; };
 		D3A7E8F519FDCB5E00695965 /* Nebula.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Nebula.fsh; sourceTree = "<group>"; };
+		D3ED616419FF327C00DF3A43 /* BurnSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BurnSprite.m; sourceTree = "<group>"; };
+		D3ED616919FF3B7400DF3A43 /* BurnSprite.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = BurnSprite.fsh; sourceTree = "<group>"; };
+		D3ED616D19FF3B8000DF3A43 /* BurnSprite.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = BurnSprite.vsh; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -526,6 +538,7 @@
 				75058A4619FECF95001AA9C6 /* Bullet.m */,
 				75058A5019FEE7B7001AA9C6 /* EnemyShip.h */,
 				75058A5119FEE7B7001AA9C6 /* EnemyShip.m */,
+				D3ED616419FF327C00DF3A43 /* BurnSprite.m */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -606,6 +619,8 @@
 				D3A7E8F519FDCB5E00695965 /* Nebula.fsh */,
 				D3937FC719FE1C410074009E /* DistortionParticle.vsh */,
 				D3937FC119FE1B2A0074009E /* DistortionParticle.fsh */,
+				D3ED616D19FF3B8000DF3A43 /* BurnSprite.vsh */,
+				D3ED616919FF3B7400DF3A43 /* BurnSprite.fsh */,
 				7A40366119DDF8C2007B6E8F /* Platforms */,
 				5B12100D197483EE004C1E1D /* res */,
 				B73789911807667A0076A88C /* Icons */,
@@ -771,7 +786,7 @@
 		};
 		7A97910219E62E40001FFC4D /* cocos2dJava.jar */ = {
 			isa = PBXReferenceProxy;
-			fileType = archive.jar;
+			fileType = compiled.java.jar;
 			path = cocos2dJava.jar;
 			remoteRef = 7A97910119E62E40001FFC4D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -791,6 +806,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D3A7E8F419FDCABE00695965 /* Nebula.vsh in Resources */,
+				D3ED616C19FF3B7400DF3A43 /* BurnSprite.fsh in Resources */,
 				7A4036F719DE401F007B6E8F /* iPad-old.png in Resources */,
 				7A4036F819DE401F007B6E8F /* iPad-old@2x.png in Resources */,
 				D3937FCA19FE1C410074009E /* DistortionParticle.vsh in Resources */,
@@ -800,6 +816,7 @@
 				7A4036FA19DE401F007B6E8F /* iPad@2x.png in Resources */,
 				D3A7E8E119FDC88600695965 /* Nebula.png in Resources */,
 				7A4036FB19DE401F007B6E8F /* iPhone-old.png in Resources */,
+				D3ED617019FF3B8000DF3A43 /* BurnSprite.vsh in Resources */,
 				7A4036FC19DE401F007B6E8F /* iPhone-old@2x.png in Resources */,
 				7A4036FD19DE401F007B6E8F /* iPhone.png in Resources */,
 				7A59498B19E38E4A00F65F90 /* MainMenu.xib in Resources */,
@@ -824,6 +841,7 @@
 				927F61AE196C771E000F43EF /* Default@2x.png in Resources */,
 				927F61AF196C771E000F43EF /* iPad@2x.png in Resources */,
 				927F61B0196C771E000F43EF /* iPad.png in Resources */,
+				D3ED616F19FF3B8000DF3A43 /* BurnSprite.vsh in Resources */,
 				D3A7E8E019FDC88600695965 /* Nebula.png in Resources */,
 				927F61B1196C771E000F43EF /* iPad-old@2x.png in Resources */,
 				927F61B2196C771E000F43EF /* iPhone-old@2x.png in Resources */,
@@ -834,6 +852,7 @@
 				927F61B6196C771E000F43EF /* iPhone-old.png in Resources */,
 				927F61B7196C771E000F43EF /* iPhone.png in Resources */,
 				927F61B8196C771E000F43EF /* Default-568h@2x.png in Resources */,
+				D3ED616B19FF3B7400DF3A43 /* BurnSprite.fsh in Resources */,
 				D3937FC919FE1C410074009E /* DistortionParticle.vsh in Resources */,
 				D3A7E8F719FDCB5E00695965 /* Nebula.fsh in Resources */,
 				D3937FC319FE1B2A0074009E /* DistortionParticle.fsh in Resources */,
@@ -852,6 +871,7 @@
 				B7378978180762440076A88C /* Default@2x.png in Resources */,
 				D3937FC219FE1B2A0074009E /* DistortionParticle.fsh in Resources */,
 				B71F5914188484E7003F4D28 /* iPad@2x.png in Resources */,
+				D3ED616E19FF3B8000DF3A43 /* BurnSprite.vsh in Resources */,
 				B71F5913188484E7003F4D28 /* iPad.png in Resources */,
 				D3A7E8DF19FDC88600695965 /* Nebula.png in Resources */,
 				B71F5912188484E7003F4D28 /* iPad-old@2x.png in Resources */,
@@ -862,6 +882,7 @@
 				B7378976180762440076A88C /* Default-Landscape~ipad.png in Resources */,
 				B71F5915188484E7003F4D28 /* iPhone-old.png in Resources */,
 				B71F5917188484E7003F4D28 /* iPhone.png in Resources */,
+				D3ED616A19FF3B7400DF3A43 /* BurnSprite.fsh in Resources */,
 				D3937FC819FE1C410074009E /* DistortionParticle.vsh in Resources */,
 				B7378975180762440076A88C /* Default-568h@2x.png in Resources */,
 				D3A7E8F619FDCB5E00695965 /* Nebula.fsh in Resources */,
@@ -939,6 +960,7 @@
 				7A4036E819DE3F33007B6E8F /* MainMenu.m in Sources */,
 				75058A3419FEC27F001AA9C6 /* GameScene.m in Sources */,
 				7A40360419DDEE84007B6E8F /* main.m in Sources */,
+				D3ED616719FF327C00DF3A43 /* BurnSprite.m in Sources */,
 				7A59498E19E3941300F65F90 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -952,6 +974,7 @@
 				927F619E196C771E000F43EF /* MainMenu.m in Sources */,
 				75058A3219FEC27F001AA9C6 /* GameScene.m in Sources */,
 				75058A5319FEE7B7001AA9C6 /* EnemyShip.m in Sources */,
+				D3ED616619FF327C00DF3A43 /* BurnSprite.m in Sources */,
 				5B121030197484FA004C1E1D /* GalacticGuardianActivity.m in Sources */,
 				75058A4819FECF95001AA9C6 /* Bullet.m in Sources */,
 			);
@@ -962,6 +985,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D3A7E8DA19FDC86000695965 /* NebulaBackground.m in Sources */,
+				D3ED616519FF327C00DF3A43 /* BurnSprite.m in Sources */,
 				D304DD3A19FEC85F0042180F /* Joystick.m in Sources */,
 				75058A5219FEE7B7001AA9C6 /* EnemyShip.m in Sources */,
 				B73789871807631A0076A88C /* main.m in Sources */,
