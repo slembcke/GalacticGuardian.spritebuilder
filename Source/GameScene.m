@@ -102,8 +102,14 @@ enum ZORDER {
 		[self scheduleBlock:^(CCTimer *timer) {
 			
 			EnemyShip *enemy = (EnemyShip *)[CCBReader load:@"BadGuy1"];
-			
-			enemy.position = ccp(CCRANDOM_0_1() > 0.5f ? 0 + 128.0f : 1024.0f - 128.0f, CCRANDOM_MINUS1_1() * 128.0f + 512.0f);
+			if(CCRANDOM_0_1() > 0.33f){
+				// left or right sides.
+				enemy.position = ccp(CCRANDOM_0_1() > 0.5f ? -64.0f : GameSceneSize.width + 64.0f, CCRANDOM_MINUS1_1() * 400.0f + GameSceneSize.height / 2.0f);
+			}else{
+				// Top:
+				enemy.position = ccp(CCRANDOM_MINUS1_1() * 400.0f + GameSceneSize.width / 2.0f, GameSceneSize.height + 64.0f);
+			}
+
 			[_physics addChild:enemy z:Z_ENEMY];
 			[_enemies addObject:enemy];
 			
@@ -129,6 +135,7 @@ enum ZORDER {
 {
 	CCNode *wall = (CCNode *)[CCBReader load:@"Asteroid"];
 	wall.position = pos;
+	wall.rotation = CCRANDOM_0_1() * 360.0f;
 	[_physics addChild:wall z:Z_ENEMY];
 }
 
@@ -370,7 +377,7 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 	[self scheduleBlock:^(CCTimer *timer){
 		// Go back to the menu after a short delay.
 		[[CCDirector sharedDirector] replaceScene:[CCBReader loadAsScene:@"MainMenu"]];
-	} delay:7.0];
+	} delay:5.0];
 	
 
 	for (EnemyShip * e in _enemies) {
