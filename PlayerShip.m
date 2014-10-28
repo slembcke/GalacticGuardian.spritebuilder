@@ -111,7 +111,7 @@
 	CCNode *gun = _gunPorts[_currentGunPort];
 	
 	// Why not just position multiply the gun transform by the _transform? Guns are flipped with negative scales, so we need to explictly ignore that.
-	// So instead, we just offset from the ship's translation.
+	// So instead, we just offset from the ship's translation. 
 	return CGAffineTransformTranslate(_transform, -gun.position.y, gun.position.x);
 }
 

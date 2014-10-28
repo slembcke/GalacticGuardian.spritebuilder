@@ -158,8 +158,8 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>100</real>
-							<real>135</real>
+							<real>120</real>
+							<real>120</real>
 							<integer>3</integer>
 							<integer>0</integer>
 							<integer>0</integer>
@@ -484,8 +484,8 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>100</real>
-							<real>135</real>
+							<real>120</real>
+							<real>120</real>
 							<integer>0</integer>
 							<integer>0</integer>
 							<integer>0</integer>
@@ -777,8 +777,6 @@
 						</array>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -1023,6 +1021,16 @@
 						<key>value</key>
 						<string>0.250000</string>
 					</dict>
+					<dict>
+						<key>name</key>
+						<string>_debris</string>
+						<key>optimized</key>
+						<false/>
+						<key>type</key>
+						<integer>3</integer>
+						<key>value</key>
+						<string>AndySpaceshipDebris</string>
+					</dict>
 				</array>
 				<key>displayName</key>
 				<string>Ship1</string>
@@ -1047,8 +1055,8 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>100</real>
-							<real>140</real>
+							<real>120</real>
+							<real>120</real>
 							<integer>0</integer>
 							<integer>0</integer>
 							<integer>0</integer>
@@ -1116,6 +1124,16 @@
 						<key>value</key>
 						<string>0.250000</string>
 					</dict>
+					<dict>
+						<key>name</key>
+						<string>_debris</string>
+						<key>optimized</key>
+						<false/>
+						<key>type</key>
+						<integer>3</integer>
+						<key>value</key>
+						<string>ScottSpaceshipDebris</string>
+					</dict>
 				</array>
 				<key>displayName</key>
 				<string>Ship2</string>
@@ -1140,8 +1158,8 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>100</real>
-							<real>140</real>
+							<real>120</real>
+							<real>120</real>
 							<integer>3</integer>
 							<integer>0</integer>
 							<integer>0</integer>
@@ -1177,6 +1195,8 @@
 						<string>ScottSpaceship.ccb</string>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 		</array>
 		<key>customClass</key>
@@ -1260,13 +1280,13 @@
 			<key>ext</key>
 			<string>phone</string>
 			<key>height</key>
-			<integer>568</integer>
+			<integer>320</integer>
 			<key>name</key>
-			<string>Phone Portrait</string>
+			<string>Phone Landscape</string>
 			<key>scale</key>
 			<real>1</real>
 			<key>width</key>
-			<integer>320</integer>
+			<integer>568</integer>
 		</dict>
 		<dict>
 			<key>centeredOrigin</key>
@@ -1274,13 +1294,13 @@
 			<key>ext</key>
 			<string>tablet phonehd</string>
 			<key>height</key>
-			<integer>512</integer>
+			<integer>384</integer>
 			<key>name</key>
-			<string>Tablet Portrait</string>
+			<string>Tablet Landscape</string>
 			<key>scale</key>
 			<real>2</real>
 			<key>width</key>
-			<integer>384</integer>
+			<integer>512</integer>
 		</dict>
 		<dict>
 			<key>centeredOrigin</key>
@@ -1288,13 +1308,13 @@
 			<key>ext</key>
 			<string>phone</string>
 			<key>height</key>
-			<integer>480</integer>
+			<integer>320</integer>
 			<key>name</key>
-			<string>iPhone Portrait (short)</string>
+			<string>Phone Landscape (short)</string>
 			<key>scale</key>
 			<real>1</real>
 			<key>width</key>
-			<integer>320</integer>
+			<integer>480</integer>
 		</dict>
 	</array>
 	<key>sequences</key>
