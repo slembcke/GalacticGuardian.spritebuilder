@@ -169,7 +169,7 @@
 			<key>collisionMask</key>
 			<array/>
 			<key>collisionType</key>
-			<string></string>
+			<string>wall</string>
 			<key>cornerRadius</key>
 			<real>10</real>
 			<key>density</key>
