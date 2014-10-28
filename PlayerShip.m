@@ -82,14 +82,11 @@
 -(void)fixedUpdate:(CCTime)delta withInput:(CGPoint)joystickValue
 {
 	CCPhysicsBody *body = self.physicsBody;
-	CGPoint targetVelocity = ccpMult(joystickValue, _speed);
-	CGPoint velocity = cpvlerpconst(body.velocity, targetVelocity, _speed/_accelTime*delta);
-	
+
 	//	CCLOG(@"velocity: %@", NSStringFromCGPoint(velocity));
 	
-	body.velocity = velocity;
-	if(cpvlengthsq(velocity)){
-		self.rotation = -CC_RADIANS_TO_DEGREES(atan2f(velocity.y, velocity.x));
+	if(cpvlengthsq(joystickValue)){
+		self.rotation = -CC_RADIANS_TO_DEGREES(atan2f(joystickValue.y, joystickValue.x));
 		
 //		_mainThruster.visible = YES;
 //		
@@ -102,6 +99,14 @@
 //		_mainThruster.visible = NO;
 //		[_engineNoise stop]; _engineNoise = nil;
 	}
+
+	float newSpeed = (cpfclamp(cpvlength(joystickValue) - 0.5f, 0.0f, 0.5f)) * 2.0f * _speed;
+	CGPoint targetVelocity = ccpMult(joystickValue, newSpeed);
+	
+	CGPoint velocity = cpvlerpconst(body.velocity, targetVelocity, newSpeed/_accelTime*delta);
+	body.velocity = velocity;
+
+
 }
 
 -(CGAffineTransform)gunPortTransform
