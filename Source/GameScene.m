@@ -42,15 +42,23 @@ enum ZORDER {
 	Joystick *_joystick;
 	PlayerShip *_playerShip;
 	
+	CCTime _fixedTime;
+	
 	NSMutableArray *_enemies;
 	NSMutableArray *_bullets;
 	
 	int _enemies_killed;
+	// Consider extracting when we write more weapon types
+	bool _has_auto_firing_weapon;
+	bool _firing;
 }
 
 -(instancetype)initWithShipType:(NSString *)shipType
 {
 	if((self = [super init])){
+		
+		_has_auto_firing_weapon = true;
+		
 		CGSize viewSize = [CCDirector sharedDirector].viewSize;
 		
 		CGFloat joystickOffset = viewSize.width/8.0;
@@ -114,8 +122,17 @@ enum ZORDER {
 
 -(void)fixedUpdate:(CCTime)delta
 {
+	_fixedTime += delta;
+	
 	// Fly the ship using the joystick controls.
 	[_playerShip fixedUpdate:delta withInput:_joystick.value];
+	
+	if(_firing && _has_auto_firing_weapon){
+		if(_playerShip.lastFireTime + (1.0f / _playerShip.fireRate) < _fixedTime){
+			[self fireBullet];
+		}
+	}
+
 	
 	for (EnemyShip *e in _enemies) {
 		[e fixedUpdate:delta towardsPlayer:_playerShip.position];
@@ -214,6 +231,7 @@ enum ZORDER {
 {
 	// Don't fire bullets if the ship is destroyed.
 	if(_playerShip == nil) return;
+	_playerShip.lastFireTime = _fixedTime;
 	
 	// This is sort of a fancy math way to figure out where to fire the bullet from.
 	// You could figure this out with more code, but I wanted to have fun with some maths.
@@ -288,8 +306,17 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity)
 
 -(void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event
 {
+	if(_has_auto_firing_weapon){
+			_firing = true;
+	}else{
+		[self fireBullet];
+	}
 	
-	[self fireBullet];
+}
+
+-(void)touchEnded:(CCTouch *)touch withEvent:(CCTouchEvent *)event
+{
+	_firing = false;
 }
 
 #pragma mark - CCPhysicsCollisionDelegate methods

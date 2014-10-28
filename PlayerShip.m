@@ -29,7 +29,7 @@
 	
 	float _speed;
 	float _accelTime;
-	float _fireRate;
+
 }
 
 -(void)onEnter
