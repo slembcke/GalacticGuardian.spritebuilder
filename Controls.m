@@ -1,15 +1,13 @@
-//
-//  Joystick.m
-//  Cocoroids
-//
-//  Created by Scott Lembcke on 1/20/14.
-//  Copyright (c) 2014 Apportable. All rights reserved.
-//
-
-#import "Joystick.h"
 #import "ObjectiveChipmunk/ObjectiveChipmunk.h"
 
+#import "Controls.h"
 
+
+static CGPoint DirectionValue = {0.0, 0.0};
+static BOOL FireValue = NO;
+
+
+@interface Joystick : CCNode @end
 @implementation Joystick {
 	CGPoint _center;
 	float _radius;
@@ -48,8 +46,7 @@
 	CGPoint delta = cpvclamp(cpvsub(touch, _center), _radius);
 	self.position = cpvadd(_center, delta);
 	
-	CGPoint value = cpvmult(delta, 1.0/_radius);
-	_value = (cpvnear(value, CGPointZero, _deadZone) ? CGPointZero : value);
+	DirectionValue = cpvmult(delta, 1.0/_radius);
 }
 
 -(void)touchBegan:(CCTouch *)touch withEvent:(CCTouchEvent *)event
@@ -84,3 +81,54 @@
 }
 
 @end
+
+
+@implementation Controls
+
++(CCNode *)newControlsLayer
+{
+	CGSize viewSize = [CCDirector sharedDirector].viewSize;
+	CCNode *node = [CCNode node];
+	
+	CGFloat joystickOffset = viewSize.width/8.0;
+	CCNode *joystick = [[Joystick alloc] initWithSize:joystickOffset];
+	joystick.position = ccp(joystickOffset, joystickOffset);
+	[node addChild:joystick];
+	
+	return node;
+}
+
++(CCNode *)gameControllerIndicator
+{
+	return nil;
+}
+
++(CGPoint)directionValue {return DirectionValue;}
++(BOOL)fireValue {return FireValue;}
+
+@end
+
+
+//#import "GameController.h"
+//
+//
+//@implementation GameController
+//
+//GCController *ControllerProfile;
+//
+//+(void)initialize
+//{
+//	[[NSNotificationCenter defaultCenter] addObserverForName:GCControllerDidConnectNotification object:nil queue:nil
+//		usingBlock:^(NSNotification *notification){
+//			ControllerProfile = notification.object;
+//		}
+//	];
+//	
+//	[[NSNotificationCenter defaultCenter] addObserverForName:GCControllerDidDisconnectNotification object:nil queue:nil
+//		usingBlock:^(NSNotification *notification){
+//			ControllerProfile = nil;
+//		}
+//	];
+//}
+//
+//@end

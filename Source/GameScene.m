@@ -14,7 +14,7 @@
 #import "PlayerShip.h"
 #import "EnemyShip.h"
 #import "Bullet.h"
-#import "Joystick.h"
+#import "Controls.h"
 
 
 static CGSize GameSceneSize = {1024, 1024};
@@ -27,7 +27,7 @@ enum ZORDER {
 	Z_PLAYER,
 	Z_PARTICLES,
 	Z_FLASH,
-	Z_JOYSTICK,
+	Z_CONTROLS,
 };
 
 
@@ -39,7 +39,6 @@ enum ZORDER {
 	CCPhysicsNode *_physics;
 	NebulaBackground *_background;
 	
-	Joystick *_joystick;
 	PlayerShip *_playerShip;
 	
 	NSMutableArray *_enemies;
@@ -53,10 +52,7 @@ enum ZORDER {
 	if((self = [super init])){
 		CGSize viewSize = [CCDirector sharedDirector].viewSize;
 		
-		CGFloat joystickOffset = viewSize.width/8.0;
-		_joystick = [[Joystick alloc] initWithSize:joystickOffset];
-		_joystick.position = ccp(joystickOffset, joystickOffset);
-		[self addChild:_joystick z:Z_JOYSTICK];
+		[self addChild:[Controls newControlsLayer] z:Z_CONTROLS];
 		
 		_scrollNode = [CCNode node];
 		_scrollNode.contentSize = CGSizeMake(1.0, 1.0);
@@ -115,10 +111,11 @@ enum ZORDER {
 -(void)fixedUpdate:(CCTime)delta
 {
 	// Fly the ship using the joystick controls.
-	[_playerShip fixedUpdate:delta withInput:_joystick.value];
+	[_playerShip fixedUpdate:delta withInput:[Controls directionValue]];
 	
+	CGPoint playerPosition = _playerShip.position;
 	for (EnemyShip *e in _enemies) {
-		[e fixedUpdate:delta towardsPlayer:_playerShip.position];
+		[e fixedUpdate:delta towardsPlayer:playerPosition];
 	}
 }
 
