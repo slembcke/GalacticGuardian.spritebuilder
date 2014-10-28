@@ -29,7 +29,7 @@
 	
 	float _speed;
 	float _accelTime;
-	float _fireRate;
+	int _hp;
 }
 
 -(void)onEnter
@@ -43,7 +43,7 @@
 	// First you list the categories (strings) that the object belongs to.
 	body.collisionCategories = @[@"ship"];
 	// Then you list which categories its allowed to collide with.
-	body.collisionMask = @[@"enemy"];
+	body.collisionMask = @[@"enemy", @"debris"];
 	
 	// Make the thruster pulse
 	float scaleX = _mainThruster.scaleX;
@@ -57,6 +57,7 @@
 	// Make the shield spin
 	[_shield runAction:[CCActionRepeatForever actionWithAction:[CCActionRotateBy actionWithDuration:1.0 angle:360.0]]];
 	
+	_hp = 4;
 	
 	_gunPorts = [NSMutableArray array];
 	for (CCNode* node in [_children[0] children]) {
@@ -81,14 +82,11 @@
 -(void)fixedUpdate:(CCTime)delta withInput:(CGPoint)joystickValue
 {
 	CCPhysicsBody *body = self.physicsBody;
-	CGPoint targetVelocity = ccpMult(joystickValue, _speed);
-	CGPoint velocity = cpvlerpconst(body.velocity, targetVelocity, _speed/_accelTime*delta);
-	
+
 	//	CCLOG(@"velocity: %@", NSStringFromCGPoint(velocity));
 	
-	body.velocity = velocity;
-	if(cpvlengthsq(velocity)){
-		self.rotation = -CC_RADIANS_TO_DEGREES(atan2f(velocity.y, velocity.x));
+	if(cpvlengthsq(joystickValue)){
+		self.rotation = -CC_RADIANS_TO_DEGREES(atan2f(joystickValue.y, joystickValue.x));
 		
 //		_mainThruster.visible = YES;
 //		
@@ -101,6 +99,16 @@
 //		_mainThruster.visible = NO;
 //		[_engineNoise stop]; _engineNoise = nil;
 	}
+
+	float newSpeed = (cpfclamp(cpvlength(joystickValue) - 0.5f, 0.0f, 0.5f)) * 2.0f * _speed;
+	CGPoint targetVelocity = ccpMult(joystickValue, newSpeed);
+	
+	CGPoint velocity = cpvlerpconst(body.velocity, targetVelocity, newSpeed/_accelTime*delta);
+	body.velocity = velocity;
+
+	// Certain collisions can add to this. We want this to dampen off pretty quickly. (if not instantly)
+	body.angularVelocity *= 0.9f;
+
 }
 
 -(CGAffineTransform)gunPortTransform
@@ -136,8 +144,16 @@
 	} else {
 		[[OALSimpleAudio sharedInstance] playEffect:@"Crash.wav"];
 		
-		return YES;
+		_hp -= 1;
+		
+		return _hp <= 0;
 	}
 }
+
+-(BOOL) isDead
+{
+	return _hp <= 0;
+}
+
 
 @end

@@ -41,15 +41,23 @@ enum ZORDER {
 	
 	PlayerShip *_playerShip;
 	
+	CCTime _fixedTime;
+	
 	NSMutableArray *_enemies;
 	NSMutableArray *_bullets;
 	
 	int _enemies_killed;
+	// Consider extracting when we write more weapon types
+	bool _has_auto_firing_weapon;
+	bool _firing;
 }
 
 -(instancetype)initWithShipType:(NSString *)shipType
 {
 	if((self = [super init])){
+		
+		_has_auto_firing_weapon = true;
+		
 		CGSize viewSize = [CCDirector sharedDirector].viewSize;
 		
 		[self addChild:[Controls newControlsLayer] z:Z_CONTROLS];
@@ -90,8 +98,14 @@ enum ZORDER {
 		[self scheduleBlock:^(CCTimer *timer) {
 			
 			EnemyShip *enemy = (EnemyShip *)[CCBReader load:@"BadGuy1"];
-			
-			enemy.position = ccp(CCRANDOM_0_1() > 0.5f ? 0 + 128.0f : 1024.0f - 128.0f, CCRANDOM_MINUS1_1() * 128.0f + 512.0f);
+			if(CCRANDOM_0_1() > 0.33f){
+				// left or right sides.
+				enemy.position = ccp(CCRANDOM_0_1() > 0.5f ? -64.0f : GameSceneSize.width + 64.0f, CCRANDOM_MINUS1_1() * 400.0f + GameSceneSize.height / 2.0f);
+			}else{
+				// Top:
+				enemy.position = ccp(CCRANDOM_MINUS1_1() * 400.0f + GameSceneSize.width / 2.0f, GameSceneSize.height + 64.0f);
+			}
+
 			[_physics addChild:enemy z:Z_ENEMY];
 			[_enemies addObject:enemy];
 			
@@ -99,6 +113,11 @@ enum ZORDER {
 			
 		} delay:1.0f];
 		
+		for(int i = 0; i < 20; i++){
+			// maybe this spoke/circle pattern will be cool.
+			float angle = (M_PI * 2.0f / 20.0f) * i;
+			[self addWallAt: ccpAdd(ccpMult(ccpForAngle(angle), 150.0f + 250.0f * CCRANDOM_0_1() ), ccp(512, 512))];
+		}
 		
 		// Enable touch events.
 		// The entire scene is used as a shoot button.
@@ -108,14 +127,30 @@ enum ZORDER {
 	return self;
 }
 
+-(void)addWallAt:(CGPoint) pos
+{
+	CCNode *wall = (CCNode *)[CCBReader load:@"Asteroid"];
+	wall.position = pos;
+	wall.rotation = CCRANDOM_0_1() * 360.0f;
+	[_physics addChild:wall z:Z_ENEMY];
+}
+
 -(void)fixedUpdate:(CCTime)delta
 {
+	_fixedTime += delta;
+	
 	// Fly the ship using the joystick controls.
 	[_playerShip fixedUpdate:delta withInput:[Controls directionValue]];
 	
-	CGPoint playerPosition = _playerShip.position;
+	if(_firing && _has_auto_firing_weapon){
+		if(_playerShip.lastFireTime + (1.0f / _playerShip.fireRate) < _fixedTime){
+			[self fireBullet];
+		}
+	}
+
+	
 	for (EnemyShip *e in _enemies) {
-		[e fixedUpdate:delta towardsPlayer:playerPosition];
+		[e fixedUpdate:delta towardsPlayer:_playerShip];
 	}
 }
 
@@ -142,7 +177,10 @@ enum ZORDER {
 	CCNode *debris = [CCBReader load:enemy.debris];
 	debris.position = pos;
 	debris.rotation = enemy.rotation;
-	InitDebris(debris, debris, enemy.physicsBody.velocity);
+	
+	CCColor *weaponColor = [CCColor colorWithRed:0.3f green:0.8f blue:1.0f];
+	
+	InitDebris(debris, debris, enemy.physicsBody.velocity, weaponColor);
 	[_physics addChild:debris];
 	
 	CCNode *explosion = [CCBReader load:@"Particles/ShipExplosion"];
@@ -210,7 +248,8 @@ enum ZORDER {
 -(void)fireBullet
 {
 	// Don't fire bullets if the ship is destroyed.
-	if(_playerShip == nil) return;
+	if([_playerShip isDead]) return;
+	_playerShip.lastFireTime = _fixedTime;
 	
 	// This is sort of a fancy math way to figure out where to fire the bullet from.
 	// You could figure this out with more code, but I wanted to have fun with some maths.
@@ -257,10 +296,12 @@ enum ZORDER {
 
 // Recursive helper function to set up physics on the debris child nodes.
 static void
-InitDebris(CCNode *root, CCNode *node, CGPoint velocity)
+InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 {
 	// If the node has a body, set some properties.
 	CCPhysicsBody *body = node.physicsBody;
+	body.collisionCategories = @[@"debris"];
+	
 	if(body){
 		// Bodies with the same group reference don't collide.
 		// Any type of object will do. It's the object reference that is important.
@@ -274,19 +315,74 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity)
 		
 		// Nodes with bodies should also be sprites.
 		// This is a convenient place to add the fade action.
-		[node runAction:[CCActionFadeOut actionWithDuration:2.0]];
+		node.color = burnColor;
+		[node runAction: [CCActionSequence actions:
+		 [CCActionDelay actionWithDuration:0.5],
+		 [CCActionFadeOut actionWithDuration:2.0], nil]];
 	}
 	
 	// Recurse on the children.
-	for(CCNode *child in node.children) InitDebris(root, child, velocity);
+	for(CCNode *child in node.children) InitDebris(root, child, velocity, burnColor);
 }
 
 //MARK CCResponder methods
 
 -(void)touchBegan:(CCTouch *)touch withEvent:(CCTouchEvent *)event
 {
+	if(_has_auto_firing_weapon){
+			_firing = true;
+	}else{
+		[self fireBullet];
+	}
 	
-	[self fireBullet];
+}
+
+-(void)touchEnded:(CCTouch *)touch withEvent:(CCTouchEvent *)event
+{
+	_firing = false;
+}
+
+-(void)playerDestroyed;
+{
+	
+	//The ship was destroyed!
+	[_playerShip removeFromParent];
+	
+	CGPoint pos = _playerShip.position;
+	
+	CCNode *debris = [CCBReader load:_playerShip.debris];
+	debris.position = pos;
+	debris.rotation = _playerShip.rotation;
+	InitDebris(debris, debris, _playerShip.physicsBody.velocity, [CCColor colorWithRed:1.0f green:1.0f blue:0.3f]);
+	[_physics addChild:debris];
+	
+	CCNode *explosion = [CCBReader load:@"Particles/ShipExplosion"];
+	explosion.position = pos;
+	[_physics addChild:explosion z:Z_PARTICLES];
+	
+	CCNode *distortion = [CCBReader load:@"DistortionParticles/LargeRing"];
+	distortion.position = pos;
+	[_background.distortionNode addChild:distortion];
+	
+	[self scheduleBlock:^(CCTimer *timer) {
+		[debris removeFromParent];
+		[explosion removeFromParent];
+		[distortion removeFromParent];
+	} delay:5];
+	
+	[self scheduleBlock:^(CCTimer *timer){
+		// Go back to the menu after a short delay.
+		[[CCDirector sharedDirector] replaceScene:[CCBReader loadAsScene:@"MainMenu"]];
+	} delay:5.0];
+	
+
+	for (EnemyShip * e in _enemies) {
+		// explode based on distance from player.
+		float dist = ccpLength(ccpSub(_playerShip.position, e.position));
+		[e scheduleBlock:^(CCTimer *timer) {
+			[self enemyDeath:e];
+		} delay:dist / 200.0f];
+	}
 }
 
 #pragma mark - CCPhysicsCollisionDelegate methods
@@ -295,36 +391,7 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity)
 -(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair ship:(PlayerShip *)player enemy:(EnemyShip *)enemy
 {
 	if([_playerShip takeDamage]){
-		//The ship was destroyed!
-		[_playerShip removeFromParent];
-		
-		CGPoint pos = _playerShip.position;
-		
-		CCNode *debris = [CCBReader load:_playerShip.debris];
-		debris.position = pos;
-		debris.rotation = _playerShip.rotation;
-		InitDebris(debris, debris, _playerShip.physicsBody.velocity);
-		[_physics addChild:debris];
-		
-		CCNode *explosion = [CCBReader load:@"Particles/ShipExplosion"];
-		explosion.position = pos;
-		[_physics addChild:explosion z:Z_PARTICLES];
-		
-		CCNode *distortion = [CCBReader load:@"DistortionParticles/LargeRing"];
-		distortion.position = pos;
-		[_background.distortionNode addChild:distortion];
-		
-		[self scheduleBlock:^(CCTimer *timer) {
-			[debris removeFromParent];
-			[explosion removeFromParent];
-			[distortion removeFromParent];
-		} delay:5];
-		
-		[self scheduleBlock:^(CCTimer *timer){
-			// Go back to the menu after a short delay.
-			[[CCDirector sharedDirector] replaceScene:[CCBReader loadAsScene:@"MainMenu"]];
-		} delay:5.0];
-		
+		[self playerDestroyed];
 		// Don't process the collision so the enemy spaceship will survive and mock you.
 		return NO;
 	}else{
@@ -344,6 +411,12 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity)
 		[self enemyDeath:enemy];
 	}
 	
+	return NO;
+}
+
+-(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair bullet:(Bullet *)bullet wall:(CCNode *)wall
+{
+	[self destroyBullet:bullet];
 	return NO;
 }
 

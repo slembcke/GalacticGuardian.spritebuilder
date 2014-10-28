@@ -14,8 +14,12 @@
 
 @property(nonatomic, readonly) CGAffineTransform gunPortTransform;
 
+@property(nonatomic) float fireRate;
+@property(nonatomic) float lastFireTime;
+
 -(void)fixedUpdate:(CCTime)delta withInput:(CGPoint)joystickValue;
 
 -(BOOL)takeDamage;
+-(BOOL)isDead;
 
 @end

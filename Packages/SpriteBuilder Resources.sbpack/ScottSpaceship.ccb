@@ -850,8 +850,6 @@
 								<array/>
 							</dict>
 						</array>
-						<key>selected</key>
-						<true/>
 					</dict>
 					<dict>
 						<key>UUID</key>
@@ -1303,6 +1301,16 @@
 				<key>value</key>
 				<string>ScottSpaceshipDebris</string>
 			</dict>
+			<dict>
+				<key>name</key>
+				<string>_fireRate</string>
+				<key>optimized</key>
+				<false/>
+				<key>type</key>
+				<integer>1</integer>
+				<key>value</key>
+				<string>10.000000</string>
+			</dict>
 		</array>
 		<key>displayName</key>
 		<string>CCNode</string>
@@ -1406,6 +1414,8 @@
 				</array>
 			</dict>
 		</array>
+		<key>selected</key>
+		<true/>
 	</dict>
 	<key>notes</key>
 	<array/>

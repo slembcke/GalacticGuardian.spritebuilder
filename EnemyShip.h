@@ -3,12 +3,13 @@
 //
 
 #import "CCNode.h"
+#import "PlayerShip.h"
 
 @interface EnemyShip : CCNode
 
 @property(nonatomic, readonly) NSString *debris;
 
--(void)fixedUpdate:(CCTime)delta towardsPlayer:(CGPoint)playerPos;
+-(void)fixedUpdate:(CCTime)delta towardsPlayer:(PlayerShip *)player;
 -(BOOL) takeDamage;
 
 @end

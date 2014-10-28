@@ -21,7 +21,7 @@
 	// First you list the categories (strings) that the object belongs to.
 	body.collisionCategories = @[@"bullet"];
 	// Then you list which categories its allowed to collide with.
-	body.collisionMask = @[@"enemy"];
+	body.collisionMask = @[@"enemy", @"wall"];
 	
 	[super onEnter];
 }
