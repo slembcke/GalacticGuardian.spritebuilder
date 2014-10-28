@@ -25,9 +25,11 @@
 
 	// TODO: dynamic number of gunports based on ship. CCNode *_gunPort1, *_gunPort2;
 	NSUInteger _currentGunPort;
+	NSMutableArray *_gunPorts;
 	
 	float _speed;
 	float _accelTime;
+	float _fireRate;
 }
 
 -(void)onEnter
@@ -54,6 +56,16 @@
 	
 	// Make the shield spin
 	[_shield runAction:[CCActionRepeatForever actionWithAction:[CCActionRotateBy actionWithDuration:1.0 angle:360.0]]];
+	
+	
+	_gunPorts = [NSMutableArray array];
+	for (CCNode* node in [_children[0] children]) {
+		if([node.name isEqualToString:@"gun"]){
+			[_gunPorts addObject:node];
+		}
+	}
+	NSAssert([_gunPorts count] > 0, @"Missing gunports on ship in spritebuilder");
+	
 	
 	[super onEnter];
 }
@@ -94,11 +106,13 @@
 -(CGAffineTransform)gunPortTransform
 {
 	// Constantly switch between gunports.
-//	_currentGunPort++;
-//	
-//	CCNode *gunports[] = {_gunPort1, _gunPort2};
-//	return [gunports[_currentGunPort%2] nodeToWorldTransform];
-	return _transform;
+	_currentGunPort = (_currentGunPort + 1) % [_gunPorts count];
+
+	CCNode *gun = _gunPorts[_currentGunPort];
+	
+	// Why not just position multiply the gun transform by the _transform? Guns are flipped with negative scales, so we need to explictly ignore that.
+	// So instead, we just offset from the ship's translation. 
+	return CGAffineTransformTranslate(_transform, -gun.position.y, gun.position.x);
 }
 
 -(BOOL)takeDamage

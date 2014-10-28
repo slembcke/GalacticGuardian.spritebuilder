@@ -1883,8 +1883,6 @@
 								<array/>
 							</dict>
 						</array>
-						<key>selected</key>
-						<true/>
 					</dict>
 				</array>
 				<key>customClass</key>
@@ -1968,7 +1966,7 @@
 			</dict>
 		</array>
 		<key>customClass</key>
-		<string>PlayerShip</string>
+		<string></string>
 		<key>customProperties</key>
 		<array>
 			<dict>
@@ -2060,6 +2058,8 @@
 				</array>
 			</dict>
 		</array>
+		<key>selected</key>
+		<true/>
 	</dict>
 	<key>notes</key>
 	<array/>

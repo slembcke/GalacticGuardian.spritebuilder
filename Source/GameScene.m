@@ -94,11 +94,12 @@ enum ZORDER {
 		[self scheduleBlock:^(CCTimer *timer) {
 			
 			EnemyShip *enemy = (EnemyShip *)[CCBReader load:@"BadGuy1"];
-			enemy.position = ccp(CCRANDOM_0_1() > 0.5f ? 0 + 128.0f : 1024.0f - 128.0f, 512.0f);
+			
+			enemy.position = ccp(CCRANDOM_0_1() > 0.5f ? 0 + 128.0f : 1024.0f - 128.0f, CCRANDOM_MINUS1_1() * 128.0f + 512.0f);
 			[_physics addChild:enemy z:Z_ENEMY];
 			[_enemies addObject:enemy];
 			
-			[timer repeatOnceWithInterval:1.0f];
+			[timer repeatOnceWithInterval:1.5f];
 			
 		} delay:1.0f];
 		
@@ -287,6 +288,7 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity)
 
 -(void)touchBegan:(CCTouch *)touch withEvent:(CCTouchEvent *)event
 {
+	
 	[self fireBullet];
 }
 
@@ -324,7 +326,7 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity)
 		[self scheduleBlock:^(CCTimer *timer){
 			// Go back to the menu after a short delay.
 			[[CCDirector sharedDirector] replaceScene:[CCBReader loadAsScene:@"MainMenu"]];
-		} delay:5.0]; // TODO: nonzero delay needed for optimal fun
+		} delay:5.0];
 		
 		// Don't process the collision so the enemy spaceship will survive and mock you.
 		return NO;

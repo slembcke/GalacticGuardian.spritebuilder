@@ -25,9 +25,13 @@
 {
 	_time += delta;
 	
-	// There is a simple hack in the vertex shader to make the nebula scroll. d
-	_background.shaderUniforms[@"u_ScrollOffset"] = [NSValue valueWithCGPoint:ccp(0.0, fmod(_time/4.0, 1.0))];
-	_ship1.rotation = _ship2.rotation = fmod(_time * 15.0f, 360.0f) - 180.0f;
+	// There is a simple hack in the vertex shader to make the nebula scroll.
+	
+	float direction = sinf(_time);
+	float shipDirection = cosf(_time);
+	
+	_background.shaderUniforms[@"u_ScrollOffset"] = [NSValue valueWithCGPoint:ccp(direction / 8.0f, fmod(_time/4.0, 1.0))];
+	_ship1.rotation = _ship2.rotation = shipDirection * 15.0f - 90.0f;
 }
 
 

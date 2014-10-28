@@ -69,7 +69,7 @@
 								<key>type</key>
 								<string>StringSimple</string>
 								<key>value</key>
-								<string></string>
+								<string>gun</string>
 							</dict>
 							<dict>
 								<key>name</key>
@@ -177,7 +177,7 @@
 								<key>type</key>
 								<string>StringSimple</string>
 								<key>value</key>
-								<string></string>
+								<string>gun</string>
 							</dict>
 							<dict>
 								<key>name</key>
@@ -766,7 +766,7 @@
 								<key>type</key>
 								<string>StringSimple</string>
 								<key>value</key>
-								<string></string>
+								<string>gun</string>
 							</dict>
 							<dict>
 								<key>name</key>
@@ -850,6 +850,8 @@
 								<array/>
 							</dict>
 						</array>
+						<key>selected</key>
+						<true/>
 					</dict>
 					<dict>
 						<key>UUID</key>
@@ -874,7 +876,7 @@
 								<key>type</key>
 								<string>StringSimple</string>
 								<key>value</key>
-								<string></string>
+								<string>gun</string>
 							</dict>
 							<dict>
 								<key>name</key>
