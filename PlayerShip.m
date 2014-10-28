@@ -108,7 +108,11 @@
 	// Constantly switch between gunports.
 	_currentGunPort = (_currentGunPort + 1) % [_gunPorts count];
 
-	return [_gunPorts[_currentGunPort] nodeToWorldTransform];
+	CCNode *gun = _gunPorts[_currentGunPort];
+	
+	// Why not just position multiply the gun transform by the _transform? Guns are flipped with negative scales, so we need to explictly ignore that.
+	// So instead, we just offset from the ship's translation.
+	return CGAffineTransformTranslate(_transform, -gun.position.y, gun.position.x);
 }
 
 -(BOOL)takeDamage
