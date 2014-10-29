@@ -90,6 +90,7 @@
 	
 	GCController *_controller;
 	GCControllerDirectionPad *_controllerStick;
+	GCControllerDirectionPad *_controllerAim;
 	GCControllerDirectionPad *_controllerDpad;
 	
 	NSMutableDictionary *_buttonStates;
@@ -136,9 +137,14 @@
 	controller.playerIndex = 0;
 	
 	_controllerStick = controller.extendedGamepad.leftThumbstick;
+	_controllerAim = controller.extendedGamepad.rightThumbstick;
 	_controllerDpad = controller.gamepad.dpad;
 	
 	__weak typeof(self) _self = self;
+	
+	controller.extendedGamepad.rightThumbstick.valueChangedHandler = ^(GCControllerDirectionPad *dpad, float xValue, float yValue){
+		[_self setButtonValue:ControlFireButton value:(xValue*xValue + yValue*yValue) > 0.25];
+	};
 	
 	controller.gamepad.buttonA.valueChangedHandler = ^(GCControllerButtonInput *button, float value, BOOL pressed){
 		[_self setButtonValue:ControlFireButton value:pressed];
@@ -231,8 +237,8 @@
 {
 	if(_controller){
 		return cpvclamp(cpv(
-			_controllerStick.xAxis.value + _controllerDpad.xAxis.value,
-			_controllerStick.yAxis.value + _controllerDpad.yAxis.value
+			_controllerStick.xAxis.value + 0.1*_controllerAim.xAxis.value + _controllerDpad.xAxis.value,
+			_controllerStick.yAxis.value + 0.1*_controllerAim.yAxis.value + _controllerDpad.yAxis.value
 		), 1.0);
 	} else {
 		return _virtualJoystick.value;

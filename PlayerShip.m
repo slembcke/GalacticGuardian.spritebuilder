@@ -84,9 +84,10 @@
 	CCPhysicsBody *body = self.physicsBody;
 
 	//	CCLOG(@"velocity: %@", NSStringFromCGPoint(velocity));
-	
 	if(cpvlengthsq(joystickValue)){
-		self.rotation = -CC_RADIANS_TO_DEGREES(atan2f(joystickValue.y, joystickValue.x));
+		const float maxTurn = 360.0*delta;
+		CGPoint relativeDirection = cpTransformVect(cpTransformInverse(body.body.transform), joystickValue);
+		self.rotation += clampf(-CC_RADIANS_TO_DEGREES(ccpToAngle(relativeDirection)), -maxTurn, maxTurn);
 		
 //		_mainThruster.visible = YES;
 //		
@@ -108,7 +109,6 @@
 
 	// Certain collisions can add to this. We want this to dampen off pretty quickly. (if not instantly)
 	body.angularVelocity *= 0.9f;
-
 }
 
 -(CGAffineTransform)gunPortTransform
