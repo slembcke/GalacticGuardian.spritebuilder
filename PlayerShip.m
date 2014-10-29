@@ -142,7 +142,7 @@
 		_shield = nil;
 		return NO;
 	} else {
-		[[OALSimpleAudio sharedInstance] playEffect:@"Crash.wav"];
+//		[[OALSimpleAudio sharedInstance] playEffect:@"Crash.wav"];
 		
 		_hp -= 1;
 		

@@ -1,16 +1,16 @@
+#import <GameController/GameController.h>
+
 #import "ObjectiveChipmunk/ObjectiveChipmunk.h"
 
 #import "Controls.h"
 
 
-static CGPoint DirectionValue = {0.0, 0.0};
-static BOOL FireValue = NO;
-
-
-@interface Joystick : CCNode @end
-@implementation Joystick {
+@interface VirtualJoystick : CCNode @end
+@implementation VirtualJoystick {
 	CGPoint _center;
 	float _radius;
+	
+	CGPoint _value;
 	
 	__unsafe_unretained CCTouch *_trackingTouch;
 }
@@ -41,12 +41,14 @@ static BOOL FireValue = NO;
 	self.userInteractionEnabled = YES;
 }
 
+-(CGPoint)value {return _value;}
+
 -(void)setTouchPosition:(CGPoint)touch
 {
 	CGPoint delta = cpvclamp(cpvsub(touch, _center), _radius);
 	self.position = cpvadd(_center, delta);
 	
-	DirectionValue = cpvmult(delta, 1.0/_radius);
+	_value = cpvmult(delta, 1.0/_radius);
 }
 
 -(void)touchBegan:(CCTouch *)touch withEvent:(CCTouchEvent *)event
@@ -83,52 +85,116 @@ static BOOL FireValue = NO;
 @end
 
 
-@implementation Controls
-
-+(CCNode *)newControlsLayer
-{
-	CGSize viewSize = [CCDirector sharedDirector].viewSize;
-	CCNode *node = [CCNode node];
+@implementation Controls {
+	VirtualJoystick *_virtualJoystick;
 	
-	CGFloat joystickOffset = viewSize.width/8.0;
-	CCNode *joystick = [[Joystick alloc] initWithSize:joystickOffset];
-	joystick.position = ccp(joystickOffset, joystickOffset);
-	[node addChild:joystick];
+	GCController *_controller;
+	GCControllerDirectionPad *_controllerStick;
+	GCControllerDirectionPad *_controllerDpad;
 	
-	return node;
+	NSArray *_observers;
 }
 
-+(CCNode *)gameControllerIndicator
+-(id)init
 {
-	return nil;
+	if((self = [super init])){
+		CGSize viewSize = [CCDirector sharedDirector].viewSize;
+		
+		CGFloat joystickOffset = viewSize.width/8.0;
+		_virtualJoystick = [[VirtualJoystick alloc] initWithSize:joystickOffset];
+		_virtualJoystick.position = ccp(joystickOffset, joystickOffset);
+		[self addChild:_virtualJoystick];
+		
+		[self setupGamepadSupport];
+	}
+	
+	return self;
 }
 
-+(CGPoint)directionValue {return DirectionValue;}
-+(BOOL)fireValue {return FireValue;}
+-(void)logController:(GCController *)controller
+{
+	NSLog(@"Controller: %@", controller);
+	NSLog(@"	Extended: %@", controller.extendedGamepad);
+	NSLog(@"	VendorName: %@", controller.vendorName);
+}
+
+-(BOOL)activateController:(GCController *)controller
+{
+	if(_controller) return NO;
+	
+	_controllerStick = controller.extendedGamepad.leftThumbstick;
+	_controllerDpad = controller.gamepad.dpad;
+	
+	if(_controllerStick || _controllerDpad){
+		NSLog(@"Using controller %@", controller);
+		
+		controller.playerIndex = 0;
+		_controller = controller;
+		return YES;
+	} else {
+		controller.playerIndex = GCControllerPlayerIndexUnset;
+		return NO;
+	}
+}
+
+-(void)deactivateController:(GCController *)controller
+{
+	if(controller == _controller){
+		_controller = nil;
+		_controllerStick = nil;
+	}
+}
+
+-(void)setupGamepadSupport
+{
+	NSArray *controllers = [GCController controllers];
+	NSLog(@"%d controllers found.", (int)controllers.count);
+	
+	for(GCController *controller in controllers){
+		[self logController:controller];
+		if(_controller == nil) [self activateController:controller];
+	}
+	
+	id connect = [[NSNotificationCenter defaultCenter] addObserverForName:GCControllerDidConnectNotification object:nil queue:nil
+		usingBlock:^(NSNotification *notification){
+			NSLog(@"Controller connected.");
+			GCController *controller = notification.object;
+			[self logController:controller];
+			[self activateController:controller];
+		}
+	];
+	
+	id disconnect = [[NSNotificationCenter defaultCenter] addObserverForName:GCControllerDidDisconnectNotification object:nil queue:nil
+		usingBlock:^(NSNotification *notification){
+			NSLog(@"Controller disconnected.");
+			GCController *controller = notification.object;
+			[self logController:controller];
+			[self deactivateController:controller];
+		}
+	];
+	
+	_observers = @[connect, disconnect];
+}
+
+-(void)onExit
+{
+	for(id observer in _observers){
+		[[NSNotificationCenter defaultCenter] removeObserver:observer];
+	}
+	
+	[super onExit];
+}
+
+-(CGPoint)directionValue
+{
+	if(_controller){
+		return cpvclamp(cpv(
+			_controllerStick.xAxis.value + _controllerDpad.xAxis.value,
+			_controllerStick.yAxis.value + _controllerDpad.yAxis.value
+		), 1.0);
+	} else {
+		return _virtualJoystick.value;
+	}
+}
 
 @end
-
-
-//#import "GameController.h"
-//
-//
-//@implementation GameController
-//
-//GCController *ControllerProfile;
-//
-//+(void)initialize
-//{
-//	[[NSNotificationCenter defaultCenter] addObserverForName:GCControllerDidConnectNotification object:nil queue:nil
-//		usingBlock:^(NSNotification *notification){
-//			ControllerProfile = notification.object;
-//		}
-//	];
-//	
-//	[[NSNotificationCenter defaultCenter] addObserverForName:GCControllerDidDisconnectNotification object:nil queue:nil
-//		usingBlock:^(NSNotification *notification){
-//			ControllerProfile = nil;
-//		}
-//	];
-//}
-//
-//@end

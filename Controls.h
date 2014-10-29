@@ -1,9 +1,5 @@
-@interface Controls : NSObject
+@interface Controls : CCNode
 
-+(CCNode *)newControlsLayer;
-+(CCNode *)gameControllerIndicator;
-
-+(CGPoint)directionValue;
-+(BOOL)fireValue;
+-(CGPoint)directionValue;
 
 @end

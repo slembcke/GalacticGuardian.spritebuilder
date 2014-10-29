@@ -39,6 +39,7 @@ enum ZORDER {
 	CCPhysicsNode *_physics;
 	NebulaBackground *_background;
 	
+	Controls *_controls;
 	PlayerShip *_playerShip;
 	
 	CCTime _fixedTime;
@@ -60,7 +61,8 @@ enum ZORDER {
 		
 		CGSize viewSize = [CCDirector sharedDirector].viewSize;
 		
-		[self addChild:[Controls newControlsLayer] z:Z_CONTROLS];
+		_controls = [Controls node];
+		[self addChild:_controls z:Z_CONTROLS];
 		
 		_scrollNode = [CCNode node];
 		_scrollNode.contentSize = CGSizeMake(1.0, 1.0);
@@ -140,7 +142,7 @@ enum ZORDER {
 	_fixedTime += delta;
 	
 	// Fly the ship using the joystick controls.
-	[_playerShip fixedUpdate:delta withInput:[Controls directionValue]];
+	[_playerShip fixedUpdate:delta withInput:_controls.directionValue];
 	
 	if(_firing && _has_auto_firing_weapon){
 		if(_playerShip.lastFireTime + (1.0f / _playerShip.fireRate) < _fixedTime){

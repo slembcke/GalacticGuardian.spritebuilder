@@ -2,13 +2,14 @@
 #import "NebulaBackground.h"
 #import "GameScene.h"
 
+#import <GameController/GameController.h>
+
 @implementation MainMenu {
 	NebulaBackground *_background;
 	CCTime _time;
 	
 	CCSprite* _ship1;
 	CCSprite* _ship2;
-	
 }
 
 -(void)didLoadFromCCB
@@ -18,7 +19,12 @@
 	particles.positionType = CCPositionTypeNormalized;
 	particles.position = ccp(0.5, 0.5);
 	[_background.distortionNode addChild:particles];
-	
+}
+
+-(void)onExit
+{
+	// TODO remove observers
+	[super onExit];
 }
 
 -(void)update:(CCTime)delta
