@@ -14,8 +14,8 @@
 
 		CCPhysicsBody *body = self.physicsBody = [CCPhysicsBody bodyWithCircleOfRadius:3.0f andCenter:CGPointZero];
 		
-		_accelRange = 150.0f;
-		_accelAmount = 5.0f;
+		_accelRange = 90.0f;
+		_accelAmount = 30.0f;
 		_amount = values[type];
 		
 		// This is used to pick which collision delegate method to call, see GameScene.m for more info.
@@ -25,9 +25,9 @@
 		// First you list the categories (strings) that the object belongs to.
 		body.collisionCategories = @[CollisionCategoryPickup];
 		// Then you list which categories its allowed to collide with.
-		body.collisionMask = @[CollisionCategoryPlayer, CollisionCategoryBarrier];
+		body.collisionMask = @[CollisionCategoryPlayer];
 		body.angularVelocity = CCRANDOM_MINUS1_1() * 1.2f;
-		body.velocity = ccpMult(CCRANDOM_IN_UNIT_CIRCLE(), 10.0f);
+		body.velocity = ccpMult(CCRANDOM_ON_UNIT_CIRCLE(), 95.0f);
 		
 	}
 	return self;
@@ -42,7 +42,7 @@
 	CCPhysicsBody *body = self.physicsBody;
 	
 	// First, apply some drag
-	if(ccpLengthSQ(body.velocity) > 25.0f){
+	if(ccpLength(body.velocity) > 40.0f){
 		body.velocity = ccpMult(body.velocity, 0.9);
 	}
 
