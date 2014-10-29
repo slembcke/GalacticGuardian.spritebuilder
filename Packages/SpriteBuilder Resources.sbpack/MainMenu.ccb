@@ -123,8 +123,6 @@
 						</array>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 				<key>seqExpanded</key>
 				<true/>
 			</dict>
@@ -1011,7 +1009,7 @@
 						<key>type</key>
 						<integer>1</integer>
 						<key>value</key>
-						<string>50.000000</string>
+						<string>200.000000</string>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -1101,7 +1099,7 @@
 						<key>type</key>
 						<string>CCBFile</string>
 						<key>value</key>
-						<string>AndySpaceship.ccb</string>
+						<string>AndySpaceship-1.ccb</string>
 					</dict>
 				</array>
 			</dict>
@@ -1124,7 +1122,7 @@
 						<key>type</key>
 						<integer>1</integer>
 						<key>value</key>
-						<string>50.000000</string>
+						<string>200.000000</string>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -1134,7 +1132,7 @@
 						<key>type</key>
 						<integer>1</integer>
 						<key>value</key>
-						<string>0.250000</string>
+						<string>0.500000</string>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -1214,9 +1212,11 @@
 						<key>type</key>
 						<string>CCBFile</string>
 						<key>value</key>
-						<string>ScottSpaceship.ccb</string>
+						<string>ScottSpaceship-1.ccb</string>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 		</array>
 		<key>customClass</key>

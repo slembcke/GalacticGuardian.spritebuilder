@@ -84,6 +84,8 @@
 		<dict/>
 		<key>Sprites</key>
 		<dict/>
+		<key>Sprites/Powerups/pill_blue.png</key>
+		<dict/>
 		<key>Sprites/ShipParts</key>
 		<dict>
 			<key>isSmartSpriteSheet</key>

@@ -37,16 +37,18 @@
 	NSMutableArray *_pickups;
 	
 	int _enemies_killed;
+	int _ship_level;
 	
 	// Consider extracting when we write more weapon types
 	bool _has_auto_firing_weapon;
 	
 }
 
--(instancetype)initWithShipType:(NSString *)shipType
+-(instancetype)initWithShipType:(NSString *)shipType level:(int) shipLevel
 {
 	if((self = [super init])){
 		
+		_ship_level = shipLevel;
 		_has_auto_firing_weapon = true;
 		
 		CGSize viewSize = [CCDirector sharedDirector].viewSize;
@@ -91,7 +93,8 @@
 		_pickups = [NSMutableArray array];
 		
 		// Add a ship in the middle of the screen.
-		_playerShip = (PlayerShip *)[CCBReader load:shipType];
+		
+		_playerShip = (PlayerShip *)[CCBReader load:[NSString stringWithFormat:@"%@-%d", shipType, _ship_level ]];
 		_playerShip.position = ccp(GameSceneSize.width/2.0, GameSceneSize.height/2.0);
 		[_physics addChild:_playerShip z:Z_PLAYER];
 		[_background.distortionNode addChild:_playerShip.shieldDistortionSprite];
@@ -224,16 +227,16 @@
 		_enemies_killed += 1;
 		// spawn loot:
 		
-		NSString* loot = @"SpaceBucks-1";
+		SpaceBuckType type = SpaceBuck_1;
 		if(CCRANDOM_0_1() > 0.8f){
 			if(CCRANDOM_0_1() > 0.8f){
-				loot = @"SpaceBucks-4";
+				type = SpaceBuck_4;
 			}else{
-				loot = @"SpaceBucks-16";
+				type = SpaceBuck_8;
 			}
 		}
 		
-		SpaceBucks *pickup = (SpaceBucks*) [CCBReader load:loot];
+		SpaceBucks *pickup = [[SpaceBucks alloc] initWithAmount: type];
 		pickup.position = enemy.position;
 		[_pickups addObject:pickup];
 		[_physics addChild:pickup];
@@ -468,6 +471,16 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 -(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair bullet:(Bullet *)bullet wall:(CCNode *)wall
 {
 	[self destroyBullet:bullet];
+	return NO;
+}
+
+-(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair ship:(PlayerShip *)player pickup:(SpaceBucks *)pickup
+{
+	[pickup removeFromParent];
+	[_pickups removeObject:pickup];
+	
+	
+	
 	return NO;
 }
 

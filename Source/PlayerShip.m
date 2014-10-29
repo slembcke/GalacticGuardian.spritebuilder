@@ -56,7 +56,7 @@
 	// First you list the categories (strings) that the object belongs to.
 	body.collisionCategories = @[CollisionCategoryPlayer];
 	// Then you list which categories its allowed to collide with.
-	body.collisionMask = @[CollisionCategoryEnemy, CollisionCategoryDebris, CollisionCategoryBarrier];
+	body.collisionMask = @[CollisionCategoryEnemy, CollisionCategoryDebris, CollisionCategoryBarrier, CollisionCategoryPickup];
 	
 	// Make the thruster pulse
 	float scaleX = _mainThruster.scaleX;
