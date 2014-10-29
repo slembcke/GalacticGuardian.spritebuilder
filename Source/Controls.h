@@ -1,5 +1,6 @@
 typedef NS_ENUM(NSUInteger, ControlButton){
 	ControlFireButton,
+	ControlPauseButton,
 };
 
 typedef void (^ControlHandler)(BOOL state);

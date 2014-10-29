@@ -142,12 +142,16 @@
 	
 	__weak typeof(self) _self = self;
 	
-	controller.extendedGamepad.rightThumbstick.valueChangedHandler = ^(GCControllerDirectionPad *dpad, float xValue, float yValue){
+	_controllerAim.valueChangedHandler = ^(GCControllerDirectionPad *dpad, float xValue, float yValue){
 		[_self setButtonValue:ControlFireButton value:(xValue*xValue + yValue*yValue) > 0.25];
 	};
 	
 	controller.gamepad.buttonA.valueChangedHandler = ^(GCControllerButtonInput *button, float value, BOOL pressed){
 		[_self setButtonValue:ControlFireButton value:pressed];
+	};
+	
+	controller.controllerPausedHandler = ^(GCController *controller){
+		[_self callHandler:@(ControlPauseButton) value:YES];
 	};
 	
 	self.visible = NO;
@@ -157,7 +161,9 @@
 -(void)deactivateController:(GCController *)controller
 {
 	if(controller == _controller){
+		_controllerAim.valueChangedHandler = nil;
 		_controller.gamepad.buttonA.valueChangedHandler = nil;
+		_controller.controllerPausedHandler = nil;
 		
 		_controller = nil;
 		_controllerStick = nil;
@@ -175,7 +181,10 @@
 		[self logController:controller];
 		if(_controller == nil) [self activateController:controller];
 	}
-	
+}
+
+-(void)onEnter
+{
 	id connect = [[NSNotificationCenter defaultCenter] addObserverForName:GCControllerDidConnectNotification object:nil queue:nil
 		usingBlock:^(NSNotification *notification){
 			NSLog(@"Controller connected.");
@@ -197,6 +206,8 @@
 	];
 	
 	_observers = @[connect, disconnect];
+	
+	[super onEnter];
 }
 
 -(void)onExit
@@ -208,6 +219,11 @@
 	[super onExit];
 }
 
+-(void)dealloc
+{
+	NSLog(@"dealloc");
+}
+
 -(void)setButtonValue:(ControlButton)button value:(BOOL)value
 {
 	NSNumber *key = @(button);
@@ -215,7 +231,13 @@
 	
 	if(value != prev){
 		_buttonStates[key] = @(value);
-		
+		[self callHandler:key value:value];
+	}
+}
+
+-(void)callHandler:(id)key value:(BOOL)value;
+{
+	if(self.isRunningInActiveScene){
 		ControlHandler handler = _buttonHandlers[key];
 		if(handler) handler(value);
 	}

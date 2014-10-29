@@ -1,8 +1,8 @@
+#import "Constants.h"
+
 #import "MainMenu.h"
 #import "NebulaBackground.h"
 #import "GameScene.h"
-
-#import <GameController/GameController.h>
 
 @implementation MainMenu {
 	NebulaBackground *_background;
@@ -12,6 +12,20 @@
 	CCSprite* _ship2;
 }
 
++(void)initialize
+{
+	if(self == [MainMenu class]) return;
+	
+	// This doesn't really belong here, but there isn't a great platform common "just launched" location.
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	[defaults registerDefaults:@{
+		DefaultsMusicKey: @(1.0),
+		DefaultsSoundKey: @(1.0),
+	}];
+	
+	// TODO Set volumes, start music.
+}
+
 -(void)didLoadFromCCB
 {
 	CCParticleSystem *particles = (CCParticleSystem *)[CCBReader load:@"DistortionParticles/Menu"];
@@ -19,12 +33,6 @@
 	particles.positionType = CCPositionTypeNormalized;
 	particles.position = ccp(0.5, 0.5);
 	[_background.distortionNode addChild:particles];
-}
-
--(void)onExit
-{
-	// TODO remove observers
-	[super onExit];
 }
 
 -(void)update:(CCTime)delta

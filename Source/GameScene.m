@@ -138,6 +138,12 @@ enum ZORDER {
 	[_controls setHandler:^(BOOL value){
 		if(value && !_self->_has_auto_firing_weapon) [_self fireBullet];
 	} forButton:ControlFireButton];
+	
+	[_controls setHandler:^(BOOL state) {
+		CCScene *pause = (CCScene *)[CCBReader load:@"PauseScene"];
+		CCTransition *fade = [CCTransition transitionCrossFadeWithDuration:0.25];
+		[[CCDirector sharedDirector] pushScene:pause withTransition:fade];
+	} forButton:ControlPauseButton];
 }
 
 -(void)addWallAt:(CGPoint) pos

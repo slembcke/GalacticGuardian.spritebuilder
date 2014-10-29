@@ -127,6 +127,18 @@
 		D3A7E8F619FDCB5E00695965 /* Nebula.fsh in Resources */ = {isa = PBXBuildFile; fileRef = D3A7E8F519FDCB5E00695965 /* Nebula.fsh */; };
 		D3A7E8F719FDCB5E00695965 /* Nebula.fsh in Resources */ = {isa = PBXBuildFile; fileRef = D3A7E8F519FDCB5E00695965 /* Nebula.fsh */; };
 		D3A7E8F819FDCB5E00695965 /* Nebula.fsh in Resources */ = {isa = PBXBuildFile; fileRef = D3A7E8F519FDCB5E00695965 /* Nebula.fsh */; };
+		D3EAD2BB1A009F8D002AA0D2 /* PauseScene.m in Sources */ = {isa = PBXBuildFile; fileRef = D3EAD2BA1A009F8D002AA0D2 /* PauseScene.m */; };
+		D3EAD2BC1A00A855002AA0D2 /* PauseScene.m in Sources */ = {isa = PBXBuildFile; fileRef = D3EAD2BA1A009F8D002AA0D2 /* PauseScene.m */; };
+		D3EAD2BD1A00A855002AA0D2 /* PauseScene.m in Sources */ = {isa = PBXBuildFile; fileRef = D3EAD2BA1A009F8D002AA0D2 /* PauseScene.m */; };
+		D3EAD2C11A00B448002AA0D2 /* NebulaDebug.fsh in Resources */ = {isa = PBXBuildFile; fileRef = D3EAD2BF1A00B448002AA0D2 /* NebulaDebug.fsh */; };
+		D3EAD2C21A00B448002AA0D2 /* NebulaDebug.fsh in Resources */ = {isa = PBXBuildFile; fileRef = D3EAD2BF1A00B448002AA0D2 /* NebulaDebug.fsh */; };
+		D3EAD2C31A00B448002AA0D2 /* NebulaDebug.fsh in Resources */ = {isa = PBXBuildFile; fileRef = D3EAD2BF1A00B448002AA0D2 /* NebulaDebug.fsh */; };
+		D3EAD2C41A00B448002AA0D2 /* NebulaDebug.vsh in Resources */ = {isa = PBXBuildFile; fileRef = D3EAD2C01A00B448002AA0D2 /* NebulaDebug.vsh */; };
+		D3EAD2C51A00B448002AA0D2 /* NebulaDebug.vsh in Resources */ = {isa = PBXBuildFile; fileRef = D3EAD2C01A00B448002AA0D2 /* NebulaDebug.vsh */; };
+		D3EAD2C61A00B448002AA0D2 /* NebulaDebug.vsh in Resources */ = {isa = PBXBuildFile; fileRef = D3EAD2C01A00B448002AA0D2 /* NebulaDebug.vsh */; };
+		D3EAD2C81A00B465002AA0D2 /* Default-Landscape@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = D3EAD2C71A00B465002AA0D2 /* Default-Landscape@2x~ipad.png */; };
+		D3EAD2C91A00B465002AA0D2 /* Default-Landscape@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = D3EAD2C71A00B465002AA0D2 /* Default-Landscape@2x~ipad.png */; };
+		D3EAD2CA1A00B465002AA0D2 /* Default-Landscape@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = D3EAD2C71A00B465002AA0D2 /* Default-Landscape@2x~ipad.png */; };
 		D3ED616519FF327C00DF3A43 /* BurnSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = D3ED616419FF327C00DF3A43 /* BurnSprite.m */; };
 		D3ED616619FF327C00DF3A43 /* BurnSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = D3ED616419FF327C00DF3A43 /* BurnSprite.m */; };
 		D3ED616719FF327C00DF3A43 /* BurnSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = D3ED616419FF327C00DF3A43 /* BurnSprite.m */; };
@@ -294,6 +306,11 @@
 		D3A7E8DE19FDC88600695965 /* NebulaDepth.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NebulaDepth.png; sourceTree = "<group>"; };
 		D3A7E8F119FDCABE00695965 /* Nebula.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Nebula.vsh; sourceTree = "<group>"; };
 		D3A7E8F519FDCB5E00695965 /* Nebula.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Nebula.fsh; sourceTree = "<group>"; };
+		D3EAD2BA1A009F8D002AA0D2 /* PauseScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PauseScene.m; sourceTree = "<group>"; };
+		D3EAD2BE1A00AD2B002AA0D2 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		D3EAD2BF1A00B448002AA0D2 /* NebulaDebug.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = NebulaDebug.fsh; sourceTree = "<group>"; };
+		D3EAD2C01A00B448002AA0D2 /* NebulaDebug.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = NebulaDebug.vsh; sourceTree = "<group>"; };
+		D3EAD2C71A00B465002AA0D2 /* Default-Landscape@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape@2x~ipad.png"; sourceTree = "<group>"; };
 		D3ED616419FF327C00DF3A43 /* BurnSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BurnSprite.m; sourceTree = "<group>"; };
 		D3ED616919FF3B7400DF3A43 /* BurnSprite.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = BurnSprite.fsh; sourceTree = "<group>"; };
 		D3ED616D19FF3B8000DF3A43 /* BurnSprite.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = BurnSprite.vsh; sourceTree = "<group>"; };
@@ -528,6 +545,7 @@
 			children = (
 				7A40362019DDEF0D007B6E8F /* Platforms */,
 				D352B48019EC608A00829775 /* MetalShaders */,
+				D3EAD2BE1A00AD2B002AA0D2 /* Constants.h */,
 				B7378992180767190076A88C /* MainMenu.h */,
 				B7378993180767190076A88C /* MainMenu.m */,
 				75058A2F19FEC27F001AA9C6 /* GameScene.h */,
@@ -543,6 +561,7 @@
 				D3ED616419FF327C00DF3A43 /* BurnSprite.m */,
 				D31D3DCE1A0041A80085DB5B /* Controls.h */,
 				D31D3DCA1A00418C0085DB5B /* Controls.m */,
+				D3EAD2BA1A009F8D002AA0D2 /* PauseScene.m */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -550,6 +569,7 @@
 		B73789911807667A0076A88C /* Icons */ = {
 			isa = PBXGroup;
 			children = (
+				D3EAD2C71A00B465002AA0D2 /* Default-Landscape@2x~ipad.png */,
 				B71F5907188484E7003F4D28 /* iPad-old.png */,
 				B71F5908188484E7003F4D28 /* iPad-old@2x.png */,
 				B71F5909188484E7003F4D28 /* iPad.png */,
@@ -618,6 +638,8 @@
 		B77F1B4617B978D7009739AE /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D3EAD2BF1A00B448002AA0D2 /* NebulaDebug.fsh */,
+				D3EAD2C01A00B448002AA0D2 /* NebulaDebug.vsh */,
 				D3A7E8DD19FDC88600695965 /* Nebula.png */,
 				D3A7E8DE19FDC88600695965 /* NebulaDepth.png */,
 				D3A7E8F119FDCABE00695965 /* Nebula.vsh */,
@@ -810,6 +832,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3EAD2C61A00B448002AA0D2 /* NebulaDebug.vsh in Resources */,
 				D3A7E8F419FDCABE00695965 /* Nebula.vsh in Resources */,
 				D3ED616C19FF3B7400DF3A43 /* BurnSprite.fsh in Resources */,
 				7A4036F719DE401F007B6E8F /* iPad-old.png in Resources */,
@@ -832,6 +855,8 @@
 				7A40370119DE401F007B6E8F /* Default-568h@2x.png in Resources */,
 				7A40370219DE401F007B6E8F /* Default-Landscape~ipad.png in Resources */,
 				7A40370319DE401F007B6E8F /* Default.png in Resources */,
+				D3EAD2CA1A00B465002AA0D2 /* Default-Landscape@2x~ipad.png in Resources */,
+				D3EAD2C31A00B448002AA0D2 /* NebulaDebug.fsh in Resources */,
 				7A40370419DE401F007B6E8F /* Default@2x.png in Resources */,
 				7A4036F619DE3FFC007B6E8F /* Published-iOS in Resources */,
 			);
@@ -859,9 +884,12 @@
 				927F61B8196C771E000F43EF /* Default-568h@2x.png in Resources */,
 				D3ED616B19FF3B7400DF3A43 /* BurnSprite.fsh in Resources */,
 				D3937FC919FE1C410074009E /* DistortionParticle.vsh in Resources */,
+				D3EAD2C51A00B448002AA0D2 /* NebulaDebug.vsh in Resources */,
 				D3A7E8F719FDCB5E00695965 /* Nebula.fsh in Resources */,
 				D3937FC319FE1B2A0074009E /* DistortionParticle.fsh in Resources */,
+				D3EAD2C21A00B448002AA0D2 /* NebulaDebug.fsh in Resources */,
 				927F61B9196C771E000F43EF /* iPhone@2x.png in Resources */,
+				D3EAD2C91A00B465002AA0D2 /* Default-Landscape@2x~ipad.png in Resources */,
 				927F61BA196C771E000F43EF /* Default.png in Resources */,
 				927F61BB196C771E000F43EF /* iPad-old.png in Resources */,
 			);
@@ -889,9 +917,12 @@
 				B71F5917188484E7003F4D28 /* iPhone.png in Resources */,
 				D3ED616A19FF3B7400DF3A43 /* BurnSprite.fsh in Resources */,
 				D3937FC819FE1C410074009E /* DistortionParticle.vsh in Resources */,
+				D3EAD2C41A00B448002AA0D2 /* NebulaDebug.vsh in Resources */,
 				B7378975180762440076A88C /* Default-568h@2x.png in Resources */,
 				D3A7E8F619FDCB5E00695965 /* Nebula.fsh in Resources */,
+				D3EAD2C11A00B448002AA0D2 /* NebulaDebug.fsh in Resources */,
 				B71F5918188484E7003F4D28 /* iPhone@2x.png in Resources */,
+				D3EAD2C81A00B465002AA0D2 /* Default-Landscape@2x~ipad.png in Resources */,
 				B7378977180762440076A88C /* Default.png in Resources */,
 				B71F5911188484E7003F4D28 /* iPad-old.png in Resources */,
 			);
@@ -963,6 +994,7 @@
 				D3A7E8DC19FDC86000695965 /* NebulaBackground.m in Sources */,
 				D31D3DCD1A00418C0085DB5B /* Controls.m in Sources */,
 				7A4036E819DE3F33007B6E8F /* MainMenu.m in Sources */,
+				D3EAD2BD1A00A855002AA0D2 /* PauseScene.m in Sources */,
 				75058A3419FEC27F001AA9C6 /* GameScene.m in Sources */,
 				7A40360419DDEE84007B6E8F /* main.m in Sources */,
 				D3ED616719FF327C00DF3A43 /* BurnSprite.m in Sources */,
@@ -977,6 +1009,7 @@
 				D3ED617119FF57A000DF3A43 /* PlayerShip.m in Sources */,
 				D3A7E8DB19FDC86000695965 /* NebulaBackground.m in Sources */,
 				D31D3DCC1A00418C0085DB5B /* Controls.m in Sources */,
+				D3EAD2BC1A00A855002AA0D2 /* PauseScene.m in Sources */,
 				927F619E196C771E000F43EF /* MainMenu.m in Sources */,
 				75058A3219FEC27F001AA9C6 /* GameScene.m in Sources */,
 				75058A5319FEE7B7001AA9C6 /* EnemyShip.m in Sources */,
@@ -996,6 +1029,7 @@
 				D31D3DCB1A00418C0085DB5B /* Controls.m in Sources */,
 				B73789871807631A0076A88C /* main.m in Sources */,
 				75058A4719FECF95001AA9C6 /* Bullet.m in Sources */,
+				D3EAD2BB1A009F8D002AA0D2 /* PauseScene.m in Sources */,
 				7A046D8C19E8A20E004C4763 /* MainMenu.m in Sources */,
 				75058A3119FEC27F001AA9C6 /* GameScene.m in Sources */,
 				5B121038197487F2004C1E1D /* AppDelegate.m in Sources */,

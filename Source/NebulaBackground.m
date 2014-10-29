@@ -7,16 +7,22 @@
 
 @implementation NebulaBackground {
 	CCRenderTexture *_distortionMap;
+	
+	id _modeObserver;
 }
 
-static CCTexture *NebulaTexture;
-static CCTexture *DepthMap;
-static CCTexture *DistortionTexture;
+static CCShader *ShaderMode = nil;
+
+static CCTexture *NebulaTexture = nil;
+static CCTexture *DepthMap = nil;
+static CCTexture *DistortionTexture = nil;
 
 // These textures all need to be loaded with special settings.
 // Might as well pre-load and permanently cache them.
 +(void)initialize
 {
+	ShaderMode = [CCShader shaderNamed:@"Nebula"];
+	
 	NebulaTexture = [CCTexture textureWithFile:@"Nebula.png"];
 	NebulaTexture.contentScale = 2.0;
 	NebulaTexture.texParameters = &(ccTexParams){GL_LINEAR, GL_LINEAR, GL_REPEAT, GL_REPEAT};
@@ -26,6 +32,26 @@ static CCTexture *DistortionTexture;
 	
 	DistortionTexture = [CCTexture textureWithFile:@"DistortionTexture.png"];
 	[DistortionTexture generateMipmap];
+}
+
++(NSString *)toggleDistortionMode
+{
+	static int mode = 0;
+	mode = (mode + 1)%3;
+	
+	CCShader *shaders[] = {
+		[CCShader shaderNamed:@"Nebula"],
+		[CCShader positionTextureColorShader],
+		[CCShader shaderNamed:@"NebulaDebug"],
+	};
+	ShaderMode = shaders[mode];
+	
+	NSString *names[] = {
+		@"On",
+		@"Off",
+		@"Debug",
+	};
+	return names[mode];
 }
 
 -(id)init
@@ -47,7 +73,7 @@ static CCTexture *DistortionTexture;
 		[_distortionMap end];
 		
 		// Apply the Nebula shader that applies some subtle parallax mapping and distortions.
-		self.shader = [CCShader shaderNamed:@"Nebula"];
+		self.shader = ShaderMode;
 		self.shaderUniforms[@"u_ParallaxAmount"] = @(0.08);
 		self.shaderUniforms[@"u_DepthMap"] = DepthMap;
 		self.shaderUniforms[@"u_DistortionMap"] = _distortionMap.texture;
@@ -67,12 +93,16 @@ static CCTexture *DistortionTexture;
 
 -(void)onEnter
 {
+	// Set the shader again just in case the setting was changed in the pause menu.
+	self.shader = ShaderMode;
+	
 	// Setup the texture rect once the node is added to the scene and we can calculate the content size.
 	CGRect rect = {CGPointZero, self.contentSizeInPoints};
 	self.textureRect = rect;
 	
 	// Forward onEnter to the distortion node.
 	[_distortionNode onEnter];
+	
 	[super onEnter];
 }
 
@@ -80,6 +110,7 @@ static CCTexture *DistortionTexture;
 {
 	// Forward onExit to the distortion node.
 	[_distortionNode onExit];
+	
 	[super onExit];
 }
 
