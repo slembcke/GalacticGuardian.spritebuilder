@@ -57,7 +57,7 @@
 																																		]]];
 	
 	// Make the shield spin
-	[_shield runAction:[CCActionRepeatForever actionWithAction:[CCActionRotateBy actionWithDuration:1.0 angle:360.0]]];
+	[_shield runAction:[CCActionRepeatForever actionWithAction:[CCActionRotateBy actionWithDuration:0.5 angle:360.0]]];
 	
 	_hp = 4;
 	
@@ -125,31 +125,34 @@
 	return CGAffineTransformTranslate(_transform, -gun.position.y, gun.position.x);
 }
 
+-(void)resetShield
+{
+	// TODO?
+}
+
+-(void)destroyShield
+{
+	float duration = 0.25;
+	[_shield runAction:[CCActionSequence actions:
+		[CCActionSpawn actions:
+			[CCActionScaleTo actionWithDuration:duration scale:4.0],
+			[CCActionFadeOut actionWithDuration:duration],
+			nil
+		],
+		[CCActionHide action],
+		nil
+	]];
+}
+
 -(BOOL)takeDamage
 {
-	if(_shield){
-		[[OALSimpleAudio sharedInstance] playEffect:@"Shield.wav"];
-		
-		float duration = 0.25;
-		[_shield runAction:[CCActionSequence actions:
-												[CCActionSpawn actions:
-												 [CCActionScaleTo actionWithDuration:duration scale:4.0],
-												 [CCActionFadeOut actionWithDuration:duration],
-												 nil
-												 ],
-												[CCActionRemove action],
-												nil
-												]];
-		
-		_shield = nil;
-		return NO;
-	} else {
-//		[[OALSimpleAudio sharedInstance] playEffect:@"Crash.wav"];
-		
-		_hp -= 1;
-		
-		return _hp <= 0;
+	_hp -= 1;
+	
+	if(_hp == 1){
+		[self destroyShield];
 	}
+		
+	return _hp <= 0;
 }
 
 -(BOOL) isDead
