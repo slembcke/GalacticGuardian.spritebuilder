@@ -17,6 +17,8 @@
 	if(self == [MainMenu class]) return;
 	
 	// This doesn't really belong here, but there isn't a great platform common "just launched" location.
+	[CCDirector sharedDirector].fixedUpdateInterval = 1.0/120.0;
+	
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	[defaults registerDefaults:@{
 		DefaultsMusicKey: @(1.0),

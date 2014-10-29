@@ -65,7 +65,7 @@ static CCTexture *DistortionTexture = nil;
 		// Set up the distortion map render texture;
 		CGSize size = [CCDirector sharedDirector].viewSize;
 		_distortionMap = [CCRenderTexture renderTextureWithWidth:size.width height:size.height];
-		_distortionMap.contentScale /= 8.0;
+		_distortionMap.contentScale /= 4.0;
 		_distortionMap.texture.antialiased = YES;
 		
 		// Set the distortion map to no offset. 

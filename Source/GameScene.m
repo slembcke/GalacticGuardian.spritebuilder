@@ -65,8 +65,7 @@
 		_physics = [CCPhysicsNode node];
 		[_scrollNode addChild:_physics z:Z_PHYSICS];
 		
-		_enemies = [NSMutableArray array];
-		_bullets = [NSMutableArray array];
+		_physics.iterations = 1;
 		
 		// Use the gamescene as the collision delegate.
 		// See the ccPhysicsCollision* methods below.
@@ -74,6 +73,9 @@
 		
 		// Enable to show debug outlines for Physics shapes.
 //		_physics.debugDraw = YES;
+		
+		_enemies = [NSMutableArray array];
+		_bullets = [NSMutableArray array];
 		
 		// Add a ship in the middle of the screen.
 		_playerShip = (PlayerShip *)[CCBReader load:shipType];
@@ -188,7 +190,7 @@
 	CCColor *weaponColor = [CCColor colorWithRed:0.3f green:0.8f blue:1.0f];
 	
 	InitDebris(debris, debris, enemy.physicsBody.velocity, weaponColor);
-	[_physics addChild:debris];
+	[_physics addChild:debris z:Z_DEBRIS];
 	
 	CCNode *explosion = [CCBReader load:@"Particles/ShipExplosion"];
 	explosion.position = pos;
@@ -287,7 +289,7 @@
 	// Make the bullet move in the direction it's pointed.
 	bullet.physicsBody.velocity = ccpMult(direction, bullet.speed);
 	
-	[_physics addChild:bullet];
+	[_physics addChild:bullet z:Z_BULLET];
 	[_bullets addObject:bullet];
 	
 	// Give the bullet a finite lifetime.
@@ -344,7 +346,7 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 	debris.position = pos;
 	debris.rotation = _playerShip.rotation;
 	InitDebris(debris, debris, _playerShip.physicsBody.velocity, [CCColor colorWithRed:1.0f green:1.0f blue:0.3f]);
-	[_physics addChild:debris];
+	[_physics addChild:debris z:Z_DEBRIS];
 	
 	CCNode *explosion = [CCBReader load:@"Particles/ShipExplosion"];
 	explosion.position = pos;
