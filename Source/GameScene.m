@@ -134,7 +134,7 @@
 		
 		// setup interface:
 		CCSprite *levelProgressBG = [CCSprite spriteWithImageNamed:@"Sprites/Powerups/buttonRed.png"];
-		levelProgressBG.anchorPoint = ccp(-1, 1);
+		levelProgressBG.anchorPoint = ccp(0, 1);
 		levelProgressBG.positionType = CCPositionTypeMake(CCPositionUnitUIPoints, CCPositionUnitUIPoints, CCPositionReferenceCornerTopLeft);
 		levelProgressBG.position = ccp(20, 20);
 		levelProgressBG.color = CCColor.darkGrayColor;
@@ -257,12 +257,11 @@
 		// spawn loot:
 		for(int i = 0; i < 4; i++){
 			SpaceBuckType type = SpaceBuck_1;
-			if(CCRANDOM_0_1() > 0.8f){
-				if(CCRANDOM_0_1() > 0.8f){
-					type = SpaceBuck_4;
-				}else{
-					type = SpaceBuck_8;
-				}
+			float n = CCRANDOM_0_1();
+			if(n > 0.90f){
+				type = SpaceBuck_8;
+			}else if ( n > 0.70f){
+				type = SpaceBuck_4;
 			}
 			
 			SpaceBucks *pickup = [[SpaceBucks alloc] initWithAmount: type];

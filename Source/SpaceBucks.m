@@ -7,15 +7,18 @@
 
 -(instancetype)initWithAmount:(SpaceBuckType) type
 {
-	NSString *spriteNames[] = {@"Sprites/Powerups/pill_blue.png", @"Sprites/Powerups/pill_green.png", @"Sprites/Powerups/pill_blue.png"};
+	NSString *spriteNames[] = {@"Sprites/Powerups/pill_blue.png", @"Sprites/Powerups/pill_green.png", @"Sprites/Powerups/pill_red.png"};
 	int values[] = {1, 4, 8};
+	
+	
+	NSLog(@"makin space bucks of %d, is sprite: %@", type, spriteNames[type]);
 	
 	if((self = [super initWithImageNamed:spriteNames[type]])){
 
 		CCPhysicsBody *body = self.physicsBody = [CCPhysicsBody bodyWithCircleOfRadius:3.0f andCenter:CGPointZero];
 		
-		_accelRange = 90.0f;
-		_accelAmount = 30.0f;
+		_accelRange = 130.0f;
+		_accelAmount = 60.0f;
 		_amount = values[type];
 		
 		// This is used to pick which collision delegate method to call, see GameScene.m for more info.
