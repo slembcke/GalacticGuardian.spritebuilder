@@ -10,7 +10,9 @@
 
 @interface Bullet : CCSprite
 
-@property(nonatomic, assign) float speed;
-@property(nonatomic, assign) float duration;
+@property(nonatomic, readonly) float speed;
+@property(nonatomic, readonly) float duration;
+
+-(instancetype)initWithTMP;
 
 @end
