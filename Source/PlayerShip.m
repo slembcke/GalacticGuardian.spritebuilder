@@ -42,7 +42,7 @@
 	_shieldDistortionSprite.opacity = distortAmount;
 	
 	// Rotate the distortion sprite to twist the space behind it.
-	[_shieldDistortionSprite runAction:[CCActionRepeatForever actionWithAction:[CCActionRotateBy actionWithDuration:3.0 angle:-360.0]]];
+	[_shieldDistortionSprite runAction:[CCActionRepeatForever actionWithAction:[CCActionRotateBy actionWithDuration:1.0 angle:-360.0]]];
 }
 
 -(void)onEnter
