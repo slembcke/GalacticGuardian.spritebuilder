@@ -1,4 +1,4 @@
-//
+	//
 //  GameScene.m
 //  Galactic Guardian
 //
@@ -15,6 +15,7 @@
 #import "PlayerShip.h"
 #import "EnemyShip.h"
 #import "Bullet.h"
+#import "SpaceBucks.h"
 #import "Controls.h"
 
 
@@ -33,11 +34,13 @@
 	
 	NSMutableArray *_enemies;
 	NSMutableArray *_bullets;
+	NSMutableArray *_pickups;
 	
 	int _enemies_killed;
+	
 	// Consider extracting when we write more weapon types
 	bool _has_auto_firing_weapon;
-//	bool _firing;
+	
 }
 
 -(instancetype)initWithShipType:(NSString *)shipType
@@ -85,6 +88,7 @@
 		
 		_enemies = [NSMutableArray array];
 		_bullets = [NSMutableArray array];
+		_pickups = [NSMutableArray array];
 		
 		// Add a ship in the middle of the screen.
 		_playerShip = (PlayerShip *)[CCBReader load:shipType];
@@ -185,11 +189,15 @@
 			[self fireBullet];
 		}
 	}
-
 	
 	for (EnemyShip *e in _enemies) {
 		[e fixedUpdate:delta towardsPlayer:_playerShip];
 	}
+	for (SpaceBucks *sb in _pickups) {
+		[sb fixedUpdate:delta towardsPlayer:_playerShip];
+	}
+	
+	
 }
 
 -(void)setScrollPosition:(CGPoint)scrollPosition
@@ -211,7 +219,25 @@
 {
 	[enemy removeFromParent];
 	[_enemies removeObject:enemy];
-	_enemies_killed += 1;
+	
+	if(![_playerShip isDead]){
+		_enemies_killed += 1;
+		// spawn loot:
+		
+		NSString* loot = @"SpaceBucks-1";
+		if(CCRANDOM_0_1() > 0.8f){
+			if(CCRANDOM_0_1() > 0.8f){
+				loot = @"SpaceBucks-4";
+			}else{
+				loot = @"SpaceBucks-16";
+			}
+		}
+		
+		SpaceBucks *pickup = (SpaceBucks*) [CCBReader load:loot];
+		pickup.position = enemy.position;
+		[_pickups addObject:pickup];
+		[_physics addChild:pickup];
+	}
 	
 	CGPoint pos = enemy.position;
 	
