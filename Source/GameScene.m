@@ -476,6 +476,13 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 	}
 }
 
+-(void) levelUp;
+{
+	
+	
+}
+
+
 #pragma mark - CCPhysicsCollisionDelegate methods
 
 
@@ -518,6 +525,10 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 	
 	_spaceBucks += [pickup amount];
 	levelProgress.percentage = ((float) _spaceBucks/ _spaceBucksTilNextLevel) * 100.0f;
+	if(_spaceBucks >= _spaceBucksTilNextLevel){
+		[self levelUp];
+	}
+	
 	
 	return NO;
 }
