@@ -23,6 +23,7 @@
 		75058A5219FEE7B7001AA9C6 /* EnemyShip.m in Sources */ = {isa = PBXBuildFile; fileRef = 75058A5119FEE7B7001AA9C6 /* EnemyShip.m */; };
 		75058A5319FEE7B7001AA9C6 /* EnemyShip.m in Sources */ = {isa = PBXBuildFile; fileRef = 75058A5119FEE7B7001AA9C6 /* EnemyShip.m */; };
 		75058A5419FEE7B7001AA9C6 /* EnemyShip.m in Sources */ = {isa = PBXBuildFile; fileRef = 75058A5119FEE7B7001AA9C6 /* EnemyShip.m */; };
+		75058A6A1A005881001AA9C6 /* SpaceBucks.m in Sources */ = {isa = PBXBuildFile; fileRef = 75058A691A005881001AA9C6 /* SpaceBucks.m */; };
 		7A046D8C19E8A20E004C4763 /* MainMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = B7378993180767190076A88C /* MainMenu.m */; };
 		7A40360419DDEE84007B6E8F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A40360319DDEE84007B6E8F /* main.m */; };
 		7A4036E819DE3F33007B6E8F /* MainMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = B7378993180767190076A88C /* MainMenu.m */; };
@@ -233,6 +234,8 @@
 		75058A4619FECF95001AA9C6 /* Bullet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bullet.m; sourceTree = "<group>"; };
 		75058A5019FEE7B7001AA9C6 /* EnemyShip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnemyShip.h; sourceTree = "<group>"; };
 		75058A5119FEE7B7001AA9C6 /* EnemyShip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnemyShip.m; sourceTree = "<group>"; };
+		75058A681A005881001AA9C6 /* SpaceBucks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpaceBucks.h; sourceTree = "<group>"; };
+		75058A691A005881001AA9C6 /* SpaceBucks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpaceBucks.m; sourceTree = "<group>"; };
 		7A4035FF19DDEE84007B6E8F /* GalacticGuardian Mac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GalacticGuardian Mac.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A40360219DDEE84007B6E8F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Platforms/Mac/Info.plist; sourceTree = "<group>"; };
 		7A40360319DDEE84007B6E8F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Source/Platforms/Mac/main.m; sourceTree = "<group>"; };
@@ -539,6 +542,8 @@
 				75058A5019FEE7B7001AA9C6 /* EnemyShip.h */,
 				75058A5119FEE7B7001AA9C6 /* EnemyShip.m */,
 				D3ED616419FF327C00DF3A43 /* BurnSprite.m */,
+				75058A681A005881001AA9C6 /* SpaceBucks.h */,
+				75058A691A005881001AA9C6 /* SpaceBucks.m */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -786,7 +791,7 @@
 		};
 		7A97910219E62E40001FFC4D /* cocos2dJava.jar */ = {
 			isa = PBXReferenceProxy;
-			fileType = compiled.java.jar;
+			fileType = archive.jar;
 			path = cocos2dJava.jar;
 			remoteRef = 7A97910119E62E40001FFC4D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -990,6 +995,7 @@
 				75058A5219FEE7B7001AA9C6 /* EnemyShip.m in Sources */,
 				B73789871807631A0076A88C /* main.m in Sources */,
 				75058A4719FECF95001AA9C6 /* Bullet.m in Sources */,
+				75058A6A1A005881001AA9C6 /* SpaceBucks.m in Sources */,
 				7A046D8C19E8A20E004C4763 /* MainMenu.m in Sources */,
 				75058A3119FEC27F001AA9C6 /* GameScene.m in Sources */,
 				5B121038197487F2004C1E1D /* AppDelegate.m in Sources */,
