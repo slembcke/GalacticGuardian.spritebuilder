@@ -28,9 +28,11 @@
 		// First you list the categories (strings) that the object belongs to.
 		body.collisionCategories = @[CollisionCategoryPickup];
 		// Then you list which categories its allowed to collide with.
-		body.collisionMask = @[CollisionCategoryPlayer];
+		body.collisionMask = @[CollisionCategoryPlayer, CollisionCategoryBarrier];
 		body.angularVelocity = CCRANDOM_MINUS1_1() * 1.2f;
 		body.velocity = ccpMult(CCRANDOM_ON_UNIT_CIRCLE(), 95.0f);
+		
+		
 		
 	}
 	return self;

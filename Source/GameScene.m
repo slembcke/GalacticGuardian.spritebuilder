@@ -522,5 +522,14 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 	return NO;
 }
 
+-(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair wall:(CCNode *)wall pickup:(SpaceBucks *)pickup
+{
+	[pickup scheduleBlock:^(CCTimer *timer) {
+		[pickup removeFromParent];
+		[_pickups removeObject:pickup];
+	} delay:1.0f];
+	return NO;
+}
+
 
 @end
