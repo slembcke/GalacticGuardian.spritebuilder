@@ -3,18 +3,12 @@
 
 @implementation SpaceBucks
 
-
+static NSString * const spriteNames[] = {@"Sprites/Powerups/pill_blue.png", @"Sprites/Powerups/pill_green.png", @"Sprites/Powerups/pill_red.png"};
+const int values[] = {1, 4, 8};
 
 -(instancetype)initWithAmount:(SpaceBuckType) type
 {
-	NSString *spriteNames[] = {@"Sprites/Powerups/pill_blue.png", @"Sprites/Powerups/pill_green.png", @"Sprites/Powerups/pill_red.png"};
-	int values[] = {1, 4, 8};
-	
-	
-	NSLog(@"makin space bucks of %d, is sprite: %@", type, spriteNames[type]);
-	
 	if((self = [super initWithImageNamed:spriteNames[type]])){
-
 		CCPhysicsBody *body = self.physicsBody = [CCPhysicsBody bodyWithCircleOfRadius:3.0f andCenter:CGPointZero];
 		
 		_accelRange = 130.0f;
