@@ -92,6 +92,9 @@
 	GCControllerDirectionPad *_controllerStick;
 	GCControllerDirectionPad *_controllerDpad;
 	
+	NSMutableDictionary *_buttonStates;
+	NSMutableDictionary *_buttonHandlers;
+	
 	NSArray *_observers;
 }
 
@@ -99,11 +102,17 @@
 {
 	if((self = [super init])){
 		CGSize viewSize = [CCDirector sharedDirector].viewSize;
+		self.contentSize = viewSize;
 		
 		CGFloat joystickOffset = viewSize.width/8.0;
 		_virtualJoystick = [[VirtualJoystick alloc] initWithSize:joystickOffset];
 		_virtualJoystick.position = ccp(joystickOffset, joystickOffset);
 		[self addChild:_virtualJoystick];
+		
+		_buttonStates = [NSMutableDictionary dictionary];
+		_buttonHandlers = [NSMutableDictionary dictionary];
+		
+		self.userInteractionEnabled = YES;
 		
 		[self setupGamepadSupport];
 	}
@@ -120,28 +129,34 @@
 
 -(BOOL)activateController:(GCController *)controller
 {
-	if(_controller) return NO;
+	if(_controller || controller.gamepad == nil) return NO;
+	
+	NSLog(@"Using controller %@", controller);
+	_controller = controller;
+	controller.playerIndex = 0;
 	
 	_controllerStick = controller.extendedGamepad.leftThumbstick;
 	_controllerDpad = controller.gamepad.dpad;
 	
-	if(_controllerStick || _controllerDpad){
-		NSLog(@"Using controller %@", controller);
-		
-		controller.playerIndex = 0;
-		_controller = controller;
-		return YES;
-	} else {
-		controller.playerIndex = GCControllerPlayerIndexUnset;
-		return NO;
-	}
+	__weak typeof(self) _self = self;
+	
+	controller.gamepad.buttonA.valueChangedHandler = ^(GCControllerButtonInput *button, float value, BOOL pressed){
+		[_self setButtonValue:ControlFireButton value:pressed];
+	};
+	
+	self.visible = NO;
+	return YES;
 }
 
 -(void)deactivateController:(GCController *)controller
 {
 	if(controller == _controller){
+		_controller.gamepad.buttonA.valueChangedHandler = nil;
+		
 		_controller = nil;
 		_controllerStick = nil;
+		
+		self.visible = YES;
 	}
 }
 
@@ -158,6 +173,7 @@
 	id connect = [[NSNotificationCenter defaultCenter] addObserverForName:GCControllerDidConnectNotification object:nil queue:nil
 		usingBlock:^(NSNotification *notification){
 			NSLog(@"Controller connected.");
+			
 			GCController *controller = notification.object;
 			[self logController:controller];
 			[self activateController:controller];
@@ -167,6 +183,7 @@
 	id disconnect = [[NSNotificationCenter defaultCenter] addObserverForName:GCControllerDidDisconnectNotification object:nil queue:nil
 		usingBlock:^(NSNotification *notification){
 			NSLog(@"Controller disconnected.");
+			
 			GCController *controller = notification.object;
 			[self logController:controller];
 			[self deactivateController:controller];
@@ -185,6 +202,31 @@
 	[super onExit];
 }
 
+-(void)setButtonValue:(ControlButton)button value:(BOOL)value
+{
+	NSNumber *key = @(button);
+	BOOL prev = [_buttonStates[key] boolValue];
+	
+	if(value != prev){
+		_buttonStates[key] = @(value);
+		
+		ControlHandler handler = _buttonHandlers[key];
+		if(handler) handler(value);
+	}
+}
+
+// TEMP
+-(void)touchBegan:(CCTouch *)touch withEvent:(CCTouchEvent *)event
+{
+	[self setButtonValue:ControlFireButton value:YES];
+}
+
+// TEMP
+-(void)touchEnded:(CCTouch *)touch withEvent:(CCTouchEvent *)event
+{
+	[self setButtonValue:ControlFireButton value:NO];
+}
+
 -(CGPoint)directionValue
 {
 	if(_controller){
@@ -195,6 +237,16 @@
 	} else {
 		return _virtualJoystick.value;
 	}
+}
+
+-(BOOL)getButton:(ControlButton)button
+{
+	return [_buttonStates[@(button)] boolValue];
+}
+
+-(void)setHandler:(ControlHandler)block forButton:(ControlButton)button
+{
+	_buttonHandlers[@(button)] = block;
 }
 
 @end

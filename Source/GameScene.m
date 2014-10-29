@@ -50,7 +50,7 @@ enum ZORDER {
 	int _enemies_killed;
 	// Consider extracting when we write more weapon types
 	bool _has_auto_firing_weapon;
-	bool _firing;
+//	bool _firing;
 }
 
 -(instancetype)initWithShipType:(NSString *)shipType
@@ -61,8 +61,7 @@ enum ZORDER {
 		
 		CGSize viewSize = [CCDirector sharedDirector].viewSize;
 		
-		_controls = [Controls node];
-		[self addChild:_controls z:Z_CONTROLS];
+		[self setupControls];
 		
 		_scrollNode = [CCNode node];
 		_scrollNode.contentSize = CGSizeMake(1.0, 1.0);
@@ -129,6 +128,18 @@ enum ZORDER {
 	return self;
 }
 
+-(void)setupControls
+{
+	_controls = [Controls node];
+	[self addChild:_controls z:Z_CONTROLS];
+	
+	__unsafe_unretained typeof(self) _self = self;
+	
+	[_controls setHandler:^(BOOL value){
+		if(value && !_self->_has_auto_firing_weapon) [_self fireBullet];
+	} forButton:ControlFireButton];
+}
+
 -(void)addWallAt:(CGPoint) pos
 {
 	CCNode *wall = (CCNode *)[CCBReader load:@"Asteroid"];
@@ -144,7 +155,7 @@ enum ZORDER {
 	// Fly the ship using the joystick controls.
 	[_playerShip fixedUpdate:delta withInput:_controls.directionValue];
 	
-	if(_firing && _has_auto_firing_weapon){
+	if([_controls getButton:ControlFireButton] && _has_auto_firing_weapon){
 		if(_playerShip.lastFireTime + (1.0f / _playerShip.fireRate) < _fixedTime){
 			[self fireBullet];
 		}
@@ -325,23 +336,6 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 	
 	// Recurse on the children.
 	for(CCNode *child in node.children) InitDebris(root, child, velocity, burnColor);
-}
-
-//MARK CCResponder methods
-
--(void)touchBegan:(CCTouch *)touch withEvent:(CCTouchEvent *)event
-{
-	if(_has_auto_firing_weapon){
-			_firing = true;
-	}else{
-		[self fireBullet];
-	}
-	
-}
-
--(void)touchEnded:(CCTouch *)touch withEvent:(CCTouchEvent *)event
-{
-	_firing = false;
 }
 
 -(void)playerDestroyed;
