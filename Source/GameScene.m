@@ -374,7 +374,7 @@
 	// When I make my own art, I like to align things on the positive x-axis to make the code "prettier".
 	
 	// Now we can create the bullet with the position and direction.
-	Bullet *bullet = (Bullet *)[CCBReader load:@"Bullet"];
+	Bullet *bullet = [[Bullet alloc] initWithTMP];
 	bullet.position = position;
 	bullet.rotation = -CC_RADIANS_TO_DEGREES(ccpToAngle(direction)) + 90.0f;
 	
