@@ -94,14 +94,8 @@
 		_pickups = [NSMutableArray array];
 		
 		// Add a ship in the middle of the screen.
-		
-		_playerShip = (PlayerShip *)[CCBReader load:[NSString stringWithFormat:@"%@-%d", shipType, _ship_level ]];
-		_playerShip.position = ccp(GameSceneSize.width/2.0, GameSceneSize.height/2.0);
-		[_physics addChild:_playerShip z:Z_PLAYER];
-		[_background.distortionNode addChild:_playerShip.shieldDistortionSprite];
-		
-		// Center on the player.
-		self.scrollPosition = _playerShip.position;
+		_ship_level = shipLevel;
+		[self createPlayerShipAt: ccp(GameSceneSize.width/2.0, GameSceneSize.height/2.0) ofType:shipType];
 		
 		[self scheduleBlock:^(CCTimer *timer) {
 			EnemyShip *enemy = (EnemyShip *)[CCBReader load:@"BadGuy1"];
@@ -401,7 +395,6 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 	
 	//The ship was destroyed!
 	[_playerShip removeFromParent];
-	[_playerShip.shieldDistortionSprite removeFromParent];
 	
 	CGPoint pos = _playerShip.position;
 	
@@ -468,6 +461,63 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 	[director pushScene:pause withTransition:[CCTransition transitionCrossFadeWithDuration:0.25]];
 }
 
+-(void) createPlayerShipAt:(CGPoint) pos ofType:(NSString *) shipType
+{
+	_spaceBucks = 0;
+	_spaceBucksTilNextLevel = _ship_level * 60 + 30;
+	if(_ship_level >= 3){
+		// Temp code:
+		_spaceBucksTilNextLevel = 10000;
+	}
+	
+	float rotation = 0.0f;
+	if(_playerShip){
+		rotation = _playerShip.rotation;
+		
+		[_playerShip removeFromParent];
+	}
+	
+	_playerShip = (PlayerShip *)[CCBReader load:[NSString stringWithFormat:@"%@-%d", shipType, _ship_level ]];
+	_playerShip.position = pos;
+	_playerShip.name = shipType;
+	[_physics addChild:_playerShip z:Z_PLAYER];
+	[_background.distortionNode addChild:_playerShip.shieldDistortionSprite];
+	
+	// Center on the player.
+	self.scrollPosition = _playerShip.position;
+}
+
+-(void) levelUp;
+{
+	_ship_level += 1;
+	
+	CGSize viewSize = [CCDirector sharedDirector].viewSize;
+
+	CCLabelTTF *levelUpText = [CCLabelTTF labelWithString:@"Upgraded Weapon" fontName:@"Helvetica" fontSize:36.0];
+	[self addChild:levelUpText];
+	levelUpText.position = ccp(viewSize.width / 2.0f, viewSize.height / 1.5f);
+	levelUpText.anchorPoint = ccp(0.5, 0.5);
+
+	
+	[levelUpText setScale:2.0f];
+	[levelUpText runAction:[CCActionSequence actions:
+			[CCActionSpawn actions:
+				[CCActionFadeIn actionWithDuration:0.15],
+				[CCActionScaleTo actionWithDuration:0.25 scale:1.0],
+				nil
+			],
+			[CCActionDelay actionWithDuration:0.75],
+			[CCActionFadeOut actionWithDuration:0.15],
+			[CCActionRemove action],
+			nil
+	]];
+	
+	[self createPlayerShipAt:_playerShip.position ofType:_playerShip.name];
+	
+	
+}
+
+
 #pragma mark - CCPhysicsCollisionDelegate methods
 
 
@@ -510,7 +560,20 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 	
 	_spaceBucks += [pickup amount];
 	levelProgress.percentage = ((float) _spaceBucks/ _spaceBucksTilNextLevel) * 100.0f;
+	if(_spaceBucks >= _spaceBucksTilNextLevel){
+		[self levelUp];
+	}
 	
+	
+	return NO;
+}
+
+-(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair wall:(CCNode *)wall pickup:(SpaceBucks *)pickup
+{
+	[pickup scheduleBlock:^(CCTimer *timer) {
+		[pickup removeFromParent];
+		[_pickups removeObject:pickup];
+	} delay:1.0f];
 	return NO;
 }
 

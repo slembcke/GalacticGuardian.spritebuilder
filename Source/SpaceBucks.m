@@ -8,6 +8,9 @@ const int values[] = {1, 4, 8};
 
 -(instancetype)initWithAmount:(SpaceBuckType) type
 {
+	NSString *spriteNames[] = {@"Sprites/Powerups/pill_blue.png", @"Sprites/Powerups/pill_green.png", @"Sprites/Powerups/pill_red.png"};
+	int values[] = {1, 4, 8};
+	
 	if((self = [super initWithImageNamed:spriteNames[type]])){
 		CCPhysicsBody *body = self.physicsBody = [CCPhysicsBody bodyWithCircleOfRadius:3.0f andCenter:CGPointZero];
 		
@@ -22,9 +25,11 @@ const int values[] = {1, 4, 8};
 		// First you list the categories (strings) that the object belongs to.
 		body.collisionCategories = @[CollisionCategoryPickup];
 		// Then you list which categories its allowed to collide with.
-		body.collisionMask = @[CollisionCategoryPlayer];
+		body.collisionMask = @[CollisionCategoryPlayer, CollisionCategoryBarrier];
 		body.angularVelocity = CCRANDOM_MINUS1_1() * 1.2f;
 		body.velocity = ccpMult(CCRANDOM_ON_UNIT_CIRCLE(), 95.0f);
+		
+		
 		
 	}
 	return self;
