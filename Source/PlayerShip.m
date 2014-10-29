@@ -8,6 +8,8 @@
 
 #import "OALSimpleAudio.h"
 
+#import "Constants.h"
+
 #import "PlayerShip.h"
 
 // To access some of Chipmunk's handy vector functions like cpvlerpconst().
@@ -32,6 +34,17 @@
 	int _hp;
 }
 
+-(void)didLoadFromCCB
+{
+	const float distortAmount = 0.25;
+	
+	_shieldDistortionSprite = [CCSprite spriteWithImageNamed:@"DistortionTexture.png"];
+	_shieldDistortionSprite.opacity = distortAmount;
+	
+	// Rotate the distortion sprite to twist the space behind it.
+	[_shieldDistortionSprite runAction:[CCActionRepeatForever actionWithAction:[CCActionRotateBy actionWithDuration:3.0 angle:-360.0]]];
+}
+
 -(void)onEnter
 {
 	CCPhysicsBody *body = self.physicsBody;
@@ -41,21 +54,21 @@
 	
 	// This sets up simple collision rules.
 	// First you list the categories (strings) that the object belongs to.
-	body.collisionCategories = @[@"ship"];
+	body.collisionCategories = @[CollisionCategoryPlayer];
 	// Then you list which categories its allowed to collide with.
-	body.collisionMask = @[@"enemy", @"debris"];
+	body.collisionMask = @[CollisionCategoryEnemy, CollisionCategoryDebris, CollisionCategoryBarrier];
 	
 	// Make the thruster pulse
 	float scaleX = _mainThruster.scaleX;
 	float scaleY = _mainThruster.scaleY;
 	[_mainThruster runAction:[CCActionRepeatForever actionWithAction:[CCActionSequence actions:
-																																		[CCActionScaleTo actionWithDuration:0.1 scaleX:scaleX scaleY:0.5*scaleY],
-																																		[CCActionScaleTo actionWithDuration:0.05 scaleX:scaleX scaleY:scaleY],
-																																		nil
-																																		]]];
+		[CCActionScaleTo actionWithDuration:0.1 scaleX:scaleX scaleY:0.5*scaleY],
+		[CCActionScaleTo actionWithDuration:0.05 scaleX:scaleX scaleY:scaleY],
+		nil
+	]]];
 	
 	// Make the shield spin
-	[_shield runAction:[CCActionRepeatForever actionWithAction:[CCActionRotateBy actionWithDuration:1.0 angle:360.0]]];
+	[_shield runAction:[CCActionRepeatForever actionWithAction:[CCActionRotateBy actionWithDuration:0.5 angle:360.0]]];
 	
 	_hp = 4;
 	
@@ -84,19 +97,20 @@
 	CCPhysicsBody *body = self.physicsBody;
 
 	//	CCLOG(@"velocity: %@", NSStringFromCGPoint(velocity));
-	
 	if(cpvlengthsq(joystickValue)){
-		self.rotation = -CC_RADIANS_TO_DEGREES(atan2f(joystickValue.y, joystickValue.x));
+		const float maxTurn = 360.0*delta;
+		CGPoint relativeDirection = cpTransformVect(cpTransformInverse(body.body.transform), joystickValue);
+		self.rotation += clampf(-CC_RADIANS_TO_DEGREES(ccpToAngle(relativeDirection)), -maxTurn, maxTurn);
 		
-//		_mainThruster.visible = YES;
-//		
+		_mainThruster.visible = YES;
+		
 //		if(!_engineNoise){
 //			_engineNoise = [[OALSimpleAudio sharedInstance] playEffect:@"Engine.wav" loop:YES];
 //		}
 //		
 //		_engineNoise.volume = ccpLength(joystickValue);
 	} else {
-//		_mainThruster.visible = NO;
+		_mainThruster.visible = NO;
 //		[_engineNoise stop]; _engineNoise = nil;
 	}
 
@@ -108,7 +122,11 @@
 
 	// Certain collisions can add to this. We want this to dampen off pretty quickly. (if not instantly)
 	body.angularVelocity *= 0.9f;
+}
 
+-(void)update:(CCTime)delta
+{
+	_shieldDistortionSprite.position = self.position;
 }
 
 -(CGAffineTransform)gunPortTransform
@@ -123,31 +141,36 @@
 	return CGAffineTransformTranslate(_transform, -gun.position.y, gun.position.x);
 }
 
+-(void)resetShield
+{
+	// TODO?
+}
+
+-(void)destroyShield
+{
+	float duration = 0.25;
+	[_shield runAction:[CCActionSequence actions:
+		[CCActionSpawn actions:
+			[CCActionScaleTo actionWithDuration:duration scale:4.0],
+			[CCActionFadeOut actionWithDuration:duration],
+			nil
+		],
+		[CCActionHide action],
+		nil
+	]];
+	
+	_shieldDistortionSprite.visible = NO;
+}
+
 -(BOOL)takeDamage
 {
-	if(_shield){
-		[[OALSimpleAudio sharedInstance] playEffect:@"Shield.wav"];
-		
-		float duration = 0.25;
-		[_shield runAction:[CCActionSequence actions:
-												[CCActionSpawn actions:
-												 [CCActionScaleTo actionWithDuration:duration scale:4.0],
-												 [CCActionFadeOut actionWithDuration:duration],
-												 nil
-												 ],
-												[CCActionRemove action],
-												nil
-												]];
-		
-		_shield = nil;
-		return NO;
-	} else {
-		[[OALSimpleAudio sharedInstance] playEffect:@"Crash.wav"];
-		
-		_hp -= 1;
-		
-		return _hp <= 0;
+	_hp -= 1;
+	
+	if(_hp == 1){
+		[self destroyShield];
 	}
+		
+	return _hp <= 0;
 }
 
 -(BOOL) isDead

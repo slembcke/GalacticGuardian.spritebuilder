@@ -17,6 +17,8 @@
 @property(nonatomic) float fireRate;
 @property(nonatomic) float lastFireTime;
 
+@property(nonatomic) CCSprite *shieldDistortionSprite;
+
 -(void)fixedUpdate:(CCTime)delta withInput:(CGPoint)joystickValue;
 
 -(BOOL)takeDamage;

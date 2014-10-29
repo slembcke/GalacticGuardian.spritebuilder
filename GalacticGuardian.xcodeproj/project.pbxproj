@@ -14,7 +14,6 @@
 		5B121038197487F2004C1E1D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B737893E1807617C0076A88C /* AppDelegate.m */; };
 		75058A3119FEC27F001AA9C6 /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 75058A3019FEC27F001AA9C6 /* GameScene.m */; };
 		75058A3219FEC27F001AA9C6 /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 75058A3019FEC27F001AA9C6 /* GameScene.m */; };
-		75058A3319FEC27F001AA9C6 /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 75058A3019FEC27F001AA9C6 /* GameScene.m */; };
 		75058A3419FEC27F001AA9C6 /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 75058A3019FEC27F001AA9C6 /* GameScene.m */; };
 		75058A4219FECE64001AA9C6 /* PlayerShip.m in Sources */ = {isa = PBXBuildFile; fileRef = 75058A4119FECE64001AA9C6 /* PlayerShip.m */; };
 		75058A4719FECF95001AA9C6 /* Bullet.m in Sources */ = {isa = PBXBuildFile; fileRef = 75058A4619FECF95001AA9C6 /* Bullet.m */; };
@@ -104,9 +103,10 @@
 		B77F1B4017B978D7009739AE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B77F1B3F17B978D7009739AE /* CoreGraphics.framework */; };
 		B77F1B4217B978D7009739AE /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B77F1B4117B978D7009739AE /* CoreText.framework */; };
 		B78A0B10198AF87200C63841 /* Published-Android in Resources */ = {isa = PBXBuildFile; fileRef = B78A0B0F198AF87200C63841 /* Published-Android */; };
-		D304DD3A19FEC85F0042180F /* Joystick.m in Sources */ = {isa = PBXBuildFile; fileRef = D304DD3919FEC85F0042180F /* Joystick.m */; };
-		D304DD3B19FEC85F0042180F /* Joystick.m in Sources */ = {isa = PBXBuildFile; fileRef = D304DD3919FEC85F0042180F /* Joystick.m */; };
-		D304DD3C19FEC85F0042180F /* Joystick.m in Sources */ = {isa = PBXBuildFile; fileRef = D304DD3919FEC85F0042180F /* Joystick.m */; };
+		D31D3DC91A00108B0085DB5B /* GameController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D31D3DC81A00108A0085DB5B /* GameController.framework */; };
+		D31D3DCB1A00418C0085DB5B /* Controls.m in Sources */ = {isa = PBXBuildFile; fileRef = D31D3DCA1A00418C0085DB5B /* Controls.m */; };
+		D31D3DCC1A00418C0085DB5B /* Controls.m in Sources */ = {isa = PBXBuildFile; fileRef = D31D3DCA1A00418C0085DB5B /* Controls.m */; };
+		D31D3DCD1A00418C0085DB5B /* Controls.m in Sources */ = {isa = PBXBuildFile; fileRef = D31D3DCA1A00418C0085DB5B /* Controls.m */; };
 		D3937FC219FE1B2A0074009E /* DistortionParticle.fsh in Resources */ = {isa = PBXBuildFile; fileRef = D3937FC119FE1B2A0074009E /* DistortionParticle.fsh */; };
 		D3937FC319FE1B2A0074009E /* DistortionParticle.fsh in Resources */ = {isa = PBXBuildFile; fileRef = D3937FC119FE1B2A0074009E /* DistortionParticle.fsh */; };
 		D3937FC419FE1B2A0074009E /* DistortionParticle.fsh in Resources */ = {isa = PBXBuildFile; fileRef = D3937FC119FE1B2A0074009E /* DistortionParticle.fsh */; };
@@ -128,6 +128,18 @@
 		D3A7E8F619FDCB5E00695965 /* Nebula.fsh in Resources */ = {isa = PBXBuildFile; fileRef = D3A7E8F519FDCB5E00695965 /* Nebula.fsh */; };
 		D3A7E8F719FDCB5E00695965 /* Nebula.fsh in Resources */ = {isa = PBXBuildFile; fileRef = D3A7E8F519FDCB5E00695965 /* Nebula.fsh */; };
 		D3A7E8F819FDCB5E00695965 /* Nebula.fsh in Resources */ = {isa = PBXBuildFile; fileRef = D3A7E8F519FDCB5E00695965 /* Nebula.fsh */; };
+		D3EAD2BB1A009F8D002AA0D2 /* PauseScene.m in Sources */ = {isa = PBXBuildFile; fileRef = D3EAD2BA1A009F8D002AA0D2 /* PauseScene.m */; };
+		D3EAD2BC1A00A855002AA0D2 /* PauseScene.m in Sources */ = {isa = PBXBuildFile; fileRef = D3EAD2BA1A009F8D002AA0D2 /* PauseScene.m */; };
+		D3EAD2BD1A00A855002AA0D2 /* PauseScene.m in Sources */ = {isa = PBXBuildFile; fileRef = D3EAD2BA1A009F8D002AA0D2 /* PauseScene.m */; };
+		D3EAD2C11A00B448002AA0D2 /* NebulaDebug.fsh in Resources */ = {isa = PBXBuildFile; fileRef = D3EAD2BF1A00B448002AA0D2 /* NebulaDebug.fsh */; };
+		D3EAD2C21A00B448002AA0D2 /* NebulaDebug.fsh in Resources */ = {isa = PBXBuildFile; fileRef = D3EAD2BF1A00B448002AA0D2 /* NebulaDebug.fsh */; };
+		D3EAD2C31A00B448002AA0D2 /* NebulaDebug.fsh in Resources */ = {isa = PBXBuildFile; fileRef = D3EAD2BF1A00B448002AA0D2 /* NebulaDebug.fsh */; };
+		D3EAD2C41A00B448002AA0D2 /* NebulaDebug.vsh in Resources */ = {isa = PBXBuildFile; fileRef = D3EAD2C01A00B448002AA0D2 /* NebulaDebug.vsh */; };
+		D3EAD2C51A00B448002AA0D2 /* NebulaDebug.vsh in Resources */ = {isa = PBXBuildFile; fileRef = D3EAD2C01A00B448002AA0D2 /* NebulaDebug.vsh */; };
+		D3EAD2C61A00B448002AA0D2 /* NebulaDebug.vsh in Resources */ = {isa = PBXBuildFile; fileRef = D3EAD2C01A00B448002AA0D2 /* NebulaDebug.vsh */; };
+		D3EAD2C81A00B465002AA0D2 /* Default-Landscape@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = D3EAD2C71A00B465002AA0D2 /* Default-Landscape@2x~ipad.png */; };
+		D3EAD2C91A00B465002AA0D2 /* Default-Landscape@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = D3EAD2C71A00B465002AA0D2 /* Default-Landscape@2x~ipad.png */; };
+		D3EAD2CA1A00B465002AA0D2 /* Default-Landscape@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = D3EAD2C71A00B465002AA0D2 /* Default-Landscape@2x~ipad.png */; };
 		D3ED616519FF327C00DF3A43 /* BurnSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = D3ED616419FF327C00DF3A43 /* BurnSprite.m */; };
 		D3ED616619FF327C00DF3A43 /* BurnSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = D3ED616419FF327C00DF3A43 /* BurnSprite.m */; };
 		D3ED616719FF327C00DF3A43 /* BurnSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = D3ED616419FF327C00DF3A43 /* BurnSprite.m */; };
@@ -137,6 +149,8 @@
 		D3ED616E19FF3B8000DF3A43 /* BurnSprite.vsh in Resources */ = {isa = PBXBuildFile; fileRef = D3ED616D19FF3B8000DF3A43 /* BurnSprite.vsh */; };
 		D3ED616F19FF3B8000DF3A43 /* BurnSprite.vsh in Resources */ = {isa = PBXBuildFile; fileRef = D3ED616D19FF3B8000DF3A43 /* BurnSprite.vsh */; };
 		D3ED617019FF3B8000DF3A43 /* BurnSprite.vsh in Resources */ = {isa = PBXBuildFile; fileRef = D3ED616D19FF3B8000DF3A43 /* BurnSprite.vsh */; };
+		D3ED617119FF57A000DF3A43 /* PlayerShip.m in Sources */ = {isa = PBXBuildFile; fileRef = 75058A4119FECE64001AA9C6 /* PlayerShip.m */; };
+		D3ED617219FF57A100DF3A43 /* PlayerShip.m in Sources */ = {isa = PBXBuildFile; fileRef = 75058A4119FECE64001AA9C6 /* PlayerShip.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -219,15 +233,15 @@
 		5B121011197483EE004C1E1D /* ic_launcher.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_launcher.png; sourceTree = "<group>"; };
 		5B121013197483EE004C1E1D /* ic_launcher.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_launcher.png; sourceTree = "<group>"; };
 		5B121015197483EE004C1E1D /* ic_launcher.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_launcher.png; sourceTree = "<group>"; };
-		5B12101B19748413004C1E1D /* GalacticGuardianActivity.java */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.java; name = GalacticGuardianActivity.java; path = Source/Platforms/Android/java/org/cocos2d/GalacticGuardian/GalacticGuardianActivity.java; sourceTree = "<group>"; };
-		5B121021197484A3004C1E1D /* GalacticGuardian Java.jar */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = archive.jar; path = "GalacticGuardian Java.jar"; sourceTree = BUILT_PRODUCTS_DIR; };
-		5B12102E197484FA004C1E1D /* GalacticGuardianActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GalacticGuardianActivity.h; path = Source/Platforms/Android/GalacticGuardianActivity.h; sourceTree = "<group>"; };
-		5B12102F197484FA004C1E1D /* GalacticGuardianActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GalacticGuardianActivity.m; path = Source/Platforms/Android/GalacticGuardianActivity.m; sourceTree = "<group>"; };
+		5B12101B19748413004C1E1D /* GalacticGuardianActivity.java */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.java; name = GalacticGuardianActivity.java; path = java/org/cocos2d/GalacticGuardian/GalacticGuardianActivity.java; sourceTree = "<group>"; };
+		5B121021197484A3004C1E1D /* GalacticGuardian Java.jar */ = {isa = PBXFileReference; explicitFileType = compiled.java.jar; includeInIndex = 0; path = "GalacticGuardian Java.jar"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5B12102E197484FA004C1E1D /* GalacticGuardianActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GalacticGuardianActivity.h; sourceTree = "<group>"; };
+		5B12102F197484FA004C1E1D /* GalacticGuardianActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GalacticGuardianActivity.m; sourceTree = "<group>"; };
 		5B121033197485FE004C1E1D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Platforms/Android/Info.plist; sourceTree = "<group>"; };
 		5B121034197485FE004C1E1D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Platforms/iOS/Info.plist; sourceTree = "<group>"; };
 		5BA4619E1974C88900785744 /* AndroidManifest.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = AndroidManifest.xml; path = Platforms/Android/AndroidManifest.xml; sourceTree = "<group>"; };
-		75058A2F19FEC27F001AA9C6 /* GameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameScene.h; path = Source/GameScene.h; sourceTree = "<group>"; };
-		75058A3019FEC27F001AA9C6 /* GameScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameScene.m; path = Source/GameScene.m; sourceTree = "<group>"; };
+		75058A2F19FEC27F001AA9C6 /* GameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
+		75058A3019FEC27F001AA9C6 /* GameScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameScene.m; sourceTree = "<group>"; };
 		75058A4119FECE64001AA9C6 /* PlayerShip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerShip.m; sourceTree = "<group>"; };
 		75058A4419FECE7D001AA9C6 /* PlayerShip.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayerShip.h; sourceTree = "<group>"; };
 		75058A4519FECF95001AA9C6 /* Bullet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bullet.h; sourceTree = "<group>"; };
@@ -239,8 +253,8 @@
 		7A4035FF19DDEE84007B6E8F /* GalacticGuardian Mac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GalacticGuardian Mac.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A40360219DDEE84007B6E8F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Platforms/Mac/Info.plist; sourceTree = "<group>"; };
 		7A40360319DDEE84007B6E8F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Source/Platforms/Mac/main.m; sourceTree = "<group>"; };
-		7A40360519DDEE84007B6E8F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Source/Platforms/Mac/AppDelegate.h; sourceTree = "<group>"; };
-		7A40360619DDEE84007B6E8F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = Source/Platforms/Mac/AppDelegate.m; sourceTree = "<group>"; };
+		7A40360519DDEE84007B6E8F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		7A40360619DDEE84007B6E8F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		7A4036F419DE3FA8007B6E8F /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/Frameworks/AppKit.framework; sourceTree = DEVELOPER_DIR; };
 		7A59493A19E37F9300F65F90 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/Frameworks/OpenGL.framework; sourceTree = DEVELOPER_DIR; };
 		7A59493C19E37FB200F65F90 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/libz.dylib; sourceTree = DEVELOPER_DIR; };
@@ -260,8 +274,8 @@
 		B71F590F188484E7003F4D28 /* Settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Settings.png; path = Icons/Settings.png; sourceTree = "<group>"; };
 		B71F5910188484E7003F4D28 /* Settings@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Settings@2x.png"; path = "Icons/Settings@2x.png"; sourceTree = "<group>"; };
 		B737893A180761570076A88C /* Published-iOS */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "Published-iOS"; path = "Source/Resources/Published-iOS"; sourceTree = SOURCE_ROOT; };
-		B737893D1807617C0076A88C /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Source/Platforms/iOS/AppDelegate.h; sourceTree = "<group>"; };
-		B737893E1807617C0076A88C /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = Source/Platforms/iOS/AppDelegate.m; sourceTree = "<group>"; };
+		B737893D1807617C0076A88C /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		B737893E1807617C0076A88C /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		B7378940180761A80076A88C /* cocos2d.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2d.xcodeproj; path = "Source/libs/cocos2d-iphone/cocos2d.xcodeproj"; sourceTree = SOURCE_ROOT; };
 		B737896B180762440076A88C /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "Source/Resources/Default-568h@2x.png"; sourceTree = SOURCE_ROOT; };
 		B737896C180762440076A88C /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Landscape~ipad.png"; path = "Source/Resources/Default-Landscape~ipad.png"; sourceTree = SOURCE_ROOT; };
@@ -269,8 +283,8 @@
 		B737896E180762440076A88C /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "Source/Resources/Default@2x.png"; sourceTree = SOURCE_ROOT; };
 		B73789851807631A0076A88C /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Source/Platforms/iOS/main.m; sourceTree = SOURCE_ROOT; };
 		B73789861807631A0076A88C /* Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Prefix.pch; path = Source/Prefix.pch; sourceTree = SOURCE_ROOT; };
-		B7378992180767190076A88C /* MainMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainMenu.h; path = Source/MainMenu.h; sourceTree = "<group>"; };
-		B7378993180767190076A88C /* MainMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainMenu.m; path = Source/MainMenu.m; sourceTree = "<group>"; };
+		B7378992180767190076A88C /* MainMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenu.h; sourceTree = "<group>"; };
+		B7378993180767190076A88C /* MainMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenu.m; sourceTree = "<group>"; };
 		B77F1B2E17B978D7009739AE /* GalacticGuardian.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GalacticGuardian.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B77F1B3117B978D7009739AE /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		B77F1B3317B978D7009739AE /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -283,17 +297,23 @@
 		B77F1B4117B978D7009739AE /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		B78A0B0F198AF87200C63841 /* Published-Android */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Published-Android"; sourceTree = "<group>"; };
 		B7B3713D180358F1007369CC /* libObjectiveChipmunk.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libObjectiveChipmunk.a; path = "../libs/cocos2d-iphone/external/Chipmunk/xcode/build/Debug-iphoneos/libObjectiveChipmunk.a"; sourceTree = "<group>"; };
-		D304DD3819FEC85F0042180F /* Joystick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Joystick.h; sourceTree = "<group>"; };
-		D304DD3919FEC85F0042180F /* Joystick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Joystick.m; sourceTree = "<group>"; };
-		D352B48019EC608A00829775 /* MetalShaders */ = {isa = PBXFileReference; lastKnownFileType = folder; name = MetalShaders; path = Source/MetalShaders; sourceTree = "<group>"; };
+		D31D3DC81A00108A0085DB5B /* GameController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameController.framework; path = System/Library/Frameworks/GameController.framework; sourceTree = SDKROOT; };
+		D31D3DCA1A00418C0085DB5B /* Controls.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Controls.m; sourceTree = "<group>"; };
+		D31D3DCE1A0041A80085DB5B /* Controls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Controls.h; sourceTree = "<group>"; };
+		D352B48019EC608A00829775 /* MetalShaders */ = {isa = PBXFileReference; lastKnownFileType = folder; path = MetalShaders; sourceTree = "<group>"; };
 		D3937FBD19FDD9AB0074009E /* NebulaBackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NebulaBackground.h; sourceTree = "<group>"; };
 		D3937FC119FE1B2A0074009E /* DistortionParticle.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = DistortionParticle.fsh; sourceTree = "<group>"; };
 		D3937FC719FE1C410074009E /* DistortionParticle.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = DistortionParticle.vsh; sourceTree = "<group>"; };
-		D3A7E8D919FDC86000695965 /* NebulaBackground.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NebulaBackground.m; path = Source/NebulaBackground.m; sourceTree = "<group>"; };
+		D3A7E8D919FDC86000695965 /* NebulaBackground.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NebulaBackground.m; sourceTree = "<group>"; };
 		D3A7E8DD19FDC88600695965 /* Nebula.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Nebula.png; sourceTree = "<group>"; };
 		D3A7E8DE19FDC88600695965 /* NebulaDepth.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NebulaDepth.png; sourceTree = "<group>"; };
 		D3A7E8F119FDCABE00695965 /* Nebula.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Nebula.vsh; sourceTree = "<group>"; };
 		D3A7E8F519FDCB5E00695965 /* Nebula.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Nebula.fsh; sourceTree = "<group>"; };
+		D3EAD2BA1A009F8D002AA0D2 /* PauseScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PauseScene.m; sourceTree = "<group>"; };
+		D3EAD2BE1A00AD2B002AA0D2 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		D3EAD2BF1A00B448002AA0D2 /* NebulaDebug.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = NebulaDebug.fsh; sourceTree = "<group>"; };
+		D3EAD2C01A00B448002AA0D2 /* NebulaDebug.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = NebulaDebug.vsh; sourceTree = "<group>"; };
+		D3EAD2C71A00B465002AA0D2 /* Default-Landscape@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape@2x~ipad.png"; sourceTree = "<group>"; };
 		D3ED616419FF327C00DF3A43 /* BurnSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BurnSprite.m; sourceTree = "<group>"; };
 		D3ED616919FF3B7400DF3A43 /* BurnSprite.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = BurnSprite.fsh; sourceTree = "<group>"; };
 		D3ED616D19FF3B8000DF3A43 /* BurnSprite.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = BurnSprite.vsh; sourceTree = "<group>"; };
@@ -344,6 +364,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D31D3DC91A00108B0085DB5B /* GameController.framework in Frameworks */,
 				7A97911819E631CD001FFC4D /* libcocos2d.a in Frameworks */,
 				8392007A18EE8E3300B6C429 /* GLKit.framework in Frameworks */,
 				B77F1B3217B978D7009739AE /* QuartzCore.framework in Frameworks */,
@@ -411,7 +432,7 @@
 				7A40362219DDF090007B6E8F /* Android */,
 				7A9791C019E6FAC5001FFC4D /* Mac */,
 			);
-			name = Platforms;
+			path = Platforms;
 			sourceTree = "<group>";
 		};
 		7A40362119DDF08C007B6E8F /* iOS */ = {
@@ -420,7 +441,7 @@
 				B737893D1807617C0076A88C /* AppDelegate.h */,
 				B737893E1807617C0076A88C /* AppDelegate.m */,
 			);
-			name = iOS;
+			path = iOS;
 			sourceTree = "<group>";
 		};
 		7A40362219DDF090007B6E8F /* Android */ = {
@@ -430,7 +451,7 @@
 				5B12102E197484FA004C1E1D /* GalacticGuardianActivity.h */,
 				5B12102F197484FA004C1E1D /* GalacticGuardianActivity.m */,
 			);
-			name = Android;
+			path = Android;
 			sourceTree = "<group>";
 		};
 		7A40365D19DDF896007B6E8F /* Platforms */ = {
@@ -511,7 +532,7 @@
 				7A40360519DDEE84007B6E8F /* AppDelegate.h */,
 				7A40360619DDEE84007B6E8F /* AppDelegate.m */,
 			);
-			name = Mac;
+			path = Mac;
 			sourceTree = "<group>";
 		};
 		9222E2B918734FF800A246C7 /* libs */ = {
@@ -527,14 +548,13 @@
 			children = (
 				7A40362019DDEF0D007B6E8F /* Platforms */,
 				D352B48019EC608A00829775 /* MetalShaders */,
+				D3EAD2BE1A00AD2B002AA0D2 /* Constants.h */,
 				B7378992180767190076A88C /* MainMenu.h */,
 				B7378993180767190076A88C /* MainMenu.m */,
 				75058A2F19FEC27F001AA9C6 /* GameScene.h */,
 				75058A3019FEC27F001AA9C6 /* GameScene.m */,
 				D3937FBD19FDD9AB0074009E /* NebulaBackground.h */,
 				D3A7E8D919FDC86000695965 /* NebulaBackground.m */,
-				D304DD3819FEC85F0042180F /* Joystick.h */,
-				D304DD3919FEC85F0042180F /* Joystick.m */,
 				75058A4419FECE7D001AA9C6 /* PlayerShip.h */,
 				75058A4119FECE64001AA9C6 /* PlayerShip.m */,
 				75058A4519FECF95001AA9C6 /* Bullet.h */,
@@ -544,13 +564,17 @@
 				D3ED616419FF327C00DF3A43 /* BurnSprite.m */,
 				75058A681A005881001AA9C6 /* SpaceBucks.h */,
 				75058A691A005881001AA9C6 /* SpaceBucks.m */,
+				D31D3DCE1A0041A80085DB5B /* Controls.h */,
+				D31D3DCA1A00418C0085DB5B /* Controls.m */,
+				D3EAD2BA1A009F8D002AA0D2 /* PauseScene.m */,
 			);
-			name = Source;
+			path = Source;
 			sourceTree = "<group>";
 		};
 		B73789911807667A0076A88C /* Icons */ = {
 			isa = PBXGroup;
 			children = (
+				D3EAD2C71A00B465002AA0D2 /* Default-Landscape@2x~ipad.png */,
 				B71F5907188484E7003F4D28 /* iPad-old.png */,
 				B71F5908188484E7003F4D28 /* iPad-old@2x.png */,
 				B71F5909188484E7003F4D28 /* iPad.png */,
@@ -595,6 +619,7 @@
 		B77F1B3017B978D7009739AE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D31D3DC81A00108A0085DB5B /* GameController.framework */,
 				7A59493C19E37FB200F65F90 /* libz.dylib */,
 				7A59493A19E37F9300F65F90 /* OpenGL.framework */,
 				7A4036F419DE3FA8007B6E8F /* AppKit.framework */,
@@ -618,6 +643,8 @@
 		B77F1B4617B978D7009739AE /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D3EAD2BF1A00B448002AA0D2 /* NebulaDebug.fsh */,
+				D3EAD2C01A00B448002AA0D2 /* NebulaDebug.vsh */,
 				D3A7E8DD19FDC88600695965 /* Nebula.png */,
 				D3A7E8DE19FDC88600695965 /* NebulaDepth.png */,
 				D3A7E8F119FDCABE00695965 /* Nebula.vsh */,
@@ -810,6 +837,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3EAD2C61A00B448002AA0D2 /* NebulaDebug.vsh in Resources */,
 				D3A7E8F419FDCABE00695965 /* Nebula.vsh in Resources */,
 				D3ED616C19FF3B7400DF3A43 /* BurnSprite.fsh in Resources */,
 				7A4036F719DE401F007B6E8F /* iPad-old.png in Resources */,
@@ -832,6 +860,8 @@
 				7A40370119DE401F007B6E8F /* Default-568h@2x.png in Resources */,
 				7A40370219DE401F007B6E8F /* Default-Landscape~ipad.png in Resources */,
 				7A40370319DE401F007B6E8F /* Default.png in Resources */,
+				D3EAD2CA1A00B465002AA0D2 /* Default-Landscape@2x~ipad.png in Resources */,
+				D3EAD2C31A00B448002AA0D2 /* NebulaDebug.fsh in Resources */,
 				7A40370419DE401F007B6E8F /* Default@2x.png in Resources */,
 				7A4036F619DE3FFC007B6E8F /* Published-iOS in Resources */,
 			);
@@ -859,9 +889,12 @@
 				927F61B8196C771E000F43EF /* Default-568h@2x.png in Resources */,
 				D3ED616B19FF3B7400DF3A43 /* BurnSprite.fsh in Resources */,
 				D3937FC919FE1C410074009E /* DistortionParticle.vsh in Resources */,
+				D3EAD2C51A00B448002AA0D2 /* NebulaDebug.vsh in Resources */,
 				D3A7E8F719FDCB5E00695965 /* Nebula.fsh in Resources */,
 				D3937FC319FE1B2A0074009E /* DistortionParticle.fsh in Resources */,
+				D3EAD2C21A00B448002AA0D2 /* NebulaDebug.fsh in Resources */,
 				927F61B9196C771E000F43EF /* iPhone@2x.png in Resources */,
+				D3EAD2C91A00B465002AA0D2 /* Default-Landscape@2x~ipad.png in Resources */,
 				927F61BA196C771E000F43EF /* Default.png in Resources */,
 				927F61BB196C771E000F43EF /* iPad-old.png in Resources */,
 			);
@@ -889,9 +922,12 @@
 				B71F5917188484E7003F4D28 /* iPhone.png in Resources */,
 				D3ED616A19FF3B7400DF3A43 /* BurnSprite.fsh in Resources */,
 				D3937FC819FE1C410074009E /* DistortionParticle.vsh in Resources */,
+				D3EAD2C41A00B448002AA0D2 /* NebulaDebug.vsh in Resources */,
 				B7378975180762440076A88C /* Default-568h@2x.png in Resources */,
 				D3A7E8F619FDCB5E00695965 /* Nebula.fsh in Resources */,
+				D3EAD2C11A00B448002AA0D2 /* NebulaDebug.fsh in Resources */,
 				B71F5918188484E7003F4D28 /* iPhone@2x.png in Resources */,
+				D3EAD2C81A00B465002AA0D2 /* Default-Landscape@2x~ipad.png in Resources */,
 				B7378977180762440076A88C /* Default.png in Resources */,
 				B71F5911188484E7003F4D28 /* iPad-old.png in Resources */,
 			);
@@ -949,7 +985,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				75058A3319FEC27F001AA9C6 /* GameScene.m in Sources */,
 				5B12102A197484DD004C1E1D /* GalacticGuardianActivity.java in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -960,9 +995,11 @@
 			files = (
 				75058A5419FEE7B7001AA9C6 /* EnemyShip.m in Sources */,
 				75058A4919FECF95001AA9C6 /* Bullet.m in Sources */,
+				D3ED617219FF57A100DF3A43 /* PlayerShip.m in Sources */,
 				D3A7E8DC19FDC86000695965 /* NebulaBackground.m in Sources */,
-				D304DD3C19FEC85F0042180F /* Joystick.m in Sources */,
+				D31D3DCD1A00418C0085DB5B /* Controls.m in Sources */,
 				7A4036E819DE3F33007B6E8F /* MainMenu.m in Sources */,
+				D3EAD2BD1A00A855002AA0D2 /* PauseScene.m in Sources */,
 				75058A3419FEC27F001AA9C6 /* GameScene.m in Sources */,
 				7A40360419DDEE84007B6E8F /* main.m in Sources */,
 				D3ED616719FF327C00DF3A43 /* BurnSprite.m in Sources */,
@@ -974,8 +1011,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D304DD3B19FEC85F0042180F /* Joystick.m in Sources */,
+				D3ED617119FF57A000DF3A43 /* PlayerShip.m in Sources */,
 				D3A7E8DB19FDC86000695965 /* NebulaBackground.m in Sources */,
+				D31D3DCC1A00418C0085DB5B /* Controls.m in Sources */,
+				D3EAD2BC1A00A855002AA0D2 /* PauseScene.m in Sources */,
 				927F619E196C771E000F43EF /* MainMenu.m in Sources */,
 				75058A3219FEC27F001AA9C6 /* GameScene.m in Sources */,
 				75058A5319FEE7B7001AA9C6 /* EnemyShip.m in Sources */,
@@ -991,11 +1030,12 @@
 			files = (
 				D3A7E8DA19FDC86000695965 /* NebulaBackground.m in Sources */,
 				D3ED616519FF327C00DF3A43 /* BurnSprite.m in Sources */,
-				D304DD3A19FEC85F0042180F /* Joystick.m in Sources */,
 				75058A5219FEE7B7001AA9C6 /* EnemyShip.m in Sources */,
+				D31D3DCB1A00418C0085DB5B /* Controls.m in Sources */,
 				B73789871807631A0076A88C /* main.m in Sources */,
 				75058A4719FECF95001AA9C6 /* Bullet.m in Sources */,
 				75058A6A1A005881001AA9C6 /* SpaceBucks.m in Sources */,
+				D3EAD2BB1A009F8D002AA0D2 /* PauseScene.m in Sources */,
 				7A046D8C19E8A20E004C4763 /* MainMenu.m in Sources */,
 				75058A3119FEC27F001AA9C6 /* GameScene.m in Sources */,
 				5B121038197487F2004C1E1D /* AppDelegate.m in Sources */,

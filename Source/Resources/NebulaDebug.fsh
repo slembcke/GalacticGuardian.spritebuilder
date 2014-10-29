@@ -13,6 +13,9 @@ void main(){
 	// Sample the distortion offset from the distortion map for the distortion field effect.
 	mediump vec2 distortion = 2.0*texture2D(u_DistortionMap, cc_FragTexCoord2).xy - 1.0;
 	
-	// Add the distortion offsets together, sample and tint.
-	gl_FragColor = cc_FragColor*texture2D(cc_MainTexture, cc_FragTexCoord1 + parallax + DistortionAmount*distortion);
+	// Show the distortion field texture coordinate offset.
+	// The red channel is how much to offset the x-axis, green is y-axis.
+	// When it shows a dim yellow color (0.5, 0.5, 0.0), that means no offset.
+	// The colors are greatly exagerated to show the effect better.
+	gl_FragColor = vec4(0.5 + 2.0*(parallax + DistortionAmount*distortion), 0.0, 1.0);
 }

@@ -6,29 +6,16 @@
 //  Copyright (c) 2014 Apportable. All rights reserved.
 //
 
-#import "OALSimpleAudio.h"
+//#import "OALSimpleAudio.h"
 #import "NebulaBackground.h"
 
 #import "GameScene.h"
 
+#import "Constants.h"
 #import "PlayerShip.h"
 #import "EnemyShip.h"
 #import "Bullet.h"
-#import "Joystick.h"
-
-
-static CGSize GameSceneSize = {1024, 1024};
-
-enum ZORDER {
-	Z_SCROLL_NODE,
-	Z_NEBULA,
-	Z_PHYSICS,
-	Z_ENEMY,
-	Z_PLAYER,
-	Z_PARTICLES,
-	Z_FLASH,
-	Z_JOYSTICK,
-};
+#import "Controls.h"
 
 
 @implementation GameScene
@@ -39,7 +26,7 @@ enum ZORDER {
 	CCPhysicsNode *_physics;
 	NebulaBackground *_background;
 	
-	Joystick *_joystick;
+	Controls *_controls;
 	PlayerShip *_playerShip;
 	
 	CCTime _fixedTime;
@@ -50,7 +37,7 @@ enum ZORDER {
 	int _enemies_killed;
 	// Consider extracting when we write more weapon types
 	bool _has_auto_firing_weapon;
-	bool _firing;
+//	bool _firing;
 }
 
 -(instancetype)initWithShipType:(NSString *)shipType
@@ -61,10 +48,7 @@ enum ZORDER {
 		
 		CGSize viewSize = [CCDirector sharedDirector].viewSize;
 		
-		CGFloat joystickOffset = viewSize.width/8.0;
-		_joystick = [[Joystick alloc] initWithSize:joystickOffset];
-		_joystick.position = ccp(joystickOffset, joystickOffset);
-		[self addChild:_joystick z:Z_JOYSTICK];
+		[self setupControls];
 		
 		_scrollNode = [CCNode node];
 		_scrollNode.contentSize = CGSizeMake(1.0, 1.0);
@@ -81,8 +65,7 @@ enum ZORDER {
 		_physics = [CCPhysicsNode node];
 		[_scrollNode addChild:_physics z:Z_PHYSICS];
 		
-		_enemies = [NSMutableArray array];
-		_bullets = [NSMutableArray array];
+		_physics.iterations = 1;
 		
 		// Use the gamescene as the collision delegate.
 		// See the ccPhysicsCollision* methods below.
@@ -91,16 +74,28 @@ enum ZORDER {
 		// Enable to show debug outlines for Physics shapes.
 //		_physics.debugDraw = YES;
 		
+		CCNode *bounds = [CCNode node];
+		CGFloat boundsWidth = 50.0;
+		CGRect boundsRect = CGRectMake(-boundsWidth, -boundsWidth, GameSceneSize.width + 2.0*boundsWidth, GameSceneSize.height + 2.0*boundsWidth);
+		bounds.physicsBody = [CCPhysicsBody bodyWithPolylineFromRect:boundsRect cornerRadius:boundsWidth];
+		bounds.physicsBody.collisionCategories = @[CollisionCategoryBarrier];
+		bounds.physicsBody.collisionMask = @[CollisionCategoryPlayer];
+		bounds.physicsBody.elasticity = 1.0;
+		[_physics addChild:bounds];
+		
+		_enemies = [NSMutableArray array];
+		_bullets = [NSMutableArray array];
+		
 		// Add a ship in the middle of the screen.
 		_playerShip = (PlayerShip *)[CCBReader load:shipType];
 		_playerShip.position = ccp(GameSceneSize.width/2.0, GameSceneSize.height/2.0);
 		[_physics addChild:_playerShip z:Z_PLAYER];
+		[_background.distortionNode addChild:_playerShip.shieldDistortionSprite];
 		
 		// Center on the player.
-		_scrollNode.anchorPoint = _playerShip.position;
+		self.scrollPosition = _playerShip.position;
 		
 		[self scheduleBlock:^(CCTimer *timer) {
-			
 			EnemyShip *enemy = (EnemyShip *)[CCBReader load:@"BadGuy1"];
 			if(CCRANDOM_0_1() > 0.33f){
 				// left or right sides.
@@ -114,7 +109,6 @@ enum ZORDER {
 			[_enemies addObject:enemy];
 			
 			[timer repeatOnceWithInterval:1.5f];
-			
 		} delay:1.0f];
 		
 		for(int i = 0; i < 20; i++){
@@ -131,6 +125,46 @@ enum ZORDER {
 	return self;
 }
 
+-(void)setupControls
+{
+	_controls = [Controls node];
+	[self addChild:_controls z:Z_CONTROLS];
+	
+	// TODO should change to __weak once we get rid of the ivar access below.
+	__unsafe_unretained typeof(self) _self = self;
+	
+	[_controls setHandler:^(BOOL value){
+		if(value && !_self->_has_auto_firing_weapon) [_self fireBullet];
+	} forButton:ControlFireButton];
+	
+	[_controls setHandler:^(BOOL state) {
+		CCDirector *director = [CCDirector sharedDirector];
+		CGSize viewSize = director.viewSize;
+		
+		CCScene *pause = (CCScene *)[CCBReader load:@"PauseScene"];
+		
+		CCRenderTexture *rt = [CCRenderTexture renderTextureWithWidth:viewSize.width height:viewSize.height];
+		rt.contentScale /= 4.0;
+		rt.texture.antialiased = YES;
+		
+		GLKMatrix4 projection = director.projectionMatrix;
+		CCRenderer *renderer = [rt begin];
+			[_self visit:renderer parentTransform:&projection];
+		[rt end];
+		
+		CCSprite *screenGrab = [CCSprite spriteWithTexture:rt.texture];
+		screenGrab.anchorPoint = ccp(0.0, 0.0);
+		screenGrab.effect = [CCEffectStack effects:
+			[CCEffectBlur effectWithBlurRadius:4.0],
+			[CCEffectSaturation effectWithSaturation:-0.5],
+			nil
+		];
+		[pause addChild:screenGrab z:-1];
+		
+		[director pushScene:pause withTransition:[CCTransition transitionCrossFadeWithDuration:0.25]];
+	} forButton:ControlPauseButton];
+}
+
 -(void)addWallAt:(CGPoint) pos
 {
 	CCNode *wall = (CCNode *)[CCBReader load:@"Asteroid"];
@@ -144,9 +178,9 @@ enum ZORDER {
 	_fixedTime += delta;
 	
 	// Fly the ship using the joystick controls.
-	[_playerShip fixedUpdate:delta withInput:_joystick.value];
+	[_playerShip fixedUpdate:delta withInput:_controls.directionValue];
 	
-	if(_firing && _has_auto_firing_weapon){
+	if([_controls getButton:ControlFireButton] && _has_auto_firing_weapon){
 		if(_playerShip.lastFireTime + (1.0f / _playerShip.fireRate) < _fixedTime){
 			[self fireBullet];
 		}
@@ -158,15 +192,18 @@ enum ZORDER {
 	}
 }
 
+-(void)setScrollPosition:(CGPoint)scrollPosition
+{
+	// Clamp the scrolling position so you can't see outside of the game area.
+	scrollPosition.x = MAX(_minScrollPos.x, MIN(scrollPosition.x, _maxScrollPos.x));
+	scrollPosition.y = MAX(_minScrollPos.y, MIN(scrollPosition.y, _maxScrollPos.y));
+	
+	_scrollNode.anchorPoint = scrollPosition;
+}
+
 -(void)update:(CCTime)delta
 {
-	CGPoint pos = _playerShip.position;
-	
-	// Clamp the scrolling position so you can't see outside of the game area.
-	_scrollNode.anchorPoint = ccp(
-		MAX(_minScrollPos.x, MIN(pos.x, _maxScrollPos.x)),
-		MAX(_minScrollPos.y, MIN(pos.y, _maxScrollPos.y))
-	);
+	self.scrollPosition = _playerShip.position;
 }
 
 
@@ -185,7 +222,7 @@ enum ZORDER {
 	CCColor *weaponColor = [CCColor colorWithRed:0.3f green:0.8f blue:1.0f];
 	
 	InitDebris(debris, debris, enemy.physicsBody.velocity, weaponColor);
-	[_physics addChild:debris];
+	[_physics addChild:debris z:Z_DEBRIS];
 	
 	CCNode *explosion = [CCBReader load:@"Particles/ShipExplosion"];
 	explosion.position = pos;
@@ -284,7 +321,7 @@ enum ZORDER {
 	// Make the bullet move in the direction it's pointed.
 	bullet.physicsBody.velocity = ccpMult(direction, bullet.speed);
 	
-	[_physics addChild:bullet];
+	[_physics addChild:bullet z:Z_BULLET];
 	[_bullets addObject:bullet];
 	
 	// Give the bullet a finite lifetime.
@@ -304,7 +341,7 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 {
 	// If the node has a body, set some properties.
 	CCPhysicsBody *body = node.physicsBody;
-	body.collisionCategories = @[@"debris"];
+	body.collisionCategories = @[CollisionCategoryDebris];
 	
 	if(body){
 		// Bodies with the same group reference don't collide.
@@ -329,28 +366,12 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 	for(CCNode *child in node.children) InitDebris(root, child, velocity, burnColor);
 }
 
-//MARK CCResponder methods
-
--(void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event
-{
-	if(_has_auto_firing_weapon){
-			_firing = true;
-	}else{
-		[self fireBullet];
-	}
-	
-}
-
--(void)touchEnded:(CCTouch *)touch withEvent:(CCTouchEvent *)event
-{
-	_firing = false;
-}
-
 -(void)playerDestroyed;
 {
 	
 	//The ship was destroyed!
 	[_playerShip removeFromParent];
+	[_playerShip.shieldDistortionSprite removeFromParent];
 	
 	CGPoint pos = _playerShip.position;
 	
@@ -358,7 +379,7 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 	debris.position = pos;
 	debris.rotation = _playerShip.rotation;
 	InitDebris(debris, debris, _playerShip.physicsBody.velocity, [CCColor colorWithRed:1.0f green:1.0f blue:0.3f]);
-	[_physics addChild:debris];
+	[_physics addChild:debris z:Z_DEBRIS];
 	
 	CCNode *explosion = [CCBReader load:@"Particles/ShipExplosion"];
 	explosion.position = pos;

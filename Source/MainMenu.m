@@ -1,3 +1,5 @@
+#import "Constants.h"
+
 #import "MainMenu.h"
 #import "NebulaBackground.h"
 #import "GameScene.h"
@@ -8,7 +10,22 @@
 	
 	CCSprite* _ship1;
 	CCSprite* _ship2;
+}
+
++(void)initialize
+{
+	if(self == [MainMenu class]) return;
 	
+	// This doesn't really belong here, but there isn't a great platform common "just launched" location.
+	[CCDirector sharedDirector].fixedUpdateInterval = 1.0/120.0;
+	
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	[defaults registerDefaults:@{
+		DefaultsMusicKey: @(1.0),
+		DefaultsSoundKey: @(1.0),
+	}];
+	
+	// TODO Set volumes, start music.
 }
 
 -(void)didLoadFromCCB
@@ -18,7 +35,6 @@
 	particles.positionType = CCPositionTypeNormalized;
 	particles.position = ccp(0.5, 0.5);
 	[_background.distortionNode addChild:particles];
-	
 }
 
 -(void)update:(CCTime)delta
