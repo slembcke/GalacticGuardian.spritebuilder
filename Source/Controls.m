@@ -110,6 +110,17 @@
 		_virtualJoystick.position = ccp(joystickOffset, joystickOffset);
 		[self addChild:_virtualJoystick];
 		
+		CCButton *pauseButton = [CCButton buttonWithTitle:@"Pause"];
+		pauseButton.anchorPoint = ccp(1, 1);
+		pauseButton.positionType = CCPositionTypeMake(CCPositionUnitUIPoints, CCPositionUnitUIPoints, CCPositionReferenceCornerTopRight);
+		pauseButton.position = ccp(20, 20);
+		[self addChild:pauseButton];
+		
+		__weak typeof(self) _self = self;
+		pauseButton.block = ^(id sender){
+			[_self callHandler:@(ControlPauseButton) value:YES];
+		};
+		
 		_buttonStates = [NSMutableDictionary dictionary];
 		_buttonHandlers = [NSMutableDictionary dictionary];
 		

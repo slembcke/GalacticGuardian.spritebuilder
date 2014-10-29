@@ -130,6 +130,7 @@
 	_controls = [Controls node];
 	[self addChild:_controls z:Z_CONTROLS];
 	
+	// TODO should change to __weak once we get rid of the ivar access below.
 	__unsafe_unretained typeof(self) _self = self;
 	
 	[_controls setHandler:^(BOOL value){
@@ -137,9 +138,30 @@
 	} forButton:ControlFireButton];
 	
 	[_controls setHandler:^(BOOL state) {
+		CCDirector *director = [CCDirector sharedDirector];
+		CGSize viewSize = director.viewSize;
+		
 		CCScene *pause = (CCScene *)[CCBReader load:@"PauseScene"];
-		CCTransition *fade = [CCTransition transitionCrossFadeWithDuration:0.25];
-		[[CCDirector sharedDirector] pushScene:pause withTransition:fade];
+		
+		CCRenderTexture *rt = [CCRenderTexture renderTextureWithWidth:viewSize.width height:viewSize.height];
+		rt.contentScale /= 4.0;
+		rt.texture.antialiased = YES;
+		
+		GLKMatrix4 projection = director.projectionMatrix;
+		CCRenderer *renderer = [rt begin];
+			[_self visit:renderer parentTransform:&projection];
+		[rt end];
+		
+		CCSprite *screenGrab = [CCSprite spriteWithTexture:rt.texture];
+		screenGrab.anchorPoint = ccp(0.0, 0.0);
+		screenGrab.effect = [CCEffectStack effects:
+			[CCEffectBlur effectWithBlurRadius:4.0],
+			[CCEffectSaturation effectWithSaturation:-0.5],
+			nil
+		];
+		[pause addChild:screenGrab z:-1];
+		
+		[director pushScene:pause withTransition:[CCTransition transitionCrossFadeWithDuration:0.25]];
 	} forButton:ControlPauseButton];
 }
 
