@@ -87,6 +87,7 @@
 
 @implementation Controls {
 	VirtualJoystick *_virtualJoystick;
+	VirtualJoystick *_virtualAimJoystick;
 	
 	GCController *_controller;
 	GCControllerDirectionPad *_controllerStick;
@@ -106,9 +107,14 @@
 		self.contentSize = viewSize;
 		
 		CGFloat joystickOffset = viewSize.width/8.0;
+		
 		_virtualJoystick = [[VirtualJoystick alloc] initWithSize:joystickOffset];
 		_virtualJoystick.position = ccp(joystickOffset, joystickOffset);
 		[self addChild:_virtualJoystick];
+		
+		_virtualAimJoystick = [[VirtualJoystick alloc] initWithSize:joystickOffset];
+		_virtualAimJoystick.position = ccp(viewSize.width - joystickOffset, joystickOffset);
+		[self addChild:_virtualAimJoystick];
 		
 		CCButton *pauseButton = [CCButton buttonWithTitle:@"Pause"];
 		pauseButton.anchorPoint = ccp(1, 1);
@@ -153,10 +159,6 @@
 	
 	__weak typeof(self) _self = self;
 	
-	_controllerAim.valueChangedHandler = ^(GCControllerDirectionPad *dpad, float xValue, float yValue){
-		[_self setButtonValue:ControlFireButton value:(xValue*xValue + yValue*yValue) > 0.25];
-	};
-	
 	controller.gamepad.buttonA.valueChangedHandler = ^(GCControllerButtonInput *button, float value, BOOL pressed){
 		[_self setButtonValue:ControlFireButton value:pressed];
 	};
@@ -172,7 +174,6 @@
 -(void)deactivateController:(GCController *)controller
 {
 	if(controller == _controller){
-		_controllerAim.valueChangedHandler = nil;
 		_controller.gamepad.buttonA.valueChangedHandler = nil;
 		_controller.controllerPausedHandler = nil;
 		
@@ -235,6 +236,19 @@
 	NSLog(@"dealloc");
 }
 
+-(void)update:(CCTime)delta
+{
+	CGPoint aim = CGPointZero;
+	
+	if(_controllerAim){
+		aim = CGPointMake(_controllerAim.xAxis.value, _controllerAim.yAxis.value);
+	} else {
+		aim = _virtualAimJoystick.value;
+	}
+	
+	[self setButtonValue:ControlFireButton value:(aim.x*aim.x + aim.y*aim.y) > 0.25];
+}
+
 -(void)setButtonValue:(ControlButton)button value:(BOOL)value
 {
 	NSNumber *key = @(button);
@@ -254,18 +268,6 @@
 	}
 }
 
-// TEMP
--(void)touchBegan:(CCTouch *)touch withEvent:(CCTouchEvent *)event
-{
-	[self setButtonValue:ControlFireButton value:YES];
-}
-
-// TEMP
--(void)touchEnded:(CCTouch *)touch withEvent:(CCTouchEvent *)event
-{
-	[self setButtonValue:ControlFireButton value:NO];
-}
-
 -(CGPoint)directionValue
 {
 	if(_controller){
@@ -274,7 +276,7 @@
 			_controllerStick.yAxis.value + 0.1*_controllerAim.yAxis.value + _controllerDpad.yAxis.value
 		), 1.0);
 	} else {
-		return _virtualJoystick.value;
+		return ccpAdd(_virtualJoystick.value, ccpMult(_virtualAimJoystick.value, 0.1));
 	}
 }
 
