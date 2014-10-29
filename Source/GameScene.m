@@ -42,18 +42,13 @@
 	int _ship_level;
 	int _spaceBucks;
 	int _spaceBucksTilNextLevel;
-	
-	// Consider extracting when we write more weapon types
-	bool _has_auto_firing_weapon;
-
 }
 
 -(instancetype)initWithShipType:(NSString *)shipType level:(int) shipLevel
 {
 	if((self = [super init])){
-		
 		_ship_level = shipLevel;
-		_has_auto_firing_weapon = true;
+		
 		_spaceBucks = 0;
 		_spaceBucksTilNextLevel = 40;
 		
@@ -165,39 +160,8 @@
 	_controls = [Controls node];
 	[self addChild:_controls z:Z_CONTROLS];
 	
-	// TODO should change to __weak once we get rid of the ivar access below.
-	__unsafe_unretained typeof(self) _self = self;
-	
-	[_controls setHandler:^(BOOL value){
-		if(value && !_self->_has_auto_firing_weapon) [_self fireBullet];
-	} forButton:ControlFireButton];
-	
-	[_controls setHandler:^(BOOL state) {
-		CCDirector *director = [CCDirector sharedDirector];
-		CGSize viewSize = director.viewSize;
-		
-		CCScene *pause = (CCScene *)[CCBReader load:@"PauseScene"];
-		
-		CCRenderTexture *rt = [CCRenderTexture renderTextureWithWidth:viewSize.width height:viewSize.height];
-		rt.contentScale /= 4.0;
-		rt.texture.antialiased = YES;
-		
-		GLKMatrix4 projection = director.projectionMatrix;
-		CCRenderer *renderer = [rt begin];
-			[_self visit:renderer parentTransform:&projection];
-		[rt end];
-		
-		CCSprite *screenGrab = [CCSprite spriteWithTexture:rt.texture];
-		screenGrab.anchorPoint = ccp(0.0, 0.0);
-		screenGrab.effect = [CCEffectStack effects:
-			[CCEffectBlur effectWithBlurRadius:4.0],
-			[CCEffectSaturation effectWithSaturation:-0.5],
-			nil
-		];
-		[pause addChild:screenGrab z:-1];
-		
-		[director pushScene:pause withTransition:[CCTransition transitionCrossFadeWithDuration:0.25]];
-	} forButton:ControlPauseButton];
+	__weak typeof(self) _self = self;
+	[_controls setHandler:^(BOOL state) {[_self pause];} forButton:ControlPauseButton];
 }
 
 -(void)addWallAt:(CGPoint) pos
@@ -213,9 +177,9 @@
 	_fixedTime += delta;
 	
 	// Fly the ship using the joystick controls.
-	[_playerShip fixedUpdate:delta withInput:_controls.directionValue];
+	[_playerShip fixedUpdate:delta withControls:_controls];
 	
-	if([_controls getButton:ControlFireButton] && _has_auto_firing_weapon){
+	if([_controls getButton:ControlFireButton]){
 		if(_playerShip.lastFireTime + (1.0f / _playerShip.fireRate) < _fixedTime){
 			[self fireBullet];
 		}
@@ -474,6 +438,34 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 			[self enemyDeath:e];
 		} delay:dist / 200.0f];
 	}
+}
+
+-(void)pause
+{
+	CCDirector *director = [CCDirector sharedDirector];
+	CGSize viewSize = director.viewSize;
+	
+	CCScene *pause = (CCScene *)[CCBReader load:@"PauseScene"];
+	
+	CCRenderTexture *rt = [CCRenderTexture renderTextureWithWidth:viewSize.width height:viewSize.height];
+	rt.contentScale /= 4.0;
+	rt.texture.antialiased = YES;
+	
+	GLKMatrix4 projection = director.projectionMatrix;
+	CCRenderer *renderer = [rt begin];
+		[self visit:renderer parentTransform:&projection];
+	[rt end];
+	
+	CCSprite *screenGrab = [CCSprite spriteWithTexture:rt.texture];
+	screenGrab.anchorPoint = ccp(0.0, 0.0);
+	screenGrab.effect = [CCEffectStack effects:
+		[CCEffectBlur effectWithBlurRadius:4.0],
+		[CCEffectSaturation effectWithSaturation:-0.5],
+		nil
+	];
+	[pause addChild:screenGrab z:-1];
+	
+	[director pushScene:pause withTransition:[CCTransition transitionCrossFadeWithDuration:0.25]];
 }
 
 #pragma mark - CCPhysicsCollisionDelegate methods

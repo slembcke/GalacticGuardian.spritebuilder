@@ -233,6 +233,8 @@
 
 -(void)dealloc
 {
+	// TODO memory leak!!!
+	// 90% certain it's the CGController blocks.
 	NSLog(@"dealloc");
 }
 
@@ -268,15 +270,27 @@
 	}
 }
 
--(CGPoint)directionValue
+-(CGPoint)thrustDirection
 {
 	if(_controller){
 		return cpvclamp(cpv(
-			_controllerStick.xAxis.value + 0.1*_controllerAim.xAxis.value + _controllerDpad.xAxis.value,
-			_controllerStick.yAxis.value + 0.1*_controllerAim.yAxis.value + _controllerDpad.yAxis.value
+			_controllerStick.xAxis.value + _controllerDpad.xAxis.value,
+			_controllerStick.yAxis.value + _controllerDpad.yAxis.value
 		), 1.0);
 	} else {
-		return ccpAdd(_virtualJoystick.value, ccpMult(_virtualAimJoystick.value, 0.1));
+		return _virtualJoystick.value;
+	}
+}
+
+-(CGPoint)aimDirection
+{
+	if(_controller){
+		return cpvclamp(cpv(
+			_controllerAim.xAxis.value,
+			_controllerAim.yAxis.value
+		), 1.0);
+	} else {
+		return _virtualAimJoystick.value;
 	}
 }
 

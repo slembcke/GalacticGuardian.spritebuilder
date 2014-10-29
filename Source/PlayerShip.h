@@ -8,6 +8,9 @@
 
 #import "CCNode.h"
 
+#import "Controls.h"
+
+
 @interface PlayerShip : CCNode
 
 @property(nonatomic, readonly) NSString *debris;
@@ -19,7 +22,7 @@
 
 @property(nonatomic) CCSprite *shieldDistortionSprite;
 
--(void)fixedUpdate:(CCTime)delta withInput:(CGPoint)joystickValue;
+-(void)fixedUpdate:(CCTime)delta withControls:(Controls *)controls;
 
 -(BOOL)takeDamage;
 -(BOOL)isDead;

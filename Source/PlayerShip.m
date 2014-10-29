@@ -92,15 +92,19 @@
 }
 
 // This method is called from [GameScene fixedUpdate:], not from Cocos2D.
--(void)fixedUpdate:(CCTime)delta withInput:(CGPoint)joystickValue
+-(void)fixedUpdate:(CCTime)delta withControls:(Controls *)controls
 {
 	CCPhysicsBody *body = self.physicsBody;
-
-	//	CCLOG(@"velocity: %@", NSStringFromCGPoint(velocity));
-	if(cpvlengthsq(joystickValue)){
-		const float maxTurn = 360.0*delta;
-		CGPoint relativeDirection = cpTransformVect(cpTransformInverse(body.body.transform), joystickValue);
-		self.rotation += clampf(-CC_RADIANS_TO_DEGREES(ccpToAngle(relativeDirection)), -maxTurn, maxTurn);
+	
+	const float deadZone = 0.5;
+	
+	CGPoint thrust = controls.thrustDirection;
+	if(cpvlength(thrust) > deadZone){
+		float removeDeadZone = MAX(cpvlength(thrust) - deadZone, 0.0f)/(1.0 - deadZone);
+		CGPoint targetVelocity = ccpMult(thrust, removeDeadZone*_speed);
+		
+		CGPoint velocity = cpvlerpconst(body.velocity, targetVelocity, _speed*delta/_accelTime);
+		body.velocity = velocity;
 		
 		_mainThruster.visible = YES;
 		
@@ -113,13 +117,15 @@
 		_mainThruster.visible = NO;
 //		[_engineNoise stop]; _engineNoise = nil;
 	}
-
-	float newSpeed = (cpfclamp(cpvlength(joystickValue) - 0.5f, 0.0f, 0.5f)) * 2.0f * _speed;
-	CGPoint targetVelocity = ccpMult(joystickValue, newSpeed);
 	
-	CGPoint velocity = cpvlerpconst(body.velocity, targetVelocity, newSpeed/_accelTime*delta);
-	body.velocity = velocity;
-
+	// Mix some of the thrust control into the aiming to make it feel more dynamic.
+	CGPoint aimDirection = ccpAdd(controls.aimDirection, ccpMult(thrust, 0.1));
+	if(cpvlength(aimDirection) > 0.01){
+		const float maxTurn = 360.0*delta;
+		CGPoint relativeDirection = cpTransformVect(cpTransformInverse(body.absoluteTransform), aimDirection);
+		self.rotation += clampf(-CC_RADIANS_TO_DEGREES(ccpToAngle(relativeDirection)), -maxTurn, maxTurn);
+	}
+	
 	// Certain collisions can add to this. We want this to dampen off pretty quickly. (if not instantly)
 	body.angularVelocity *= 0.9f;
 }
