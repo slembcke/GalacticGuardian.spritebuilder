@@ -35,6 +35,10 @@
 	particles.positionType = CCPositionTypeNormalized;
 	particles.position = ccp(0.5, 0.5);
 	[_background.distortionNode addChild:particles];
+	
+	// Make the "no physics node" warning go away.
+	_ship1.physicsBody = nil;
+	_ship2.physicsBody = nil;
 }
 
 -(void)update:(CCTime)delta
