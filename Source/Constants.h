@@ -24,3 +24,4 @@ enum Z_ORDER {
 #define CollisionCategoryBullet @"Bullet"
 #define CollisionCategoryAsteroid @"Asteroid"
 #define CollisionCategoryBarrier @"Barrier"
+#define CollisionCategoryPickup @"Pickup"

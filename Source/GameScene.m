@@ -1,4 +1,4 @@
-//
+	//
 //  GameScene.m
 //  Galactic Guardian
 //
@@ -15,6 +15,7 @@
 #import "PlayerShip.h"
 #import "EnemyShip.h"
 #import "Bullet.h"
+#import "SpaceBucks.h"
 #import "Controls.h"
 
 
@@ -33,17 +34,21 @@
 	
 	NSMutableArray *_enemies;
 	NSMutableArray *_bullets;
+	NSMutableArray *_pickups;
 	
 	int _enemies_killed;
+	int _ship_level;
+	
 	// Consider extracting when we write more weapon types
 	bool _has_auto_firing_weapon;
-//	bool _firing;
+	
 }
 
--(instancetype)initWithShipType:(NSString *)shipType
+-(instancetype)initWithShipType:(NSString *)shipType level:(int) shipLevel
 {
 	if((self = [super init])){
 		
+		_ship_level = shipLevel;
 		_has_auto_firing_weapon = true;
 		
 		CGSize viewSize = [CCDirector sharedDirector].viewSize;
@@ -85,9 +90,11 @@
 		
 		_enemies = [NSMutableArray array];
 		_bullets = [NSMutableArray array];
+		_pickups = [NSMutableArray array];
 		
 		// Add a ship in the middle of the screen.
-		_playerShip = (PlayerShip *)[CCBReader load:shipType];
+		
+		_playerShip = (PlayerShip *)[CCBReader load:[NSString stringWithFormat:@"%@-%d", shipType, _ship_level ]];
 		_playerShip.position = ccp(GameSceneSize.width/2.0, GameSceneSize.height/2.0);
 		[_physics addChild:_playerShip z:Z_PLAYER];
 		[_background.distortionNode addChild:_playerShip.shieldDistortionSprite];
@@ -185,11 +192,15 @@
 			[self fireBullet];
 		}
 	}
-
 	
 	for (EnemyShip *e in _enemies) {
 		[e fixedUpdate:delta towardsPlayer:_playerShip];
 	}
+	for (SpaceBucks *sb in _pickups) {
+		[sb fixedUpdate:delta towardsPlayer:_playerShip];
+	}
+	
+	
 }
 
 -(void)setScrollPosition:(CGPoint)scrollPosition
@@ -219,7 +230,25 @@
 {
 	[enemy removeFromParent];
 	[_enemies removeObject:enemy];
-	_enemies_killed += 1;
+	
+	if(![_playerShip isDead]){
+		_enemies_killed += 1;
+		// spawn loot:
+		
+		SpaceBuckType type = SpaceBuck_1;
+		if(CCRANDOM_0_1() > 0.8f){
+			if(CCRANDOM_0_1() > 0.8f){
+				type = SpaceBuck_4;
+			}else{
+				type = SpaceBuck_8;
+			}
+		}
+		
+		SpaceBucks *pickup = [[SpaceBucks alloc] initWithAmount: type];
+		pickup.position = enemy.position;
+		[_pickups addObject:pickup];
+		[_physics addChild:pickup];
+	}
 	
 	CGPoint pos = enemy.position;
 	
@@ -450,6 +479,16 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 -(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair bullet:(Bullet *)bullet wall:(CCNode *)wall
 {
 	[self destroyBullet:bullet];
+	return NO;
+}
+
+-(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair ship:(PlayerShip *)player pickup:(SpaceBucks *)pickup
+{
+	[pickup removeFromParent];
+	[_pickups removeObject:pickup];
+	
+	
+	
 	return NO;
 }
 
