@@ -90,6 +90,7 @@
 		_playerShip = (PlayerShip *)[CCBReader load:shipType];
 		_playerShip.position = ccp(GameSceneSize.width/2.0, GameSceneSize.height/2.0);
 		[_physics addChild:_playerShip z:Z_PLAYER];
+		[_background.distortionNode addChild:_playerShip.shieldDistortionSprite];
 		
 		// Center on the player.
 		self.scrollPosition = _playerShip.position;
@@ -348,6 +349,7 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 	
 	//The ship was destroyed!
 	[_playerShip removeFromParent];
+	[_playerShip.shieldDistortionSprite removeFromParent];
 	
 	CGPoint pos = _playerShip.position;
 	

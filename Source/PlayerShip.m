@@ -34,6 +34,17 @@
 	int _hp;
 }
 
+-(void)didLoadFromCCB
+{
+	const float distortAmount = 0.25;
+	
+	_shieldDistortionSprite = [CCSprite spriteWithImageNamed:@"DistortionTexture.png"];
+	_shieldDistortionSprite.opacity = distortAmount;
+	
+	// Rotate the distortion sprite to twist the space behind it.
+	[_shieldDistortionSprite runAction:[CCActionRepeatForever actionWithAction:[CCActionRotateBy actionWithDuration:3.0 angle:-360.0]]];
+}
+
 -(void)onEnter
 {
 	CCPhysicsBody *body = self.physicsBody;
@@ -51,10 +62,10 @@
 	float scaleX = _mainThruster.scaleX;
 	float scaleY = _mainThruster.scaleY;
 	[_mainThruster runAction:[CCActionRepeatForever actionWithAction:[CCActionSequence actions:
-																																		[CCActionScaleTo actionWithDuration:0.1 scaleX:scaleX scaleY:0.5*scaleY],
-																																		[CCActionScaleTo actionWithDuration:0.05 scaleX:scaleX scaleY:scaleY],
-																																		nil
-																																		]]];
+		[CCActionScaleTo actionWithDuration:0.1 scaleX:scaleX scaleY:0.5*scaleY],
+		[CCActionScaleTo actionWithDuration:0.05 scaleX:scaleX scaleY:scaleY],
+		nil
+	]]];
 	
 	// Make the shield spin
 	[_shield runAction:[CCActionRepeatForever actionWithAction:[CCActionRotateBy actionWithDuration:0.5 angle:360.0]]];
@@ -91,15 +102,15 @@
 		CGPoint relativeDirection = cpTransformVect(cpTransformInverse(body.body.transform), joystickValue);
 		self.rotation += clampf(-CC_RADIANS_TO_DEGREES(ccpToAngle(relativeDirection)), -maxTurn, maxTurn);
 		
-//		_mainThruster.visible = YES;
-//		
+		_mainThruster.visible = YES;
+		
 //		if(!_engineNoise){
 //			_engineNoise = [[OALSimpleAudio sharedInstance] playEffect:@"Engine.wav" loop:YES];
 //		}
 //		
 //		_engineNoise.volume = ccpLength(joystickValue);
 	} else {
-//		_mainThruster.visible = NO;
+		_mainThruster.visible = NO;
 //		[_engineNoise stop]; _engineNoise = nil;
 	}
 
@@ -111,6 +122,11 @@
 
 	// Certain collisions can add to this. We want this to dampen off pretty quickly. (if not instantly)
 	body.angularVelocity *= 0.9f;
+}
+
+-(void)update:(CCTime)delta
+{
+	_shieldDistortionSprite.position = self.position;
 }
 
 -(CGAffineTransform)gunPortTransform
@@ -142,6 +158,8 @@
 		[CCActionHide action],
 		nil
 	]];
+	
+	_shieldDistortionSprite.visible = NO;
 }
 
 -(BOOL)takeDamage
