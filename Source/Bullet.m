@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 Apportable. All rights reserved.
 //
 
+#import "Constants.h"
+
 #import "Bullet.h"
 
 @implementation Bullet
@@ -19,9 +21,9 @@
 	
 	// This sets up simple collision rules.
 	// First you list the categories (strings) that the object belongs to.
-	body.collisionCategories = @[@"bullet"];
+	body.collisionCategories = @[CollisionCategoryBullet];
 	// Then you list which categories its allowed to collide with.
-	body.collisionMask = @[@"enemy", @"wall"];
+	body.collisionMask = @[CollisionCategoryEnemy, CollisionCategoryAsteroid];
 	
 	[super onEnter];
 }

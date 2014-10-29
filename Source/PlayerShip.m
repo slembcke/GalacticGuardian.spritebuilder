@@ -8,6 +8,8 @@
 
 #import "OALSimpleAudio.h"
 
+#import "Constants.h"
+
 #import "PlayerShip.h"
 
 // To access some of Chipmunk's handy vector functions like cpvlerpconst().
@@ -41,9 +43,9 @@
 	
 	// This sets up simple collision rules.
 	// First you list the categories (strings) that the object belongs to.
-	body.collisionCategories = @[@"ship"];
+	body.collisionCategories = @[CollisionCategoryPlayer];
 	// Then you list which categories its allowed to collide with.
-	body.collisionMask = @[@"enemy", @"debris"];
+	body.collisionMask = @[CollisionCategoryEnemy, CollisionCategoryDebris, CollisionCategoryBarrier];
 	
 	// Make the thruster pulse
 	float scaleX = _mainThruster.scaleX;

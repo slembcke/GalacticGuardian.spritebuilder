@@ -74,6 +74,15 @@
 		// Enable to show debug outlines for Physics shapes.
 //		_physics.debugDraw = YES;
 		
+		CCNode *bounds = [CCNode node];
+		CGFloat boundsWidth = 50.0;
+		CGRect boundsRect = CGRectMake(-boundsWidth, -boundsWidth, GameSceneSize.width + 2.0*boundsWidth, GameSceneSize.height + 2.0*boundsWidth);
+		bounds.physicsBody = [CCPhysicsBody bodyWithPolylineFromRect:boundsRect cornerRadius:boundsWidth];
+		bounds.physicsBody.collisionCategories = @[CollisionCategoryBarrier];
+		bounds.physicsBody.collisionMask = @[CollisionCategoryPlayer];
+		bounds.physicsBody.elasticity = 1.0;
+		[_physics addChild:bounds];
+		
 		_enemies = [NSMutableArray array];
 		_bullets = [NSMutableArray array];
 		
@@ -309,7 +318,7 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 {
 	// If the node has a body, set some properties.
 	CCPhysicsBody *body = node.physicsBody;
-	body.collisionCategories = @[@"debris"];
+	body.collisionCategories = @[CollisionCategoryDebris];
 	
 	if(body){
 		// Bodies with the same group reference don't collide.

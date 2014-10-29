@@ -17,3 +17,10 @@ enum Z_ORDER {
 	Z_DEBRIS,
 	Z_CONTROLS,
 };
+
+#define CollisionCategoryPlayer @"Player"
+#define CollisionCategoryEnemy @"Enemy"
+#define CollisionCategoryDebris @"Debris"
+#define CollisionCategoryBullet @"Bullet"
+#define CollisionCategoryAsteroid @"Asteroid"
+#define CollisionCategoryBarrier @"Barrier"
