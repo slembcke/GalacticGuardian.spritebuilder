@@ -32,16 +32,20 @@
 	
 	CCTime _fixedTime;
 	
+	CCProgressNode *levelProgress;
+	
 	NSMutableArray *_enemies;
 	NSMutableArray *_bullets;
 	NSMutableArray *_pickups;
 	
 	int _enemies_killed;
 	int _ship_level;
+	int _spaceBucks;
+	int _spaceBucksTilNextLevel;
 	
 	// Consider extracting when we write more weapon types
 	bool _has_auto_firing_weapon;
-	
+
 }
 
 -(instancetype)initWithShipType:(NSString *)shipType level:(int) shipLevel
@@ -50,6 +54,8 @@
 		
 		_ship_level = shipLevel;
 		_has_auto_firing_weapon = true;
+		_spaceBucks = 0;
+		_spaceBucksTilNextLevel = 40;
 		
 		CGSize viewSize = [CCDirector sharedDirector].viewSize;
 		
@@ -124,9 +130,31 @@
 			[self addWallAt: ccpAdd(ccpMult(ccpForAngle(angle), 150.0f + 250.0f * CCRANDOM_0_1() ), ccp(512, 512))];
 		}
 		
+		
+		
+		// setup interface:
+		CCSprite *levelProgressBG = [CCSprite spriteWithImageNamed:@"Sprites/Powerups/buttonRed.png"];
+		levelProgressBG.anchorPoint = ccp(0, 1);
+		levelProgressBG.positionType = CCPositionTypeMake(CCPositionUnitUIPoints, CCPositionUnitUIPoints, CCPositionReferenceCornerTopLeft);
+		levelProgressBG.position = ccp(20, 20);
+		levelProgressBG.color = CCColor.darkGrayColor;
+		[self addChild:levelProgressBG];
+		
+		levelProgress = [CCProgressNode progressWithSprite:[CCSprite spriteWithImageNamed:@"Sprites/Powerups/buttonRed.png"]];
+		levelProgress.type = CCProgressNodeTypeBar;
+		levelProgress.midpoint = CGPointZero;
+		levelProgress.barChangeRate = ccp(1.0f, 0.0f);
+		levelProgress.anchorPoint = ccp(0, 1);
+		levelProgress.positionType = CCPositionTypeMake(CCPositionUnitUIPoints, CCPositionUnitUIPoints, CCPositionReferenceCornerTopLeft);
+		levelProgress.position = ccp(20, 20);
+		[self addChild:levelProgress];
+		
+		levelProgress.percentage = (float) _spaceBucks;
+		
 		// Enable touch events.
 		// The entire scene is used as a shoot button.
 		self.userInteractionEnabled = YES;
+		
 	}
 	
 	return self;
@@ -233,21 +261,22 @@
 	
 	if(![_playerShip isDead]){
 		_enemies_killed += 1;
+		
 		// spawn loot:
-		
-		SpaceBuckType type = SpaceBuck_1;
-		if(CCRANDOM_0_1() > 0.8f){
-			if(CCRANDOM_0_1() > 0.8f){
-				type = SpaceBuck_4;
-			}else{
+		for(int i = 0; i < 4; i++){
+			SpaceBuckType type = SpaceBuck_1;
+			float n = CCRANDOM_0_1();
+			if(n > 0.90f){
 				type = SpaceBuck_8;
+			}else if ( n > 0.70f){
+				type = SpaceBuck_4;
 			}
+			
+			SpaceBucks *pickup = [[SpaceBucks alloc] initWithAmount: type];
+			pickup.position = enemy.position;
+			[_pickups addObject:pickup];
+			[_physics addChild:pickup z:Z_PICKUPS];
 		}
-		
-		SpaceBucks *pickup = [[SpaceBucks alloc] initWithAmount: type];
-		pickup.position = enemy.position;
-		[_pickups addObject:pickup];
-		[_physics addChild:pickup];
 	}
 	
 	CGPoint pos = enemy.position;
@@ -487,7 +516,8 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 	[pickup removeFromParent];
 	[_pickups removeObject:pickup];
 	
-	
+	_spaceBucks += [pickup amount];
+	levelProgress.percentage = ((float) _spaceBucks/ _spaceBucksTilNextLevel) * 100.0f;
 	
 	return NO;
 }

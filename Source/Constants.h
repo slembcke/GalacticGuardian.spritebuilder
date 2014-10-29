@@ -15,6 +15,7 @@ enum Z_ORDER {
 	Z_PLAYER,
 	Z_FLASH,
 	Z_DEBRIS,
+	Z_PICKUPS,
 	Z_CONTROLS,
 };
 
