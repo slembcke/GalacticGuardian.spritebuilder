@@ -87,6 +87,7 @@
 -(void)onExit
 {
 	[_engineNoise stop];
+	[_shieldDistortionSprite removeFromParent];
 	
 	[super onExit];
 }
