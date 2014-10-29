@@ -11,24 +11,11 @@
 
 #import "GameScene.h"
 
+#import "Constants.h"
 #import "PlayerShip.h"
 #import "EnemyShip.h"
 #import "Bullet.h"
 #import "Controls.h"
-
-
-static CGSize GameSceneSize = {1024, 1024};
-
-enum ZORDER {
-	Z_SCROLL_NODE,
-	Z_NEBULA,
-	Z_PHYSICS,
-	Z_ENEMY,
-	Z_PLAYER,
-	Z_PARTICLES,
-	Z_FLASH,
-	Z_CONTROLS,
-};
 
 
 @implementation GameScene
@@ -94,10 +81,9 @@ enum ZORDER {
 		[_physics addChild:_playerShip z:Z_PLAYER];
 		
 		// Center on the player.
-		_scrollNode.anchorPoint = _playerShip.position;
+		self.scrollPosition = _playerShip.position;
 		
 		[self scheduleBlock:^(CCTimer *timer) {
-			
 			EnemyShip *enemy = (EnemyShip *)[CCBReader load:@"BadGuy1"];
 			if(CCRANDOM_0_1() > 0.33f){
 				// left or right sides.
@@ -111,7 +97,6 @@ enum ZORDER {
 			[_enemies addObject:enemy];
 			
 			[timer repeatOnceWithInterval:1.5f];
-			
 		} delay:1.0f];
 		
 		for(int i = 0; i < 20; i++){
@@ -173,15 +158,18 @@ enum ZORDER {
 	}
 }
 
+-(void)setScrollPosition:(CGPoint)scrollPosition
+{
+	// Clamp the scrolling position so you can't see outside of the game area.
+	scrollPosition.x = MAX(_minScrollPos.x, MIN(scrollPosition.x, _maxScrollPos.x));
+	scrollPosition.y = MAX(_minScrollPos.y, MIN(scrollPosition.y, _maxScrollPos.y));
+	
+	_scrollNode.anchorPoint = scrollPosition;
+}
+
 -(void)update:(CCTime)delta
 {
-	CGPoint pos = _playerShip.position;
-	
-	// Clamp the scrolling position so you can't see outside of the game area.
-	_scrollNode.anchorPoint = ccp(
-		MAX(_minScrollPos.x, MIN(pos.x, _maxScrollPos.x)),
-		MAX(_minScrollPos.y, MIN(pos.y, _maxScrollPos.y))
-	);
+	self.scrollPosition = _playerShip.position;
 }
 
 

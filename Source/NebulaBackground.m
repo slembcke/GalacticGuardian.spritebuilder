@@ -65,7 +65,7 @@ static CCTexture *DistortionTexture = nil;
 		// Set up the distortion map render texture;
 		CGSize size = [CCDirector sharedDirector].viewSize;
 		_distortionMap = [CCRenderTexture renderTextureWithWidth:size.width height:size.height];
-		_distortionMap.contentScale /= 4.0;
+		_distortionMap.contentScale /= 8.0;
 		_distortionMap.texture.antialiased = YES;
 		
 		// Set the distortion map to no offset. 
@@ -77,7 +77,6 @@ static CCTexture *DistortionTexture = nil;
 		self.shaderUniforms[@"u_ParallaxAmount"] = @(0.08);
 		self.shaderUniforms[@"u_DepthMap"] = DepthMap;
 		self.shaderUniforms[@"u_DistortionMap"] = _distortionMap.texture;
-		self.shaderUniforms[@"u_DistortionAmount"] = @(-0.5);
 		
 		_distortionNode = [CCNode node];
 	}
