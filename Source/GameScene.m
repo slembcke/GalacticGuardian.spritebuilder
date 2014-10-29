@@ -267,7 +267,7 @@
 			SpaceBucks *pickup = [[SpaceBucks alloc] initWithAmount: type];
 			pickup.position = enemy.position;
 			[_pickups addObject:pickup];
-			[_physics addChild:pickup];
+			[_physics addChild:pickup z:Z_PICKUPS];
 		}
 	}
 	
