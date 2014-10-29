@@ -21,7 +21,7 @@
 @implementation GameScene
 {
 	CCNode *_scrollNode;
-	CGPoint _minScrollPos, _maxScrollPos;
+	float _clampWidth, _clampHeight;
 	
 	CCPhysicsNode *_physics;
 	NebulaBackground *_background;
@@ -55,8 +55,8 @@
 		_scrollNode.position = ccp(viewSize.width/2.0, viewSize.height/2.0);
 		[self addChild:_scrollNode z:Z_SCROLL_NODE];
 		
-		_minScrollPos = ccp(viewSize.width/2.0, viewSize.height/2.0);
-		_maxScrollPos = ccp(GameSceneSize.width - _minScrollPos.x, GameSceneSize.height - _minScrollPos.y);
+		_clampWidth = (GameSceneSize.width - viewSize.width)/2.0;
+		_clampHeight = (GameSceneSize.height - viewSize.height)/2.0;
 		
 		_background = [NebulaBackground node];
 		_background.contentSize = GameSceneSize;
@@ -194,11 +194,19 @@
 
 -(void)setScrollPosition:(CGPoint)scrollPosition
 {
-	// Clamp the scrolling position so you can't see outside of the game area.
-	scrollPosition.x = MAX(_minScrollPos.x, MIN(scrollPosition.x, _maxScrollPos.x));
-	scrollPosition.y = MAX(_minScrollPos.y, MIN(scrollPosition.y, _maxScrollPos.y));
+	float smoothing = 1e3;
 	
-	_scrollNode.anchorPoint = scrollPosition;
+	CGPoint exp = CGPointMake(
+		(scrollPosition.x - GameSceneSize.width/2.0)/_clampWidth,
+		(scrollPosition.y - GameSceneSize.height/2.0)/_clampHeight
+	);
+	
+	CGPoint offset = CGPointMake(
+		 _clampWidth*(log(pow(smoothing, -exp.x - 1.0) + 1.01) - log(pow(smoothing, exp.x - 1.0) + 1.01)),
+		_clampHeight*(log(pow(smoothing, -exp.y - 1.0) + 1.01) - log(pow(smoothing, exp.y - 1.0) + 1.01))
+	);
+	
+	_scrollNode.anchorPoint = ccpAdd(scrollPosition, ccpMult(offset, 1.0/log(smoothing)));
 }
 
 -(void)update:(CCTime)delta
