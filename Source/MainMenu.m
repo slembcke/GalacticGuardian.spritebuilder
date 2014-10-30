@@ -9,6 +9,8 @@
 	NebulaBackground *_background;
 	CCTime _time;
 	
+	CCLabelTTF* _titleLabel;
+	
 	CCSprite* _ship1;
 	CCSprite* _ship2;
 }
@@ -61,6 +63,9 @@
 
 -(void)showShipSelector
 {
+	// Remove label so it doesn't show through the background and so it makes a good cinematic when we select a ship.
+	[_titleLabel removeFromParent];
+	
 	CCDirector *director = [CCDirector sharedDirector];
 	CGSize viewSize = director.viewSize;
 	

@@ -84,6 +84,19 @@ const float ship_powers[] = {30.0f, 80.0f, 100.0f};
 -(void) showShip:(ShipType) shipType
 {
 	[_shipNode removeFromParent];
+	CCNode *oldShip = _shipNode;
+	{
+		float rotation = 0.0f;
+		rotation = _shipNode.rotation;
+
+		int shipChassis = 1;
+		NSString * shipArt = ship_fileNames[shipType];
+		_shipNode = [CCBReader load:[NSString stringWithFormat:@"%@-%d", shipArt, shipChassis ]];
+		_shipNode.position = [oldShip position];
+		_shipNode.scale = 2.0f;
+		_shipNode.physicsBody = nil;
+		[_viewNode addChild:_shipNode];
+	}
 	
 	[shipNameLabel setString: ship_names[shipType]];
 	
