@@ -11,6 +11,5 @@
 
 -(void)ggFixedUpdate:(CCTime)delta scene:(GameScene *)scene;
 -(BOOL) takeDamage;
--(void)destroy;
 
 @end

@@ -327,7 +327,10 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 		node.color = burnColor;
 		[node runAction: [CCActionSequence actions:
 		 [CCActionDelay actionWithDuration:0.5],
-		 [CCActionFadeOut actionWithDuration:2.0], nil]];
+		 [CCActionFadeOut actionWithDuration:2.0],
+		 [CCActionRemove action],
+		 nil
+		]];
 	}
 	
 	// Recurse on the children.

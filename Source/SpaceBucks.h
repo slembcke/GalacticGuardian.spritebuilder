@@ -11,9 +11,6 @@ typedef NS_ENUM(NSUInteger, SpaceBuckType){
 
 @interface SpaceBucks : CCSprite
 
-@property(nonatomic, assign) float accelRange;
-@property(nonatomic, assign) float accelAmount;
-
 @property(nonatomic, assign) int amount;
 
 -(instancetype)initWithAmount:(SpaceBuckType) type;

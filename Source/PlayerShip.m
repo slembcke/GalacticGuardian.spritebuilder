@@ -221,7 +221,7 @@
 	for (EnemyShip * e in scene.enemies) {
 		// explode based on distance from player.
 		float dist = ccpLength(ccpSub(pos, e.position));
-		[e scheduleBlock:^(CCTimer *timer) {[e destroy];} delay:dist / 200.0f];
+		[e scheduleBlock:^(CCTimer *timer) {[scene enemyDeath:e];} delay:dist / 200.0f];
 	}
 	
 	[self removeFromParent];

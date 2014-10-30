@@ -8,14 +8,9 @@ const int values[] = {1, 4, 8};
 
 -(instancetype)initWithAmount:(SpaceBuckType) type
 {
-	NSString *spriteNames[] = {@"Sprites/Powerups/pill_blue.png", @"Sprites/Powerups/pill_green.png", @"Sprites/Powerups/pill_red.png"};
-	int values[] = {1, 4, 8};
-	
 	if((self = [super initWithImageNamed:spriteNames[type]])){
-		CCPhysicsBody *body = self.physicsBody = [CCPhysicsBody bodyWithCircleOfRadius:3.0f andCenter:CGPointZero];
+		CCPhysicsBody *body = self.physicsBody = [CCPhysicsBody bodyWithCircleOfRadius:3.0f andCenter:self.anchorPointInPoints];
 		
-		_accelRange = 130.0f;
-		_accelAmount = 60.0f;
 		_amount = values[type];
 		
 		// This is used to pick which collision delegate method to call, see GameScene.m for more info.
@@ -35,6 +30,9 @@ const int values[] = {1, 4, 8};
 	return self;
 }
 
+const float AccelRange = 130.0;
+const float AccelMin = 60.0;
+const float AccelMax = 1800.0;
 
 -(void)ggFixedUpdate:(CCTime)delta scene:(GameScene *)scene
 {
@@ -49,9 +47,13 @@ const int values[] = {1, 4, 8};
 	}
 	
 	CGPoint targetPoint = scene.playerPosition;
-	if(ccpDistance(targetPoint, self.position) < _accelRange){
+	float distance = ccpDistance(targetPoint, self.position);
+	
+	if(distance < AccelRange){
 		// then consider accellerating towards player
-		body.velocity = ccpAdd(body.velocity, ccpMult(ccpNormalize(ccpSub(targetPoint, self.position)), delta * _accelAmount));
+		float accel = AccelMin + AccelMax*(AccelRange - distance)/AccelRange;
+		CGPoint direction = ccpNormalize(ccpSub(targetPoint, self.position));
+		body.velocity = ccpAdd(body.velocity, ccpMult(direction, delta * accel));
 	}
 	
 }
