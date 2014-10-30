@@ -7,7 +7,7 @@
 //
 
 #import "CCNode.h"
-
+#import "Bullet.h"
 #import "Controls.h"
 
 
@@ -19,6 +19,9 @@
 
 @property(nonatomic) float fireRate;
 @property(nonatomic) float lastFireTime;
+@property(nonatomic) BulletLevel bulletLevel;
+
+
 
 @property(nonatomic) CCSprite *shieldDistortionSprite;
 

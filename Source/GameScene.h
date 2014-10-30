@@ -4,8 +4,7 @@
 
 -(instancetype)initWithShipType:(NSString *)shipType level:(int) shipLevel;
 
-// TODO should extract this to the enemy class
--(void)enemyDeath:(EnemyShip *)enemy;
+-(void)enemyDeath:(EnemyShip *)enemy from:(Bullet *) bullet;
 
 -(void)drawFlash:(CGPoint) position withImage:(NSString*) imagePath;
 -(void)drawBulletFlash:(Bullet *)fromBullet;

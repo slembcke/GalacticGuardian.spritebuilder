@@ -60,7 +60,7 @@
 
 -(void)play:(NSString *)selectedShip
 {
-	GameScene *scene = [[GameScene alloc] initWithShipType:selectedShip level:1 ];
+	GameScene *scene = [[GameScene alloc] initWithShipType:selectedShip level:0 ];
 	[[CCDirector sharedDirector] replaceScene:scene];
 }
 

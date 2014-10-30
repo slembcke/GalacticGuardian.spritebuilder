@@ -80,6 +80,7 @@ VisitAll(CCNode *node, void (^block)(CCNode *))
 	[_shield runAction:[CCActionRepeatForever actionWithAction:[CCActionRotateBy actionWithDuration:0.5 angle:360.0]]];
 	
 	_hp = 4;
+	_bulletLevel = BulletBlue1;
 	
 	_gunPorts = [NSMutableArray array];
 	VisitAll(self, ^(CCNode *node){
@@ -225,7 +226,7 @@ VisitAll(CCNode *node, void (^block)(CCNode *))
 	for (EnemyShip * e in scene.enemies) {
 		// explode based on distance from player.
 		float dist = ccpLength(ccpSub(pos, e.position));
-		[e scheduleBlock:^(CCTimer *timer) {[scene enemyDeath:e];} delay:dist / 200.0f];
+		[e scheduleBlock:^(CCTimer *timer) {[scene enemyDeath:e from:nil];} delay:dist / 200.0f];
 	}
 	
 	[self removeFromParent];

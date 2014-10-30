@@ -7,16 +7,40 @@
 //
 
 #import "Constants.h"
-
 #import "Bullet.h"
-
 #import "GameScene.h"
+
+
+static NSString * const bulletImageNames[] = {
+	@"Sprites/Bullets/laserBlue02.png",
+	@"Sprites/Bullets/laserGreen04.png",
+	@"Sprites/Bullets/laserRed02.png",
+	@"Sprites/Bullets/laserBlue12.png",
+	@"Sprites/Bullets/laserGreen08.png",
+	@"Sprites/Bullets/laserRed12.png",
+};
+static NSString * const bulletFlashes[] ={
+	@"Sprites/Bullets/laserBlue08.png",
+	@"Sprites/Bullets/laserGreen14.png",
+	@"Sprites/Bullets/laserRed08.png",
+	@"Sprites/Bullets/laserBlue08.png",
+	@"Sprites/Bullets/laserGreen14.png",
+	@"Sprites/Bullets/laserRed08.png"};
+
+const int bulletSpeeds[] = {
+	450, 525, 600, 550, 625, 700
+};
+const float bulletDurations[] = {
+	0.25, 0.26, 0.27, 0.32, 0.33, 0.35
+};
+
 
 @implementation Bullet
 
--(instancetype)initWithTMP
+-(instancetype)initWithBulletLevel:(BulletLevel) level
 {
-	if((self = [super initWithImageNamed:@"Sprites/Bullets/laserBlue12.png"])){
+	if((self = [super initWithImageNamed:bulletImageNames[level] ])){
+		_bulletLevel = level;
 		CGSize size = self.contentSize;
 		CGFloat radius = size.width/2.0;
 		
@@ -44,18 +68,30 @@
 
 -(float)speed
 {
-	return 500.0;
+	return bulletSpeeds[_bulletLevel];
 }
 
 -(float)duration
 {
-	return 0.25;
+	return bulletDurations[_bulletLevel];
 }
 
 -(NSString *)flashImagePath
 {
-	return @"Sprites/Bullets/laserBlue08.png";
+	return bulletFlashes[_bulletLevel];
 }
+
+-(CCColor *)bulletColor
+{
+	if(_bulletLevel % 3 == 0){
+		return 	[CCColor colorWithRed:0.3f green:0.8f blue:1.0f];
+	}else if(_bulletLevel % 3 == 1){
+		return 	[CCColor colorWithRed:0.3f green:1.0f blue:0.5f];
+	}else{
+		return 	[CCColor colorWithRed:1.0f green:0.2f blue:0.2f];
+	}
+}
+
 
 -(void)destroy
 {

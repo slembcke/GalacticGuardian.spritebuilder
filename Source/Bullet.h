@@ -8,15 +8,21 @@
 
 #import "CCSprite.h"
 
+typedef NS_ENUM(NSUInteger, BulletLevel){
+	BulletBlue1, BulletBlue2, BulletGreen1, BulletGreen2, BulletRed1, BulletRed2
+};
+
 @interface Bullet : CCSprite
 
 @property(nonatomic, readonly) float speed;
 @property(nonatomic, readonly) float duration;
 @property(nonatomic, readonly) NSString *flashImagePath;
+@property(nonatomic, readonly) BulletLevel bulletLevel;
+@property(nonatomic, readonly) CCColor *bulletColor;
 
-
--(instancetype)initWithTMP;
+-(instancetype)initWithBulletLevel:(BulletLevel) level;
 
 -(void)destroy;
 
 @end
+

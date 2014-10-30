@@ -209,7 +209,7 @@
 }
 
 
--(void)enemyDeath:(EnemyShip *)enemy
+-(void)enemyDeath:(EnemyShip *)enemy from:(Bullet *) bullet;
 {
 	[enemy removeFromParent];
 	[_enemies removeObject:enemy];
@@ -240,7 +240,10 @@
 	debris.position = pos;
 	debris.rotation = enemy.rotation;
 	
-	CCColor *weaponColor = [CCColor colorWithRed:0.3f green:0.8f blue:1.0f];
+	CCColor *weaponColor = [CCColor colorWithRed:1.0f green:1.0f blue:0.3f];
+	if(bullet != nil){
+		weaponColor = bullet.bulletColor;
+	}
 	
 	InitDebris(debris, debris, enemy.physicsBody.velocity, weaponColor);
 	[_physics addChild:debris z:Z_DEBRIS];
@@ -331,7 +334,7 @@
 	// So by "fancy math" I really just meant knowing what the numbers in a CGAffineTransform are. ;)
 	
 	// Now we can create the bullet with the position and direction.
-	Bullet *bullet = [[Bullet alloc] initWithTMP];
+	Bullet *bullet = [[Bullet alloc] initWithBulletLevel:_playerShip.bulletLevel];
 	bullet.position = position;
 	bullet.rotation = -CC_RADIANS_TO_DEGREES(ccpToAngle(direction)) + 90.0f;
 	
@@ -414,7 +417,7 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 {
 	_spaceBucks = 0;
 	_spaceBucksTilNextLevel = _ship_level * 60 + 30;
-	if(_ship_level >= 3){
+	if(_ship_level >= 7){
 		// Temp code:
 		_spaceBucksTilNextLevel = 10000;
 	}
@@ -426,11 +429,13 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 		[_playerShip removeFromParent];
 	}
 	
-	_playerShip = (PlayerShip *)[CCBReader load:[NSString stringWithFormat:@"%@-%d", shipType, _ship_level ]];
+	int shipChassis = (_ship_level) / 2 + 1;
+	_playerShip = (PlayerShip *)[CCBReader load:[NSString stringWithFormat:@"%@-%d", shipType, shipChassis ]];
 	_playerShip.position = pos;
 	_playerShip.name = shipType;
 	[_physics addChild:_playerShip z:Z_PLAYER];
 	[_background.distortionNode addChild:_playerShip.shieldDistortionSprite];
+	_playerShip.bulletLevel = MIN(_ship_level, BulletRed2);
 	
 	// Center on the player.
 	self.scrollPosition = _playerShip.position;
@@ -440,12 +445,14 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 {
 	
 	_ship_level += 1;
+	_playerShip.bulletLevel = MIN(_ship_level, BulletRed2);
+	
 	
 	CGSize viewSize = [CCDirector sharedDirector].viewSize;
 
 	[[OALSimpleAudio sharedInstance] playEffect:@"TempSounds/LevelUp.wav" volume:0.8 pitch:1.0 pan:0.0 loop:NO];
 	
-	CCLabelTTF *levelUpText = [CCLabelTTF labelWithString:@"Upgraded Weapon" fontName:@"Helvetica" fontSize:36.0];
+	CCLabelTTF *levelUpText = [CCLabelTTF labelWithString:@"More Awesome!" fontName:@"Helvetica" fontSize:36.0];
 	[self addChild:levelUpText];
 	levelUpText.position = ccp(viewSize.width / 2.0f, viewSize.height / 1.5f);
 	levelUpText.anchorPoint = ccp(0.5, 0.5);
@@ -458,8 +465,8 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 				[CCActionScaleTo actionWithDuration:0.25 scale:1.0],
 				nil
 			],
-			[CCActionDelay actionWithDuration:0.75],
-			[CCActionFadeOut actionWithDuration:0.15],
+			[CCActionDelay actionWithDuration:0.95],
+			[CCActionFadeOut actionWithDuration:0.35],
 			[CCActionRemove action],
 			nil
 	]];
@@ -492,7 +499,7 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 		return NO;
 	}else{
 		// Player took damage, the enemy should self destruct.
-		[self enemyDeath: enemy];
+		[self enemyDeath: enemy from:nil];
 		return YES;
 	}
 	
@@ -504,7 +511,7 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 	[bullet destroy];
 	
 	if([enemy takeDamage]){
-		[self enemyDeath:enemy];
+		[self enemyDeath:enemy from:bullet];
 	}
 	
 	return NO;

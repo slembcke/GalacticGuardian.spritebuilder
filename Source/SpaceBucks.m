@@ -4,9 +4,7 @@
 @implementation SpaceBucks
 
 static NSString * const spriteNames[] = {@"Sprites/Powerups/pill_blue.png", @"Sprites/Powerups/pill_green.png", @"Sprites/Powerups/pill_red.png"};
-
 static NSString * const spriteFlashes[] = {@"Sprites/Bullets/laserBlue08.png", @"Sprites/Bullets/laserGreen14.png", @"Sprites/Bullets/laserRed08.png"};
-
 const int values[] = {1, 4, 8};
 
 -(instancetype)initWithAmount:(SpaceBuckType) type
