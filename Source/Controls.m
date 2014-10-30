@@ -135,7 +135,9 @@
 		
 		self.userInteractionEnabled = YES;
 		
-		[self setupGamepadSupport];
+		if(NSClassFromString(@"GCController")){
+			[self setupGamepadSupport];
+		}
 	}
 	
 	return self;
@@ -200,27 +202,29 @@
 
 -(void)onEnter
 {
-	id connect = [[NSNotificationCenter defaultCenter] addObserverForName:GCControllerDidConnectNotification object:nil queue:nil
-		usingBlock:^(NSNotification *notification){
-			NSLog(@"Controller connected.");
-			
-			GCController *controller = notification.object;
-			[self logController:controller];
-			[self activateController:controller];
-		}
-	];
-	
-	id disconnect = [[NSNotificationCenter defaultCenter] addObserverForName:GCControllerDidDisconnectNotification object:nil queue:nil
-		usingBlock:^(NSNotification *notification){
-			NSLog(@"Controller disconnected.");
-			
-			GCController *controller = notification.object;
-			[self logController:controller];
-			[self deactivateController:controller];
-		}
-	];
-	
-	_observers = @[connect, disconnect];
+	if(NSClassFromString(@"GCController")){
+		id connect = [[NSNotificationCenter defaultCenter] addObserverForName:GCControllerDidConnectNotification object:nil queue:nil
+			usingBlock:^(NSNotification *notification){
+				NSLog(@"Controller connected.");
+				
+				GCController *controller = notification.object;
+				[self logController:controller];
+				[self activateController:controller];
+			}
+		];
+		
+		id disconnect = [[NSNotificationCenter defaultCenter] addObserverForName:GCControllerDidDisconnectNotification object:nil queue:nil
+			usingBlock:^(NSNotification *notification){
+				NSLog(@"Controller disconnected.");
+				
+				GCController *controller = notification.object;
+				[self logController:controller];
+				[self deactivateController:controller];
+			}
+		];
+		
+		_observers = @[connect, disconnect];
+	}
 	
 	[super onEnter];
 }
