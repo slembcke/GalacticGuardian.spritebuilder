@@ -319,7 +319,7 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 		body.collisionGroup = root;
 		
 		// Copy the velocity onto the body + a little random.
-		body.velocity = ccpAdd(velocity, ccpMult(CCRANDOM_IN_UNIT_CIRCLE(), 150.0));
+		body.velocity = ccpAdd(velocity, ccpMult(CCRANDOM_IN_UNIT_CIRCLE(), 75.0));
 		body.angularVelocity = 5.0*CCRANDOM_MINUS1_1();
 		
 		// Nodes with bodies should also be sprites.
