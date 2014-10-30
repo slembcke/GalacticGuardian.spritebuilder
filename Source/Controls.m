@@ -112,10 +112,13 @@
 		
 		CGFloat joystickOffset = viewSize.width/8.0;
 		
-		CCNode *rocketButton = [CCBReader loadAsScene:@"RocketButton" owner:self];
+		CCNode *rocketButton = [CCBReader load:@"RocketButton" owner:self];
 		rocketButton.position = ccp(2.0*joystickOffset, joystickOffset);
-		rocketButton.contentSize = CGSizeMake(0.1*joystickOffset, 0.1*joystickOffset);
+		rocketButton.contentSize = CGSizeMake(0.7*joystickOffset, 0.7*joystickOffset);
 		[self addChild:rocketButton];
+		
+		// Quick hack to disable the default exclusive touch property of CCButtons.
+		[(CCButton *)rocketButton.children[0] setExclusiveTouch:NO];
 		
 		_virtualJoystick = [FancyJoystick node];
 		_virtualJoystick.scale = 2.0*joystickOffset/_virtualJoystick.contentSize.width;
