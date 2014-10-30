@@ -42,7 +42,7 @@
 	int _spaceBucksTilNextLevel;
 }
 
--(instancetype)initWithShipType:(ShipType *)shipType level:(int) shipLevel
+-(instancetype)initWithShipType:(ShipType) shipType level:(int) shipLevel
 {
 	if((self = [super init])){
 		

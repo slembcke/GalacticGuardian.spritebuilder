@@ -3,6 +3,7 @@
 #import "MainMenu.h"
 #import "NebulaBackground.h"
 #import "GameScene.h"
+#import "ShipSelectionScene.h"
 
 @implementation MainMenu {
 	NebulaBackground *_background;
@@ -63,7 +64,8 @@
 	CCDirector *director = [CCDirector sharedDirector];
 	CGSize viewSize = director.viewSize;
 	
-	CCScene *newScene = (CCScene *)[CCBReader load:@"ShipSelectionScene"];
+	ShipSelectionScene *newScene = (ShipSelectionScene *)[CCBReader load:@"ShipSelectionScene"];
+	newScene.mainMenu = self;
 	
 	CCRenderTexture *rt = [CCRenderTexture renderTextureWithWidth:viewSize.width height:viewSize.height];
 	rt.contentScale /= 4.0;
@@ -89,8 +91,14 @@
 
 -(void) launchWithShip:(ShipType) shipType;
 {
-	GameScene *scene = [[GameScene alloc] initWithShipType:shipType level:0 ];
-	[[CCDirector sharedDirector] replaceScene:scene];
+	__block ShipType blockShip = shipType;
+	
+	
+	[self scheduleBlock:^(CCTimer *timer) {
+		GameScene *scene = [[GameScene alloc] initWithShipType:blockShip level:0 ];
+		[[CCDirector sharedDirector] replaceScene:scene];
+	}delay:1.0f];
+
 }
 
 

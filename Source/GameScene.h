@@ -5,7 +5,7 @@
 
 @interface GameScene : CCScene<CCPhysicsCollisionDelegate>
 
--(instancetype)initWithShipType:(ShipType *)shipType level:(int) shipLevel;
+-(instancetype)initWithShipType:(ShipType) shipType level:(int) shipLevel;
 
 -(void)enemyDeath:(EnemyShip *)enemy from:(Bullet *) bullet;
 

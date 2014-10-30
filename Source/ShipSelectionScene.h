@@ -2,7 +2,7 @@
 
 @interface ShipSelectionScene : CCScene
 
-@property(nonatomic, readonly) MainMenu *mainMenu;
+@property(nonatomic) MainMenu *mainMenu;
 
 
 @end
