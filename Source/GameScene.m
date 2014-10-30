@@ -460,7 +460,7 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 		_spaceBucksTilNextLevel = 60000;
 	}
 	
-	float rotation = 0.0f;
+	float rotation = -90.0f;
 	if(_playerShip){
 		rotation = _playerShip.rotation;
 		
@@ -470,6 +470,7 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 	int shipChassis = MIN((_ship_level) / 2 + 1, 3);
 	_playerShip = (PlayerShip *)[CCBReader load:[NSString stringWithFormat:@"%@-%d", shipArt, shipChassis ]];
 	_playerShip.position = pos;
+	_playerShip.rotation = rotation;
 	_playerShip.name = shipArt;
 	[_physics addChild:_playerShip z:Z_PLAYER];
 	[_background.distortionNode addChild:_playerShip.shieldDistortionSprite];
