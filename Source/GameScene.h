@@ -1,4 +1,4 @@
-@class PlayerShip, EnemyShip;
+@class PlayerShip, EnemyShip, Bullet;
 
 @interface GameScene : CCScene<CCPhysicsCollisionDelegate>
 
@@ -7,7 +7,8 @@
 // TODO should extract this to the enemy class
 -(void)enemyDeath:(EnemyShip *)enemy;
 
--(void)drawFlash:(CGPoint)position;
+-(void)drawFlash:(CGPoint) position withImage:(NSString*) imagePath;
+-(void)drawBulletFlash:(Bullet *)fromBullet;
 
 @property(nonatomic, readonly) CCNode *distortionNode;
 

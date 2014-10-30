@@ -12,6 +12,7 @@ typedef NS_ENUM(NSUInteger, SpaceBuckType){
 @interface SpaceBucks : CCSprite
 
 @property(nonatomic, assign) int amount;
+@property(nonatomic, assign) NSString *flashImage;
 
 -(instancetype)initWithAmount:(SpaceBuckType) type;
 -(void)ggFixedUpdate:(CCTime)delta scene:(GameScene *)scene;

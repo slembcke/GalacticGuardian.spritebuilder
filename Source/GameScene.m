@@ -263,11 +263,16 @@
 	[[OALSimpleAudio sharedInstance] playEffect:@"TempSounds/Explosion.wav" volume:2.0 pitch:1.0 pan:0.0 loop:NO];
 }
 
--(void)drawFlash:(CGPoint)position
+-(void)drawBulletFlash:(Bullet *)fromBullet;
+{
+	[self drawFlash:fromBullet.position withImage:fromBullet.flashImagePath];
+}
+
+-(void)drawFlash:(CGPoint) position withImage:(NSString*) imagePath;
 {
 	float duration = 0.15;
 	
-	CCSprite *flash = [CCSprite spriteWithImageNamed:@"Sprites/Bullets/laserBlue08.png"];
+	CCSprite *flash = [CCSprite spriteWithImageNamed:imagePath];
 	flash.position = position;
 	[_physics addChild:flash z:Z_FLASH];
 	
@@ -337,7 +342,7 @@
 	[_physics addChild:bullet z:Z_BULLET];
 	
 	// Draw a muzzle flash too!
-	[self drawFlash:position];
+	[self drawBulletFlash:bullet];
 	
 	// Make some noise. Add a little chromatically tuned pitch bending to make it more musical.
 	int half_steps = (arc4random()%(2*4 + 1) - 4);
@@ -517,7 +522,7 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 	[pickup removeFromParent];
 	[_pickups removeObject:pickup];
 	
-	[self drawFlash:pickup.position];
+	[self drawFlash:pickup.position withImage:pickup.flashImage];
 	[[OALSimpleAudio sharedInstance] playEffect:@"TempSounds/Pickup.wav" volume:0.5 pitch:1.0 pan:0.0 loop:NO];
 	
 	_spaceBucks += [pickup amount];

@@ -12,6 +12,8 @@
 
 @property(nonatomic, readonly) float speed;
 @property(nonatomic, readonly) float duration;
+@property(nonatomic, readonly) NSString *flashImagePath;
+
 
 -(instancetype)initWithTMP;
 

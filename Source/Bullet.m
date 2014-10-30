@@ -52,10 +52,15 @@
 	return 0.25;
 }
 
+-(NSString *)flashImagePath
+{
+	return @"Sprites/Bullets/laserBlue08.png";
+}
+
 -(void)destroy
 {
 	// Draw a little flash at it's last position
-	[(GameScene *)self.scene drawFlash:self.position];
+	[(GameScene *)self.scene drawBulletFlash:self];
 	
 //	// Draw a little distortion too
 //	CCSprite *distortion = [CCSprite spriteWithImageNamed:@"DistortionTexture.png"];

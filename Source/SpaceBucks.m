@@ -4,6 +4,9 @@
 @implementation SpaceBucks
 
 static NSString * const spriteNames[] = {@"Sprites/Powerups/pill_blue.png", @"Sprites/Powerups/pill_green.png", @"Sprites/Powerups/pill_red.png"};
+
+static NSString * const spriteFlashes[] = {@"Sprites/Bullets/laserBlue08.png", @"Sprites/Bullets/laserGreen14.png", @"Sprites/Bullets/laserRed08.png"};
+
 const int values[] = {1, 4, 8};
 
 -(instancetype)initWithAmount:(SpaceBuckType) type
@@ -12,6 +15,7 @@ const int values[] = {1, 4, 8};
 		CCPhysicsBody *body = self.physicsBody = [CCPhysicsBody bodyWithCircleOfRadius:3.0f andCenter:self.anchorPointInPoints];
 		
 		_amount = values[type];
+		_flashImage = spriteFlashes[type];
 		
 		// This is used to pick which collision delegate method to call, see GameScene.m for more info.
 		body.collisionType = @"pickup";
