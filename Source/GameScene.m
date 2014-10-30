@@ -321,7 +321,6 @@
 	CGPoint direction = ccp(transform.a, transform.b);
 	
 	// So by "fancy math" I really just meant knowing what the numbers in a CGAffineTransform are. ;)
-	// When I make my own art, I like to align things on the positive x-axis to make the code "prettier".
 	
 	// Now we can create the bullet with the position and direction.
 	Bullet *bullet = [[Bullet alloc] initWithTMP];
