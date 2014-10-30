@@ -46,7 +46,6 @@
 {
 	if((self = [super init])){
 		
-		NSString *shipArt = @"AndySpaceship";
 		_ship_level = shipLevel;
 		
 		_spaceBucks = 0;
@@ -94,7 +93,7 @@
 		
 		// Add a ship in the middle of the screen.
 		_ship_level = shipLevel;
-		[self createPlayerShipAt: ccp(GameSceneSize.width/2.0, GameSceneSize.height/2.0) ofType:shipArt];
+		[self createPlayerShipAt: ccp(GameSceneSize.width/2.0, GameSceneSize.height/2.0) withArt:ship_fileNames[shipType]];
 		
 		[self scheduleBlock:^(CCTimer *timer) {
 			EnemyShip *enemy = (EnemyShip *)[CCBReader load:@"BadGuy1"];
@@ -415,7 +414,7 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 	[director pushScene:pause withTransition:[CCTransition transitionCrossFadeWithDuration:0.25]];
 }
 
--(void) createPlayerShipAt:(CGPoint) pos ofType:(NSString *) shipType
+-(void) createPlayerShipAt:(CGPoint) pos withArt:(NSString *) shipArt
 {
 	_spaceBucks = 0;
 	_spaceBucksTilNextLevel = _ship_level * 60 + 30;
@@ -432,9 +431,9 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 	}
 	
 	int shipChassis = MIN((_ship_level) / 2 + 1, 3);
-	_playerShip = (PlayerShip *)[CCBReader load:[NSString stringWithFormat:@"%@-%d", shipType, shipChassis ]];
+	_playerShip = (PlayerShip *)[CCBReader load:[NSString stringWithFormat:@"%@-%d", shipArt, shipChassis ]];
 	_playerShip.position = pos;
-	_playerShip.name = shipType;
+	_playerShip.name = shipArt;
 	[_physics addChild:_playerShip z:Z_PLAYER];
 	[_background.distortionNode addChild:_playerShip.shieldDistortionSprite];
 	_playerShip.bulletLevel = MIN(_ship_level, BulletRed2);
@@ -473,9 +472,7 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 			nil
 	]];
 	
-	[self createPlayerShipAt:_playerShip.position ofType:_playerShip.name];
-	
-	
+	[self createPlayerShipAt:_playerShip.position withArt:_playerShip.name];
 }
 
 -(CCNode *)distortionNode
