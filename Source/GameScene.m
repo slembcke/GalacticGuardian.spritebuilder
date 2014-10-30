@@ -119,14 +119,13 @@
 		
 		
 		// setup interface:
-		CCSprite *levelProgressBG = [CCSprite spriteWithImageNamed:@"Sprites/Powerups/buttonRed.png"];
+		CCSprite *levelProgressBG = [CCSprite spriteWithImageNamed:@"UI/bgBar.png"];
 		levelProgressBG.anchorPoint = ccp(0, 1);
 		levelProgressBG.positionType = CCPositionTypeMake(CCPositionUnitUIPoints, CCPositionUnitUIPoints, CCPositionReferenceCornerTopLeft);
 		levelProgressBG.position = ccp(20, 20);
-		levelProgressBG.color = CCColor.darkGrayColor;
 		[self addChild:levelProgressBG];
 		
-		levelProgress = [CCProgressNode progressWithSprite:[CCSprite spriteWithImageNamed:@"Sprites/Powerups/buttonRed.png"]];
+		levelProgress = [CCProgressNode progressWithSprite:[CCSprite spriteWithImageNamed:@"UI/yellowBar.png"]];
 		levelProgress.type = CCProgressNodeTypeBar;
 		levelProgress.midpoint = CGPointZero;
 		levelProgress.barChangeRate = ccp(1.0f, 0.0f);
