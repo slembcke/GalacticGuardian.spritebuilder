@@ -47,6 +47,13 @@
 	[_shieldDistortionSprite runAction:[CCActionRepeatForever actionWithAction:[CCActionRotateBy actionWithDuration:1.0 angle:-360.0]]];
 }
 
+static void
+VisitAll(CCNode *node, void (^block)(CCNode *))
+{
+	block(node);
+	for(CCNode *child in node.children) VisitAll(child, block);
+}
+
 -(void)onEnter
 {
 	CCPhysicsBody *body = self.physicsBody;
@@ -75,11 +82,11 @@
 	_hp = 4;
 	
 	_gunPorts = [NSMutableArray array];
-	for (CCNode* node in [_children[0] children]) {
+	VisitAll(self, ^(CCNode *node){
 		if([node.name isEqualToString:@"gun"]){
 			[_gunPorts addObject:node];
 		}
-	}
+	});
 	NSAssert([_gunPorts count] > 0, @"Missing gunports on ship in spritebuilder");
 	
 	
@@ -145,9 +152,7 @@
 
 	CCNode *gun = _gunPorts[_currentGunPort];
 	
-	// Why not just position multiply the gun transform by the _transform? Guns are flipped with negative scales, so we need to explictly ignore that.
-	// So instead, we just offset from the ship's translation. 
-	return CGAffineTransformTranslate(_transform, -gun.position.y, gun.position.x);
+	return CGAffineTransformConcat(gun.nodeToWorldTransform, self.parent.worldToNodeTransform);
 }
 
 -(void)resetShield

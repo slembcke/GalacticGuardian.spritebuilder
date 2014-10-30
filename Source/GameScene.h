@@ -7,6 +7,8 @@
 // TODO should extract this to the enemy class
 -(void)enemyDeath:(EnemyShip *)enemy;
 
+-(void)drawFlash:(CGPoint)position;
+
 @property(nonatomic, readonly) CCNode *distortionNode;
 
 @property(nonatomic, readonly) PlayerShip *player;

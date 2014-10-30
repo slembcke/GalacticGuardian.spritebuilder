@@ -86,9 +86,9 @@
 		<dict/>
 		<key>Sprites/Powerups</key>
 		<dict>
-			<key>isDirty</key>
-			<true/>
 			<key>isSmartSpriteSheet</key>
+			<true/>
+			<key>trimSprites</key>
 			<true/>
 		</dict>
 		<key>Sprites/ShipParts</key>

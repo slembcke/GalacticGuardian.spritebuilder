@@ -261,6 +261,41 @@
 	} delay:5];
 }
 
+-(void)drawFlash:(CGPoint)position
+{
+	float duration = 0.15;
+	
+	CCSprite *flash = [CCSprite spriteWithImageNamed:@"Sprites/Bullets/laserBlue08.png"];
+	flash.position = position;
+	[_physics addChild:flash z:Z_FLASH];
+	
+	[flash runAction:[CCActionSequence actions:
+		[CCActionSpawn actions:
+			[CCActionFadeOut actionWithDuration:duration],
+			[CCActionScaleTo actionWithDuration:duration scale:0.25],
+			nil
+		],
+		[CCActionRemove action],
+		nil
+	]];
+	
+	// Draw a little distortion too
+	CCSprite *distortion = [CCSprite spriteWithImageNamed:@"DistortionTexture.png"];
+	distortion.position = position;
+	distortion.scale = 0.25;
+	[_background.distortionNode addChild:distortion];
+	
+	[distortion runAction:[CCActionSequence actions:
+		[CCActionSpawn actions:
+			[CCActionFadeOut actionWithDuration:duration],
+			[CCActionScaleTo actionWithDuration:duration scale:1.0],
+			nil
+		],
+		[CCActionRemove action],
+		nil
+	]];
+}
+
 -(void)fireBullet
 {
 	// Don't fire bullets if the ship is destroyed.
@@ -283,7 +318,7 @@
 	CGPoint position = ccp(transform.tx, transform.ty);
 
 	// The transform's x-axis, (c, d), will point in the direction of the gunport.
-	CGPoint direction = ccp(transform.d, -transform.c);
+	CGPoint direction = ccp(transform.a, transform.b);
 	
 	// So by "fancy math" I really just meant knowing what the numbers in a CGAffineTransform are. ;)
 	// When I make my own art, I like to align things on the positive x-axis to make the code "prettier".
@@ -297,6 +332,9 @@
 	bullet.physicsBody.velocity = ccpMult(direction, bullet.speed);
 	
 	[_physics addChild:bullet z:Z_BULLET];
+	
+	// Draw a muzzle flash too!
+	[self drawFlash:position];
 	
 	// Make some noise. Add a little chromatically tuned pitch bending to make it more musical.
 //	int half_steps = (arc4random()%(2*4 + 1) - 4);
