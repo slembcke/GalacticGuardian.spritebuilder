@@ -99,7 +99,7 @@
 {
 	CCPhysicsBody *body = self.physicsBody;
 	
-	const float deadZone = 0.5;
+	const float deadZone = 0.25;
 	
 	CGPoint thrust = controls.thrustDirection;
 	if(cpvlength(thrust) > deadZone){
