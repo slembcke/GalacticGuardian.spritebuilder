@@ -27,6 +27,8 @@
 	
 	[OALSimpleAudio sharedInstance].bgVolume = [defaults floatForKey:DefaultsMusicKey];
 	[OALSimpleAudio sharedInstance].effectsVolume = [defaults floatForKey:DefaultsSoundKey];
+	
+	[[OALSimpleAudio sharedInstance] playBg:@"TempMusic.aac" loop:YES];
 }
 
 -(void)didLoadFromCCB
