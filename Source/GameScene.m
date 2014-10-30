@@ -439,7 +439,7 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 	
 	CGSize viewSize = [CCDirector sharedDirector].viewSize;
 
-	[[OALSimpleAudio sharedInstance] playEffect:@"TempSounds/LevelUp.wav" volume:0.5 pitch:1.0 pan:0.0 loop:NO];
+	[[OALSimpleAudio sharedInstance] playEffect:@"TempSounds/LevelUp.wav" volume:0.8 pitch:1.0 pan:0.0 loop:NO];
 	
 	CCLabelTTF *levelUpText = [CCLabelTTF labelWithString:@"Upgraded Weapon" fontName:@"Helvetica" fontSize:36.0];
 	[self addChild:levelUpText];
