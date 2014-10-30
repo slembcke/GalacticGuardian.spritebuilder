@@ -21,7 +21,7 @@ const int values[] = {1, 4, 8};
 		body.collisionCategories = @[CollisionCategoryPickup];
 		// Then you list which categories its allowed to collide with.
 		body.collisionMask = @[CollisionCategoryPlayer, CollisionCategoryBarrier];
-		body.angularVelocity = CCRANDOM_MINUS1_1() * 1.2f;
+		body.angularVelocity = CCRANDOM_MINUS1_1() * 20.0f;
 		body.velocity = ccpMult(CCRANDOM_ON_UNIT_CIRCLE(), 95.0f);
 		
 		
@@ -32,7 +32,7 @@ const int values[] = {1, 4, 8};
 
 const float AccelRange = 130.0;
 const float AccelMin = 60.0;
-const float AccelMax = 1800.0;
+const float AccelMax = 600.0;
 
 -(void)ggFixedUpdate:(CCTime)delta scene:(GameScene *)scene
 {
@@ -43,7 +43,7 @@ const float AccelMax = 1800.0;
 	
 	// First, apply some drag
 	if(ccpLength(body.velocity) > 40.0f){
-		body.velocity = ccpMult(body.velocity, 0.9);
+		body.velocity = ccpMult(body.velocity, pow(0.25, delta));
 	}
 	
 	CGPoint targetPoint = scene.playerPosition;
