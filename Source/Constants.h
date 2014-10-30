@@ -4,6 +4,9 @@
 
 static CGSize GameSceneSize = {1024, 1024};
 
+typedef NS_ENUM(NSUInteger, ShipTypes){
+	Ship_Retribution, Ship_Defiant, Ship_Herald
+};
 
 enum Z_ORDER {
 	Z_SCROLL_NODE,

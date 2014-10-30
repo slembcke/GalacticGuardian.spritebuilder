@@ -58,6 +58,35 @@
 }
 
 
+-(void)showShipSelector
+{
+	CCDirector *director = [CCDirector sharedDirector];
+	CGSize viewSize = director.viewSize;
+	
+	CCScene *pause = (CCScene *)[CCBReader load:@"ShipSelectionScene"];
+	
+	CCRenderTexture *rt = [CCRenderTexture renderTextureWithWidth:viewSize.width height:viewSize.height];
+	rt.contentScale /= 4.0;
+	rt.texture.antialiased = YES;
+	
+	GLKMatrix4 projection = director.projectionMatrix;
+	CCRenderer *renderer = [rt begin];
+	[self visit:renderer parentTransform:&projection];
+	[rt end];
+	
+	CCSprite *screenGrab = [CCSprite spriteWithTexture:rt.texture];
+	screenGrab.anchorPoint = ccp(0.0, 0.0);
+	screenGrab.effect = [CCEffectStack effects:
+											 [CCEffectBlur effectWithBlurRadius:4.0],
+											 [CCEffectSaturation effectWithSaturation:-0.5],
+											 nil
+											 ];
+	[pause addChild:screenGrab z:-1];
+	
+	[director pushScene:pause withTransition:[CCTransition transitionCrossFadeWithDuration:0.25]];
+}
+
+
 -(void)play:(NSString *)selectedShip
 {
 	GameScene *scene = [[GameScene alloc] initWithShipType:selectedShip level:0 ];
