@@ -551,6 +551,7 @@
 				D3EAD2BE1A00AD2B002AA0D2 /* Constants.h */,
 				B7378992180767190076A88C /* MainMenu.h */,
 				B7378993180767190076A88C /* MainMenu.m */,
+				D3EAD2BA1A009F8D002AA0D2 /* PauseScene.m */,
 				75058A2F19FEC27F001AA9C6 /* GameScene.h */,
 				75058A3019FEC27F001AA9C6 /* GameScene.m */,
 				D3937FBD19FDD9AB0074009E /* NebulaBackground.h */,
@@ -566,7 +567,6 @@
 				75058A691A005881001AA9C6 /* SpaceBucks.m */,
 				D31D3DCE1A0041A80085DB5B /* Controls.h */,
 				D31D3DCA1A00418C0085DB5B /* Controls.m */,
-				D3EAD2BA1A009F8D002AA0D2 /* PauseScene.m */,
 			);
 			path = Source;
 			sourceTree = "<group>";

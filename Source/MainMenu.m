@@ -14,7 +14,7 @@
 
 +(void)initialize
 {
-	if(self == [MainMenu class]) return;
+	if(self != [MainMenu class]) return;
 	
 	// This doesn't really belong here, but there isn't a great platform common "just launched" location.
 	[CCDirector sharedDirector].fixedUpdateInterval = 1.0/120.0;
@@ -25,7 +25,8 @@
 		DefaultsSoundKey: @(1.0),
 	}];
 	
-	// TODO Set volumes, start music.
+	[OALSimpleAudio sharedInstance].bgVolume = [defaults floatForKey:DefaultsMusicKey];
+	[OALSimpleAudio sharedInstance].effectsVolume = [defaults floatForKey:DefaultsSoundKey];
 }
 
 -(void)didLoadFromCCB
