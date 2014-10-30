@@ -155,4 +155,9 @@
     }
 }
 
+-(void)touchCancelled:(CCTouch *)touch withEvent:(CCTouchEvent *)event
+{
+	[self touchEnded:touch withEvent:event];
+}
+
 @end
