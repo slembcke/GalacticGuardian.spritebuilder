@@ -417,9 +417,9 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 {
 	_spaceBucks = 0;
 	_spaceBucksTilNextLevel = _ship_level * 60 + 30;
-	if(_ship_level >= 7){
+	if(_ship_level >= 6){
 		// Temp code:
-		_spaceBucksTilNextLevel = 10000;
+		_spaceBucksTilNextLevel = 60000;
 	}
 	
 	float rotation = 0.0f;
@@ -429,7 +429,7 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 		[_playerShip removeFromParent];
 	}
 	
-	int shipChassis = (_ship_level) / 2 + 1;
+	int shipChassis = MIN((_ship_level) / 2 + 1, 3);
 	_playerShip = (PlayerShip *)[CCBReader load:[NSString stringWithFormat:@"%@-%d", shipType, shipChassis ]];
 	_playerShip.position = pos;
 	_playerShip.name = shipType;
