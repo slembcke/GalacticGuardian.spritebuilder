@@ -107,6 +107,15 @@
 		D31D3DCB1A00418C0085DB5B /* Controls.m in Sources */ = {isa = PBXBuildFile; fileRef = D31D3DCA1A00418C0085DB5B /* Controls.m */; };
 		D31D3DCC1A00418C0085DB5B /* Controls.m in Sources */ = {isa = PBXBuildFile; fileRef = D31D3DCA1A00418C0085DB5B /* Controls.m */; };
 		D31D3DCD1A00418C0085DB5B /* Controls.m in Sources */ = {isa = PBXBuildFile; fileRef = D31D3DCA1A00418C0085DB5B /* Controls.m */; };
+		D3450BB61A01FEA100E63B3A /* FancyJoystick.m in Sources */ = {isa = PBXBuildFile; fileRef = D3450BB11A01FEA100E63B3A /* FancyJoystick.m */; };
+		D3450BB71A01FEA100E63B3A /* joystick.plist in Resources */ = {isa = PBXBuildFile; fileRef = D3450BB21A01FEA100E63B3A /* joystick.plist */; };
+		D3450BB81A01FEA100E63B3A /* joystick.png in Resources */ = {isa = PBXBuildFile; fileRef = D3450BB31A01FEA100E63B3A /* joystick.png */; };
+		D3450BBC1A01FEAD00E63B3A /* FancyJoystick.m in Sources */ = {isa = PBXBuildFile; fileRef = D3450BB11A01FEA100E63B3A /* FancyJoystick.m */; };
+		D3450BBD1A01FEAD00E63B3A /* FancyJoystick.m in Sources */ = {isa = PBXBuildFile; fileRef = D3450BB11A01FEA100E63B3A /* FancyJoystick.m */; };
+		D3450BBE1A01FEB200E63B3A /* joystick.plist in Resources */ = {isa = PBXBuildFile; fileRef = D3450BB21A01FEA100E63B3A /* joystick.plist */; };
+		D3450BBF1A01FEB200E63B3A /* joystick.png in Resources */ = {isa = PBXBuildFile; fileRef = D3450BB31A01FEA100E63B3A /* joystick.png */; };
+		D3450BC01A01FEB300E63B3A /* joystick.plist in Resources */ = {isa = PBXBuildFile; fileRef = D3450BB21A01FEA100E63B3A /* joystick.plist */; };
+		D3450BC11A01FEB300E63B3A /* joystick.png in Resources */ = {isa = PBXBuildFile; fileRef = D3450BB31A01FEA100E63B3A /* joystick.png */; };
 		D3937FC219FE1B2A0074009E /* DistortionParticle.fsh in Resources */ = {isa = PBXBuildFile; fileRef = D3937FC119FE1B2A0074009E /* DistortionParticle.fsh */; };
 		D3937FC319FE1B2A0074009E /* DistortionParticle.fsh in Resources */ = {isa = PBXBuildFile; fileRef = D3937FC119FE1B2A0074009E /* DistortionParticle.fsh */; };
 		D3937FC419FE1B2A0074009E /* DistortionParticle.fsh in Resources */ = {isa = PBXBuildFile; fileRef = D3937FC119FE1B2A0074009E /* DistortionParticle.fsh */; };
@@ -300,6 +309,12 @@
 		D31D3DC81A00108A0085DB5B /* GameController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameController.framework; path = System/Library/Frameworks/GameController.framework; sourceTree = SDKROOT; };
 		D31D3DCA1A00418C0085DB5B /* Controls.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Controls.m; sourceTree = "<group>"; };
 		D31D3DCE1A0041A80085DB5B /* Controls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Controls.h; sourceTree = "<group>"; };
+		D3450BB01A01FEA100E63B3A /* FancyJoystick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FancyJoystick.h; sourceTree = "<group>"; };
+		D3450BB11A01FEA100E63B3A /* FancyJoystick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FancyJoystick.m; sourceTree = "<group>"; };
+		D3450BB21A01FEA100E63B3A /* joystick.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = joystick.plist; sourceTree = "<group>"; };
+		D3450BB31A01FEA100E63B3A /* joystick.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = joystick.png; sourceTree = "<group>"; };
+		D3450BB41A01FEA100E63B3A /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		D3450BB51A01FEA100E63B3A /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D352B48019EC608A00829775 /* MetalShaders */ = {isa = PBXFileReference; lastKnownFileType = folder; path = MetalShaders; sourceTree = "<group>"; };
 		D3937FBD19FDD9AB0074009E /* NebulaBackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NebulaBackground.h; sourceTree = "<group>"; };
 		D3937FC119FE1B2A0074009E /* DistortionParticle.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = DistortionParticle.fsh; sourceTree = "<group>"; };
@@ -538,6 +553,7 @@
 		9222E2B918734FF800A246C7 /* libs */ = {
 			isa = PBXGroup;
 			children = (
+				D3450BAF1A01FEA100E63B3A /* FancyJoystick */,
 				B7378940180761A80076A88C /* cocos2d.xcodeproj */,
 			);
 			name = libs;
@@ -672,6 +688,20 @@
 				B73789861807631A0076A88C /* Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D3450BAF1A01FEA100E63B3A /* FancyJoystick */ = {
+			isa = PBXGroup;
+			children = (
+				D3450BB01A01FEA100E63B3A /* FancyJoystick.h */,
+				D3450BB11A01FEA100E63B3A /* FancyJoystick.m */,
+				D3450BB21A01FEA100E63B3A /* joystick.plist */,
+				D3450BB31A01FEA100E63B3A /* joystick.png */,
+				D3450BB41A01FEA100E63B3A /* LICENSE */,
+				D3450BB51A01FEA100E63B3A /* README.md */,
+			);
+			name = FancyJoystick;
+			path = Source/libs/FancyJoystick;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -818,7 +848,7 @@
 		};
 		7A97910219E62E40001FFC4D /* cocos2dJava.jar */ = {
 			isa = PBXReferenceProxy;
-			fileType = archive.jar;
+			fileType = compiled.java.jar;
 			path = cocos2dJava.jar;
 			remoteRef = 7A97910119E62E40001FFC4D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -842,9 +872,11 @@
 				D3ED616C19FF3B7400DF3A43 /* BurnSprite.fsh in Resources */,
 				7A4036F719DE401F007B6E8F /* iPad-old.png in Resources */,
 				7A4036F819DE401F007B6E8F /* iPad-old@2x.png in Resources */,
+				D3450BC11A01FEB300E63B3A /* joystick.png in Resources */,
 				D3937FCA19FE1C410074009E /* DistortionParticle.vsh in Resources */,
 				D3937FC419FE1B2A0074009E /* DistortionParticle.fsh in Resources */,
 				7A4036F919DE401F007B6E8F /* iPad.png in Resources */,
+				D3450BC01A01FEB300E63B3A /* joystick.plist in Resources */,
 				D3A7E8F819FDCB5E00695965 /* Nebula.fsh in Resources */,
 				7A4036FA19DE401F007B6E8F /* iPad@2x.png in Resources */,
 				D3A7E8E119FDC88600695965 /* Nebula.png in Resources */,
@@ -875,6 +907,7 @@
 				D3A7E8E319FDC88600695965 /* NebulaDepth.png in Resources */,
 				927F61AE196C771E000F43EF /* Default@2x.png in Resources */,
 				927F61AF196C771E000F43EF /* iPad@2x.png in Resources */,
+				D3450BBE1A01FEB200E63B3A /* joystick.plist in Resources */,
 				927F61B0196C771E000F43EF /* iPad.png in Resources */,
 				D3ED616F19FF3B8000DF3A43 /* BurnSprite.vsh in Resources */,
 				D3A7E8E019FDC88600695965 /* Nebula.png in Resources */,
@@ -897,6 +930,7 @@
 				D3EAD2C91A00B465002AA0D2 /* Default-Landscape@2x~ipad.png in Resources */,
 				927F61BA196C771E000F43EF /* Default.png in Resources */,
 				927F61BB196C771E000F43EF /* iPad-old.png in Resources */,
+				D3450BBF1A01FEB200E63B3A /* joystick.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -908,6 +942,7 @@
 				D3A7E8E219FDC88600695965 /* NebulaDepth.png in Resources */,
 				B7378978180762440076A88C /* Default@2x.png in Resources */,
 				D3937FC219FE1B2A0074009E /* DistortionParticle.fsh in Resources */,
+				D3450BB71A01FEA100E63B3A /* joystick.plist in Resources */,
 				B71F5914188484E7003F4D28 /* iPad@2x.png in Resources */,
 				D3ED616E19FF3B8000DF3A43 /* BurnSprite.vsh in Resources */,
 				B71F5913188484E7003F4D28 /* iPad.png in Resources */,
@@ -930,6 +965,7 @@
 				D3EAD2C81A00B465002AA0D2 /* Default-Landscape@2x~ipad.png in Resources */,
 				B7378977180762440076A88C /* Default.png in Resources */,
 				B71F5911188484E7003F4D28 /* iPad-old.png in Resources */,
+				D3450BB81A01FEA100E63B3A /* joystick.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -996,6 +1032,7 @@
 				75058A5419FEE7B7001AA9C6 /* EnemyShip.m in Sources */,
 				75058A4919FECF95001AA9C6 /* Bullet.m in Sources */,
 				D3ED617219FF57A100DF3A43 /* PlayerShip.m in Sources */,
+				D3450BBD1A01FEAD00E63B3A /* FancyJoystick.m in Sources */,
 				D3A7E8DC19FDC86000695965 /* NebulaBackground.m in Sources */,
 				D31D3DCD1A00418C0085DB5B /* Controls.m in Sources */,
 				7A4036E819DE3F33007B6E8F /* MainMenu.m in Sources */,
@@ -1020,6 +1057,7 @@
 				75058A5319FEE7B7001AA9C6 /* EnemyShip.m in Sources */,
 				D3ED616619FF327C00DF3A43 /* BurnSprite.m in Sources */,
 				5B121030197484FA004C1E1D /* GalacticGuardianActivity.m in Sources */,
+				D3450BBC1A01FEAD00E63B3A /* FancyJoystick.m in Sources */,
 				75058A4819FECF95001AA9C6 /* Bullet.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1028,6 +1066,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3450BB61A01FEA100E63B3A /* FancyJoystick.m in Sources */,
 				D3A7E8DA19FDC86000695965 /* NebulaBackground.m in Sources */,
 				D3ED616519FF327C00DF3A43 /* BurnSprite.m in Sources */,
 				75058A5219FEE7B7001AA9C6 /* EnemyShip.m in Sources */,

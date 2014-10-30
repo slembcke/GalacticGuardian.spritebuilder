@@ -3,6 +3,7 @@
 #import "ObjectiveChipmunk/ObjectiveChipmunk.h"
 
 #import "Controls.h"
+#import "FancyJoystick.h"
 
 
 @interface VirtualJoystick : CCNode @end
@@ -86,8 +87,8 @@
 
 
 @implementation Controls {
-	VirtualJoystick *_virtualJoystick;
-	VirtualJoystick *_virtualAimJoystick;
+	FancyJoystick *_virtualJoystick;
+	FancyJoystick *_virtualAimJoystick;
 	
 	GCController *_controller;
 	GCControllerDirectionPad *_controllerStick;
@@ -108,11 +109,13 @@
 		
 		CGFloat joystickOffset = viewSize.width/8.0;
 		
-		_virtualJoystick = [[VirtualJoystick alloc] initWithSize:joystickOffset];
+		_virtualJoystick = [FancyJoystick node];
+		_virtualJoystick.scale = 2.0*joystickOffset/_virtualJoystick.contentSize.width;
 		_virtualJoystick.position = ccp(joystickOffset, joystickOffset);
 		[self addChild:_virtualJoystick];
 		
-		_virtualAimJoystick = [[VirtualJoystick alloc] initWithSize:joystickOffset];
+		_virtualAimJoystick = [FancyJoystick node];
+		_virtualAimJoystick.scale = 2.0*joystickOffset/_virtualJoystick.contentSize.width;
 		_virtualAimJoystick.position = ccp(viewSize.width - joystickOffset, joystickOffset);
 		[self addChild:_virtualAimJoystick];
 		
@@ -245,7 +248,7 @@
 	if(_controllerAim){
 		aim = CGPointMake(_controllerAim.xAxis.value, _controllerAim.yAxis.value);
 	} else {
-		aim = _virtualAimJoystick.value;
+		aim = _virtualAimJoystick.direction;
 	}
 	
 	[self setButtonValue:ControlFireButton value:(aim.x*aim.x + aim.y*aim.y) > 0.25];
@@ -278,7 +281,7 @@
 			_controllerStick.yAxis.value + _controllerDpad.yAxis.value
 		), 1.0);
 	} else {
-		return _virtualJoystick.value;
+		return _virtualJoystick.direction;
 	}
 }
 
@@ -290,7 +293,7 @@
 			_controllerAim.yAxis.value
 		), 1.0);
 	} else {
-		return _virtualAimJoystick.value;
+		return _virtualAimJoystick.direction;
 	}
 }
 
