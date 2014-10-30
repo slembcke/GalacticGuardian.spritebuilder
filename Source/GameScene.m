@@ -219,7 +219,7 @@
 		_enemies_killed += 1;
 		
 		// spawn loot:
-		for(int i = 0; i < 4; i++){
+		for(int i = 0; i < 10; i++){
 			SpaceBuckType type = SpaceBuck_1;
 			float n = CCRANDOM_0_1();
 			if(n > 0.90f){
@@ -284,13 +284,15 @@
 	// Draw a little distortion too
 	CCSprite *distortion = [CCSprite spriteWithImageNamed:@"DistortionTexture.png"];
 	distortion.position = position;
-	distortion.scale = 0.25;
+	distortion.scale = 0.15;
+	distortion.opacity = 0.5;
+	distortion.rotation = 360.0*CCRANDOM_0_1();
 	[_background.distortionNode addChild:distortion];
 	
 	[distortion runAction:[CCActionSequence actions:
 		[CCActionSpawn actions:
 			[CCActionFadeOut actionWithDuration:duration],
-			[CCActionScaleTo actionWithDuration:duration scale:1.0],
+			[CCActionScaleTo actionWithDuration:duration scale:0.5],
 			nil
 		],
 		[CCActionRemove action],
@@ -512,6 +514,7 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 	[pickup removeFromParent];
 	[_pickups removeObject:pickup];
 	
+	[self drawFlash:pickup.position];
 	[[OALSimpleAudio sharedInstance] playEffect:@"TempSounds/Pickup.wav" volume:0.5 pitch:1.0 pan:0.0 loop:NO];
 	
 	_spaceBucks += [pickup amount];

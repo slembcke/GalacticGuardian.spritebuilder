@@ -22,7 +22,7 @@ const int values[] = {1, 4, 8};
 		// Then you list which categories its allowed to collide with.
 		body.collisionMask = @[CollisionCategoryPlayer, CollisionCategoryBarrier];
 		body.angularVelocity = CCRANDOM_MINUS1_1() * 20.0f;
-		body.velocity = ccpMult(CCRANDOM_ON_UNIT_CIRCLE(), 95.0f);
+		body.velocity = ccpMult(CCRANDOM_IN_UNIT_CIRCLE(), 200.0f);
 		
 		
 		
