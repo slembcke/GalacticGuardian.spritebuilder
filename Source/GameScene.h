@@ -1,8 +1,11 @@
+#import "Constants.h"
+
 @class PlayerShip, EnemyShip, Bullet;
+
 
 @interface GameScene : CCScene<CCPhysicsCollisionDelegate>
 
--(instancetype)initWithShipType:(NSString *)shipType level:(int) shipLevel;
+-(instancetype)initWithShipType:(ShipType) shipType level:(int) shipLevel;
 
 -(void)enemyDeath:(EnemyShip *)enemy from:(Bullet *) bullet;
 -(void)splashDamageAt:(CGPoint)center radius:(float)radius damage:(int)damage;

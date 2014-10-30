@@ -4,6 +4,12 @@
 
 static CGSize GameSceneSize = {1024, 1024};
 
+static NSString * const ship_names[] =			{@"Retribution", @"Defiant", @"Herald"};
+static NSString * const ship_fileNames[] =	{@"Retribution", @"ScottSpaceship", @"AndySpaceship"};
+
+typedef NS_ENUM(NSUInteger, ShipType){
+	Ship_Retribution, Ship_Defiant, Ship_Herald
+};
 
 enum Z_ORDER {
 	Z_SCROLL_NODE,

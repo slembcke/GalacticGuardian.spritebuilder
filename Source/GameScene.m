@@ -44,9 +44,10 @@
 	int _spaceBucksTilNextLevel;
 }
 
--(instancetype)initWithShipType:(NSString *)shipType level:(int) shipLevel
+-(instancetype)initWithShipType:(ShipType) shipType level:(int) shipLevel
 {
 	if((self = [super init])){
+		
 		_ship_level = shipLevel;
 		
 		_spaceBucks = 0;
@@ -94,7 +95,7 @@
 		
 		// Add a ship in the middle of the screen.
 		_ship_level = shipLevel;
-		[self createPlayerShipAt: ccp(GameSceneSize.width/2.0, GameSceneSize.height/2.0) ofType:shipType];
+		[self createPlayerShipAt: ccp(GameSceneSize.width/2.0, GameSceneSize.height/2.0) withArt:ship_fileNames[shipType]];
 		
 		[self scheduleBlock:^(CCTimer *timer) {
 			EnemyShip *enemy = (EnemyShip *)[CCBReader load:@"BadGuy1"];
@@ -450,13 +451,13 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 	[director pushScene:pause withTransition:[CCTransition transitionCrossFadeWithDuration:0.25]];
 }
 
--(void) createPlayerShipAt:(CGPoint) pos ofType:(NSString *) shipType
+-(void) createPlayerShipAt:(CGPoint) pos withArt:(NSString *) shipArt
 {
 	_spaceBucks = 0;
 	_spaceBucksTilNextLevel = _ship_level * 60 + 30;
-	if(_ship_level >= 7){
+	if(_ship_level >= 6){
 		// Temp code:
-		_spaceBucksTilNextLevel = 10000;
+		_spaceBucksTilNextLevel = 60000;
 	}
 	
 	float rotation = 0.0f;
@@ -466,10 +467,10 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 		[_playerShip removeFromParent];
 	}
 	
-	int shipChassis = (_ship_level) / 2 + 1;
-	_playerShip = (PlayerShip *)[CCBReader load:[NSString stringWithFormat:@"%@-%d", shipType, shipChassis ]];
+	int shipChassis = MIN((_ship_level) / 2 + 1, 3);
+	_playerShip = (PlayerShip *)[CCBReader load:[NSString stringWithFormat:@"%@-%d", shipArt, shipChassis ]];
 	_playerShip.position = pos;
-	_playerShip.name = shipType;
+	_playerShip.name = shipArt;
 	[_physics addChild:_playerShip z:Z_PLAYER];
 	[_background.distortionNode addChild:_playerShip.shieldDistortionSprite];
 	_playerShip.bulletLevel = MIN(_ship_level, BulletRed2);
@@ -508,9 +509,7 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 			nil
 	]];
 	
-	[self createPlayerShipAt:_playerShip.position ofType:_playerShip.name];
-	
-	
+	[self createPlayerShipAt:_playerShip.position withArt:_playerShip.name];
 }
 
 -(CCNode *)distortionNode
@@ -572,7 +571,7 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 	[_pickups removeObject:pickup];
 	
 	[self drawFlash:pickup.position withImage:pickup.flashImage];
-	[[OALSimpleAudio sharedInstance] playEffect:@"TempSounds/Pickup.wav" volume:0.5 pitch:1.0 pan:0.0 loop:NO];
+	[[OALSimpleAudio sharedInstance] playEffect:@"TempSounds/Pickup.wav" volume:0.25 pitch:1.0 pan:0.0 loop:NO];
 	
 	_spaceBucks += [pickup amount];
 	levelProgress.percentage = ((float) _spaceBucks/ _spaceBucksTilNextLevel) * 100.0f;

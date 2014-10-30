@@ -3,10 +3,13 @@
 #import "MainMenu.h"
 #import "NebulaBackground.h"
 #import "GameScene.h"
+#import "ShipSelectionScene.h"
 
 @implementation MainMenu {
 	NebulaBackground *_background;
 	CCTime _time;
+	
+	CCLabelTTF* _titleLabel;
 	
 	CCSprite* _ship1;
 	CCSprite* _ship2;
@@ -58,21 +61,51 @@
 }
 
 
--(void)play:(NSString *)selectedShip
+-(void)showShipSelector
 {
-	GameScene *scene = [[GameScene alloc] initWithShipType:selectedShip level:0 ];
-	[[CCDirector sharedDirector] replaceScene:scene];
+	// Remove label so it doesn't show through the background and so it makes a good cinematic when we select a ship.
+	[_titleLabel removeFromParent];
+	
+	CCDirector *director = [CCDirector sharedDirector];
+	CGSize viewSize = director.viewSize;
+	
+	ShipSelectionScene *newScene = (ShipSelectionScene *)[CCBReader load:@"ShipSelectionScene"];
+	newScene.mainMenu = self;
+	
+	CCRenderTexture *rt = [CCRenderTexture renderTextureWithWidth:viewSize.width height:viewSize.height];
+	rt.contentScale /= 4.0;
+	rt.texture.antialiased = YES;
+	
+	GLKMatrix4 projection = director.projectionMatrix;
+	CCRenderer *renderer = [rt begin];
+	[self visit:renderer parentTransform:&projection];
+	[rt end];
+	
+	CCSprite *screenGrab = [CCSprite spriteWithTexture:rt.texture];
+	screenGrab.anchorPoint = ccp(0.0, 0.0);
+	screenGrab.effect = [CCEffectStack effects:
+											 [CCEffectBlur effectWithBlurRadius:4.0],
+											 [CCEffectSaturation effectWithSaturation:-0.5],
+											 nil
+											 ];
+	[newScene addChild:screenGrab z:-1];
+	
+	[director pushScene:newScene withTransition:[CCTransition transitionCrossFadeWithDuration:0.25]];
 }
 
--(void)ship1Selected
+
+-(void) launchWithShip:(ShipType) shipType;
 {
-	[self play:@"AndySpaceship"];
+	__block ShipType blockShip = shipType;
+	
+	
+	[self scheduleBlock:^(CCTimer *timer) {
+		GameScene *scene = [[GameScene alloc] initWithShipType:blockShip level:0 ];
+		[[CCDirector sharedDirector] replaceScene:scene];
+	}delay:1.0f];
+
 }
 
--(void)ship2Selected
-{
-	[self play:@"ScottSpaceship"];
-}
 
 
 @end
