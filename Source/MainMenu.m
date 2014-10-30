@@ -63,7 +63,7 @@
 	CCDirector *director = [CCDirector sharedDirector];
 	CGSize viewSize = director.viewSize;
 	
-	CCScene *pause = (CCScene *)[CCBReader load:@"ShipSelectionScene"];
+	CCScene *newScene = (CCScene *)[CCBReader load:@"ShipSelectionScene"];
 	
 	CCRenderTexture *rt = [CCRenderTexture renderTextureWithWidth:viewSize.width height:viewSize.height];
 	rt.contentScale /= 4.0;
@@ -81,27 +81,18 @@
 											 [CCEffectSaturation effectWithSaturation:-0.5],
 											 nil
 											 ];
-	[pause addChild:screenGrab z:-1];
+	[newScene addChild:screenGrab z:-1];
 	
-	[director pushScene:pause withTransition:[CCTransition transitionCrossFadeWithDuration:0.25]];
+	[director pushScene:newScene withTransition:[CCTransition transitionCrossFadeWithDuration:0.25]];
 }
 
 
--(void)play:(NSString *)selectedShip
+-(void) launchWithShip:(ShipType) shipType;
 {
-	GameScene *scene = [[GameScene alloc] initWithShipType:selectedShip level:0 ];
+	GameScene *scene = [[GameScene alloc] initWithShipType:shipType level:0 ];
 	[[CCDirector sharedDirector] replaceScene:scene];
 }
 
--(void)ship1Selected
-{
-	[self play:@"AndySpaceship"];
-}
-
--(void)ship2Selected
-{
-	[self play:@"ScottSpaceship"];
-}
 
 
 @end

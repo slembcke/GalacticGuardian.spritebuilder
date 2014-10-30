@@ -4,7 +4,9 @@
 
 static CGSize GameSceneSize = {1024, 1024};
 
-typedef NS_ENUM(NSUInteger, ShipTypes){
+static NSString * const ship_names[] = {@"Retribution", @"Defiant", @"Herald"};
+
+typedef NS_ENUM(NSUInteger, ShipType){
 	Ship_Retribution, Ship_Defiant, Ship_Herald
 };
 

@@ -165,7 +165,7 @@
 						<key>displayName</key>
 						<string>bgBar</string>
 						<key>memberVarAssignmentName</key>
-						<string>shieldBarSprite</string>
+						<string></string>
 						<key>memberVarAssignmentType</key>
 						<integer>1</integer>
 						<key>properties</key>
@@ -739,7 +739,7 @@
 						<key>displayName</key>
 						<string>PlayerShip</string>
 						<key>memberVarAssignmentName</key>
-						<string>shipNode</string>
+						<string>_shipNode</string>
 						<key>memberVarAssignmentType</key>
 						<integer>1</integer>
 						<key>properties</key>
@@ -1424,7 +1424,7 @@
 						<key>displayName</key>
 						<string>blueBar</string>
 						<key>memberVarAssignmentName</key>
-						<string></string>
+						<string>shieldBarSprite</string>
 						<key>memberVarAssignmentType</key>
 						<integer>1</integer>
 						<key>properties</key>
@@ -1532,7 +1532,7 @@
 						<key>displayName</key>
 						<string>greenBar</string>
 						<key>memberVarAssignmentName</key>
-						<string></string>
+						<string>speedBarSprite</string>
 						<key>memberVarAssignmentType</key>
 						<integer>1</integer>
 						<key>properties</key>
@@ -1640,7 +1640,7 @@
 						<key>displayName</key>
 						<string>redBar</string>
 						<key>memberVarAssignmentName</key>
-						<string></string>
+						<string>powerBarSprite</string>
 						<key>memberVarAssignmentType</key>
 						<integer>1</integer>
 						<key>properties</key>
@@ -2266,8 +2266,6 @@
 								</array>
 							</dict>
 						</array>
-						<key>selected</key>
-						<true/>
 					</dict>
 				</array>
 				<key>customClass</key>
@@ -2275,7 +2273,7 @@
 				<key>displayName</key>
 				<string>View</string>
 				<key>memberVarAssignmentName</key>
-				<string></string>
+				<string>_viewNode</string>
 				<key>memberVarAssignmentType</key>
 				<integer>1</integer>
 				<key>properties</key>
@@ -2361,6 +2359,8 @@
 						<real>0.5</real>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>

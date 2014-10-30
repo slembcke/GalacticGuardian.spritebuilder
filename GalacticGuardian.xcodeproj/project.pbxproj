@@ -266,6 +266,7 @@
 		75058A681A005881001AA9C6 /* SpaceBucks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpaceBucks.h; sourceTree = "<group>"; };
 		75058A691A005881001AA9C6 /* SpaceBucks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpaceBucks.m; sourceTree = "<group>"; };
 		7584885F1A02C24A005F0B48 /* ShipSelectionScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShipSelectionScene.m; sourceTree = "<group>"; };
+		758488641A02E3EB005F0B48 /* ShipSelectionScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShipSelectionScene.h; sourceTree = "<group>"; };
 		7A4035FF19DDEE84007B6E8F /* GalacticGuardian Mac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GalacticGuardian Mac.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A40360219DDEE84007B6E8F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Platforms/Mac/Info.plist; sourceTree = "<group>"; };
 		7A40360319DDEE84007B6E8F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Source/Platforms/Mac/main.m; sourceTree = "<group>"; };
@@ -592,6 +593,7 @@
 				D31D3DCE1A0041A80085DB5B /* Controls.h */,
 				D31D3DCA1A00418C0085DB5B /* Controls.m */,
 				7584885F1A02C24A005F0B48 /* ShipSelectionScene.m */,
+				758488641A02E3EB005F0B48 /* ShipSelectionScene.h */,
 			);
 			path = Source;
 			sourceTree = "<group>";

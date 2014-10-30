@@ -42,9 +42,11 @@
 	int _spaceBucksTilNextLevel;
 }
 
--(instancetype)initWithShipType:(NSString *)shipType level:(int) shipLevel
+-(instancetype)initWithShipType:(ShipType *)shipType level:(int) shipLevel
 {
 	if((self = [super init])){
+		
+		NSString *shipArt = @"AndySpaceship";
 		_ship_level = shipLevel;
 		
 		_spaceBucks = 0;
@@ -92,7 +94,7 @@
 		
 		// Add a ship in the middle of the screen.
 		_ship_level = shipLevel;
-		[self createPlayerShipAt: ccp(GameSceneSize.width/2.0, GameSceneSize.height/2.0) ofType:shipType];
+		[self createPlayerShipAt: ccp(GameSceneSize.width/2.0, GameSceneSize.height/2.0) ofType:shipArt];
 		
 		[self scheduleBlock:^(CCTimer *timer) {
 			EnemyShip *enemy = (EnemyShip *)[CCBReader load:@"BadGuy1"];
@@ -529,7 +531,7 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 	[_pickups removeObject:pickup];
 	
 	[self drawFlash:pickup.position withImage:pickup.flashImage];
-	[[OALSimpleAudio sharedInstance] playEffect:@"TempSounds/Pickup.wav" volume:0.5 pitch:1.0 pan:0.0 loop:NO];
+	[[OALSimpleAudio sharedInstance] playEffect:@"TempSounds/Pickup.wav" volume:0.25 pitch:1.0 pan:0.0 loop:NO];
 	
 	_spaceBucks += [pickup amount];
 	levelProgress.percentage = ((float) _spaceBucks/ _spaceBucksTilNextLevel) * 100.0f;
