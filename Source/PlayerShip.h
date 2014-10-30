@@ -22,9 +22,11 @@
 
 @property(nonatomic) CCSprite *shieldDistortionSprite;
 
--(void)fixedUpdate:(CCTime)delta withControls:(Controls *)controls;
+-(void)ggFixedUpdate:(CCTime)delta withControls:(Controls *)controls;
 
 -(BOOL)takeDamage;
 -(BOOL)isDead;
+
+-(void)destroy;
 
 @end

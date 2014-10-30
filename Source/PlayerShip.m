@@ -11,6 +11,8 @@
 #import "Constants.h"
 
 #import "PlayerShip.h"
+#import "GameScene.h"
+#import "EnemyShip.h"
 
 // To access some of Chipmunk's handy vector functions like cpvlerpconst().
 #import "ObjectiveChipmunk/ObjectiveChipmunk.h"
@@ -93,7 +95,7 @@
 }
 
 // This method is called from [GameScene fixedUpdate:], not from Cocos2D.
--(void)fixedUpdate:(CCTime)delta withControls:(Controls *)controls
+-(void)ggFixedUpdate:(CCTime)delta withControls:(Controls *)controls
 {
 	CCPhysicsBody *body = self.physicsBody;
 	
@@ -183,6 +185,46 @@
 -(BOOL) isDead
 {
 	return _hp <= 0;
+}
+
+-(void)destroy
+{
+	CGPoint pos = self.position;
+	GameScene *scene = (GameScene *)self.scene;
+	
+	CCNode *debris = [CCBReader load:self.debris];
+	debris.position = pos;
+	debris.rotation = self.rotation;
+	InitDebris(debris, debris, self.physicsBody.velocity, [CCColor colorWithRed:1.0f green:1.0f blue:0.3f]);
+	[self.parent addChild:debris z:Z_DEBRIS];
+	
+	CCNode *explosion = [CCBReader load:@"Particles/ShipExplosion"];
+	explosion.position = pos;
+	[self.parent addChild:explosion z:Z_PARTICLES];
+	
+	CCNode *distortion = [CCBReader load:@"DistortionParticles/LargeRing"];
+	distortion.position = pos;
+	[[scene distortionNode] addChild:distortion];
+	
+	[self scheduleBlock:^(CCTimer *timer) {
+		[debris removeFromParent];
+		[explosion removeFromParent];
+		[distortion removeFromParent];
+	} delay:5];
+	
+	[self scheduleBlock:^(CCTimer *timer){
+		// Go back to the menu after a short delay.
+		[[CCDirector sharedDirector] replaceScene:[CCBReader loadAsScene:@"MainMenu"]];
+	} delay:5.0];
+	
+
+	for (EnemyShip * e in scene.enemies) {
+		// explode based on distance from player.
+		float dist = ccpLength(ccpSub(pos, e.position));
+		[e scheduleBlock:^(CCTimer *timer) {[e destroy];} delay:dist / 200.0f];
+	}
+	
+	[self removeFromParent];
 }
 
 

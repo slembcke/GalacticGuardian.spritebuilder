@@ -10,6 +10,8 @@
 
 #import "Bullet.h"
 
+#import "GameScene.h"
+
 @implementation Bullet
 
 -(instancetype)initWithTMP
@@ -33,6 +35,13 @@
 	return self;
 }
 
+-(void)onEnter
+{
+	[self scheduleBlock:^(CCTimer *timer){[self destroy];} delay:self.duration];
+	
+	[super onEnter];
+}
+
 -(float)speed
 {
 	return 500.0;
@@ -41,6 +50,50 @@
 -(float)duration
 {
 	return 0.25;
+}
+
+-(void)destroy
+{
+	float duration = 0.15;
+	CGPoint pos = self.position;
+	
+	// Draw a little flash at it's last position
+	CCSprite *flash = [CCSprite spriteWithImageNamed:@"Sprites/Bullets/laserBlue08.png"];
+	flash.position = pos;
+	[self.parent addChild:flash z:Z_FLASH];
+	
+	[flash runAction:[CCActionSequence actions:
+		[CCActionSpawn actions:
+			[CCActionFadeOut actionWithDuration:duration],
+			[CCActionScaleTo actionWithDuration:duration scale:0.25],
+			nil
+		],
+		[CCActionRemove action],
+		nil
+	]];
+	
+	// Draw a little distortion too
+	CCSprite *distortion = [CCSprite spriteWithImageNamed:@"DistortionTexture.png"];
+	distortion.position = pos;
+	distortion.scale = 0.25;
+	[[(GameScene *)self.scene distortionNode] addChild:distortion];
+	
+	[distortion runAction:[CCActionSequence actions:
+		[CCActionSpawn actions:
+			[CCActionFadeOut actionWithDuration:duration],
+			[CCActionScaleTo actionWithDuration:duration scale:1.0],
+			nil
+		],
+		[CCActionRemove action],
+		nil
+	]];
+	
+	// Make some noise. Add a little chromatically tuned pitch bending to make it more musical.
+//	int half_steps = (arc4random()%(2*4 + 1) - 4);
+//	float pitch = pow(2.0f, half_steps/12.0f);
+//	[[OALSimpleAudio sharedInstance] playEffect:@"Fizzle.wav" volume:1.0 pitch:pitch pan:0.0 loop:NO];
+	
+	[self removeFromParent];
 }
 
 @end

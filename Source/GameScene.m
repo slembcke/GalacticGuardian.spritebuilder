@@ -34,8 +34,6 @@
 	
 	CCProgressNode *levelProgress;
 	
-	NSMutableArray *_enemies;
-	NSMutableArray *_bullets;
 	NSMutableArray *_pickups;
 	
 	int _enemies_killed;
@@ -90,7 +88,6 @@
 		[_physics addChild:bounds];
 		
 		_enemies = [NSMutableArray array];
-		_bullets = [NSMutableArray array];
 		_pickups = [NSMutableArray array];
 		
 		// Add a ship in the middle of the screen.
@@ -171,7 +168,8 @@
 	_fixedTime += delta;
 	
 	// Fly the ship using the joystick controls.
-	[_playerShip fixedUpdate:delta withControls:_controls];
+	[_playerShip ggFixedUpdate:delta withControls:_controls];
+	_playerPosition = _playerShip.position;
 	
 	if([_controls getButton:ControlFireButton]){
 		if(_playerShip.lastFireTime + (1.0f / _playerShip.fireRate) < _fixedTime){
@@ -180,10 +178,10 @@
 	}
 	
 	for (EnemyShip *e in _enemies) {
-		[e fixedUpdate:delta towardsPlayer:_playerShip];
+		[e ggFixedUpdate:delta scene:self];
 	}
 	for (SpaceBucks *sb in _pickups) {
-		[sb fixedUpdate:delta towardsPlayer:_playerShip];
+		[sb ggFixedUpdate:delta scene:self];
 	}
 	
 	
@@ -263,53 +261,6 @@
 	} delay:5];
 }
 
-
-
--(void)destroyBullet:(Bullet *)bullet
-{
-	[bullet removeFromParent];
-	[_bullets removeObject:bullet];
-	
-	float duration = 0.15;
-	CGPoint pos = bullet.position;
-	
-	// Draw a little flash at it's last position
-	CCSprite *flash = [CCSprite spriteWithImageNamed:@"Sprites/Bullets/laserBlue08.png"];
-	flash.position = pos;
-	[_physics addChild:flash z:Z_FLASH];
-	
-	[flash runAction:[CCActionSequence actions:
-		[CCActionSpawn actions:
-			[CCActionFadeOut actionWithDuration:duration],
-			[CCActionScaleTo actionWithDuration:duration scale:0.25],
-			nil
-		],
-		[CCActionRemove action],
-		nil
-	]];
-	
-	// Draw a little distortion too
-	CCSprite *distortion = [CCSprite spriteWithImageNamed:@"DistortionTexture.png"];
-	distortion.position = pos;
-	distortion.scale = 0.25;
-	[_background.distortionNode addChild:distortion];
-	
-	[distortion runAction:[CCActionSequence actions:
-		[CCActionSpawn actions:
-			[CCActionFadeOut actionWithDuration:duration],
-			[CCActionScaleTo actionWithDuration:duration scale:1.0],
-			nil
-		],
-		[CCActionRemove action],
-		nil
-	]];
-	
-	// Make some noise. Add a little chromatically tuned pitch bending to make it more musical.
-//	int half_steps = (arc4random()%(2*4 + 1) - 4);
-//	float pitch = pow(2.0f, half_steps/12.0f);
-//	[[OALSimpleAudio sharedInstance] playEffect:@"Fizzle.wav" volume:1.0 pitch:pitch pan:0.0 loop:NO];
-}
-
 -(void)fireBullet
 {
 	// Don't fire bullets if the ship is destroyed.
@@ -346,12 +297,6 @@
 	bullet.physicsBody.velocity = ccpMult(direction, bullet.speed);
 	
 	[_physics addChild:bullet z:Z_BULLET];
-	[_bullets addObject:bullet];
-	
-	// Give the bullet a finite lifetime.
-	[bullet scheduleBlock:^(CCTimer *timer){
-		[self destroyBullet:bullet];
-	} delay:bullet.duration];
 	
 	// Make some noise. Add a little chromatically tuned pitch bending to make it more musical.
 //	int half_steps = (arc4random()%(2*4 + 1) - 4);
@@ -359,8 +304,7 @@
 //	[[OALSimpleAudio sharedInstance] playEffect:@"Laser.wav" volume:1.0 pitch:pitch pan:0.0 loop:NO];
 }
 
-// Recursive helper function to set up physics on the debris child nodes.
-static void
+void
 InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 {
 	// If the node has a body, set some properties.
@@ -388,49 +332,6 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 	
 	// Recurse on the children.
 	for(CCNode *child in node.children) InitDebris(root, child, velocity, burnColor);
-}
-
--(void)playerDestroyed;
-{
-	
-	//The ship was destroyed!
-	[_playerShip removeFromParent];
-	
-	CGPoint pos = _playerShip.position;
-	
-	CCNode *debris = [CCBReader load:_playerShip.debris];
-	debris.position = pos;
-	debris.rotation = _playerShip.rotation;
-	InitDebris(debris, debris, _playerShip.physicsBody.velocity, [CCColor colorWithRed:1.0f green:1.0f blue:0.3f]);
-	[_physics addChild:debris z:Z_DEBRIS];
-	
-	CCNode *explosion = [CCBReader load:@"Particles/ShipExplosion"];
-	explosion.position = pos;
-	[_physics addChild:explosion z:Z_PARTICLES];
-	
-	CCNode *distortion = [CCBReader load:@"DistortionParticles/LargeRing"];
-	distortion.position = pos;
-	[_background.distortionNode addChild:distortion];
-	
-	[self scheduleBlock:^(CCTimer *timer) {
-		[debris removeFromParent];
-		[explosion removeFromParent];
-		[distortion removeFromParent];
-	} delay:5];
-	
-	[self scheduleBlock:^(CCTimer *timer){
-		// Go back to the menu after a short delay.
-		[[CCDirector sharedDirector] replaceScene:[CCBReader loadAsScene:@"MainMenu"]];
-	} delay:5.0];
-	
-
-	for (EnemyShip * e in _enemies) {
-		// explode based on distance from player.
-		float dist = ccpLength(ccpSub(_playerShip.position, e.position));
-		[e scheduleBlock:^(CCTimer *timer) {
-			[self enemyDeath:e];
-		} delay:dist / 200.0f];
-	}
 }
 
 -(void)pause
@@ -517,6 +418,11 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 	
 }
 
+-(CCNode *)distortionNode
+{
+	return _background.distortionNode;
+}
+
 
 #pragma mark - CCPhysicsCollisionDelegate methods
 
@@ -524,7 +430,7 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 -(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair ship:(PlayerShip *)player enemy:(EnemyShip *)enemy
 {
 	if([_playerShip takeDamage]){
-		[self playerDestroyed];
+		[_playerShip destroy];
 		// Don't process the collision so the enemy spaceship will survive and mock you.
 		return NO;
 	}else{
@@ -538,7 +444,7 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 
 -(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair bullet:(Bullet *)bullet enemy:(EnemyShip *)enemy
 {
-	[self destroyBullet:bullet];
+	[bullet destroy];
 	
 	if([enemy takeDamage]){
 		[self enemyDeath:enemy];
@@ -549,7 +455,7 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 
 -(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair bullet:(Bullet *)bullet wall:(CCNode *)wall
 {
-	[self destroyBullet:bullet];
+	[bullet destroy];
 	return NO;
 }
 

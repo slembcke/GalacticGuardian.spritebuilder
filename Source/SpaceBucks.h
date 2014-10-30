@@ -1,6 +1,7 @@
 #import "CCSprite.h"
 #import "Constants.h"
 #import "PlayerShip.h"
+#import "GameScene.h"
 
 
 typedef NS_ENUM(NSUInteger, SpaceBuckType){
@@ -16,6 +17,6 @@ typedef NS_ENUM(NSUInteger, SpaceBuckType){
 @property(nonatomic, assign) int amount;
 
 -(instancetype)initWithAmount:(SpaceBuckType) type;
--(void)fixedUpdate:(CCTime)delta towardsPlayer:(PlayerShip *)player;
+-(void)ggFixedUpdate:(CCTime)delta scene:(GameScene *)scene;
 
 @end

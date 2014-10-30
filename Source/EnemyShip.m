@@ -57,13 +57,13 @@
 }
 
 // This method is called from [GameScene fixedUpdate:], not from Cocos2D.
--(void)fixedUpdate:(CCTime)delta towardsPlayer:(PlayerShip *)player
+-(void)ggFixedUpdate:(CCTime)delta scene:(GameScene *)scene
 {
-	if(_hp == 0 || [player isDead]) return;
+	if(_hp == 0 || [scene.player isDead]) return;
 	
 	CCPhysicsBody *body = self.physicsBody;
 	
-	CGPoint targetVelocity = ccpMult(ccpNormalize(ccpSub(player.position, self.position)), _speed);
+	CGPoint targetVelocity = ccpMult(ccpNormalize(ccpSub(scene.playerPosition, self.position)), _speed);
 	
 	CGPoint velocity = cpvlerpconst(body.velocity, targetVelocity, _speed/_accelTime*delta);
 	

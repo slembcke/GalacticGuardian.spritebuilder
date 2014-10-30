@@ -36,9 +36,9 @@ const int values[] = {1, 4, 8};
 }
 
 
--(void)fixedUpdate:(CCTime)delta towardsPlayer:(PlayerShip *)player
+-(void)ggFixedUpdate:(CCTime)delta scene:(GameScene *)scene
 {
-	if([player isDead]) return;
+	if([scene.player isDead]) return;
 	
 	
 	CCPhysicsBody *body = self.physicsBody;
@@ -47,10 +47,11 @@ const int values[] = {1, 4, 8};
 	if(ccpLength(body.velocity) > 40.0f){
 		body.velocity = ccpMult(body.velocity, 0.9);
 	}
-
-	if(ccpDistance(player.position, self.position) < _accelRange){
+	
+	CGPoint targetPoint = scene.playerPosition;
+	if(ccpDistance(targetPoint, self.position) < _accelRange){
 		// then consider accellerating towards player
-		body.velocity = ccpAdd(body.velocity, ccpMult(ccpNormalize(ccpSub(player.position, self.position)), delta * _accelAmount));
+		body.velocity = ccpAdd(body.velocity, ccpMult(ccpNormalize(ccpSub(targetPoint, self.position)), delta * _accelAmount));
 	}
 	
 }

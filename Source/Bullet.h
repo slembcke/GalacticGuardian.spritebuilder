@@ -15,4 +15,6 @@
 
 -(instancetype)initWithTMP;
 
+-(void)destroy;
+
 @end

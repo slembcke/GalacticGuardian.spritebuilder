@@ -2,14 +2,15 @@
 //  Copyright (c) 2014 Apportable. All rights reserved.
 //
 
-#import "CCNode.h"
 #import "PlayerShip.h"
+#import "GameScene.h"
 
 @interface EnemyShip : CCNode
 
 @property(nonatomic, readonly) NSString *debris;
 
--(void)fixedUpdate:(CCTime)delta towardsPlayer:(PlayerShip *)player;
+-(void)ggFixedUpdate:(CCTime)delta scene:(GameScene *)scene;
 -(BOOL) takeDamage;
+-(void)destroy;
 
 @end
