@@ -8,6 +8,9 @@
 
 
 const float RocketAcceleration = 1000.0;
+const float RocketDistance = 150.0;
+const float RocketDamage = 7;
+const float RocketSplash = 150.0;
 
 
 @implementation Rocket {
@@ -19,13 +22,15 @@ const float RocketAcceleration = 1000.0;
 	Rocket *rocket = (Rocket *)[CCBReader load:@"Rocket"];
 	rocket->_level = level;
 	
-	CCPhysicsBody *body = rocket.physicsBody;
+	CGSize size = rocket.contentSize;
+	CGFloat radius = size.height/2.0;
+	
+	CCPhysicsBody *body = rocket.physicsBody = [CCPhysicsBody bodyWithPillFrom:ccp(radius, radius) to:ccp(size.width - radius, radius) cornerRadius:radius];
 	body.collisionType = @"rocket";
 	body.collisionCategories = @[CollisionCategoryBullet];
 	body.collisionMask = @[CollisionCategoryEnemy, CollisionCategoryAsteroid];
 	
-	float distance = 150.0;
-	CCTime fuse = sqrt(2.0*distance/RocketAcceleration);
+	CCTime fuse = sqrt(2.0*RocketDistance/RocketAcceleration);
 	[rocket scheduleBlock:^(CCTimer *timer) {
 		[rocket destroy];
 	} delay:fuse];
@@ -47,7 +52,7 @@ const float RocketAcceleration = 1000.0;
 	CGPoint pos = self.position;
 	GameScene *scene = (GameScene *)self.scene;
 	
-	[scene splashDamageAt:pos radius:100.0 damage:10];
+	[scene splashDamageAt:pos radius:RocketSplash damage:RocketDamage];
 	
 	CCNode *explosion = [CCBReader load:@"Particles/RocketExplosion"];
 	explosion.position = pos;
@@ -57,7 +62,7 @@ const float RocketAcceleration = 1000.0;
 	distortion.position = pos;
 	[scene.distortionNode addChild:distortion];
 	
-	[self scheduleBlock:^(CCTimer *timer) {
+	[scene scheduleBlock:^(CCTimer *timer) {
 		[explosion removeFromParent];
 		[distortion removeFromParent];
 	} delay:2];
