@@ -78,9 +78,9 @@
 	}
 }
 
--(BOOL) takeDamage
+-(BOOL) takeDamage:(int)damage
 {
-	_hp -= 1;
+	_hp -= damage;
 	return _hp <= 0;
 }
 

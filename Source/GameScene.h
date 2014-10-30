@@ -5,6 +5,7 @@
 -(instancetype)initWithShipType:(NSString *)shipType level:(int) shipLevel;
 
 -(void)enemyDeath:(EnemyShip *)enemy from:(Bullet *) bullet;
+-(void)splashDamageAt:(CGPoint)center radius:(float)radius damage:(int)damage;
 
 -(void)drawFlash:(CGPoint) position withImage:(NSString*) imagePath;
 -(void)drawBulletFlash:(Bullet *)fromBullet;

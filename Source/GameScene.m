@@ -6,17 +6,19 @@
 //  Copyright (c) 2014 Apportable. All rights reserved.
 //
 
-//#import "OALSimpleAudio.h"
-#import "NebulaBackground.h"
+#import "CCPhysics+ObjectiveChipmunk.h"
+
+#import "Constants.h"
 
 #import "GameScene.h"
 
-#import "Constants.h"
+#import "Controls.h"
+#import "NebulaBackground.h"
 #import "PlayerShip.h"
 #import "EnemyShip.h"
 #import "Bullet.h"
+#import "Rocket.h"
 #import "SpaceBucks.h"
-#import "Controls.h"
 
 
 @implementation GameScene
@@ -151,7 +153,8 @@
 	[self addChild:_controls z:Z_CONTROLS];
 	
 	__weak typeof(self) _self = self;
-	[_controls setHandler:^(BOOL state) {[_self pause];} forButton:ControlPauseButton];
+	[_controls setHandler:^(BOOL state) {if(state) [_self pause];} forButton:ControlPauseButton];
+	[_controls setHandler:^(BOOL state) {if(state) [_self fireRocket];} forButton:ControlRocketButton];
 }
 
 -(void)addWallAt:(CGPoint) pos
@@ -265,6 +268,18 @@
 	[[OALSimpleAudio sharedInstance] playEffect:@"TempSounds/Explosion.wav" volume:2.0 pitch:1.0 pan:0.0 loop:NO];
 }
 
+-(void)splashDamageAt:(CGPoint)center radius:(float)radius damage:(int)damage;
+{
+	for(EnemyShip *enemy in [_enemies copy]){
+		float dist = ccpDistance(center, enemy.position);
+		float splash = 1.0 - dist/radius;
+		
+		if(splash > 0.0 && [enemy takeDamage:round(splash*damage)]){
+			[self enemyDeath:enemy from:nil];
+		}
+	}
+}
+
 -(void)drawBulletFlash:(Bullet *)fromBullet;
 {
 	[self drawFlash:fromBullet.position withImage:fromBullet.flashImagePath];
@@ -350,6 +365,28 @@
 	int half_steps = (arc4random()%(2*4 + 1) - 4);
 	float pitch = pow(2.0f, half_steps/12.0f);
 	[[OALSimpleAudio sharedInstance] playEffect:@"TempSounds/Laser.wav" volume:0.25 pitch:pitch pan:0.0 loop:NO];
+}
+
+-(void)fireRocket
+{
+	// Don't fire bullets if the ship is destroyed.
+	if([_playerShip isDead]) return;
+	
+	// TODO missile recharge logic
+	
+	CGAffineTransform transform = _playerShip.physicsBody.absoluteTransform;
+	CGPoint position = ccp(transform.tx, transform.ty);
+	CGPoint direction = ccp(transform.a, transform.b);
+	
+	Rocket *rocket = [Rocket rocketWithLevel:RocketSmall];
+	rocket.position = position;
+	rocket.rotation = -CC_RADIANS_TO_DEGREES(ccpToAngle(direction));
+	
+	// Make the rocket start at the ship's velocity.
+	// Let it accelerate itself.
+	rocket.physicsBody.velocity = _playerShip.physicsBody.velocity;
+	
+	[_physics addChild:rocket z:Z_BULLET];
 }
 
 void
@@ -510,7 +547,7 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 {
 	[bullet destroy];
 	
-	if([enemy takeDamage]){
+	if([enemy takeDamage:1]){
 		[self enemyDeath:enemy from:bullet];
 	}
 	
@@ -520,6 +557,12 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 -(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair bullet:(Bullet *)bullet wall:(CCNode *)wall
 {
 	[bullet destroy];
+	return NO;
+}
+
+-(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair rocket:(Rocket *)rocket wildcard:(CCNode *)node
+{
+	[rocket destroy];
 	return NO;
 }
 

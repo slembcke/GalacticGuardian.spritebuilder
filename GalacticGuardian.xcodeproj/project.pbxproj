@@ -119,6 +119,9 @@
 		D3450BC71A0213FD00E63B3A /* TempMusic.aac in Resources */ = {isa = PBXBuildFile; fileRef = D3450BC61A0213FD00E63B3A /* TempMusic.aac */; };
 		D3450BC81A0213FD00E63B3A /* TempMusic.aac in Resources */ = {isa = PBXBuildFile; fileRef = D3450BC61A0213FD00E63B3A /* TempMusic.aac */; };
 		D3450BC91A0213FD00E63B3A /* TempMusic.aac in Resources */ = {isa = PBXBuildFile; fileRef = D3450BC61A0213FD00E63B3A /* TempMusic.aac */; };
+		D3450BCC1A02EB8500E63B3A /* Rocket.m in Sources */ = {isa = PBXBuildFile; fileRef = D3450BCB1A02EB8500E63B3A /* Rocket.m */; };
+		D3450BCD1A02EB8500E63B3A /* Rocket.m in Sources */ = {isa = PBXBuildFile; fileRef = D3450BCB1A02EB8500E63B3A /* Rocket.m */; };
+		D3450BCE1A02EB8500E63B3A /* Rocket.m in Sources */ = {isa = PBXBuildFile; fileRef = D3450BCB1A02EB8500E63B3A /* Rocket.m */; };
 		D3937FC219FE1B2A0074009E /* DistortionParticle.fsh in Resources */ = {isa = PBXBuildFile; fileRef = D3937FC119FE1B2A0074009E /* DistortionParticle.fsh */; };
 		D3937FC319FE1B2A0074009E /* DistortionParticle.fsh in Resources */ = {isa = PBXBuildFile; fileRef = D3937FC119FE1B2A0074009E /* DistortionParticle.fsh */; };
 		D3937FC419FE1B2A0074009E /* DistortionParticle.fsh in Resources */ = {isa = PBXBuildFile; fileRef = D3937FC119FE1B2A0074009E /* DistortionParticle.fsh */; };
@@ -319,6 +322,8 @@
 		D3450BB41A01FEA100E63B3A /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		D3450BB51A01FEA100E63B3A /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D3450BC61A0213FD00E63B3A /* TempMusic.aac */ = {isa = PBXFileReference; lastKnownFileType = file; path = TempMusic.aac; sourceTree = "<group>"; };
+		D3450BCB1A02EB8500E63B3A /* Rocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Rocket.m; sourceTree = "<group>"; };
+		D3450BCF1A02EBA100E63B3A /* Rocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rocket.h; sourceTree = "<group>"; };
 		D352B48019EC608A00829775 /* MetalShaders */ = {isa = PBXFileReference; lastKnownFileType = folder; path = MetalShaders; sourceTree = "<group>"; };
 		D3937FBD19FDD9AB0074009E /* NebulaBackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NebulaBackground.h; sourceTree = "<group>"; };
 		D3937FC119FE1B2A0074009E /* DistortionParticle.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = DistortionParticle.fsh; sourceTree = "<group>"; };
@@ -580,6 +585,8 @@
 				75058A4119FECE64001AA9C6 /* PlayerShip.m */,
 				75058A4519FECF95001AA9C6 /* Bullet.h */,
 				75058A4619FECF95001AA9C6 /* Bullet.m */,
+				D3450BCF1A02EBA100E63B3A /* Rocket.h */,
+				D3450BCB1A02EB8500E63B3A /* Rocket.m */,
 				75058A5019FEE7B7001AA9C6 /* EnemyShip.h */,
 				75058A5119FEE7B7001AA9C6 /* EnemyShip.m */,
 				D3ED616419FF327C00DF3A43 /* BurnSprite.m */,
@@ -1037,6 +1044,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3450BCE1A02EB8500E63B3A /* Rocket.m in Sources */,
 				75058A5419FEE7B7001AA9C6 /* EnemyShip.m in Sources */,
 				75058A4919FECF95001AA9C6 /* Bullet.m in Sources */,
 				D3ED617219FF57A100DF3A43 /* PlayerShip.m in Sources */,
@@ -1067,6 +1075,7 @@
 				5B121030197484FA004C1E1D /* GalacticGuardianActivity.m in Sources */,
 				D3450BBC1A01FEAD00E63B3A /* FancyJoystick.m in Sources */,
 				75058A4819FECF95001AA9C6 /* Bullet.m in Sources */,
+				D3450BCD1A02EB8500E63B3A /* Rocket.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1087,6 +1096,7 @@
 				75058A3119FEC27F001AA9C6 /* GameScene.m in Sources */,
 				5B121038197487F2004C1E1D /* AppDelegate.m in Sources */,
 				75058A4219FECE64001AA9C6 /* PlayerShip.m in Sources */,
+				D3450BCC1A02EB8500E63B3A /* Rocket.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

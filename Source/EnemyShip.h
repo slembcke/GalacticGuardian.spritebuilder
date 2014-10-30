@@ -10,6 +10,6 @@
 @property(nonatomic, readonly) NSString *debris;
 
 -(void)ggFixedUpdate:(CCTime)delta scene:(GameScene *)scene;
--(BOOL) takeDamage;
+-(BOOL) takeDamage:(int)damage;
 
 @end

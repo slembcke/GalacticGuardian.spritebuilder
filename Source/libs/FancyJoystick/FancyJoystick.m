@@ -101,6 +101,12 @@
 
 #pragma mark - Touch Implementation
 
+-(BOOL)hitTestWithWorldPos:(CGPoint)pos
+{
+	// Use the knob's sprite for hit testing.
+	return [_knob hitTestWithWorldPos:pos];
+}
+
 - (void)touchBegan:(CCTouch *)touch withEvent:(CCTouchEvent *)event
 {
     [self stopAllActions];

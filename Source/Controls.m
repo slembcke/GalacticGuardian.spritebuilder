@@ -6,84 +6,87 @@
 #import "FancyJoystick.h"
 
 
-@interface VirtualJoystick : CCNode @end
-@implementation VirtualJoystick {
-	CGPoint _center;
-	float _radius;
-	
-	CGPoint _value;
-	
-	__unsafe_unretained CCTouch *_trackingTouch;
-}
+// I replaced my simple joystick class with the much prettier FancyJoystick class.
+// I'll leave it here for posterity though.
 
--(instancetype)initWithSize:(CGFloat)size
-{
-	if((self = [super init])){
-		self.contentSize = CGSizeMake(size, size);
-		self.anchorPoint = ccp(0.5, 0.5);
-	}
-	
-	return self;
-}
-
--(void)onEnter
-{
-	[super onEnter];
-	
-	_center = self.position;
-	_radius = self.contentSize.width/2.0;
-	
-	// Quick and dirty way to draw the joystick nub.
-	CCDrawNode *drawNode = [CCDrawNode node];
-	[self addChild:drawNode];
-	
-	[drawNode drawDot:self.anchorPointInPoints radius:_radius color:[CCColor colorWithWhite:1.0 alpha:0.5]];
-	
-	self.userInteractionEnabled = YES;
-}
-
--(CGPoint)value {return _value;}
-
--(void)setTouchPosition:(CGPoint)touch
-{
-	CGPoint delta = cpvclamp(cpvsub(touch, _center), _radius);
-	self.position = cpvadd(_center, delta);
-	
-	_value = cpvmult(delta, 1.0/_radius);
-}
-
--(void)touchBegan:(CCTouch *)touch withEvent:(CCTouchEvent *)event
-{
-	if(_trackingTouch) return;
-	
-	CGPoint pos = [touch locationInNode:self.parent];
-	if(cpvnear(_center, pos, _radius)){
-		_trackingTouch = touch;
-		self.touchPosition = pos;
-	}
-}
-
--(void)touchMoved:(CCTouch *)touch withEvent:(CCTouchEvent *)event
-{
-	if(touch == _trackingTouch){
-		self.touchPosition = [touch locationInNode:self.parent];
-	}
-}
-
--(void)touchEnded:(CCTouch *)touch withEvent:(CCTouchEvent *)event
-{
-	if(touch == _trackingTouch){
-		_trackingTouch = nil;
-		self.touchPosition = _center;
-	}
-}
-
--(void)touchCancelled:(CCTouch *)touch withEvent:(CCTouchEvent *)event
-{
-	[self touchEnded:touch withEvent:event];
-}
-
-@end
+//@interface VirtualJoystick : CCNode @end
+//@implementation VirtualJoystick {
+//	CGPoint _center;
+//	float _radius;
+//	
+//	CGPoint _value;
+//	
+//	__unsafe_unretained CCTouch *_trackingTouch;
+//}
+//
+//-(instancetype)initWithSize:(CGFloat)size
+//{
+//	if((self = [super init])){
+//		self.contentSize = CGSizeMake(size, size);
+//		self.anchorPoint = ccp(0.5, 0.5);
+//	}
+//	
+//	return self;
+//}
+//
+//-(void)onEnter
+//{
+//	[super onEnter];
+//	
+//	_center = self.position;
+//	_radius = self.contentSize.width/2.0;
+//	
+//	// Quick and dirty way to draw the joystick nub.
+//	CCDrawNode *drawNode = [CCDrawNode node];
+//	[self addChild:drawNode];
+//	
+//	[drawNode drawDot:self.anchorPointInPoints radius:_radius color:[CCColor colorWithWhite:1.0 alpha:0.5]];
+//	
+//	self.userInteractionEnabled = YES;
+//}
+//
+//-(CGPoint)value {return _value;}
+//
+//-(void)setTouchPosition:(CGPoint)touch
+//{
+//	CGPoint delta = cpvclamp(cpvsub(touch, _center), _radius);
+//	self.position = cpvadd(_center, delta);
+//	
+//	_value = cpvmult(delta, 1.0/_radius);
+//}
+//
+//-(void)touchBegan:(CCTouch *)touch withEvent:(CCTouchEvent *)event
+//{
+//	if(_trackingTouch) return;
+//	
+//	CGPoint pos = [touch locationInNode:self.parent];
+//	if(cpvnear(_center, pos, _radius)){
+//		_trackingTouch = touch;
+//		self.touchPosition = pos;
+//	}
+//}
+//
+//-(void)touchMoved:(CCTouch *)touch withEvent:(CCTouchEvent *)event
+//{
+//	if(touch == _trackingTouch){
+//		self.touchPosition = [touch locationInNode:self.parent];
+//	}
+//}
+//
+//-(void)touchEnded:(CCTouch *)touch withEvent:(CCTouchEvent *)event
+//{
+//	if(touch == _trackingTouch){
+//		_trackingTouch = nil;
+//		self.touchPosition = _center;
+//	}
+//}
+//
+//-(void)touchCancelled:(CCTouch *)touch withEvent:(CCTouchEvent *)event
+//{
+//	[self touchEnded:touch withEvent:event];
+//}
+//
+//@end
 
 
 @implementation Controls {
@@ -108,6 +111,11 @@
 		self.contentSize = viewSize;
 		
 		CGFloat joystickOffset = viewSize.width/8.0;
+		
+		CCNode *rocketButton = [CCBReader loadAsScene:@"RocketButton" owner:self];
+		rocketButton.position = ccp(2.0*joystickOffset, joystickOffset);
+		rocketButton.contentSize = CGSizeMake(0.1*joystickOffset, 0.1*joystickOffset);
+		[self addChild:rocketButton];
 		
 		_virtualJoystick = [FancyJoystick node];
 		_virtualJoystick.scale = 2.0*joystickOffset/_virtualJoystick.contentSize.width;
@@ -135,9 +143,7 @@
 		
 		self.userInteractionEnabled = YES;
 		
-		if(NSClassFromString(@"GCController")){
-			[self setupGamepadSupport];
-		}
+		[self setupGamepadSupport];
 	}
 	
 	return self;
@@ -191,6 +197,8 @@
 
 -(void)setupGamepadSupport
 {
+	if(NSClassFromString(@"GCController") == nil) return;
+
 	NSArray *controllers = [GCController controllers];
 	NSLog(@"%d controllers found.", (int)controllers.count);
 	
@@ -309,6 +317,13 @@
 -(void)setHandler:(ControlHandler)block forButton:(ControlButton)button
 {
 	_buttonHandlers[@(button)] = block;
+}
+
+-(void)fireRocket:(CCButton *)sender
+{
+	// Kind of a hack since CCButton doesn't support continuous events.
+	[self setButtonValue:ControlRocketButton value:YES];
+	[self setButtonValue:ControlRocketButton value:NO];
 }
 
 @end
