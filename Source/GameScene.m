@@ -259,6 +259,8 @@
 		[explosion removeFromParent];
 		[distortion removeFromParent];
 	} delay:5];
+	
+	[[OALSimpleAudio sharedInstance] playEffect:@"TempSounds/Explosion.wav" volume:2.0 pitch:1.0 pan:0.0 loop:NO];
 }
 
 -(void)drawFlash:(CGPoint)position
@@ -336,9 +338,9 @@
 	[self drawFlash:position];
 	
 	// Make some noise. Add a little chromatically tuned pitch bending to make it more musical.
-//	int half_steps = (arc4random()%(2*4 + 1) - 4);
-//	float pitch = pow(2.0f, half_steps/12.0f);
-//	[[OALSimpleAudio sharedInstance] playEffect:@"Laser.wav" volume:1.0 pitch:pitch pan:0.0 loop:NO];
+	int half_steps = (arc4random()%(2*4 + 1) - 4);
+	float pitch = pow(2.0f, half_steps/12.0f);
+	[[OALSimpleAudio sharedInstance] playEffect:@"TempSounds/Laser.wav" volume:0.25 pitch:pitch pan:0.0 loop:NO];
 }
 
 void
@@ -509,6 +511,8 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 {
 	[pickup removeFromParent];
 	[_pickups removeObject:pickup];
+	
+	[[OALSimpleAudio sharedInstance] playEffect:@"TempSounds/Pickup.wav" volume:0.5 pitch:1.0 pan:0.0 loop:NO];
 	
 	_spaceBucks += [pickup amount];
 	levelProgress.percentage = ((float) _spaceBucks/ _spaceBucksTilNextLevel) * 100.0f;
