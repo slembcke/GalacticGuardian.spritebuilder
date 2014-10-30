@@ -222,12 +222,6 @@ VisitAll(CCNode *node, void (^block)(CCNode *))
 		[distortion removeFromParent];
 	} delay:5];
 	
-	[self scheduleBlock:^(CCTimer *timer){
-		// Go back to the menu after a short delay.
-		[[CCDirector sharedDirector] replaceScene:[CCBReader loadAsScene:@"MainMenu"]];
-	} delay:5.0];
-	
-
 	for (EnemyShip * e in scene.enemies) {
 		// explode based on distance from player.
 		float dist = ccpLength(ccpSub(pos, e.position));

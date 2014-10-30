@@ -471,6 +471,12 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 {
 	if([_playerShip takeDamage]){
 		[_playerShip destroy];
+		
+		[self scheduleBlock:^(CCTimer *timer){
+			// Go back to the menu after a short delay.
+			[[CCDirector sharedDirector] replaceScene:[CCBReader loadAsScene:@"MainMenu"]];
+		} delay:5.0];
+		
 		// Don't process the collision so the enemy spaceship will survive and mock you.
 		return NO;
 	}else{
