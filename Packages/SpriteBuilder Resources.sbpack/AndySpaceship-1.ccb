@@ -781,8 +781,6 @@
 										<real>90</real>
 									</dict>
 								</array>
-								<key>selected</key>
-								<true/>
 							</dict>
 						</array>
 						<key>customClass</key>
@@ -1427,7 +1425,7 @@
 				<key>type</key>
 				<integer>1</integer>
 				<key>value</key>
-				<string>200.000000</string>
+				<string>180.000000</string>
 			</dict>
 			<dict>
 				<key>name</key>
@@ -1447,7 +1445,7 @@
 				<key>type</key>
 				<integer>3</integer>
 				<key>value</key>
-				<string>AndySpaceshipDebris</string>
+				<string>AndySpaceship-1Debris</string>
 			</dict>
 			<dict>
 				<key>name</key>
@@ -1457,7 +1455,7 @@
 				<key>type</key>
 				<integer>1</integer>
 				<key>value</key>
-				<string>8.000000</string>
+				<string>12.000000</string>
 			</dict>
 		</array>
 		<key>displayName</key>
@@ -1562,6 +1560,8 @@
 				</array>
 			</dict>
 		</array>
+		<key>selected</key>
+		<true/>
 	</dict>
 	<key>notes</key>
 	<array/>

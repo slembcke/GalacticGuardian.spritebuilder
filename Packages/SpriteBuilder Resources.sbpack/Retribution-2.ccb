@@ -1280,7 +1280,7 @@
 				<key>type</key>
 				<integer>3</integer>
 				<key>value</key>
-				<string>AndySpaceshipDebris</string>
+				<string>Retribition-2Debris</string>
 			</dict>
 			<dict>
 				<key>name</key>
@@ -1290,7 +1290,7 @@
 				<key>type</key>
 				<integer>1</integer>
 				<key>value</key>
-				<string>8.000000</string>
+				<string>10.000000</string>
 			</dict>
 		</array>
 		<key>displayName</key>
@@ -1395,6 +1395,8 @@
 				</array>
 			</dict>
 		</array>
+		<key>selected</key>
+		<true/>
 	</dict>
 	<key>notes</key>
 	<array/>
