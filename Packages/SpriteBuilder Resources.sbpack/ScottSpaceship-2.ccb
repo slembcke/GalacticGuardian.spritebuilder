@@ -76,7 +76,7 @@
 										<key>type</key>
 										<string>StringSimple</string>
 										<key>value</key>
-										<string>gun</string>
+										<string>gun1</string>
 									</dict>
 									<dict>
 										<key>name</key>
@@ -271,7 +271,7 @@
 										<key>type</key>
 										<string>StringSimple</string>
 										<key>value</key>
-										<string>gun</string>
+										<string>gun2</string>
 									</dict>
 									<dict>
 										<key>name</key>
@@ -947,7 +947,7 @@
 										<key>type</key>
 										<string>StringSimple</string>
 										<key>value</key>
-										<string>gun</string>
+										<string>gun3</string>
 									</dict>
 									<dict>
 										<key>name</key>
@@ -1142,7 +1142,7 @@
 										<key>type</key>
 										<string>StringSimple</string>
 										<key>value</key>
-										<string>gun</string>
+										<string>gun4</string>
 									</dict>
 									<dict>
 										<key>name</key>
@@ -1204,6 +1204,8 @@
 										<real>90</real>
 									</dict>
 								</array>
+								<key>selected</key>
+								<true/>
 							</dict>
 						</array>
 						<key>customClass</key>
@@ -1986,8 +1988,6 @@
 				</array>
 			</dict>
 		</array>
-		<key>selected</key>
-		<true/>
 	</dict>
 	<key>notes</key>
 	<array/>

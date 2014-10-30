@@ -76,7 +76,7 @@
 										<key>type</key>
 										<string>StringSimple</string>
 										<key>value</key>
-										<string>gun</string>
+										<string>gun4</string>
 									</dict>
 									<dict>
 										<key>name</key>
@@ -166,7 +166,7 @@
 								<key>value</key>
 								<array>
 									<real>7.0999999046325684</real>
-									<real>-13.100000381469727</real>
+									<real>-9.1000003814697266</real>
 									<integer>0</integer>
 									<integer>0</integer>
 									<integer>0</integer>
@@ -240,6 +240,8 @@
 								<array/>
 							</dict>
 						</array>
+						<key>selected</key>
+						<true/>
 					</dict>
 					<dict>
 						<key>UUID</key>
@@ -271,7 +273,7 @@
 										<key>type</key>
 										<string>StringSimple</string>
 										<key>value</key>
-										<string>gun</string>
+										<string>gun3</string>
 									</dict>
 									<dict>
 										<key>name</key>
@@ -361,7 +363,7 @@
 								<key>value</key>
 								<array>
 									<real>-7.1390495300292969</real>
-									<real>-13.053852081298828</real>
+									<real>-9.0538520812988281</real>
 									<integer>0</integer>
 									<integer>0</integer>
 									<integer>0</integer>
@@ -435,6 +437,8 @@
 								<array/>
 							</dict>
 						</array>
+						<key>selected</key>
+						<true/>
 					</dict>
 					<dict>
 						<key>UUID</key>
@@ -709,7 +713,7 @@
 										<key>type</key>
 										<string>StringSimple</string>
 										<key>value</key>
-										<string>gun</string>
+										<string>gun1</string>
 									</dict>
 									<dict>
 										<key>name</key>
@@ -904,7 +908,7 @@
 										<key>type</key>
 										<string>StringSimple</string>
 										<key>value</key>
-										<string>gun</string>
+										<string>gun2</string>
 									</dict>
 									<dict>
 										<key>name</key>
@@ -2121,8 +2125,6 @@
 				</array>
 			</dict>
 		</array>
-		<key>selected</key>
-		<true/>
 	</dict>
 	<key>notes</key>
 	<array/>

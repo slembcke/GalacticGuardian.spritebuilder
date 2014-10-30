@@ -83,10 +83,15 @@ VisitAll(CCNode *node, void (^block)(CCNode *))
 	
 	_gunPorts = [NSMutableArray array];
 	VisitAll(self, ^(CCNode *node){
-		if([node.name isEqualToString:@"gun"]){
+		if([node.name hasPrefix:@"gun"]){
 			[_gunPorts addObject:node];
 		}
 	});
+	
+	[_gunPorts sortUsingComparator:^NSComparisonResult(CCNode *a, CCNode *b) {
+		return [a.name compare:b.name];
+	}];
+	
 	NSAssert([_gunPorts count] > 0, @"Missing gunports on ship in spritebuilder");
 	
 	
