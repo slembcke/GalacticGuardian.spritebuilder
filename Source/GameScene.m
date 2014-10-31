@@ -518,7 +518,7 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 				(0.5 + 0.5*dir.y)*GameSceneSize + dir.y*GroupRadius
 			);
 			
-			NSLog(@"Spawning enemies from %@", NSStringFromCGPoint(enemySpawnLocation));
+//			NSLog(@"Spawning enemies from %@", NSStringFromCGPoint(enemySpawnLocation));
 		}
 		
 		EnemyShip *enemy = (EnemyShip *)[CCBReader load:@"BadGuy1"];
@@ -526,7 +526,7 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 		[_physics addChild:enemy z:Z_ENEMY];
 		[_enemies addObject:enemy];
 		
-		NSLog(@"Enemy spawned at %@", NSStringFromCGPoint(enemy.position));
+//		NSLog(@"Enemy spawned at %@", NSStringFromCGPoint(enemy.position));
 		
 		spawnCounter++;
 	} delay:0.0];

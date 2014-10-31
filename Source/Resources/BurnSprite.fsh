@@ -17,9 +17,9 @@ void main(){
 	gl_FragColor = texture2D(cc_MainTexture, cc_FragTexCoord1);
 	
 	// First figure out how much to char the sprite.
-	float char = smoothstep(CharSmoothing, 0.0, burn - threshold + CharWidth);
+	float charring = smoothstep(CharSmoothing, 0.0, burn - threshold + CharWidth);
 	// We just want to blacken the sprite, so multiplying the rgb components is good enough.
-	gl_FragColor.rgb *= char;
+	gl_FragColor.rgb *= charring;
 	
 	// The sprite's color is used for the glow color.
 	// Unfortunately vertex colors are premultiplied, need to undo that.

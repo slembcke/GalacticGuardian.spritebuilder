@@ -1,4 +1,6 @@
+#if !ANDROID
 #import <GameController/GameController.h>
+#endif
 
 #import "ObjectiveChipmunk/ObjectiveChipmunk.h"
 
@@ -93,9 +95,11 @@
 	FancyJoystick *_virtualJoystick;
 	FancyJoystick *_virtualAimJoystick;
 	
+#if !ANDROID
 	GCController *_controller;
 	GCControllerDirectionPad *_controllerStick;
 	GCControllerDirectionPad *_controllerAim;
+#endif
 	
 	NSMutableDictionary *_buttonStates;
 	NSMutableDictionary *_buttonHandlers;
@@ -152,12 +156,15 @@
 		
 		self.userInteractionEnabled = YES;
 		
-		[self setupGamepadSupport];
+#if !ANDROID
+		[self setupGamepadSupport]
+#endif
 	}
 	
 	return self;
 }
 
+#if !ANDROID
 -(void)logController:(GCController *)controller
 {
 	NSLog(@"Controller: %@", controller);
@@ -255,9 +262,13 @@
 	[[NSNotificationCenter defaultCenter] removeObserver:_controllerConnectedObserver];
 	_controllerConnectedObserver = nil;
 }
+#endif
 
 -(void)update:(CCTime)delta
 {
+#if ANDROID
+	CGPoint aim = _virtualAimJoystick.direction;
+#else
 	CGPoint aim = CGPointZero;
 	
 	if(_controller){
@@ -265,6 +276,7 @@
 	} else {
 		aim = _virtualAimJoystick.direction;
 	}
+#endif
 	
 	[self setButtonValue:ControlFireButton value:(aim.x*aim.x + aim.y*aim.y) > 0.25];
 }
@@ -290,6 +302,9 @@
 
 -(CGPoint)thrustDirection
 {
+#if ANDROID
+	return _virtualJoystick.direction;
+#else
 	if(_controller){
 		return cpvclamp(cpv(
 			_controllerStick.xAxis.value,
@@ -298,10 +313,14 @@
 	} else {
 		return _virtualJoystick.direction;
 	}
+#endif
 }
 
 -(CGPoint)aimDirection
 {
+#if ANDROID
+	return _virtualAimJoystick.direction;
+#else
 	if(_controller){
 		return cpvclamp(cpv(
 			_controllerAim.xAxis.value,
@@ -310,6 +329,7 @@
 	} else {
 		return _virtualAimJoystick.direction;
 	}
+#endif
 }
 
 -(BOOL)getButton:(ControlButton)button

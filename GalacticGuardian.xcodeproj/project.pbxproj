@@ -125,6 +125,8 @@
 		D3450BCC1A02EB8500E63B3A /* Rocket.m in Sources */ = {isa = PBXBuildFile; fileRef = D3450BCB1A02EB8500E63B3A /* Rocket.m */; };
 		D3450BCD1A02EB8500E63B3A /* Rocket.m in Sources */ = {isa = PBXBuildFile; fileRef = D3450BCB1A02EB8500E63B3A /* Rocket.m */; };
 		D3450BCE1A02EB8500E63B3A /* Rocket.m in Sources */ = {isa = PBXBuildFile; fileRef = D3450BCB1A02EB8500E63B3A /* Rocket.m */; };
+		D3450BD61A0395F100E63B3A /* SpaceBucks.m in Sources */ = {isa = PBXBuildFile; fileRef = 75058A691A005881001AA9C6 /* SpaceBucks.m */; };
+		D3450BD81A0395F200E63B3A /* SpaceBucks.m in Sources */ = {isa = PBXBuildFile; fileRef = 75058A691A005881001AA9C6 /* SpaceBucks.m */; };
 		D3937FC219FE1B2A0074009E /* DistortionParticle.fsh in Resources */ = {isa = PBXBuildFile; fileRef = D3937FC119FE1B2A0074009E /* DistortionParticle.fsh */; };
 		D3937FC319FE1B2A0074009E /* DistortionParticle.fsh in Resources */ = {isa = PBXBuildFile; fileRef = D3937FC119FE1B2A0074009E /* DistortionParticle.fsh */; };
 		D3937FC419FE1B2A0074009E /* DistortionParticle.fsh in Resources */ = {isa = PBXBuildFile; fileRef = D3937FC119FE1B2A0074009E /* DistortionParticle.fsh */; };
@@ -252,7 +254,7 @@
 		5B121013197483EE004C1E1D /* ic_launcher.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_launcher.png; sourceTree = "<group>"; };
 		5B121015197483EE004C1E1D /* ic_launcher.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_launcher.png; sourceTree = "<group>"; };
 		5B12101B19748413004C1E1D /* GalacticGuardianActivity.java */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.java; name = GalacticGuardianActivity.java; path = java/org/cocos2d/GalacticGuardian/GalacticGuardianActivity.java; sourceTree = "<group>"; };
-		5B121021197484A3004C1E1D /* GalacticGuardian Java.jar */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = archive.jar; path = "GalacticGuardian Java.jar"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5B121021197484A3004C1E1D /* GalacticGuardian Java.jar */ = {isa = PBXFileReference; explicitFileType = compiled.java.jar; includeInIndex = 0; path = "GalacticGuardian Java.jar"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B12102E197484FA004C1E1D /* GalacticGuardianActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GalacticGuardianActivity.h; sourceTree = "<group>"; };
 		5B12102F197484FA004C1E1D /* GalacticGuardianActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GalacticGuardianActivity.m; sourceTree = "<group>"; };
 		5B121033197485FE004C1E1D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Platforms/Android/Info.plist; sourceTree = "<group>"; };
@@ -867,7 +869,7 @@
 		};
 		7A97910219E62E40001FFC4D /* cocos2dJava.jar */ = {
 			isa = PBXReferenceProxy;
-			fileType = archive.jar;
+			fileType = compiled.java.jar;
 			path = cocos2dJava.jar;
 			remoteRef = 7A97910119E62E40001FFC4D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -1062,6 +1064,7 @@
 				D3EAD2BD1A00A855002AA0D2 /* PauseScene.m in Sources */,
 				758488621A02C24A005F0B48 /* ShipSelectionScene.m in Sources */,
 				75058A3419FEC27F001AA9C6 /* GameScene.m in Sources */,
+				D3450BD81A0395F200E63B3A /* SpaceBucks.m in Sources */,
 				7A40360419DDEE84007B6E8F /* main.m in Sources */,
 				D3ED616719FF327C00DF3A43 /* BurnSprite.m in Sources */,
 				7A59498E19E3941300F65F90 /* AppDelegate.m in Sources */,
@@ -1073,6 +1076,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D3ED617119FF57A000DF3A43 /* PlayerShip.m in Sources */,
+				D3450BD61A0395F100E63B3A /* SpaceBucks.m in Sources */,
 				D3A7E8DB19FDC86000695965 /* NebulaBackground.m in Sources */,
 				D31D3DCC1A00418C0085DB5B /* Controls.m in Sources */,
 				D3EAD2BC1A00A855002AA0D2 /* PauseScene.m in Sources */,
@@ -1200,7 +1204,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
