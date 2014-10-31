@@ -442,7 +442,10 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 	CCSprite *screenGrab = [CCSprite spriteWithTexture:rt.texture];
 	screenGrab.anchorPoint = ccp(0.0, 0.0);
 	screenGrab.effect = [CCEffectStack effects:
+#if !CC_DIRECTOR_IOS_THREADED_RENDERING
+		// BUG!
 		[CCEffectBlur effectWithBlurRadius:4.0],
+#endif
 		[CCEffectSaturation effectWithSaturation:-0.5],
 		nil
 	];
