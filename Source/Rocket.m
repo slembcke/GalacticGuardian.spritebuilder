@@ -72,6 +72,7 @@ static const float RocketClusterRange = 50.0;
 	
 	[scene scheduleBlock:^(CCTimer *timer) {
 		[explosion removeFromParent];
+		[smoke removeFromParent];
 		[distortion removeFromParent];
 	} delay:2];
 	

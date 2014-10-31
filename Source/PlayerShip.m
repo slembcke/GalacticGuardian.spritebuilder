@@ -224,6 +224,7 @@ VisitAll(CCNode *node, void (^block)(CCNode *))
 	[self scheduleBlock:^(CCTimer *timer) {
 		[debris removeFromParent];
 		[explosion removeFromParent];
+		[smoke removeFromParent];
 		[distortion removeFromParent];
 	} delay:5];
 	
