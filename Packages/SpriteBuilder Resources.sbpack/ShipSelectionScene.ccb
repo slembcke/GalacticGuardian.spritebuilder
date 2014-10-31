@@ -557,7 +557,7 @@
 								<key>type</key>
 								<string>FontTTF</string>
 								<key>value</key>
-								<string>UI/kenvector_future.ttf</string>
+								<string>kenvector_future.ttf</string>
 							</dict>
 							<dict>
 								<key>name</key>
@@ -870,7 +870,7 @@
 								<key>type</key>
 								<string>FontTTF</string>
 								<key>value</key>
-								<string>UI/kenvector_future.ttf</string>
+								<string>kenvector_future.ttf</string>
 							</dict>
 							<dict>
 								<key>name</key>
@@ -1078,7 +1078,7 @@
 								<key>type</key>
 								<string>FontTTF</string>
 								<key>value</key>
-								<string>UI/kenvector_future.ttf</string>
+								<string>kenvector_future.ttf</string>
 							</dict>
 							<dict>
 								<key>name</key>
@@ -1285,7 +1285,7 @@
 								<key>type</key>
 								<string>FontTTF</string>
 								<key>value</key>
-								<string>UI/kenvector_future.ttf</string>
+								<string>kenvector_future.ttf</string>
 							</dict>
 							<dict>
 								<key>name</key>
@@ -2140,7 +2140,7 @@
 								<key>type</key>
 								<string>FontTTF</string>
 								<key>value</key>
-								<string>UI/kenvector_future.ttf</string>
+								<string>kenvector_future.ttf</string>
 							</dict>
 							<dict>
 								<key>name</key>
@@ -2592,8 +2592,6 @@
 								</array>
 							</dict>
 						</array>
-						<key>selected</key>
-						<true/>
 					</dict>
 					<dict>
 						<key>UUID</key>
@@ -2920,8 +2918,6 @@
 								</array>
 							</dict>
 						</array>
-						<key>selected</key>
-						<true/>
 					</dict>
 					<dict>
 						<key>UUID</key>
@@ -3121,7 +3117,7 @@
 								<key>type</key>
 								<string>FontTTF</string>
 								<key>value</key>
-								<string>Helvetica</string>
+								<string>kenvector_future.ttf</string>
 							</dict>
 							<dict>
 								<key>name</key>

@@ -78,64 +78,17 @@
 			<key>previewFolderHidden</key>
 			<true/>
 		</dict>
-		<key>DistortionParticles</key>
-		<dict>
-			<key>previewFolderHidden</key>
-			<true/>
-		</dict>
-		<key>Particles</key>
-		<dict>
-			<key>previewFolderHidden</key>
-			<true/>
-		</dict>
 		<key>ShipParts/ShipParts/beam0.png</key>
 		<dict/>
 		<key>ShipParts/ShipParts/wingYellow_2.png</key>
 		<dict/>
 		<key>Sprites</key>
 		<dict/>
-		<key>Sprites/Asteroids</key>
-		<dict>
-			<key>previewFolderHidden</key>
-			<true/>
-		</dict>
-		<key>Sprites/Bullets</key>
-		<dict>
-			<key>previewFolderHidden</key>
-			<true/>
-		</dict>
-		<key>Sprites/Effects</key>
-		<dict>
-			<key>previewFolderHidden</key>
-			<true/>
-		</dict>
-		<key>Sprites/Powerups</key>
-		<dict>
-			<key>isSmartSpriteSheet</key>
-			<true/>
-			<key>previewFolderHidden</key>
-			<true/>
-			<key>trimSprites</key>
-			<true/>
-		</dict>
+		<key>Sprites/Powerups/pill_blue.png</key>
+		<dict/>
 		<key>Sprites/ShipParts</key>
 		<dict>
-			<key>isDirty</key>
-			<true/>
 			<key>isSmartSpriteSheet</key>
-			<true/>
-			<key>previewFolderHidden</key>
-			<true/>
-			<key>trimSprites</key>
-			<true/>
-		</dict>
-		<key>UI</key>
-		<dict>
-			<key>isDirty</key>
-			<true/>
-			<key>isSmartSpriteSheet</key>
-			<true/>
-			<key>previewFolderHidden</key>
 			<true/>
 			<key>trimSprites</key>
 			<true/>
