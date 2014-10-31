@@ -900,7 +900,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>Sprites/ShipParts/cockpitYellow_1.png</string>
+									<string>Sprites/ShipParts/cockpitRed_3.png</string>
 								</array>
 							</dict>
 							<dict>
@@ -1135,8 +1135,6 @@
 				</array>
 			</dict>
 		</array>
-		<key>selected</key>
-		<true/>
 	</dict>
 	<key>notes</key>
 	<array/>
