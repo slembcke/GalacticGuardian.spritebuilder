@@ -84,6 +84,34 @@
 		<dict/>
 		<key>Sprites</key>
 		<dict/>
+		<key>Sprites/Asteroids</key>
+		<dict>
+			<key>isDirty</key>
+			<true/>
+			<key>isSmartSpriteSheet</key>
+			<true/>
+		</dict>
+		<key>Sprites/Bullets</key>
+		<dict>
+			<key>isDirty</key>
+			<true/>
+			<key>isSmartSpriteSheet</key>
+			<true/>
+		</dict>
+		<key>Sprites/Effects</key>
+		<dict>
+			<key>isDirty</key>
+			<true/>
+			<key>isSmartSpriteSheet</key>
+			<true/>
+		</dict>
+		<key>Sprites/Powerups</key>
+		<dict>
+			<key>isDirty</key>
+			<true/>
+			<key>isSmartSpriteSheet</key>
+			<true/>
+		</dict>
 		<key>Sprites/Powerups/pill_blue.png</key>
 		<dict/>
 		<key>Sprites/ShipParts</key>
@@ -91,6 +119,13 @@
 			<key>isSmartSpriteSheet</key>
 			<true/>
 			<key>trimSprites</key>
+			<true/>
+		</dict>
+		<key>UI</key>
+		<dict>
+			<key>isDirty</key>
+			<true/>
+			<key>isSmartSpriteSheet</key>
 			<true/>
 		</dict>
 		<key>ccbResources</key>
