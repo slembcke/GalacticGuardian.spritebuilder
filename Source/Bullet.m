@@ -15,9 +15,9 @@ static NSString * const bulletImageNames[] = {
 	@"Sprites/Bullets/laserBlue02.png",
 	@"Sprites/Bullets/laserGreen04.png",
 	@"Sprites/Bullets/laserRed02.png",
-	@"Sprites/Bullets/laserBlue12.png",
-	@"Sprites/Bullets/laserGreen08.png",
-	@"Sprites/Bullets/laserRed12.png",
+	@"Sprites/Bullets/laserBlue14.png",
+	@"Sprites/Bullets/laserGreen06.png",
+	@"Sprites/Bullets/laserRed14.png",
 };
 static NSString * const bulletFlashes[] ={
 	@"Sprites/Bullets/laserBlue08.png",
@@ -27,11 +27,11 @@ static NSString * const bulletFlashes[] ={
 	@"Sprites/Bullets/laserGreen14.png",
 	@"Sprites/Bullets/laserRed08.png"};
 
-const int bulletSpeeds[] = {
-	450, 525, 600, 550, 625, 700
+const float bulletSpeeds[] = {
+	200, 225, 250, 225, 260, 295
 };
 const float bulletDurations[] = {
-	0.25, 0.26, 0.27, 0.32, 0.33, 0.35
+	0.5, 0.52, 0.54, 0.64, 0.66, 0.70
 };
 
 
@@ -97,28 +97,6 @@ const float bulletDurations[] = {
 {
 	// Draw a little flash at it's last position
 	[(GameScene *)self.scene drawBulletFlash:self];
-	
-//	// Draw a little distortion too
-//	CCSprite *distortion = [CCSprite spriteWithImageNamed:@"DistortionTexture.png"];
-//	distortion.position = pos;
-//	distortion.scale = 0.25;
-//	[[(GameScene *)self.scene distortionNode] addChild:distortion];
-//	
-//	[distortion runAction:[CCActionSequence actions:
-//		[CCActionSpawn actions:
-//			[CCActionFadeOut actionWithDuration:duration],
-//			[CCActionScaleTo actionWithDuration:duration scale:1.0],
-//			nil
-//		],
-//		[CCActionRemove action],
-//		nil
-//	]];
-	
-	// Make some noise. Add a little chromatically tuned pitch bending to make it more musical.
-//	int half_steps = (arc4random()%(2*4 + 1) - 4);
-//	float pitch = pow(2.0f, half_steps/12.0f);
-//	[[OALSimpleAudio sharedInstance] playEffect:@"Fizzle.wav" volume:1.0 pitch:pitch pan:0.0 loop:NO];
-	
 	[self removeFromParent];
 }
 
