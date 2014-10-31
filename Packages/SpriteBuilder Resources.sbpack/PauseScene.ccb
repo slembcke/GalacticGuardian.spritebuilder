@@ -233,7 +233,7 @@
 								<key>type</key>
 								<string>FontTTF</string>
 								<key>value</key>
-								<string>Helvetica</string>
+								<string>kenvector_future.ttf</string>
 							</dict>
 							<dict>
 								<key>name</key>
@@ -290,9 +290,9 @@
 								<string>Color4</string>
 								<key>value</key>
 								<array>
-									<real>0.0</real>
-									<real>0.0</real>
-									<real>0.0</real>
+									<real>0.79066461324691772</real>
+									<real>0.79066461324691772</real>
+									<real>0.79066461324691772</real>
 									<real>1</real>
 								</array>
 							</dict>
@@ -303,10 +303,10 @@
 								<string>Color4</string>
 								<key>value</key>
 								<array>
-									<real>0.0</real>
-									<real>0.0</real>
-									<real>0.0</real>
-									<real>0.0</real>
+									<real>0.5</real>
+									<real>0.5</real>
+									<real>0.5</real>
+									<real>1</real>
 								</array>
 							</dict>
 							<dict>
@@ -316,7 +316,7 @@
 								<string>FloatScale</string>
 								<key>value</key>
 								<array>
-									<real>1</real>
+									<real>0.5</real>
 									<integer>0</integer>
 								</array>
 							</dict>
@@ -330,7 +330,7 @@
 									<real>0.0</real>
 									<real>0.0</real>
 									<real>0.0</real>
-									<real>0.0</real>
+									<real>0.50999999046325684</real>
 								</array>
 							</dict>
 							<dict>
@@ -340,7 +340,7 @@
 								<string>FloatScale</string>
 								<key>value</key>
 								<array>
-									<real>0.0</real>
+									<real>1</real>
 									<integer>0</integer>
 								</array>
 							</dict>
@@ -351,8 +351,8 @@
 								<string>Position</string>
 								<key>value</key>
 								<array>
-									<real>0.0</real>
-									<real>0.0</real>
+									<real>2</real>
+									<real>-2</real>
 									<integer>0</integer>
 									<integer>0</integer>
 									<integer>0</integer>
@@ -392,8 +392,8 @@
 								<string>Position</string>
 								<key>value</key>
 								<array>
-									<real>110.66660308837891</real>
-									<real>177.66664123535156</real>
+									<real>140.66659545898438</real>
+									<real>157.52775573730469</real>
 									<integer>0</integer>
 									<integer>1</integer>
 									<integer>1</integer>
@@ -555,8 +555,8 @@
 								<string>Position</string>
 								<key>value</key>
 								<array>
-									<real>110.66660308837891</real>
-									<real>124.58329772949219</real>
+									<real>141.66659545898438</real>
+									<real>104.44441223144531</real>
 									<integer>0</integer>
 									<integer>1</integer>
 									<integer>1</integer>
@@ -719,7 +719,7 @@
 								<key>value</key>
 								<array>
 									<real>14.555517196655273</real>
-									<real>177.66664123535156</real>
+									<real>157.52775573730469</real>
 									<integer>0</integer>
 									<integer>1</integer>
 									<integer>1</integer>
@@ -766,7 +766,7 @@
 								<key>type</key>
 								<string>FontTTF</string>
 								<key>value</key>
-								<string>Helvetica</string>
+								<string>kenvector_future.ttf</string>
 							</dict>
 							<dict>
 								<key>name</key>
@@ -775,7 +775,7 @@
 								<string>FloatScale</string>
 								<key>value</key>
 								<array>
-									<real>24</real>
+									<real>20</real>
 									<integer>1</integer>
 								</array>
 							</dict>
@@ -823,9 +823,9 @@
 								<string>Color4</string>
 								<key>value</key>
 								<array>
-									<real>0.0</real>
-									<real>0.0</real>
-									<real>0.0</real>
+									<real>0.8076937198638916</real>
+									<real>0.8076937198638916</real>
+									<real>0.8076937198638916</real>
 									<real>1</real>
 								</array>
 							</dict>
@@ -836,10 +836,10 @@
 								<string>Color4</string>
 								<key>value</key>
 								<array>
-									<real>0.0</real>
-									<real>0.0</real>
-									<real>0.0</real>
-									<real>0.0</real>
+									<real>0.49062138795852661</real>
+									<real>0.49062138795852661</real>
+									<real>0.49062138795852661</real>
+									<real>1</real>
 								</array>
 							</dict>
 							<dict>
@@ -849,7 +849,7 @@
 								<string>FloatScale</string>
 								<key>value</key>
 								<array>
-									<real>1</real>
+									<real>0.5</real>
 									<integer>0</integer>
 								</array>
 							</dict>
@@ -863,7 +863,7 @@
 									<real>0.0</real>
 									<real>0.0</real>
 									<real>0.0</real>
-									<real>0.0</real>
+									<real>0.50999999046325684</real>
 								</array>
 							</dict>
 							<dict>
@@ -926,7 +926,7 @@
 								<key>value</key>
 								<array>
 									<real>14.555517196655273</real>
-									<real>124.58329772949219</real>
+									<real>104.44441223144531</real>
 									<integer>0</integer>
 									<integer>1</integer>
 									<integer>1</integer>
@@ -973,7 +973,7 @@
 								<key>type</key>
 								<string>FontTTF</string>
 								<key>value</key>
-								<string>Helvetica</string>
+								<string>kenvector_future.ttf</string>
 							</dict>
 							<dict>
 								<key>name</key>
@@ -982,7 +982,7 @@
 								<string>FloatScale</string>
 								<key>value</key>
 								<array>
-									<real>24</real>
+									<real>20</real>
 									<integer>1</integer>
 								</array>
 							</dict>
@@ -1030,9 +1030,9 @@
 								<string>Color4</string>
 								<key>value</key>
 								<array>
-									<real>0.0</real>
-									<real>0.0</real>
-									<real>0.0</real>
+									<real>0.82756698131561279</real>
+									<real>0.82756698131561279</real>
+									<real>0.82756698131561279</real>
 									<real>1</real>
 								</array>
 							</dict>
@@ -1043,10 +1043,10 @@
 								<string>Color4</string>
 								<key>value</key>
 								<array>
-									<real>0.0</real>
-									<real>0.0</real>
-									<real>0.0</real>
-									<real>0.0</real>
+									<real>0.49447363615036011</real>
+									<real>0.49447363615036011</real>
+									<real>0.49447363615036011</real>
+									<real>1</real>
 								</array>
 							</dict>
 							<dict>
@@ -1056,7 +1056,7 @@
 								<string>FloatScale</string>
 								<key>value</key>
 								<array>
-									<real>1</real>
+									<real>0.5</real>
 									<integer>0</integer>
 								</array>
 							</dict>
@@ -1070,7 +1070,7 @@
 									<real>0.0</real>
 									<real>0.0</real>
 									<real>0.0</real>
-									<real>0.0</real>
+									<real>0.5</real>
 								</array>
 							</dict>
 							<dict>
@@ -1132,9 +1132,9 @@
 								<string>Position</string>
 								<key>value</key>
 								<array>
-									<real>387.6800537109375</real>
-									<real>30.240005493164062</real>
-									<integer>0</integer>
+									<real>8</real>
+									<real>8</real>
+									<integer>3</integer>
 									<integer>1</integer>
 									<integer>1</integer>
 								</array>
@@ -1146,8 +1146,8 @@
 								<string>Point</string>
 								<key>value</key>
 								<array>
-									<real>0.5</real>
-									<real>0.5</real>
+									<real>1</real>
+									<real>0.0</real>
 								</array>
 							</dict>
 							<dict>
@@ -1306,7 +1306,7 @@
 								<key>type</key>
 								<string>FontTTF</string>
 								<key>value</key>
-								<string>Helvetica</string>
+								<string>kenvector_future.ttf</string>
 							</dict>
 							<dict>
 								<key>name</key>
@@ -1315,7 +1315,7 @@
 								<string>FloatScale</string>
 								<key>value</key>
 								<array>
-									<real>24</real>
+									<real>18</real>
 									<integer>1</integer>
 								</array>
 							</dict>
@@ -1466,8 +1466,8 @@
 								<string>Position</string>
 								<key>value</key>
 								<array>
-									<real>133.83993530273438</real>
-									<real>29.95997428894043</real>
+									<real>8</real>
+									<real>8</real>
 									<integer>0</integer>
 									<integer>1</integer>
 									<integer>1</integer>
@@ -1480,8 +1480,8 @@
 								<string>Point</string>
 								<key>value</key>
 								<array>
-									<real>0.5</real>
-									<real>0.5</real>
+									<real>0.0</real>
+									<real>0.0</real>
 								</array>
 							</dict>
 							<dict>
@@ -1632,7 +1632,7 @@
 								<key>type</key>
 								<string>FontTTF</string>
 								<key>value</key>
-								<string>Helvetica</string>
+								<string>kenvector_future.ttf</string>
 							</dict>
 							<dict>
 								<key>name</key>
@@ -1641,7 +1641,7 @@
 								<string>FloatScale</string>
 								<key>value</key>
 								<array>
-									<real>24</real>
+									<real>18</real>
 									<integer>1</integer>
 								</array>
 							</dict>
@@ -1837,9 +1837,9 @@
 						<string>Color3</string>
 						<key>value</key>
 						<array>
-							<real>1</real>
-							<real>1</real>
-							<real>1</real>
+							<real>0.0</real>
+							<real>0.0</real>
+							<real>0.0</real>
 							<real>0.5</real>
 						</array>
 					</dict>
@@ -1852,6 +1852,8 @@
 						<real>0.5</real>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 		</array>
 		<key>customClass</key>
