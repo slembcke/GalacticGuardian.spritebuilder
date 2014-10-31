@@ -36,10 +36,18 @@ const float AccelRange = 130.0;
 const float AccelMin = 60.0;
 const float AccelMax = 600.0;
 
--(void)ggFixedUpdate:(CCTime)delta scene:(GameScene *)scene
+-(void)fixedUpdate:(CCTime)delta
 {
+	GameScene *scene = (GameScene *)self.scene;
 	if([scene.player isDead]) return;
 	
+	CGPoint pos = self.position;
+	
+	// Check if it's gone offscreen and remove it.
+	if(!CGRectContainsPoint((CGRect){CGPointZero, GameSceneSize}, pos)){
+		[self removeFromParent];
+		return;
+	}
 	
 	CCPhysicsBody *body = self.physicsBody;
 	
@@ -49,7 +57,7 @@ const float AccelMax = 600.0;
 	}
 	
 	CGPoint targetPoint = scene.playerPosition;
-	float distance = ccpDistance(targetPoint, self.position);
+	float distance = ccpDistance(targetPoint, pos);
 	
 	if(distance < AccelRange){
 		// then consider accellerating towards player
@@ -57,7 +65,6 @@ const float AccelMax = 600.0;
 		CGPoint direction = ccpNormalize(ccpSub(targetPoint, self.position));
 		body.velocity = ccpAdd(body.velocity, ccpMult(direction, delta * accel));
 	}
-	
 }
 
 @end

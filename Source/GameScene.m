@@ -36,8 +36,6 @@
 	
 	CCProgressNode *levelProgress;
 	
-	NSMutableArray *_pickups;
-	
 	int _enemies_killed;
 	int _ship_level;
 	int _spaceBucks;
@@ -91,7 +89,6 @@
 		[_physics addChild:bounds];
 		
 		_enemies = [NSMutableArray array];
-		_pickups = [NSMutableArray array];
 		
 		// Add a ship in the middle of the screen.
 		_ship_level = shipLevel;
@@ -188,11 +185,6 @@
 	for (EnemyShip *e in _enemies) {
 		[e ggFixedUpdate:delta scene:self];
 	}
-	for (SpaceBucks *sb in _pickups) {
-		[sb ggFixedUpdate:delta scene:self];
-	}
-	
-	
 }
 
 -(void)setScrollPosition:(CGPoint)scrollPosition
@@ -237,7 +229,6 @@
 			
 			SpaceBucks *pickup = [[SpaceBucks alloc] initWithAmount: type];
 			pickup.position = enemy.position;
-			[_pickups addObject:pickup];
 			[_physics addChild:pickup z:Z_PICKUPS];
 		}
 	}
@@ -589,7 +580,6 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 -(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair ship:(PlayerShip *)player pickup:(SpaceBucks *)pickup
 {
 	[pickup removeFromParent];
-	[_pickups removeObject:pickup];
 	
 	[self drawFlash:pickup.position withImage:pickup.flashImage];
 	[[OALSimpleAudio sharedInstance] playEffect:@"TempSounds/Pickup.wav" volume:0.25 pitch:1.0 pan:0.0 loop:NO];
@@ -603,15 +593,5 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 	
 	return NO;
 }
-
--(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair wall:(CCNode *)wall pickup:(SpaceBucks *)pickup
-{
-	[pickup scheduleBlock:^(CCTimer *timer) {
-		[pickup removeFromParent];
-		[_pickups removeObject:pickup];
-	} delay:1.0f];
-	return NO;
-}
-
 
 @end
