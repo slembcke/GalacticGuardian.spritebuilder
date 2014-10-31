@@ -148,6 +148,11 @@
 	return self;
 }
 
+-(void)dealloc
+{
+	NSLog(@"Dealloc GameScene.");
+}
+
 -(void)setupControls
 {
 	_controls = [Controls node];
@@ -211,7 +216,6 @@
 {
 	self.scrollPosition = _playerShip.position;
 }
-
 
 -(void)enemyDeath:(EnemyShip *)enemy from:(Bullet *) bullet;
 {
@@ -461,8 +465,10 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 	}
 	
 	float rotation = -90.0f;
+	CGPoint velocity = CGPointZero;
 	if(_playerShip){
 		rotation = _playerShip.rotation;
+		velocity = _playerShip.physicsBody.velocity;
 		
 		[_playerShip removeFromParent];
 	}
@@ -471,6 +477,7 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 	_playerShip = (PlayerShip *)[CCBReader load:[NSString stringWithFormat:@"%@-%d", shipArt, shipChassis ]];
 	_playerShip.position = pos;
 	_playerShip.rotation = rotation;
+	_playerShip.physicsBody.velocity = velocity;
 	_playerShip.name = shipArt;
 	[_physics addChild:_playerShip z:Z_PLAYER];
 	[_background.distortionNode addChild:_playerShip.shieldDistortionSprite];
@@ -478,6 +485,14 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 	
 	// Center on the player.
 	self.scrollPosition = _playerShip.position;
+	
+	CCNode *distortion = [CCBReader load:@"DistortionParticles/SmallRing"];
+	distortion.position = pos;
+	[_background.distortionNode addChild:distortion];
+	
+	[self scheduleBlock:^(CCTimer *timer) {
+		[distortion removeFromParent];
+	} delay:5];
 }
 
 -(void) levelUp;

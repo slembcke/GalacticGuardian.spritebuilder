@@ -96,12 +96,12 @@
 	GCController *_controller;
 	GCControllerDirectionPad *_controllerStick;
 	GCControllerDirectionPad *_controllerAim;
-	GCControllerDirectionPad *_controllerDpad;
 	
 	NSMutableDictionary *_buttonStates;
 	NSMutableDictionary *_buttonHandlers;
 	
-	NSArray *_observers;
+	id _controllerConnectedObserver;
+	id _controllerDisconnectedObserver;
 }
 
 -(id)init
@@ -161,7 +161,7 @@
 
 -(BOOL)activateController:(GCController *)controller
 {
-	if(_controller || controller.gamepad == nil) return NO;
+	if(_controller || controller.extendedGamepad == nil) return NO;
 	
 	NSLog(@"Using controller %@", controller);
 	_controller = controller;
@@ -169,11 +169,10 @@
 	
 	_controllerStick = controller.extendedGamepad.leftThumbstick;
 	_controllerAim = controller.extendedGamepad.rightThumbstick;
-	_controllerDpad = controller.gamepad.dpad;
 	
 	__weak typeof(self) _self = self;
 	
-	controller.gamepad.rightShoulder.valueChangedHandler = ^(GCControllerButtonInput *button, float value, BOOL pressed){
+	controller.extendedGamepad.rightShoulder.valueChangedHandler = ^(GCControllerButtonInput *button, float value, BOOL pressed){
 		[_self setButtonValue:ControlRocketButton value:pressed];
 	};
 	
@@ -181,21 +180,37 @@
 		[_self callHandler:@(ControlPauseButton) value:YES];
 	};
 	
+	_controllerDisconnectedObserver = [[NSNotificationCenter defaultCenter] addObserverForName:GCControllerDidDisconnectNotification object:controller queue:nil
+		usingBlock:^(NSNotification *notification){
+			NSLog(@"Controller disconnected.");
+			
+			GCController *controller = notification.object;
+			[_self logController:controller];
+			[_self deactivateController:controller];
+		}
+	];
+	
 	self.visible = NO;
 	return YES;
 }
 
 -(void)deactivateController:(GCController *)controller
 {
-	if(controller == _controller){
-		_controller.gamepad.rightShoulder.valueChangedHandler = nil;
-		_controller.controllerPausedHandler = nil;
-		
-		_controller = nil;
-		_controllerStick = nil;
-		
-		self.visible = YES;
-	}
+	if(controller == nil) return;
+	
+	NSAssert(controller == _controller, @"Deactivating some other controller!?");
+	
+	_controller.extendedGamepad.rightShoulder.valueChangedHandler = nil;
+	_controller.controllerPausedHandler = nil;
+	
+	_controller = nil;
+	_controllerStick = nil;
+	_controllerAim = nil;
+	
+	[[NSNotificationCenter defaultCenter] removeObserver:_controllerDisconnectedObserver];
+	_controllerDisconnectedObserver = nil;
+	
+	self.visible = YES;
 }
 
 -(void)setupGamepadSupport
@@ -209,58 +224,33 @@
 		[self logController:controller];
 		if(_controller == nil) [self activateController:controller];
 	}
-}
-
--(void)onEnter
-{
-	if(NSClassFromString(@"GCController")){
-		id connect = [[NSNotificationCenter defaultCenter] addObserverForName:GCControllerDidConnectNotification object:nil queue:nil
-			usingBlock:^(NSNotification *notification){
-				NSLog(@"Controller connected.");
-				
-				GCController *controller = notification.object;
-				[self logController:controller];
-				[self activateController:controller];
-			}
-		];
-		
-		id disconnect = [[NSNotificationCenter defaultCenter] addObserverForName:GCControllerDidDisconnectNotification object:nil queue:nil
-			usingBlock:^(NSNotification *notification){
-				NSLog(@"Controller disconnected.");
-				
-				GCController *controller = notification.object;
-				[self logController:controller];
-				[self deactivateController:controller];
-			}
-		];
-		
-		_observers = @[connect, disconnect];
-	}
 	
-	[super onEnter];
-}
-
--(void)onExit
-{
-	for(id observer in _observers){
-		[[NSNotificationCenter defaultCenter] removeObserver:observer];
-	}
-	
-	[super onExit];
+	__weak typeof(self) _self = self;
+	_controllerConnectedObserver = [[NSNotificationCenter defaultCenter] addObserverForName:GCControllerDidConnectNotification object:nil queue:nil
+		usingBlock:^(NSNotification *notification){
+			NSLog(@"Controller connected.");
+			
+			GCController *controller = notification.object;
+			[_self logController:controller];
+			[_self activateController:controller];
+		}
+	];
 }
 
 -(void)dealloc
 {
-	// TODO memory leak!!!
-	// 90% certain it's the CGController blocks.
-	NSLog(@"dealloc");
+	NSLog(@"Dealloc Controls.");
+	[self deactivateController:_controller];
+	
+	[[NSNotificationCenter defaultCenter] removeObserver:_controllerConnectedObserver];
+	_controllerConnectedObserver = nil;
 }
 
 -(void)update:(CCTime)delta
 {
 	CGPoint aim = CGPointZero;
 	
-	if(_controllerAim){
+	if(_controller){
 		aim = CGPointMake(_controllerAim.xAxis.value, _controllerAim.yAxis.value);
 	} else {
 		aim = _virtualAimJoystick.direction;
@@ -292,8 +282,8 @@
 {
 	if(_controller){
 		return cpvclamp(cpv(
-			_controllerStick.xAxis.value + _controllerDpad.xAxis.value,
-			_controllerStick.yAxis.value + _controllerDpad.yAxis.value
+			_controllerStick.xAxis.value,
+			_controllerStick.yAxis.value
 		), 1.0);
 	} else {
 		return _virtualJoystick.direction;
