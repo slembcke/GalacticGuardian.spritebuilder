@@ -157,7 +157,7 @@
 		self.userInteractionEnabled = YES;
 		
 #if !ANDROID
-		[self setupGamepadSupport]
+		[self setupGamepadSupport];
 #endif
 	}
 	
