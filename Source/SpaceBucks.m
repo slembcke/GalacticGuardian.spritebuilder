@@ -53,7 +53,10 @@ const float AccelMax = 600.0;
 
 -(void)fixedUpdate:(CCTime)delta
 {
-	if([_scene.player isDead]) return;
+	if([_scene.playerShip isDead]){
+		[self removeFromParent];
+		return;
+	}
 	
 	CCPhysicsBody *body = self.physicsBody;
 	CGPoint pos = body.absolutePosition;

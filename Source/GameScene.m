@@ -30,7 +30,6 @@
 	NebulaBackground *_background;
 	
 	Controls *_controls;
-	PlayerShip *_playerShip;
 	
 	NSMutableArray *_enemies;
 	

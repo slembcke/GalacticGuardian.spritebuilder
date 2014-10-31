@@ -88,7 +88,7 @@ static const NSUInteger PickupCount = 5;
 
 -(void)fixedUpdate:(CCTime)delta
 {
-	if(_hp == 0 || [_scene.player isDead]) return;
+	if(_hp == 0) return;
 	
 	CCPhysicsBody *body = self.physicsBody;
 	

@@ -7,7 +7,7 @@
 
 @property(nonatomic, readonly) CCNode *distortionNode;
 
-@property(nonatomic, readonly) PlayerShip *player;
+@property(nonatomic, readonly) PlayerShip *playerShip;
 @property(nonatomic, readonly) CGPoint playerPosition;
 
 -(instancetype)initWithShipType:(ShipType) shipType level:(int) shipLevel;
