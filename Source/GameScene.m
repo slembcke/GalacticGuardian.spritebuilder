@@ -417,7 +417,7 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 }
 
 -(void) createPlayerShipAt:(CGPoint) pos withArt:(NSString *) shipArt
-{
+{	
 	_spaceBucks = 0;
 	_spaceBucksTilNextLevel = _ship_level * 60 + 30;
 	if(_ship_level >= 6){
