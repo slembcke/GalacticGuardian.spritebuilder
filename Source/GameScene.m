@@ -62,11 +62,11 @@
 		_scrollNode.position = ccp(viewSize.width/2.0, viewSize.height/2.0);
 		[self addChild:_scrollNode z:Z_SCROLL_NODE];
 		
-		_clampWidth = (GameSceneSize.width - viewSize.width)/2.0;
-		_clampHeight = (GameSceneSize.height - viewSize.height)/2.0;
+		_clampWidth = (GameSceneSize - viewSize.width)/2.0;
+		_clampHeight = (GameSceneSize - viewSize.height)/2.0;
 		
 		_background = [NebulaBackground node];
-		_background.contentSize = GameSceneSize;
+		_background.contentSize = CGSizeMake(GameSceneSize, GameSceneSize);
 		[_scrollNode addChild:_background z:Z_NEBULA];
 		
 		_physics = [CCPhysicsNode node];
@@ -83,7 +83,7 @@
 		
 		CCNode *bounds = [CCNode node];
 		CGFloat boundsWidth = 50.0;
-		CGRect boundsRect = CGRectMake(-boundsWidth, -boundsWidth, GameSceneSize.width + 2.0*boundsWidth, GameSceneSize.height + 2.0*boundsWidth);
+		CGRect boundsRect = CGRectMake(-boundsWidth, -boundsWidth, GameSceneSize + 2.0*boundsWidth, GameSceneSize + 2.0*boundsWidth);
 		bounds.physicsBody = [CCPhysicsBody bodyWithPolylineFromRect:boundsRect cornerRadius:boundsWidth];
 		bounds.physicsBody.collisionCategories = @[CollisionCategoryBarrier];
 		bounds.physicsBody.collisionMask = @[CollisionCategoryPlayer];
@@ -94,23 +94,9 @@
 		
 		// Add a ship in the middle of the screen.
 		_ship_level = shipLevel;
-		[self createPlayerShipAt: ccp(GameSceneSize.width/2.0, GameSceneSize.height/2.0) withArt:ship_fileNames[shipType]];
+		[self createPlayerShipAt: ccp(GameSceneSize/2.0, GameSceneSize/2.0) withArt:ship_fileNames[shipType]];
 		
-		[self scheduleBlock:^(CCTimer *timer) {
-			EnemyShip *enemy = (EnemyShip *)[CCBReader load:@"BadGuy1"];
-			if(CCRANDOM_0_1() > 0.33f){
-				// left or right sides.
-				enemy.position = ccp(CCRANDOM_0_1() > 0.5f ? -64.0f : GameSceneSize.width + 64.0f, CCRANDOM_MINUS1_1() * 400.0f + GameSceneSize.height / 2.0f);
-			}else{
-				// Top:
-				enemy.position = ccp(CCRANDOM_MINUS1_1() * 400.0f + GameSceneSize.width / 2.0f, GameSceneSize.height + 64.0f);
-			}
-
-			[_physics addChild:enemy z:Z_ENEMY];
-			[_enemies addObject:enemy];
-			
-			[timer repeatOnceWithInterval:1.5f];
-		} delay:1.0f];
+		[self setupEnemySpawnTimer];
 		
 		for(int i = 0; i < 20; i++){
 			// maybe this spoke/circle pattern will be cool.
@@ -195,8 +181,8 @@
 	float smoothing = 1e3;
 	
 	CGPoint exp = CGPointMake(
-		(scrollPosition.x - GameSceneSize.width/2.0)/_clampWidth,
-		(scrollPosition.y - GameSceneSize.height/2.0)/_clampHeight
+		(scrollPosition.x - GameSceneSize/2.0)/_clampWidth,
+		(scrollPosition.y - GameSceneSize/2.0)/_clampHeight
 	);
 	
 	CGPoint offset = CGPointMake(
@@ -505,6 +491,47 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 	]];
 	
 	[self createPlayerShipAt:_playerShip.position withArt:_playerShip.name];
+}
+
+-(void)setupEnemySpawnTimer
+{
+	__block NSUInteger spawnCounter = 0;
+	__block CGPoint enemySpawnLocation = CGPointZero;
+	
+	const NSUInteger GroupCount = 10;
+	const float GroupRadius = 100.0;
+	
+	CCTimer *spawnTimer = [self scheduleBlock:^(CCTimer *timer) {
+		NSUInteger currentlyAllowed = MIN(spawnCounter/20 + 20, 40);
+		if(_enemies.count >= currentlyAllowed) return;
+		
+		// Every few enemies spawned, move the spawn area.
+		// That way the enemies come in groups from random directions.
+		if(spawnCounter%GroupCount == 0){
+			// Randomize the starting location.
+			// Start with a random direction.
+			CGPoint dir = CCRANDOM_ON_UNIT_CIRCLE();
+			
+			// Project that direction onto a unit square so we can spawn them just outside the screen's bounds.
+			dir = ccpMult(dir, 1.0/MAX(fabs(dir.x), fabs(dir.y)));
+			
+			// Now just need to turn that into an actual location.
+			enemySpawnLocation = CGPointMake(
+				(0.5 + 0.5*dir.x)*GameSceneSize + dir.x*GroupRadius,
+				(0.5 + 0.5*dir.y)*GameSceneSize + dir.y*GroupRadius
+			);
+		}
+		
+		EnemyShip *enemy = (EnemyShip *)[CCBReader load:@"BadGuy1"];
+		enemy.position = ccpAdd(enemySpawnLocation, ccpMult(CCRANDOM_IN_UNIT_CIRCLE(), GroupRadius));
+		[_physics addChild:enemy z:Z_ENEMY];
+		[_enemies addObject:enemy];
+		
+		spawnCounter++;
+	} delay:0.0];
+	
+	spawnTimer.repeatInterval = 0.1;
+	spawnTimer.repeatCount = CCTimerRepeatForever;
 }
 
 -(CCNode *)distortionNode

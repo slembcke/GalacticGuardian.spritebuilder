@@ -2,7 +2,8 @@
 #define DefaultsSoundKey @"SoundVolume"
 
 
-static CGSize GameSceneSize = {1024, 1024};
+#define GameSceneSize 1024.0
+
 
 static NSString * const ship_names[] =			{@"Retribution", @"Defiant", @"Herald"};
 static NSString * const ship_fileNames[] =	{@"Retribution", @"ScottSpaceship", @"AndySpaceship"};
