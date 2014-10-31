@@ -20,7 +20,7 @@ static const NSUInteger PickupCount = 5;
 	
 	float _speed;
 	float _accelTime;
-	int _hp;
+
 	
 	CCNode *_debrisNode;
 	CCNode *_explosion;

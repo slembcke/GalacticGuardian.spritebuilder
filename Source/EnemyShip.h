@@ -7,6 +7,7 @@
 
 @interface EnemyShip : CCNode
 
+@property(nonatomic) int hp;
 @property(nonatomic, readonly) NSString *debris;
 
 -(BOOL) takeDamage:(int)damage;
