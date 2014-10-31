@@ -47,7 +47,6 @@ static const NSUInteger PickupCount = 5;
 	// Then you list which categories its allowed to collide with.
 	body.collisionMask = @[
 		CollisionCategoryPlayer,
-		CollisionCategoryDebris,
 		CollisionCategoryBullet,
 		CollisionCategoryEnemy
 	];
