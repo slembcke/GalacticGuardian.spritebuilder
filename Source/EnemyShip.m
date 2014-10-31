@@ -133,8 +133,12 @@ static const NSUInteger PickupCount = 5;
 	_smoke.position = pos;
 	[parent addChild:_smoke z:Z_SMOKE];
 	
-	_distortion.position = pos;
-	[_scene.distortionNode addChild:_distortion];
+	if([_distortion parent] != nil){
+		NSLog(@"Distortion effect was already applied for this enemy ship. It was probably killed twice.");
+	}else{
+		_distortion.position = pos;
+		[_scene.distortionNode addChild:_distortion];
+	}
 	
 	[parent scheduleBlock:^(CCTimer *timer) {
 		[_debrisNode removeFromParent];
