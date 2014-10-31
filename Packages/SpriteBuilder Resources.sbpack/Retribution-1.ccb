@@ -713,8 +713,6 @@
 										<real>90</real>
 									</dict>
 								</array>
-								<key>selected</key>
-								<true/>
 							</dict>
 						</array>
 						<key>customClass</key>
@@ -1051,6 +1049,16 @@
 				<key>value</key>
 				<string>8.000000</string>
 			</dict>
+			<dict>
+				<key>name</key>
+				<string>_hp</string>
+				<key>optimized</key>
+				<false/>
+				<key>type</key>
+				<integer>0</integer>
+				<key>value</key>
+				<string>3</string>
+			</dict>
 		</array>
 		<key>displayName</key>
 		<string>CCNode</string>
@@ -1154,6 +1162,8 @@
 				</array>
 			</dict>
 		</array>
+		<key>selected</key>
+		<true/>
 	</dict>
 	<key>notes</key>
 	<array/>
