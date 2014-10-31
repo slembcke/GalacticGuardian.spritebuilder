@@ -214,62 +214,14 @@
 
 -(void)enemyDeath:(EnemyShip *)enemy from:(Bullet *) bullet;
 {
-	[enemy removeFromParent];
 	[_enemies removeObject:enemy];
 	
 	if(![_playerShip isDead]){
 		_enemies_killed += 1;
-		
-		// spawn loot:
-		for(int i = 0; i < 10; i++){
-			SpaceBuckType type = SpaceBuck_1;
-			float n = CCRANDOM_0_1();
-			if(n > 0.90f){
-				type = SpaceBuck_8;
-			}else if ( n > 0.70f){
-				type = SpaceBuck_4;
-			}
-			
-			SpaceBucks *pickup = [[SpaceBucks alloc] initWithAmount: type];
-			pickup.position = enemy.position;
-			[_physics addChild:pickup z:Z_PICKUPS];
-		}
 	}
 	
-	CGPoint pos = enemy.position;
-	
-	CCNode *debris = [CCBReader load:enemy.debris];
-	debris.position = pos;
-	debris.rotation = enemy.rotation;
-	
-	CCColor *weaponColor = [CCColor colorWithRed:1.0f green:1.0f blue:0.3f];
-	if(bullet != nil){
-		weaponColor = bullet.bulletColor;
-	}
-	
-	InitDebris(debris, debris, enemy.physicsBody.velocity, weaponColor);
-	[_physics addChild:debris z:Z_DEBRIS];
-	
-	CCNode *explosion = [CCBReader load:@"Particles/ShipExplosion"];
-	explosion.position = pos;
-	[_physics addChild:explosion z:Z_FIRE];
-	
-	CCNode *smoke = [CCBReader load:@"Particles/Smoke"];
-	smoke.position = pos;
-	[_physics addChild:smoke z:Z_SMOKE];
-	
-	CCNode *distortion = [CCBReader load:@"DistortionParticles/SmallRing"];
-	distortion.position = pos;
-	[_background.distortionNode addChild:distortion];
-	
-	[self scheduleBlock:^(CCTimer *timer) {
-		[debris removeFromParent];
-		[explosion removeFromParent];
-		[smoke removeFromParent];
-		[distortion removeFromParent];
-	} delay:5];
-	
-	[[OALSimpleAudio sharedInstance] playEffect:@"TempSounds/Explosion.wav" volume:2.0 pitch:1.0 pan:0.0 loop:NO];
+	CCColor *weaponColor = bullet.bulletColor ?: [CCColor colorWithRed:1.0f green:1.0f blue:0.3f];
+	[enemy destroyWithWeaponColor:weaponColor];
 }
 
 -(void)splashDamageAt:(CGPoint)center radius:(float)radius damage:(int)damage;

@@ -3,16 +3,12 @@
 //
 
 #import "OALSimpleAudio.h"
+#import "CCPhysics+ObjectiveChipmunk.h"
 
 #import "Constants.h"
 
 #import "EnemyShip.h"
-
-// To access some of Chipmunk's handy vector functions like cpvlerpconst().
-#import "ObjectiveChipmunk/ObjectiveChipmunk.h"
-
-// TODO
-#import "CCPhysics+ObjectiveChipmunk.h"
+#import "SpaceBucks.h"
 
 @implementation EnemyShip
 {
@@ -28,7 +24,7 @@
 	CCPhysicsBody *body = self.physicsBody;
 	
 	_hp = 5;
-	_speed = 25;
+	_speed = 50;
 	
 	// This is used to pick which collision delegate method to call, see GameScene.m for more info.
 	body.collisionType = @"enemy";
@@ -84,6 +80,56 @@
 	return _hp <= 0;
 }
 
-
+-(void)destroyWithWeaponColor:(CCColor *)weaponColor
+{
+	GameScene *scene = (GameScene *)self.scene;
+	CCNode *parent = self.parent;
+	CGPoint pos = self.position;
+	
+	// spawn loot:
+	for(int i = 0; i < 10; i++){
+		SpaceBuckType type = SpaceBuck_1;
+		float n = CCRANDOM_0_1();
+		if(n > 0.90f){
+			type = SpaceBuck_8;
+		}else if ( n > 0.70f){
+			type = SpaceBuck_4;
+		}
+		
+		SpaceBucks *pickup = [[SpaceBucks alloc] initWithAmount: type];
+		pickup.position = pos;
+		[parent addChild:pickup z:Z_PICKUPS];
+	}
+	
+	CCNode *debris = [CCBReader load:self.debris];
+	debris.position = pos;
+	debris.rotation = self.rotation;
+	
+	InitDebris(debris, debris, self.physicsBody.velocity, weaponColor);
+	[parent addChild:debris z:Z_DEBRIS];
+	
+	CCNode *explosion = [CCBReader load:@"Particles/ShipExplosion"];
+	explosion.position = pos;
+	[parent addChild:explosion z:Z_FIRE];
+	
+	CCNode *smoke = [CCBReader load:@"Particles/Smoke"];
+	smoke.position = pos;
+	[parent addChild:smoke z:Z_SMOKE];
+	
+	CCNode *distortion = [CCBReader load:@"DistortionParticles/SmallRing"];
+	distortion.position = pos;
+	[scene.distortionNode addChild:distortion];
+	
+	[parent scheduleBlock:^(CCTimer *timer) {
+		[debris removeFromParent];
+		[explosion removeFromParent];
+		[smoke removeFromParent];
+		[distortion removeFromParent];
+	} delay:3.0];
+	
+	[[OALSimpleAudio sharedInstance] playEffect:@"TempSounds/Explosion.wav" volume:2.0 pitch:1.0 pan:0.0 loop:NO];
+	
+	[self removeFromParent];
+}
 
 @end

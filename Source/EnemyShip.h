@@ -12,4 +12,6 @@
 -(void)ggFixedUpdate:(CCTime)delta scene:(GameScene *)scene;
 -(BOOL) takeDamage:(int)damage;
 
+-(void)destroyWithWeaponColor:(CCColor *)weaponColor;
+
 @end
