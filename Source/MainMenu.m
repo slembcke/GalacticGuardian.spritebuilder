@@ -10,6 +10,7 @@
 	CCTime _time;
 	
 	CCLabelTTF* _titleLabel;
+	CCButton *_playButton;
 	
 	CCSprite* _ship1;
 	CCSprite* _ship2;
@@ -50,6 +51,9 @@
 	_ship1.physicsBody = nil;
 	_ship2.physicsBody = nil;
 	_ship3.physicsBody = nil;
+	
+	// Arbitrary positive number to avoid layering issues with the ships.
+	_playButton.zOrder = 100;
 }
 
 -(void)update:(CCTime)delta
@@ -72,13 +76,24 @@
 	// Nice periodic motion left and right
 	float xPos = sinf(t + phase);
 	// Since the derivative of sin is cos, this gives us the direction of the ship.
-	float shipDirection = cosf(t + phase);
+	float shipRotation = 15.0*cosf(t + phase);
+	
+	// Add a little scaling synced with the  for a nice fake 3D effect.
+	float fakeDistance = 7.0;
+	float depth = cosf(t + phase);
+	float scale = (fakeDistance + depth)/fakeDistance;
 	
 	float yOffset = 100.0f + sinf(t / 3.0f + phase) * 40.0f;
-
-	// They rotate +/- 15 degrees, and they need to be turned -90 degrees to face upwards
-	ship.rotation = shipDirection * 15.0f - 90.0f;
-	ship.position = ccp(xPos * 80.0f + offset * 30.0f + 256.0f, yOffset);
+	
+	// They rotate +/- 15 degrees.
+	// We are modifying the parent node so we can animate the ship independently for the fly-away animation.
+	ship.parent.rotation = shipRotation;
+	ship.parent.position = ccp(xPos * 90.0f + offset * 20.0f + 256.0f, yOffset);
+	ship.parent.scale = scale;
+	
+	// Fiddle with the zOrder for layering effects.
+	NSInteger buttonZ = _playButton.zOrder;
+	ship.parent.zOrder = (depth < 0.0 ? buttonZ - 1: buttonZ + 1);
 }
 
 
@@ -121,18 +136,13 @@
 
 -(void) launchWithShip:(ShipType) shipType;
 {
-	__block ShipType blockShip = shipType;
-	
-	
 	[self scheduleBlock:^(CCTimer *timer) {
-		GameScene *scene = [[GameScene alloc] initWithShipType:blockShip];
+		GameScene *scene = [[GameScene alloc] initWithShipType:shipType];
 		[[CCDirector sharedDirector] replaceScene:scene];
 	}delay:2.75f];
 
 	CCSprite *ship = @[_ship3, _ship2, _ship1][shipType];
-	// The ship's motion is already controlled, so we're going to move a special parent node made just for this purpose.
-	[ship.parent runAction:[CCActionMoveBy actionWithDuration:2.5f position:ccp(0.0f, 400.0f)] ];
-	// but scale the ship itself.
+	[ship runAction:[CCActionMoveBy actionWithDuration:2.5f position:ccp(0.0f, 400.0f)] ];
 	[ship runAction:[CCActionScaleTo actionWithDuration:2.5f scale:2.5f]];
 }
 
