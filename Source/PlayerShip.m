@@ -211,7 +211,11 @@ VisitAll(CCNode *node, void (^block)(CCNode *))
 	
 	CCNode *explosion = [CCBReader load:@"Particles/ShipExplosion"];
 	explosion.position = pos;
-	[self.parent addChild:explosion z:Z_PARTICLES];
+	[self.parent addChild:explosion z:Z_FIRE];
+	
+	CCNode *smoke = [CCBReader load:@"Particles/Smoke"];
+	smoke.position = pos;
+	[self.parent addChild:smoke z:Z_SMOKE];
 	
 	CCNode *distortion = [CCBReader load:@"DistortionParticles/LargeRing"];
 	distortion.position = pos;

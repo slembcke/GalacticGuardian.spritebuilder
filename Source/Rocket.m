@@ -7,10 +7,16 @@
 #import "GameScene.h"
 
 
-const float RocketAcceleration = 1000.0;
-const float RocketDistance = 150.0;
-const float RocketDamage = 7;
-const float RocketSplash = 150.0;
+static const float RocketAcceleration = 1000.0;
+static const float RocketDistance = 125.0;
+
+static const float RocketDamage[] = {7.0, 10.0, 3.0};
+static const float RocketSplash = 150.0;
+
+static const int RocketClusters = 5;
+static const CCTime RocketClusterDelay = 0.3;
+static const CCTime RocketClusterInterval = 0.05;
+static const float RocketClusterRange = 50.0;
 
 
 @implementation Rocket {
@@ -47,16 +53,18 @@ const float RocketSplash = 150.0;
 	body.velocity = ccpAdd(body.velocity, ccpMult(direction, RocketAcceleration*delta));
 }
 
--(void)destroy
+-(void)splashAt:(CGPoint)pos parent:(CCNode *)parent
 {
-	CGPoint pos = self.position;
-	GameScene *scene = (GameScene *)self.scene;
-	
-	[scene splashDamageAt:pos radius:RocketSplash damage:RocketDamage];
+	GameScene *scene = (GameScene *)parent.scene;
+	[scene splashDamageAt:pos radius:RocketSplash damage:RocketDamage[_level]];
 	
 	CCNode *explosion = [CCBReader load:@"Particles/RocketExplosion"];
 	explosion.position = pos;
-	[self.parent addChild:explosion z:Z_PARTICLES];
+	[parent addChild:explosion z:Z_FIRE];
+	
+	CCNode *smoke = [CCBReader load:@"Particles/Smoke"];
+	smoke.position = pos;
+	[parent addChild:smoke z:Z_SMOKE];
 	
 	CCNode *distortion = [CCBReader load:@"DistortionParticles/RocketRing"];
 	distortion.position = pos;
@@ -66,6 +74,25 @@ const float RocketSplash = 150.0;
 		[explosion removeFromParent];
 		[distortion removeFromParent];
 	} delay:2];
+	
+	[[OALSimpleAudio sharedInstance] playEffect:@"TempSounds/Explosion.wav" volume:2.0 pitch:1.0 pan:0.0 loop:NO];
+}
+
+-(void)destroy
+{
+	CCNode *parent = self.parent;
+	CGPoint pos = self.position;
+	
+	[self splashAt:pos parent:parent];
+	
+	if(_level == RocketCluster){
+		for(int i=1; i<RocketClusters; i++){
+			[parent scheduleBlock:^(CCTimer *timer) {
+				CGPoint splashPos = ccpAdd(pos, ccpMult(CCRANDOM_ON_UNIT_CIRCLE(), RocketClusterRange));
+				[self splashAt:splashPos parent:parent];
+			} delay:i*RocketClusterInterval + RocketClusterDelay];
+		}
+	}
 	
 	[self removeFromParent];
 }

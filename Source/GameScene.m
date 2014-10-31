@@ -258,7 +258,11 @@
 	
 	CCNode *explosion = [CCBReader load:@"Particles/ShipExplosion"];
 	explosion.position = pos;
-	[_physics addChild:explosion z:Z_PARTICLES];
+	[_physics addChild:explosion z:Z_FIRE];
+	
+	CCNode *smoke = [CCBReader load:@"Particles/Smoke"];
+	smoke.position = pos;
+	[_physics addChild:smoke z:Z_SMOKE];
 	
 	CCNode *distortion = [CCBReader load:@"DistortionParticles/SmallRing"];
 	distortion.position = pos;
@@ -267,6 +271,7 @@
 	[self scheduleBlock:^(CCTimer *timer) {
 		[debris removeFromParent];
 		[explosion removeFromParent];
+		[smoke removeFromParent];
 		[distortion removeFromParent];
 	} delay:5];
 	
@@ -383,7 +388,7 @@
 	CGPoint position = ccp(transform.tx, transform.ty);
 	CGPoint direction = ccp(transform.a, transform.b);
 	
-	Rocket *rocket = [Rocket rocketWithLevel:RocketSmall];
+	Rocket *rocket = [Rocket rocketWithLevel:RocketCluster];
 	rocket.position = position;
 	rocket.rotation = -CC_RADIANS_TO_DEGREES(ccpToAngle(direction));
 	
