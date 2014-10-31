@@ -17,9 +17,15 @@
 	float _speed;
 	float _accelTime;
 	int _hp;
+	
+	CCNode *_debrisNode;
+	CCNode *_explosion;
+	CCNode *_smoke;
+	CCNode *_distortion;
+	NSArray *_pickups;
 }
 
--(void)onEnter
+-(void)didLoadFromCCB
 {
 	CCPhysicsBody *body = self.physicsBody;
 	
@@ -44,26 +50,44 @@
 	float scaleX = _mainThruster.scaleX;
 	float scaleY = _mainThruster.scaleY;
 	[_mainThruster runAction:[CCActionRepeatForever actionWithAction:[CCActionSequence actions:
-						[CCActionScaleTo actionWithDuration:0.1 scaleX:scaleX scaleY:0.5*scaleY],
-						[CCActionScaleTo actionWithDuration:0.05 scaleX:scaleX scaleY:scaleY],
-						nil
-						]]];
+		[CCActionScaleTo actionWithDuration:0.1 scaleX:scaleX scaleY:0.5*scaleY],
+		[CCActionScaleTo actionWithDuration:0.05 scaleX:scaleX scaleY:scaleY],
+		nil
+	]]];
 	
-	[super onEnter];
+	// Preload some of the destruction assets now since ships are often destroyed at the same time.
+	_debrisNode = [CCBReader load:self.debris];
+	_explosion = [CCBReader load:@"Particles/ShipExplosion"];
+	_smoke = [CCBReader load:@"Particles/Smoke"];
+	_distortion = [CCBReader load:@"DistortionParticles/SmallRing"];
+	
+	const NSUInteger pickupCount = 10;
+	SpaceBucks *pickups[pickupCount];
+	
+	for(int i = 0; i < 10; i++){
+		SpaceBuckType type = SpaceBuck_1;
+		float n = CCRANDOM_0_1();
+		if(n > 0.90f){
+			type = SpaceBuck_8;
+		}else if ( n > 0.70f){
+			type = SpaceBuck_4;
+		}
+		
+		pickups[i] = [[SpaceBucks alloc] initWithAmount:type];
+	}
+	
+	_pickups = [NSArray arrayWithObjects:pickups count:pickupCount];
 }
 
-// This method is called from [GameScene fixedUpdate:], not from Cocos2D.
--(void)ggFixedUpdate:(CCTime)delta scene:(GameScene *)scene
+-(void)fixedUpdate:(CCTime)delta
 {
+	GameScene *scene = (GameScene *)self.scene;
 	if(_hp == 0 || [scene.player isDead]) return;
 	
 	CCPhysicsBody *body = self.physicsBody;
 	
 	CGPoint targetVelocity = ccpMult(ccpNormalize(ccpSub(scene.playerPosition, self.position)), _speed);
-	
 	CGPoint velocity = cpvlerpconst(body.velocity, targetVelocity, _speed/_accelTime*delta);
-	
-	//	CCLOG(@"velocity: %@", NSStringFromCGPoint(velocity));
 	
 	body.velocity = velocity;
 	if(cpvlengthsq(velocity)){
@@ -86,7 +110,6 @@
 	CCNode *parent = self.parent;
 	CGPoint pos = self.position;
 	
-	// spawn loot:
 	for(int i = 0; i < 10; i++){
 		SpaceBuckType type = SpaceBuck_1;
 		float n = CCRANDOM_0_1();
@@ -96,35 +119,35 @@
 			type = SpaceBuck_4;
 		}
 		
-		SpaceBucks *pickup = [[SpaceBucks alloc] initWithAmount: type];
+		SpaceBucks *pickup = [[SpaceBucks alloc] initWithAmount:type];
 		pickup.position = pos;
 		[parent addChild:pickup z:Z_PICKUPS];
 	}
+//	for(SpaceBucks *pickup in _pickups){
+//		pickup.position = pos;
+//		[parent addChild:pickup z:Z_PICKUPS];
+//	}
 	
-	CCNode *debris = [CCBReader load:self.debris];
-	debris.position = pos;
-	debris.rotation = self.rotation;
+	_debrisNode.position = pos;
+	_debrisNode.rotation = self.rotation;
 	
-	InitDebris(debris, debris, self.physicsBody.velocity, weaponColor);
-	[parent addChild:debris z:Z_DEBRIS];
+	InitDebris(_debrisNode, _debrisNode, self.physicsBody.velocity, weaponColor);
+	[parent addChild:_debrisNode z:Z_DEBRIS];
 	
-	CCNode *explosion = [CCBReader load:@"Particles/ShipExplosion"];
-	explosion.position = pos;
-	[parent addChild:explosion z:Z_FIRE];
+	_explosion.position = pos;
+	[parent addChild:_explosion z:Z_FIRE];
 	
-	CCNode *smoke = [CCBReader load:@"Particles/Smoke"];
-	smoke.position = pos;
-	[parent addChild:smoke z:Z_SMOKE];
+	_smoke.position = pos;
+	[parent addChild:_smoke z:Z_SMOKE];
 	
-	CCNode *distortion = [CCBReader load:@"DistortionParticles/SmallRing"];
-	distortion.position = pos;
-	[scene.distortionNode addChild:distortion];
+	_distortion.position = pos;
+	[scene.distortionNode addChild:_distortion];
 	
 	[parent scheduleBlock:^(CCTimer *timer) {
-		[debris removeFromParent];
-		[explosion removeFromParent];
-		[smoke removeFromParent];
-		[distortion removeFromParent];
+		[_debrisNode removeFromParent];
+		[_explosion removeFromParent];
+		[_smoke removeFromParent];
+		[_distortion removeFromParent];
 	} delay:3.0];
 	
 	[[OALSimpleAudio sharedInstance] playEffect:@"TempSounds/Explosion.wav" volume:2.0 pitch:1.0 pan:0.0 loop:NO];

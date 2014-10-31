@@ -1123,8 +1123,6 @@
 								<array/>
 							</dict>
 						</array>
-						<key>selected</key>
-						<true/>
 					</dict>
 				</array>
 				<key>customClass</key>
@@ -1208,7 +1206,7 @@
 			</dict>
 		</array>
 		<key>customClass</key>
-		<string>EnemyShip</string>
+		<string></string>
 		<key>displayName</key>
 		<string>BadGuyNode</string>
 		<key>memberVarAssignmentName</key>
@@ -1277,6 +1275,8 @@
 				</array>
 			</dict>
 		</array>
+		<key>selected</key>
+		<true/>
 	</dict>
 	<key>notes</key>
 	<array/>

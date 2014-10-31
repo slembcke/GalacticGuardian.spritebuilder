@@ -170,10 +170,6 @@
 			[self fireBullet];
 		}
 	}
-	
-	for (EnemyShip *e in _enemies) {
-		[e ggFixedUpdate:delta scene:self];
-	}
 }
 
 -(void)setScrollPosition:(CGPoint)scrollPosition

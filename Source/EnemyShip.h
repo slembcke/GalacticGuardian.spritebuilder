@@ -9,7 +9,6 @@
 
 @property(nonatomic, readonly) NSString *debris;
 
--(void)ggFixedUpdate:(CCTime)delta scene:(GameScene *)scene;
 -(BOOL) takeDamage:(int)damage;
 
 -(void)destroyWithWeaponColor:(CCColor *)weaponColor;
