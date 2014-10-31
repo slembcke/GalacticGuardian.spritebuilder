@@ -19,7 +19,6 @@
 
 @property(nonatomic) float fireRate;
 @property(nonatomic) float lastFireTime;
-@property(nonatomic) BulletLevel bulletLevel;
 
 
 

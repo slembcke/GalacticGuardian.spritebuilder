@@ -125,7 +125,7 @@
 	
 	
 	[self scheduleBlock:^(CCTimer *timer) {
-		GameScene *scene = [[GameScene alloc] initWithShipType:blockShip level:0 ];
+		GameScene *scene = [[GameScene alloc] initWithShipType:blockShip];
 		[[CCDirector sharedDirector] replaceScene:scene];
 	}delay:2.75f];
 

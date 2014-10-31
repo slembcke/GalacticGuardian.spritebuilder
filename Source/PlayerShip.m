@@ -80,7 +80,6 @@ VisitAll(CCNode *node, void (^block)(CCNode *))
 	[_shield runAction:[CCActionRepeatForever actionWithAction:[CCActionRotateBy actionWithDuration:0.5 angle:360.0]]];
 	
 	_hp = 4;
-	_bulletLevel = BulletBlue1;
 	
 	_gunPorts = [NSMutableArray array];
 	VisitAll(self, ^(CCNode *node){
