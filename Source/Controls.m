@@ -173,8 +173,8 @@
 	
 	__weak typeof(self) _self = self;
 	
-	controller.gamepad.buttonA.valueChangedHandler = ^(GCControllerButtonInput *button, float value, BOOL pressed){
-		[_self setButtonValue:ControlFireButton value:pressed];
+	controller.gamepad.rightShoulder.valueChangedHandler = ^(GCControllerButtonInput *button, float value, BOOL pressed){
+		[_self setButtonValue:ControlRocketButton value:pressed];
 	};
 	
 	controller.controllerPausedHandler = ^(GCController *controller){
@@ -188,7 +188,7 @@
 -(void)deactivateController:(GCController *)controller
 {
 	if(controller == _controller){
-		_controller.gamepad.buttonA.valueChangedHandler = nil;
+		_controller.gamepad.rightShoulder.valueChangedHandler = nil;
 		_controller.controllerPausedHandler = nil;
 		
 		_controller = nil;
