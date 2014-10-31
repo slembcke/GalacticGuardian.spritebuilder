@@ -145,7 +145,7 @@
 	__weak typeof(self) _self = self;
 	[_controls setHandler:^(BOOL state) {if(state) [_self pause];} forButton:ControlPauseButton];
 	[_controls setHandler:^(BOOL state) {if(state) [_self fireRocket];} forButton:ControlRocketButton];
-	[_controls setHandler:^(BOOL state) {if(state) [_self novaBombAt:_self.playerPosition];} forButton:ControlNovaButton];
+	[_controls setHandler:^(BOOL state) {if(state) [_self fireNovaBomb];} forButton:ControlNovaButton];
 }
 
 -(void)addWallAt:(CGPoint) pos
@@ -337,12 +337,17 @@
 	#warning TODO toggle button
 }
 
--(void)novaBombAt:(CGPoint)pos
+-(void)fireNovaBomb
 {
 	// Don't fire if out of ammo or the ship is destroyed.
 	if(_novaBombs == 0 || [_playerShip isDead]) return;
 	_novaBombs -= 1;
 	
+	[self novaBombAt:_playerPosition];
+}
+
+-(void)novaBombAt:(CGPoint)pos
+{
 	CCParticleSystem *distortion = (CCParticleSystem *)[CCBReader load:@"DistortionParticles/LargeRing"];
 	distortion.position = pos;
 	[_background.distortionNode addChild:distortion];
