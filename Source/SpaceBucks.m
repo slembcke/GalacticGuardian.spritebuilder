@@ -26,8 +26,13 @@ const int values[] = {1, 4, 8};
 		body.angularVelocity = CCRANDOM_MINUS1_1() * 20.0f;
 		body.velocity = ccpMult(CCRANDOM_IN_UNIT_CIRCLE(), 200.0f);
 		
-		
-		
+		[self scheduleBlock:^(CCTimer *timer) {
+			[self runAction:[CCActionSequence actions:
+				[CCActionFadeOut actionWithDuration:0.5],
+				[CCActionRemove action],
+				nil
+			]];
+		} delay:5.0 + CCRANDOM_0_1()];
 	}
 	return self;
 }
