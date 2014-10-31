@@ -174,7 +174,7 @@
 						<string>FloatVar</string>
 						<key>value</key>
 						<array>
-							<real>100</real>
+							<real>50</real>
 							<real>2</real>
 						</array>
 					</dict>
@@ -325,8 +325,6 @@
 						<string>ccbResources/ccbParticleFire.png</string>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -602,7 +600,7 @@
 						<key>value</key>
 						<array>
 							<real>2000</real>
-							<real>1000</real>
+							<real>500</real>
 						</array>
 					</dict>
 					<dict>
@@ -614,6 +612,8 @@
 						<string>ccbResources/ccbParticleFire.png</string>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 		</array>
 		<key>customClass</key>

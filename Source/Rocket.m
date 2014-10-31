@@ -10,10 +10,10 @@
 static const float RocketAcceleration = 1000.0;
 static const float RocketDistance = 125.0;
 
-static const float RocketDamage[] = {7.0, 10.0, 3.0};
+static const float RocketDamage[] = {7.0, 10.0, 5.0};
 static const float RocketSplash = 150.0;
 
-static const int RocketClusters = 5;
+static const int RocketClusters = 3;
 static const CCTime RocketClusterInterval = 0.2;
 static const float RocketClusterRange = 25.0;
 
