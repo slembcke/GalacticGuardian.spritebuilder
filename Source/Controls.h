@@ -1,6 +1,7 @@
 typedef NS_ENUM(NSUInteger, ControlButton){
 	ControlFireButton,
 	ControlRocketButton,
+	ControlNovaButton,
 	ControlPauseButton,
 };
 

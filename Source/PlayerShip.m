@@ -217,22 +217,13 @@ VisitAll(CCNode *node, void (^block)(CCNode *))
 	smoke.position = pos;
 	[self.parent addChild:smoke z:Z_SMOKE];
 	
-	CCNode *distortion = [CCBReader load:@"DistortionParticles/LargeRing"];
-	distortion.position = pos;
-	[[scene distortionNode] addChild:distortion];
-	
 	[self scheduleBlock:^(CCTimer *timer) {
 		[debris removeFromParent];
 		[explosion removeFromParent];
 		[smoke removeFromParent];
-		[distortion removeFromParent];
 	} delay:5];
 	
-	for (EnemyShip * e in scene.enemies) {
-		// explode based on distance from player.
-		float dist = ccpLength(ccpSub(pos, e.position));
-		[e scheduleBlock:^(CCTimer *timer) {[scene enemyDeath:e from:nil];} delay:dist / 200.0f];
-	}
+	[scene novaBombAt:pos];
 	
 	[self removeFromParent];
 }

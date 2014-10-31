@@ -5,6 +5,11 @@
 
 @interface GameScene : CCScene<CCPhysicsCollisionDelegate>
 
+@property(nonatomic, readonly) CCNode *distortionNode;
+
+@property(nonatomic, readonly) PlayerShip *player;
+@property(nonatomic, readonly) CGPoint playerPosition;
+
 -(instancetype)initWithShipType:(ShipType) shipType level:(int) shipLevel;
 
 -(void)enemyDeath:(EnemyShip *)enemy from:(Bullet *) bullet;
@@ -13,12 +18,7 @@
 -(void)drawFlash:(CGPoint) position withImage:(NSString*) imagePath;
 -(void)drawBulletFlash:(Bullet *)fromBullet;
 
-@property(nonatomic, readonly) CCNode *distortionNode;
-
-@property(nonatomic, readonly) PlayerShip *player;
-@property(nonatomic, readonly) CGPoint playerPosition;
-
-@property(nonatomic, readonly) NSMutableArray *enemies;
+-(void)novaBombAt:(CGPoint)pos;
 
 @end
 

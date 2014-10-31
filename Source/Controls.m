@@ -117,8 +117,14 @@
 		rocketButton.contentSize = CGSizeMake(0.7*joystickOffset, 0.7*joystickOffset);
 		[self addChild:rocketButton];
 		
+		CCNode *novaButton = [CCBReader load:@"NovaButton" owner:self];
+		novaButton.position = ccp(viewSize.width - 2.0*joystickOffset, joystickOffset);
+		novaButton.contentSize = CGSizeMake(0.7*joystickOffset, 0.7*joystickOffset);
+		[self addChild:novaButton];
+		
 		// Quick hack to disable the default exclusive touch property of CCButtons.
 		[(CCButton *)rocketButton.children[0] setExclusiveTouch:NO];
+		[(CCButton *)novaButton.children[0] setExclusiveTouch:NO];
 		
 		_virtualJoystick = [FancyJoystick node];
 		_virtualJoystick.scale = 2.0*joystickOffset/_virtualJoystick.contentSize.width;
@@ -174,6 +180,10 @@
 	
 	controller.extendedGamepad.rightShoulder.valueChangedHandler = ^(GCControllerButtonInput *button, float value, BOOL pressed){
 		[_self setButtonValue:ControlRocketButton value:pressed];
+	};
+	
+	controller.extendedGamepad.buttonA.valueChangedHandler = ^(GCControllerButtonInput *button, float value, BOOL pressed){
+		[_self setButtonValue:ControlNovaButton value:pressed];
 	};
 	
 	controller.controllerPausedHandler = ^(GCController *controller){
@@ -317,6 +327,12 @@
 	// Kind of a hack since CCButton doesn't support continuous events.
 	[self setButtonValue:ControlRocketButton value:YES];
 	[self setButtonValue:ControlRocketButton value:NO];
+}
+
+-(void)fireNova:(CCButton *)sender
+{
+	[self setButtonValue:ControlNovaButton value:YES];
+	[self setButtonValue:ControlNovaButton value:NO];
 }
 
 @end

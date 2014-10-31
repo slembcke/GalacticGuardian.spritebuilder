@@ -32,6 +32,8 @@
 	Controls *_controls;
 	PlayerShip *_playerShip;
 	
+	NSMutableArray *_enemies;
+	
 	CCTime _fixedTime;
 	
 	CCProgressNode *levelProgress;
@@ -158,6 +160,7 @@
 	__weak typeof(self) _self = self;
 	[_controls setHandler:^(BOOL state) {if(state) [_self pause];} forButton:ControlPauseButton];
 	[_controls setHandler:^(BOOL state) {if(state) [_self fireRocket];} forButton:ControlRocketButton];
+	[_controls setHandler:^(BOOL state) {if(state) [_self novaBombAt:_self.playerPosition];} forButton:ControlNovaButton];
 }
 
 -(void)addWallAt:(CGPoint) pos
@@ -388,6 +391,31 @@
 	rocket.physicsBody.velocity = _playerShip.physicsBody.velocity;
 	
 	[_physics addChild:rocket z:Z_BULLET];
+}
+
+-(void)novaBombAt:(CGPoint)pos
+{
+	CCParticleSystem *distortion = (CCParticleSystem *)[CCBReader load:@"DistortionParticles/LargeRing"];
+	distortion.position = pos;
+	[_background.distortionNode addChild:distortion];
+	
+	[self scheduleBlock:^(CCTimer *timer) {
+		[distortion removeFromParent];
+	} delay:5.0];
+	
+	float accel = distortion.radialAccel;
+	float limit = distortion.life + distortion.lifeVar;
+	
+	for (EnemyShip *enemy in _enemies) {
+		// explode based on distance from player and particle system values.
+		// Things are gnerally moving towards the player, so fudge the numbers a little.
+		float dist = MAX(ccpLength(ccpSub(pos, enemy.position)) - 30.0, 0.0);
+		float delay = sqrt(2.0*dist/accel);
+		
+		if(delay < limit){
+			[enemy scheduleBlock:^(CCTimer *timer) {[self enemyDeath:enemy from:nil];} delay:delay];
+		}
+	}
 }
 
 void
