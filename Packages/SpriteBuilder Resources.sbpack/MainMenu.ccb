@@ -10,7 +10,7 @@
 		<false/>
 	</dict>
 	<key>UUID</key>
-	<integer>13</integer>
+	<integer>55</integer>
 	<key>centeredOrigin</key>
 	<false/>
 	<key>currentResolution</key>
@@ -81,8 +81,8 @@
 							<real>0.0</real>
 							<real>0.0</real>
 							<integer>0</integer>
-							<integer>0</integer>
-							<integer>0</integer>
+							<integer>2</integer>
+							<integer>2</integer>
 						</array>
 					</dict>
 					<dict>
@@ -158,11 +158,11 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>257</real>
-							<real>85</real>
+							<real>0.5</real>
+							<real>0.25</real>
 							<integer>0</integer>
-							<integer>0</integer>
-							<integer>0</integer>
+							<integer>2</integer>
+							<integer>2</integer>
 						</array>
 					</dict>
 					<dict>
@@ -324,7 +324,7 @@
 						<key>type</key>
 						<string>FontTTF</string>
 						<key>value</key>
-						<string>Helvetica</string>
+						<string>kenvector_future.ttf</string>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -490,7 +490,7 @@
 						<key>value</key>
 						<array>
 							<real>0.5</real>
-							<real>0.5</real>
+							<real>0.70052081346511841</real>
 							<integer>0</integer>
 							<integer>2</integer>
 							<integer>2</integer>
@@ -538,7 +538,7 @@
 						<key>type</key>
 						<string>FontTTF</string>
 						<key>value</key>
-						<string>Helvetica-Bold</string>
+						<string>kenvector_future.ttf</string>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -595,9 +595,9 @@
 						<string>Color4</string>
 						<key>value</key>
 						<array>
-							<real>1</real>
-							<real>1</real>
-							<real>1</real>
+							<real>0.81218433380126953</real>
+							<real>0.81218433380126953</real>
+							<real>0.81218433380126953</real>
 							<real>1</real>
 						</array>
 					</dict>
@@ -635,7 +635,7 @@
 							<real>0.0</real>
 							<real>0.0</real>
 							<real>0.0</real>
-							<real>0.0</real>
+							<real>0.5</real>
 						</array>
 					</dict>
 					<dict>
@@ -645,7 +645,7 @@
 						<string>FloatScale</string>
 						<key>value</key>
 						<array>
-							<real>0.0</real>
+							<real>1</real>
 							<integer>0</integer>
 						</array>
 					</dict>
@@ -656,8 +656,8 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>0.0</real>
-							<real>0.0</real>
+							<real>2</real>
+							<real>-2</real>
 							<integer>0</integer>
 							<integer>0</integer>
 							<integer>0</integer>
@@ -669,60 +669,131 @@
 			</dict>
 			<dict>
 				<key>UUID</key>
-				<integer>6</integer>
+				<integer>52</integer>
 				<key>baseClass</key>
-				<string>CCBFile</string>
+				<string>CCNode</string>
 				<key>children</key>
-				<array/>
-				<key>customClass</key>
-				<string></string>
-				<key>customProperties</key>
 				<array>
 					<dict>
-						<key>name</key>
-						<string>_speed</string>
-						<key>optimized</key>
-						<false/>
-						<key>type</key>
+						<key>UUID</key>
+						<integer>6</integer>
+						<key>baseClass</key>
+						<string>CCBFile</string>
+						<key>children</key>
+						<array/>
+						<key>customClass</key>
+						<string></string>
+						<key>customProperties</key>
+						<array>
+							<dict>
+								<key>name</key>
+								<string>_speed</string>
+								<key>optimized</key>
+								<false/>
+								<key>type</key>
+								<integer>1</integer>
+								<key>value</key>
+								<string>200.000000</string>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>_accelTime</string>
+								<key>optimized</key>
+								<false/>
+								<key>type</key>
+								<integer>1</integer>
+								<key>value</key>
+								<string>0.250000</string>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>_debris</string>
+								<key>optimized</key>
+								<false/>
+								<key>type</key>
+								<integer>3</integer>
+								<key>value</key>
+								<string>AndySpaceshipDebris</string>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>_fireRate</string>
+								<key>optimized</key>
+								<false/>
+								<key>type</key>
+								<integer>1</integer>
+								<key>value</key>
+								<string>8.000000</string>
+							</dict>
+						</array>
+						<key>displayName</key>
+						<string>Ship1</string>
+						<key>memberVarAssignmentName</key>
+						<string>_ship1</string>
+						<key>memberVarAssignmentType</key>
 						<integer>1</integer>
-						<key>value</key>
-						<string>200.000000</string>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>_accelTime</string>
-						<key>optimized</key>
-						<false/>
-						<key>type</key>
-						<integer>1</integer>
-						<key>value</key>
-						<string>0.250000</string>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>_debris</string>
-						<key>optimized</key>
-						<false/>
-						<key>type</key>
-						<integer>3</integer>
-						<key>value</key>
-						<string>AndySpaceshipDebris</string>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>_fireRate</string>
-						<key>optimized</key>
-						<false/>
-						<key>type</key>
-						<integer>1</integer>
-						<key>value</key>
-						<string>8.000000</string>
+						<key>properties</key>
+						<array>
+							<dict>
+								<key>name</key>
+								<string>name</string>
+								<key>type</key>
+								<string>StringSimple</string>
+								<key>value</key>
+								<string>Ship1</string>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>position</string>
+								<key>type</key>
+								<string>Position</string>
+								<key>value</key>
+								<array>
+									<real>97</real>
+									<real>100</real>
+									<integer>0</integer>
+									<integer>0</integer>
+									<integer>0</integer>
+								</array>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>scale</string>
+								<key>type</key>
+								<string>ScaleLock</string>
+								<key>value</key>
+								<array>
+									<real>1</real>
+									<real>1</real>
+									<false/>
+									<integer>0</integer>
+								</array>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>rotation</string>
+								<key>type</key>
+								<string>Degrees</string>
+								<key>value</key>
+								<real>270</real>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>ccbFile</string>
+								<key>type</key>
+								<string>CCBFile</string>
+								<key>value</key>
+								<string>AndySpaceship-1.ccb</string>
+							</dict>
+						</array>
 					</dict>
 				</array>
+				<key>customClass</key>
+				<string></string>
 				<key>displayName</key>
-				<string>Ship1</string>
+				<string>MovableParentNode</string>
 				<key>memberVarAssignmentName</key>
-				<string>_ship1</string>
+				<string></string>
 				<key>memberVarAssignmentType</key>
 				<integer>1</integer>
 				<key>properties</key>
@@ -733,7 +804,7 @@
 						<key>type</key>
 						<string>StringSimple</string>
 						<key>value</key>
-						<string>Ship1</string>
+						<string></string>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -742,11 +813,35 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>120</real>
-							<real>84</real>
+							<real>0.0</real>
+							<real>0.0</real>
 							<integer>0</integer>
 							<integer>0</integer>
 							<integer>0</integer>
+						</array>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>contentSize</string>
+						<key>type</key>
+						<string>Size</string>
+						<key>value</key>
+						<array>
+							<real>0.0</real>
+							<real>0.0</real>
+							<integer>0</integer>
+							<integer>0</integer>
+						</array>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>anchorPoint</string>
+						<key>type</key>
+						<string>Point</string>
+						<key>value</key>
+						<array>
+							<real>0.0</real>
+							<real>0.0</real>
 						</array>
 					</dict>
 					<dict>
@@ -761,81 +856,136 @@
 							<false/>
 							<integer>0</integer>
 						</array>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>rotation</string>
-						<key>type</key>
-						<string>Degrees</string>
-						<key>value</key>
-						<real>180</real>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>ccbFile</string>
-						<key>type</key>
-						<string>CCBFile</string>
-						<key>value</key>
-						<string>AndySpaceship-1.ccb</string>
 					</dict>
 				</array>
 			</dict>
 			<dict>
 				<key>UUID</key>
-				<integer>8</integer>
+				<integer>53</integer>
 				<key>baseClass</key>
-				<string>CCBFile</string>
+				<string>CCNode</string>
 				<key>children</key>
-				<array/>
-				<key>customClass</key>
-				<string></string>
-				<key>customProperties</key>
 				<array>
 					<dict>
-						<key>name</key>
-						<string>_speed</string>
-						<key>optimized</key>
-						<false/>
-						<key>type</key>
+						<key>UUID</key>
+						<integer>8</integer>
+						<key>baseClass</key>
+						<string>CCBFile</string>
+						<key>children</key>
+						<array/>
+						<key>customClass</key>
+						<string></string>
+						<key>customProperties</key>
+						<array>
+							<dict>
+								<key>name</key>
+								<string>_speed</string>
+								<key>optimized</key>
+								<false/>
+								<key>type</key>
+								<integer>1</integer>
+								<key>value</key>
+								<string>200.000000</string>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>_accelTime</string>
+								<key>optimized</key>
+								<false/>
+								<key>type</key>
+								<integer>1</integer>
+								<key>value</key>
+								<string>0.500000</string>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>_debris</string>
+								<key>optimized</key>
+								<false/>
+								<key>type</key>
+								<integer>3</integer>
+								<key>value</key>
+								<string>ScottSpaceshipDebris</string>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>_fireRate</string>
+								<key>optimized</key>
+								<false/>
+								<key>type</key>
+								<integer>1</integer>
+								<key>value</key>
+								<string>10.000000</string>
+							</dict>
+						</array>
+						<key>displayName</key>
+						<string>Ship2</string>
+						<key>memberVarAssignmentName</key>
+						<string>_ship2</string>
+						<key>memberVarAssignmentType</key>
 						<integer>1</integer>
-						<key>value</key>
-						<string>200.000000</string>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>_accelTime</string>
-						<key>optimized</key>
-						<false/>
-						<key>type</key>
-						<integer>1</integer>
-						<key>value</key>
-						<string>0.500000</string>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>_debris</string>
-						<key>optimized</key>
-						<false/>
-						<key>type</key>
-						<integer>3</integer>
-						<key>value</key>
-						<string>ScottSpaceshipDebris</string>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>_fireRate</string>
-						<key>optimized</key>
-						<false/>
-						<key>type</key>
-						<integer>1</integer>
-						<key>value</key>
-						<string>10.000000</string>
+						<key>properties</key>
+						<array>
+							<dict>
+								<key>name</key>
+								<string>name</string>
+								<key>type</key>
+								<string>StringSimple</string>
+								<key>value</key>
+								<string>Ship2</string>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>position</string>
+								<key>type</key>
+								<string>Position</string>
+								<key>value</key>
+								<array>
+									<real>370</real>
+									<real>100</real>
+									<integer>0</integer>
+									<integer>0</integer>
+									<integer>0</integer>
+								</array>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>scale</string>
+								<key>type</key>
+								<string>ScaleLock</string>
+								<key>value</key>
+								<array>
+									<real>1</real>
+									<real>1</real>
+									<false/>
+									<integer>0</integer>
+								</array>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>rotation</string>
+								<key>type</key>
+								<string>Degrees</string>
+								<key>value</key>
+								<real>270</real>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>ccbFile</string>
+								<key>type</key>
+								<string>CCBFile</string>
+								<key>value</key>
+								<string>ScottSpaceship-1.ccb</string>
+							</dict>
+						</array>
 					</dict>
 				</array>
+				<key>customClass</key>
+				<string></string>
 				<key>displayName</key>
-				<string>Ship2</string>
+				<string>MovableParentNode</string>
 				<key>memberVarAssignmentName</key>
-				<string>_ship2</string>
+				<string></string>
 				<key>memberVarAssignmentType</key>
 				<integer>1</integer>
 				<key>properties</key>
@@ -846,7 +996,7 @@
 						<key>type</key>
 						<string>StringSimple</string>
 						<key>value</key>
-						<string>Ship2</string>
+						<string></string>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -855,11 +1005,35 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>120</real>
-							<real>84</real>
-							<integer>3</integer>
+							<real>0.0</real>
+							<real>0.0</real>
 							<integer>0</integer>
 							<integer>0</integer>
+							<integer>0</integer>
+						</array>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>contentSize</string>
+						<key>type</key>
+						<string>Size</string>
+						<key>value</key>
+						<array>
+							<real>0.0</real>
+							<real>0.0</real>
+							<integer>0</integer>
+							<integer>0</integer>
+						</array>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>anchorPoint</string>
+						<key>type</key>
+						<string>Point</string>
+						<key>value</key>
+						<array>
+							<real>0.0</real>
+							<real>0.0</real>
 						</array>
 					</dict>
 					<dict>
@@ -875,21 +1049,197 @@
 							<integer>0</integer>
 						</array>
 					</dict>
+				</array>
+			</dict>
+			<dict>
+				<key>UUID</key>
+				<integer>54</integer>
+				<key>baseClass</key>
+				<string>CCNode</string>
+				<key>children</key>
+				<array>
+					<dict>
+						<key>UUID</key>
+						<integer>39</integer>
+						<key>baseClass</key>
+						<string>CCBFile</string>
+						<key>children</key>
+						<array/>
+						<key>customClass</key>
+						<string></string>
+						<key>customProperties</key>
+						<array>
+							<dict>
+								<key>name</key>
+								<string>_speed</string>
+								<key>optimized</key>
+								<false/>
+								<key>type</key>
+								<integer>1</integer>
+								<key>value</key>
+								<string>200.000000</string>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>_accelTime</string>
+								<key>optimized</key>
+								<false/>
+								<key>type</key>
+								<integer>1</integer>
+								<key>value</key>
+								<string>0.250000</string>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>_debris</string>
+								<key>optimized</key>
+								<false/>
+								<key>type</key>
+								<integer>3</integer>
+								<key>value</key>
+								<string>Retribution-1Debris</string>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>_fireRate</string>
+								<key>optimized</key>
+								<false/>
+								<key>type</key>
+								<integer>1</integer>
+								<key>value</key>
+								<string>8.000000</string>
+							</dict>
+						</array>
+						<key>displayName</key>
+						<string>Ship3</string>
+						<key>memberVarAssignmentName</key>
+						<string>_ship3</string>
+						<key>memberVarAssignmentType</key>
+						<integer>1</integer>
+						<key>properties</key>
+						<array>
+							<dict>
+								<key>name</key>
+								<string>name</string>
+								<key>type</key>
+								<string>StringSimple</string>
+								<key>value</key>
+								<string>Ship2</string>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>position</string>
+								<key>type</key>
+								<string>Position</string>
+								<key>value</key>
+								<array>
+									<real>431</real>
+									<real>100</real>
+									<integer>0</integer>
+									<integer>0</integer>
+									<integer>0</integer>
+								</array>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>scale</string>
+								<key>type</key>
+								<string>ScaleLock</string>
+								<key>value</key>
+								<array>
+									<real>1</real>
+									<real>1</real>
+									<false/>
+									<integer>0</integer>
+								</array>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>rotation</string>
+								<key>type</key>
+								<string>Degrees</string>
+								<key>value</key>
+								<real>270</real>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>ccbFile</string>
+								<key>type</key>
+								<string>CCBFile</string>
+								<key>value</key>
+								<string>Retribution-1.ccb</string>
+							</dict>
+						</array>
+					</dict>
+				</array>
+				<key>customClass</key>
+				<string></string>
+				<key>displayName</key>
+				<string>MovableParentNode</string>
+				<key>memberVarAssignmentName</key>
+				<string></string>
+				<key>memberVarAssignmentType</key>
+				<integer>1</integer>
+				<key>properties</key>
+				<array>
 					<dict>
 						<key>name</key>
-						<string>rotation</string>
+						<string>name</string>
 						<key>type</key>
-						<string>Degrees</string>
+						<string>StringSimple</string>
 						<key>value</key>
-						<real>180</real>
+						<string></string>
 					</dict>
 					<dict>
 						<key>name</key>
-						<string>ccbFile</string>
+						<string>position</string>
 						<key>type</key>
-						<string>CCBFile</string>
+						<string>Position</string>
 						<key>value</key>
-						<string>ScottSpaceship-1.ccb</string>
+						<array>
+							<real>0.0</real>
+							<real>0.0</real>
+							<integer>0</integer>
+							<integer>0</integer>
+							<integer>0</integer>
+						</array>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>contentSize</string>
+						<key>type</key>
+						<string>Size</string>
+						<key>value</key>
+						<array>
+							<real>0.0</real>
+							<real>0.0</real>
+							<integer>0</integer>
+							<integer>0</integer>
+						</array>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>anchorPoint</string>
+						<key>type</key>
+						<string>Point</string>
+						<key>value</key>
+						<array>
+							<real>0.0</real>
+							<real>0.0</real>
+						</array>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>scale</string>
+						<key>type</key>
+						<string>ScaleLock</string>
+						<key>value</key>
+						<array>
+							<real>1</real>
+							<real>1</real>
+							<false/>
+							<integer>0</integer>
+						</array>
 					</dict>
 				</array>
 			</dict>

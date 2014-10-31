@@ -56,7 +56,7 @@
 						<key>customClass</key>
 						<string></string>
 						<key>displayName</key>
-						<string>wingBlue_6</string>
+						<string>wingGreen_6</string>
 						<key>memberVarAssignmentName</key>
 						<string></string>
 						<key>memberVarAssignmentType</key>
@@ -125,7 +125,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>Sprites/ShipParts/wingBlue_6.png</string>
+									<string>Sprites/ShipParts/wingGreen_6.png</string>
 								</array>
 							</dict>
 							<dict>
@@ -172,7 +172,7 @@
 						<key>customClass</key>
 						<string></string>
 						<key>displayName</key>
-						<string>wingBlue_6</string>
+						<string>wingGreen_6</string>
 						<key>memberVarAssignmentName</key>
 						<string></string>
 						<key>memberVarAssignmentType</key>
@@ -241,7 +241,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>Sprites/ShipParts/wingBlue_6.png</string>
+									<string>Sprites/ShipParts/wingGreen_6.png</string>
 								</array>
 							</dict>
 							<dict>
@@ -299,7 +299,7 @@
 						<key>customClass</key>
 						<string></string>
 						<key>displayName</key>
-						<string>wingBlue_5</string>
+						<string>wingGreen_5</string>
 						<key>memberVarAssignmentName</key>
 						<string></string>
 						<key>memberVarAssignmentType</key>
@@ -368,7 +368,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>Sprites/ShipParts/wingBlue_5.png</string>
+									<string>Sprites/ShipParts/wingGreen_5.png</string>
 								</array>
 							</dict>
 							<dict>
@@ -426,7 +426,7 @@
 						<key>customClass</key>
 						<string></string>
 						<key>displayName</key>
-						<string>wingBlue_5</string>
+						<string>wingGreen_5</string>
 						<key>memberVarAssignmentName</key>
 						<string></string>
 						<key>memberVarAssignmentType</key>
@@ -495,7 +495,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>Sprites/ShipParts/wingBlue_5.png</string>
+									<string>Sprites/ShipParts/wingGreen_5.png</string>
 								</array>
 							</dict>
 							<dict>
@@ -1167,7 +1167,7 @@
 						<key>customClass</key>
 						<string></string>
 						<key>displayName</key>
-						<string>cockpitBlue_6</string>
+						<string>cockpitGreen_6</string>
 						<key>memberVarAssignmentName</key>
 						<string></string>
 						<key>memberVarAssignmentType</key>
@@ -1228,7 +1228,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>Sprites/ShipParts/cockpitBlue_6.png</string>
+									<string>Sprites/ShipParts/cockpitGreen_6.png</string>
 								</array>
 							</dict>
 							<dict>
