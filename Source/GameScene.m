@@ -468,7 +468,7 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 
 	[[OALSimpleAudio sharedInstance] playEffect:@"TempSounds/LevelUp.wav" volume:0.8 pitch:1.0 pan:0.0 loop:NO];
 	
-	CCLabelTTF *levelUpText = [CCLabelTTF labelWithString:@"More Awesome!" fontName:@"Helvetica" fontSize:36.0];
+	CCLabelTTF *levelUpText = [CCLabelTTF labelWithString:@"More Awesome!" fontName:@"kenvector_future.ttf" fontSize:36.0];
 	[self addChild:levelUpText];
 	levelUpText.position = ccp(viewSize.width / 2.0f, viewSize.height / 1.5f);
 	levelUpText.anchorPoint = ccp(0.5, 0.5);
