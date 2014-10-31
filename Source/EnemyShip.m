@@ -10,6 +10,10 @@
 #import "EnemyShip.h"
 #import "SpaceBucks.h"
 
+
+static const NSUInteger PickupCount = 5;
+
+
 @implementation EnemyShip
 {
 	CCNode *_mainThruster;
@@ -22,7 +26,9 @@
 	CCNode *_explosion;
 	CCNode *_smoke;
 	CCNode *_distortion;
-	NSArray *_pickups;
+	CCNode *_pickups[PickupCount];
+	
+	GameScene *_scene;
 }
 
 -(void)didLoadFromCCB
@@ -61,10 +67,7 @@
 	_smoke = [CCBReader load:@"Particles/Smoke"];
 	_distortion = [CCBReader load:@"DistortionParticles/SmallRing"];
 	
-	const NSUInteger pickupCount = 10;
-	SpaceBucks *pickups[pickupCount];
-	
-	for(int i = 0; i < 10; i++){
+	for(int i = 0; i < PickupCount; i++){
 		SpaceBuckType type = SpaceBuck_1;
 		float n = CCRANDOM_0_1();
 		if(n > 0.90f){
@@ -73,20 +76,23 @@
 			type = SpaceBuck_4;
 		}
 		
-		pickups[i] = [[SpaceBucks alloc] initWithAmount:type];
+		_pickups[i] = [[SpaceBucks alloc] initWithAmount:type];
 	}
-	
-	_pickups = [NSArray arrayWithObjects:pickups count:pickupCount];
+}
+
+-(void)onEnter
+{
+	_scene = (GameScene *)self.scene;
+	[super onEnter];
 }
 
 -(void)fixedUpdate:(CCTime)delta
 {
-	GameScene *scene = (GameScene *)self.scene;
-	if(_hp == 0 || [scene.player isDead]) return;
+	if(_hp == 0 || [_scene.player isDead]) return;
 	
 	CCPhysicsBody *body = self.physicsBody;
 	
-	CGPoint targetVelocity = ccpMult(ccpNormalize(ccpSub(scene.playerPosition, self.position)), _speed);
+	CGPoint targetVelocity = ccpMult(ccpNormalize(ccpSub(_scene.playerPosition, body.absolutePosition)), _speed);
 	CGPoint velocity = cpvlerpconst(body.velocity, targetVelocity, _speed/_accelTime*delta);
 	
 	body.velocity = velocity;
@@ -106,27 +112,14 @@
 
 -(void)destroyWithWeaponColor:(CCColor *)weaponColor
 {
-	GameScene *scene = (GameScene *)self.scene;
 	CCNode *parent = self.parent;
 	CGPoint pos = self.position;
 	
-	for(int i = 0; i < 10; i++){
-		SpaceBuckType type = SpaceBuck_1;
-		float n = CCRANDOM_0_1();
-		if(n > 0.90f){
-			type = SpaceBuck_8;
-		}else if ( n > 0.70f){
-			type = SpaceBuck_4;
-		}
-		
-		SpaceBucks *pickup = [[SpaceBucks alloc] initWithAmount:type];
+	for(int i=0; i<PickupCount; i++){
+		CCNode *pickup = _pickups[i];
 		pickup.position = pos;
 		[parent addChild:pickup z:Z_PICKUPS];
 	}
-//	for(SpaceBucks *pickup in _pickups){
-//		pickup.position = pos;
-//		[parent addChild:pickup z:Z_PICKUPS];
-//	}
 	
 	_debrisNode.position = pos;
 	_debrisNode.rotation = self.rotation;
@@ -141,7 +134,7 @@
 	[parent addChild:_smoke z:Z_SMOKE];
 	
 	_distortion.position = pos;
-	[scene.distortionNode addChild:_distortion];
+	[_scene.distortionNode addChild:_distortion];
 	
 	[parent scheduleBlock:^(CCTimer *timer) {
 		[_debrisNode removeFromParent];

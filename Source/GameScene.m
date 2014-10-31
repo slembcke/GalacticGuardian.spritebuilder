@@ -229,6 +229,7 @@
 	
 	CCSprite *flash = [CCSprite spriteWithImageNamed:imagePath];
 	flash.position = position;
+	flash.rotation = 360.0*CCRANDOM_0_1();
 	[_physics addChild:flash z:Z_FLASH];
 	
 	[flash runAction:[CCActionSequence actions:
@@ -494,7 +495,7 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 	__block NSUInteger spawnCounter = 0;
 	__block CGPoint enemySpawnLocation = CGPointZero;
 	
-	const NSUInteger GroupCount = 10;
+	const NSUInteger GroupCount = 8;
 	const float GroupRadius = 100.0;
 	
 	CCTimer *spawnTimer = [self scheduleBlock:^(CCTimer *timer) {
@@ -516,12 +517,16 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 				(0.5 + 0.5*dir.x)*GameSceneSize + dir.x*GroupRadius,
 				(0.5 + 0.5*dir.y)*GameSceneSize + dir.y*GroupRadius
 			);
+			
+			NSLog(@"Spawning enemies from %@", NSStringFromCGPoint(enemySpawnLocation));
 		}
 		
 		EnemyShip *enemy = (EnemyShip *)[CCBReader load:@"BadGuy1"];
 		enemy.position = ccpAdd(enemySpawnLocation, ccpMult(CCRANDOM_IN_UNIT_CIRCLE(), GroupRadius));
 		[_physics addChild:enemy z:Z_ENEMY];
 		[_enemies addObject:enemy];
+		
+		NSLog(@"Enemy spawned at %@", NSStringFromCGPoint(enemy.position));
 		
 		spawnCounter++;
 	} delay:0.0];

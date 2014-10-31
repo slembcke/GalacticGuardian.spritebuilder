@@ -1,7 +1,11 @@
+#import "CCPhysics+ObjectiveChipmunk.h"
+
 #import "SpaceBucks.h"
 #import "PlayerShip.h"
 
-@implementation SpaceBucks
+@implementation SpaceBucks {
+	GameScene *_scene;
+}
 
 static NSString * const spriteNames[] = {@"Sprites/Powerups/pill_blue.png", @"Sprites/Powerups/pill_green.png", @"Sprites/Powerups/pill_red.png"};
 static NSString * const spriteFlashes[] = {@"Sprites/Bullets/laserBlue08.png", @"Sprites/Bullets/laserGreen14.png", @"Sprites/Bullets/laserRed08.png"};
@@ -25,16 +29,22 @@ const int values[] = {1, 4, 8};
 		body.collisionMask = @[CollisionCategoryPlayer, CollisionCategoryBarrier];
 		body.angularVelocity = CCRANDOM_MINUS1_1() * 20.0f;
 		body.velocity = ccpMult(CCRANDOM_IN_UNIT_CIRCLE(), 200.0f);
-		
-		[self scheduleBlock:^(CCTimer *timer) {
-			[self runAction:[CCActionSequence actions:
-				[CCActionFadeOut actionWithDuration:0.5],
-				[CCActionRemove action],
-				nil
-			]];
-		} delay:5.0 + CCRANDOM_0_1()];
 	}
 	return self;
+}
+
+-(void)onEnter
+{
+	_scene = (GameScene *)self.scene;
+	
+	[self scheduleBlock:^(CCTimer *timer) {
+		[self runAction:[CCActionSequence actions:
+			[CCActionFadeOut actionWithDuration:0.25],
+			[CCActionRemove action],
+			nil
+		]];
+	} delay:5.0 + CCRANDOM_0_1()];
+	[super onEnter];
 }
 
 const float AccelRange = 130.0;
@@ -43,25 +53,23 @@ const float AccelMax = 600.0;
 
 -(void)fixedUpdate:(CCTime)delta
 {
-	GameScene *scene = (GameScene *)self.scene;
-	if([scene.player isDead]) return;
+	if([_scene.player isDead]) return;
 	
-	CGPoint pos = self.position;
+	CCPhysicsBody *body = self.physicsBody;
+	CGPoint pos = body.absolutePosition;
 	
 	// Check if it's gone offscreen and remove it.
-	if(!CGRectContainsPoint((CGRect){CGPointZero, GameSceneSize}, pos)){
+	if(!CGRectContainsPoint(CGRectMake(0.0, 0.0, GameSceneSize, GameSceneSize), pos)){
 		[self removeFromParent];
 		return;
 	}
-	
-	CCPhysicsBody *body = self.physicsBody;
 	
 	// First, apply some drag
 	if(ccpLength(body.velocity) > 40.0f){
 		body.velocity = ccpMult(body.velocity, pow(0.25, delta));
 	}
 	
-	CGPoint targetPoint = scene.playerPosition;
+	CGPoint targetPoint = _scene.playerPosition;
 	float distance = ccpDistance(targetPoint, pos);
 	
 	if(distance < AccelRange){

@@ -14,9 +14,8 @@ static const float RocketDamage[] = {7.0, 10.0, 3.0};
 static const float RocketSplash = 150.0;
 
 static const int RocketClusters = 5;
-static const CCTime RocketClusterDelay = 0.3;
-static const CCTime RocketClusterInterval = 0.05;
-static const float RocketClusterRange = 50.0;
+static const CCTime RocketClusterInterval = 0.2;
+static const float RocketClusterRange = 25.0;
 
 
 @implementation Rocket {
@@ -91,7 +90,7 @@ static const float RocketClusterRange = 50.0;
 			[parent scheduleBlock:^(CCTimer *timer) {
 				CGPoint splashPos = ccpAdd(pos, ccpMult(CCRANDOM_ON_UNIT_CIRCLE(), RocketClusterRange));
 				[self splashAt:splashPos parent:parent];
-			} delay:i*RocketClusterInterval + RocketClusterDelay];
+			} delay:i*RocketClusterInterval];
 		}
 	}
 	
