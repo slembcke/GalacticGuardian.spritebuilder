@@ -13,6 +13,9 @@
 	
 	CCSprite* _ship1;
 	CCSprite* _ship2;
+	CCSprite* _ship3;
+	
+	CCParticleSystem *_particles;
 }
 
 +(void)initialize
@@ -36,15 +39,17 @@
 
 -(void)didLoadFromCCB
 {
-	CCParticleSystem *particles = (CCParticleSystem *)[CCBReader load:@"DistortionParticles/Menu"];
-	particles.shader = [CCShader shaderNamed:@"DistortionParticle"];
-	particles.positionType = CCPositionTypeNormalized;
-	particles.position = ccp(0.5, 0.5);
-	[_background.distortionNode addChild:particles];
+	_particles = (CCParticleSystem *)[CCBReader load:@"DistortionParticles/Menu"];
+	_particles.shader = [CCShader shaderNamed:@"DistortionParticle"];
+	_particles.positionType = CCPositionTypeNormalized;
+	_particles.position = _titleLabel.position;
+	_particles.posVar = ccp(_titleLabel.contentSize.width / 2.0f, 15.0f);
+	[_background.distortionNode addChild:_particles];
 	
 	// Make the "no physics node" warning go away.
 	_ship1.physicsBody = nil;
 	_ship2.physicsBody = nil;
+	_ship3.physicsBody = nil;
 }
 
 -(void)update:(CCTime)delta
@@ -52,12 +57,28 @@
 	_time += delta;
 	
 	// There is a simple hack in the vertex shader to make the nebula scroll.
+	_background.shaderUniforms[@"u_ScrollOffset"] = [NSValue valueWithCGPoint:ccp(0.0f, fmod(_time/4.0, 1.0))];
 	
-	float direction = sinf(_time);
-	float shipDirection = cosf(_time);
+	// Set up three ships moving around just for fun.
+	[self setShip:_ship1 atTime:_time atOffset:0.0f];
+	[self setShip:_ship2 atTime:_time  atOffset:1.0f];
+	[self setShip:_ship3 atTime:_time  atOffset:-1.0f];
+}
+
+-(void) setShip:(CCSprite *) ship atTime:(CCTime) t atOffset:(float) offset
+{
+	float phase = (offset * M_PI * 2.0f / 3.0f);
 	
-	_background.shaderUniforms[@"u_ScrollOffset"] = [NSValue valueWithCGPoint:ccp(direction / 8.0f, fmod(_time/4.0, 1.0))];
-	_ship1.rotation = _ship2.rotation = shipDirection * 15.0f - 90.0f;
+	// Nice periodic motion left and right
+	float xPos = sinf(t + phase);
+	// Since the derivative of sin is cos, this gives us the direction of the ship.
+	float shipDirection = cosf(t + phase);
+	
+	float yOffset = 100.0f + sinf(t / 3.0f + phase) * 40.0f;
+
+	// They rotate +/- 15 degrees, and they need to be turned -90 degrees to face upwards
+	ship.rotation = shipDirection * 15.0f - 90.0f;
+	ship.position = ccp(xPos * 80.0f + offset * 30.0f + 256.0f, yOffset);
 }
 
 
@@ -65,6 +86,7 @@
 {
 	// Remove label so it doesn't show through the background and so it makes a good cinematic when we select a ship.
 	[_titleLabel removeFromParent];
+	[_particles removeFromParent];
 	
 	CCDirector *director = [CCDirector sharedDirector];
 	CGSize viewSize = director.viewSize;
@@ -105,8 +127,13 @@
 	[self scheduleBlock:^(CCTimer *timer) {
 		GameScene *scene = [[GameScene alloc] initWithShipType:blockShip level:0 ];
 		[[CCDirector sharedDirector] replaceScene:scene];
-	}delay:1.0f];
+	}delay:2.75f];
 
+	CCSprite *ship = @[_ship3, _ship2, _ship1][shipType];
+	// The ship's motion is already controlled, so we're going to move a special parent node made just for this purpose.
+	[ship.parent runAction:[CCActionMoveBy actionWithDuration:2.5f position:ccp(0.0f, 400.0f)] ];
+	// but scale the ship itself.
+	[ship runAction:[CCActionScaleTo actionWithDuration:2.5f scale:2.5f]];
 }
 
 

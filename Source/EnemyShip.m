@@ -112,6 +112,11 @@ static const NSUInteger PickupCount = 5;
 
 -(void)destroyWithWeaponColor:(CCColor *)weaponColor
 {
+	if(![self isRunningInActiveScene]){
+		NSLog(@"Probably this enemy was destroyed twice.");
+		return;
+	}
+	
 	CCNode *parent = self.parent;
 	CGPoint pos = self.position;
 	
@@ -133,12 +138,8 @@ static const NSUInteger PickupCount = 5;
 	_smoke.position = pos;
 	[parent addChild:_smoke z:Z_SMOKE];
 	
-	if([_distortion parent] != nil){
-		NSLog(@"Distortion effect was already applied for this enemy ship. It was probably killed twice.");
-	}else{
-		_distortion.position = pos;
-		[_scene.distortionNode addChild:_distortion];
-	}
+	_distortion.position = pos;
+	[_scene.distortionNode addChild:_distortion];
 	
 	[parent scheduleBlock:^(CCTimer *timer) {
 		[_debrisNode removeFromParent];
