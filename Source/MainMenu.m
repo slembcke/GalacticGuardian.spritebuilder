@@ -4,6 +4,7 @@
 #import "NebulaBackground.h"
 #import "GameScene.h"
 #import "ShipSelectionScene.h"
+#import "PauseScene.h"
 
 @implementation MainMenu {
 	NebulaBackground *_background;
@@ -94,6 +95,40 @@
 	// Fiddle with the zOrder for layering effects.
 	NSInteger buttonZ = _playButton.zOrder;
 	ship.parent.zOrder = (depth < 0.0 ? buttonZ - 1: buttonZ + 1);
+}
+
+
+-(void)showOptionsMenu
+{
+	CCDirector *director = [CCDirector sharedDirector];
+	CGSize viewSize = director.viewSize;
+	
+	PauseScene *pause = (PauseScene *)[CCBReader load:@"PauseScene"];
+	// if you get in there from this way, don't show the button.
+	[pause.menuButton removeFromParent];
+	
+	CCRenderTexture *rt = [CCRenderTexture renderTextureWithWidth:viewSize.width height:viewSize.height];
+	rt.contentScale /= 4.0;
+	rt.texture.antialiased = YES;
+	
+	GLKMatrix4 projection = director.projectionMatrix;
+	CCRenderer *renderer = [rt begin];
+	[self visit:renderer parentTransform:&projection];
+	[rt end];
+	
+	CCSprite *screenGrab = [CCSprite spriteWithTexture:rt.texture];
+	screenGrab.anchorPoint = ccp(0.0, 0.0);
+	screenGrab.effect = [CCEffectStack effects:
+#if !CC_DIRECTOR_IOS_THREADED_RENDERING
+											 // BUG!
+											 [CCEffectBlur effectWithBlurRadius:4.0],
+#endif
+											 [CCEffectSaturation effectWithSaturation:-0.5],
+											 nil
+											 ];
+	[pause addChild:screenGrab z:-1];
+	
+	[director pushScene:pause withTransition:[CCTransition transitionCrossFadeWithDuration:0.25]];
 }
 
 

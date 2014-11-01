@@ -1266,6 +1266,16 @@
 				<key>value</key>
 				<string>10.000000</string>
 			</dict>
+			<dict>
+				<key>name</key>
+				<string>_hp</string>
+				<key>optimized</key>
+				<false/>
+				<key>type</key>
+				<integer>0</integer>
+				<key>value</key>
+				<string>4</string>
+			</dict>
 		</array>
 		<key>displayName</key>
 		<string>CCNode</string>

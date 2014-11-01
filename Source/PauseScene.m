@@ -1,8 +1,7 @@
 #import "Constants.h"
 #import "NebulaBackground.h"
+#import "PauseScene.h"
 
-
-@interface PauseScene : CCScene @end
 @implementation PauseScene {
 	CCSlider *_musicSlider;
 	CCSlider *_soundSlider;
@@ -45,6 +44,14 @@
 	
 	CCTransition *fade = [CCTransition transitionCrossFadeWithDuration:0.25];
 	[[CCDirector sharedDirector] popSceneWithTransition:fade];
+}
+
+-(void)endGame:(id)sender
+{
+	[[NSUserDefaults standardUserDefaults] synchronize];
+	
+	[[CCDirector sharedDirector] popScene];
+	[[CCDirector sharedDirector] replaceScene:[CCBReader loadAsScene:@"MainMenu"]];
 }
 
 @end

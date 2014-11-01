@@ -254,7 +254,7 @@
 		5B121013197483EE004C1E1D /* ic_launcher.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_launcher.png; sourceTree = "<group>"; };
 		5B121015197483EE004C1E1D /* ic_launcher.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_launcher.png; sourceTree = "<group>"; };
 		5B12101B19748413004C1E1D /* GalacticGuardianActivity.java */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.java; name = GalacticGuardianActivity.java; path = java/org/cocos2d/GalacticGuardian/GalacticGuardianActivity.java; sourceTree = "<group>"; };
-		5B121021197484A3004C1E1D /* GalacticGuardian Java.jar */ = {isa = PBXFileReference; explicitFileType = compiled.java.jar; includeInIndex = 0; path = "GalacticGuardian Java.jar"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5B121021197484A3004C1E1D /* GalacticGuardian Java.jar */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = archive.jar; path = "GalacticGuardian Java.jar"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B12102E197484FA004C1E1D /* GalacticGuardianActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GalacticGuardianActivity.h; sourceTree = "<group>"; };
 		5B12102F197484FA004C1E1D /* GalacticGuardianActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GalacticGuardianActivity.m; sourceTree = "<group>"; };
 		5B121033197485FE004C1E1D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Platforms/Android/Info.plist; sourceTree = "<group>"; };
@@ -272,6 +272,7 @@
 		75058A691A005881001AA9C6 /* SpaceBucks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpaceBucks.m; sourceTree = "<group>"; };
 		7584885F1A02C24A005F0B48 /* ShipSelectionScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShipSelectionScene.m; sourceTree = "<group>"; };
 		758488641A02E3EB005F0B48 /* ShipSelectionScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShipSelectionScene.h; sourceTree = "<group>"; };
+		758488711A04310D005F0B48 /* PauseScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PauseScene.h; sourceTree = "<group>"; };
 		7A4035FF19DDEE84007B6E8F /* GalacticGuardian Mac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GalacticGuardian Mac.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A40360219DDEE84007B6E8F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Platforms/Mac/Info.plist; sourceTree = "<group>"; };
 		7A40360319DDEE84007B6E8F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Source/Platforms/Mac/main.m; sourceTree = "<group>"; };
@@ -583,6 +584,7 @@
 				D3EAD2BE1A00AD2B002AA0D2 /* Constants.h */,
 				B7378992180767190076A88C /* MainMenu.h */,
 				B7378993180767190076A88C /* MainMenu.m */,
+				758488711A04310D005F0B48 /* PauseScene.h */,
 				D3EAD2BA1A009F8D002AA0D2 /* PauseScene.m */,
 				75058A2F19FEC27F001AA9C6 /* GameScene.h */,
 				75058A3019FEC27F001AA9C6 /* GameScene.m */,
@@ -869,7 +871,7 @@
 		};
 		7A97910219E62E40001FFC4D /* cocos2dJava.jar */ = {
 			isa = PBXReferenceProxy;
-			fileType = compiled.java.jar;
+			fileType = archive.jar;
 			path = cocos2dJava.jar;
 			remoteRef = 7A97910119E62E40001FFC4D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
