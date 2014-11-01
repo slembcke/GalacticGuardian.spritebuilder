@@ -10,11 +10,11 @@
 		<false/>
 	</dict>
 	<key>UUID</key>
-	<integer>18</integer>
+	<integer>20</integer>
 	<key>centeredOrigin</key>
 	<false/>
 	<key>currentResolution</key>
-	<integer>0</integer>
+	<integer>1</integer>
 	<key>currentSequenceId</key>
 	<integer>0</integer>
 	<key>docDimensionsType</key>
@@ -49,7 +49,7 @@
 				<key>customClass</key>
 				<string></string>
 				<key>displayName</key>
-				<string>Background</string>
+				<string>PreviewBackground</string>
 				<key>memberVarAssignmentName</key>
 				<string></string>
 				<key>memberVarAssignmentType</key>
@@ -130,10 +130,10 @@
 						<string>Color3</string>
 						<key>value</key>
 						<array>
-							<real>0.87922793626785278</real>
-							<real>0.68614006042480469</real>
+							<real>0.34114360809326172</real>
+							<real>0.2640710175037384</real>
+							<real>0.39004150032997131</real>
 							<real>1</real>
-							<real>0.5</real>
 						</array>
 					</dict>
 					<dict>
@@ -142,15 +142,17 @@
 						<key>type</key>
 						<string>Float</string>
 						<key>value</key>
-						<real>0.5</real>
+						<real>1</real>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
-				<integer>7</integer>
+				<integer>19</integer>
 				<key>baseClass</key>
-				<string>CCNodeColor</string>
+				<string>CCSprite9Slice</string>
 				<key>children</key>
 				<array>
 					<dict>
@@ -186,8 +188,8 @@
 								<key>value</key>
 								<array>
 									<real>0.5</real>
-									<real>217.94442749023438</real>
-									<integer>0</integer>
+									<real>32</real>
+									<integer>1</integer>
 									<integer>2</integer>
 									<integer>1</integer>
 								</array>
@@ -393,7 +395,7 @@
 								<key>value</key>
 								<array>
 									<real>140.66659545898438</real>
-									<real>157.52775573730469</real>
+									<real>157</real>
 									<integer>0</integer>
 									<integer>1</integer>
 									<integer>1</integer>
@@ -442,7 +444,7 @@
 								<key>value</key>
 								<array>
 									<real>150</real>
-									<real>10</real>
+									<real>2</real>
 									<integer>1</integer>
 									<integer>1</integer>
 								</array>
@@ -463,7 +465,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>ccbResources/ccbSliderBgNormal.png</string>
+									<string>UI/grey_sliderHorizontal.png</string>
 								</array>
 							</dict>
 							<dict>
@@ -474,7 +476,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>ccbResources/ccbSliderHandle.png</string>
+									<string>UI/grey_sliderDown.png</string>
 								</array>
 							</dict>
 							<dict>
@@ -485,7 +487,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>ccbResources/ccbSliderBgHighlighted.png</string>
+									<string></string>
 								</array>
 							</dict>
 							<dict>
@@ -555,8 +557,8 @@
 								<string>Position</string>
 								<key>value</key>
 								<array>
-									<real>141.66659545898438</real>
-									<real>104.44441223144531</real>
+									<real>141</real>
+									<real>104</real>
 									<integer>0</integer>
 									<integer>1</integer>
 									<integer>1</integer>
@@ -605,7 +607,7 @@
 								<key>value</key>
 								<array>
 									<real>150</real>
-									<real>10</real>
+									<real>2</real>
 									<integer>1</integer>
 									<integer>1</integer>
 								</array>
@@ -626,7 +628,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>ccbResources/ccbSliderBgNormal.png</string>
+									<string>UI/grey_sliderHorizontal.png</string>
 								</array>
 							</dict>
 							<dict>
@@ -637,7 +639,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>ccbResources/ccbSliderHandle.png</string>
+									<string>UI/grey_sliderDown.png</string>
 								</array>
 							</dict>
 							<dict>
@@ -648,7 +650,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>ccbResources/ccbSliderBgHighlighted.png</string>
+									<string></string>
 								</array>
 							</dict>
 							<dict>
@@ -718,8 +720,8 @@
 								<string>Position</string>
 								<key>value</key>
 								<array>
-									<real>14.555517196655273</real>
-									<real>157.52775573730469</real>
+									<real>14</real>
+									<real>157</real>
 									<integer>0</integer>
 									<integer>1</integer>
 									<integer>1</integer>
@@ -925,8 +927,8 @@
 								<string>Position</string>
 								<key>value</key>
 								<array>
-									<real>14.555517196655273</real>
-									<real>104.44441223144531</real>
+									<real>14</real>
+									<real>104</real>
 									<integer>0</integer>
 									<integer>1</integer>
 									<integer>1</integer>
@@ -1549,7 +1551,7 @@
 								<string>String</string>
 								<key>value</key>
 								<array>
-									<string>Toggle Distortions</string>
+									<string>Distortion Toggle</string>
 									<false/>
 								</array>
 							</dict>
@@ -1793,8 +1795,8 @@
 								<key>value</key>
 								<array>
 									<real>8</real>
-									<real>113</real>
-									<integer>3</integer>
+									<real>8</real>
+									<integer>2</integer>
 									<integer>1</integer>
 									<integer>1</integer>
 								</array>
@@ -1807,7 +1809,7 @@
 								<key>value</key>
 								<array>
 									<real>1</real>
-									<real>0.0</real>
+									<real>1</real>
 								</array>
 							</dict>
 							<dict>
@@ -2093,14 +2095,12 @@
 								</array>
 							</dict>
 						</array>
-						<key>selected</key>
-						<true/>
 					</dict>
 				</array>
 				<key>customClass</key>
 				<string></string>
 				<key>displayName</key>
-				<string>View</string>
+				<string>CCSprite9Slice</string>
 				<key>memberVarAssignmentName</key>
 				<string></string>
 				<key>memberVarAssignmentType</key>
@@ -2168,15 +2168,24 @@
 					</dict>
 					<dict>
 						<key>name</key>
-						<string>color</string>
+						<string>spriteFrame</string>
 						<key>type</key>
-						<string>Color3</string>
+						<string>SpriteFrame</string>
 						<key>value</key>
 						<array>
-							<real>0.0</real>
-							<real>0.0</real>
-							<real>0.0</real>
-							<real>0.5</real>
+							<string></string>
+							<string>UI/grey_panel.png</string>
+						</array>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>normalMapSpriteFrame</string>
+						<key>type</key>
+						<string>SpriteFrame</string>
+						<key>value</key>
+						<array>
+							<string></string>
+							<string></string>
 						</array>
 					</dict>
 					<dict>
@@ -2186,6 +2195,51 @@
 						<string>Float</string>
 						<key>value</key>
 						<real>0.5</real>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>color</string>
+						<key>type</key>
+						<string>Color3</string>
+						<key>value</key>
+						<array>
+							<real>0.25017830729484558</real>
+							<real>0.25017830729484558</real>
+							<real>0.25017830729484558</real>
+							<real>0.5</real>
+						</array>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>marginLeft</string>
+						<key>type</key>
+						<string>Float</string>
+						<key>value</key>
+						<real>0.33000001311302185</real>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>marginRight</string>
+						<key>type</key>
+						<string>Float</string>
+						<key>value</key>
+						<real>0.33000001311302185</real>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>marginTop</string>
+						<key>type</key>
+						<string>Float</string>
+						<key>value</key>
+						<real>0.33000001311302185</real>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>marginBottom</string>
+						<key>type</key>
+						<string>Float</string>
+						<key>value</key>
+						<real>0.33000001311302185</real>
 					</dict>
 				</array>
 			</dict>

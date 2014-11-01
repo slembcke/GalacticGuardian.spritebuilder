@@ -104,7 +104,7 @@
 		B77F1B3C17B978D7009739AE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B77F1B3B17B978D7009739AE /* UIKit.framework */; };
 		B77F1B3E17B978D7009739AE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B77F1B3D17B978D7009739AE /* Foundation.framework */; };
 		B77F1B4017B978D7009739AE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B77F1B3F17B978D7009739AE /* CoreGraphics.framework */; };
-		B77F1B4217B978D7009739AE /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B77F1B4117B978D7009739AE /* CoreText.framework */; };
+		B77F1B4217B978D7009739AE /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B77F1B4117B978D7009739AE /* CoreText.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		B78A0B10198AF87200C63841 /* Published-Android in Resources */ = {isa = PBXBuildFile; fileRef = B78A0B0F198AF87200C63841 /* Published-Android */; };
 		D31D3DC91A00108B0085DB5B /* GameController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D31D3DC81A00108A0085DB5B /* GameController.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		D31D3DCB1A00418C0085DB5B /* Controls.m in Sources */ = {isa = PBXBuildFile; fileRef = D31D3DCA1A00418C0085DB5B /* Controls.m */; };

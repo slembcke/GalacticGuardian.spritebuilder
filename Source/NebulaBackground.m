@@ -115,11 +115,14 @@ static CCTexture *DistortionTexture = nil;
 
 -(void)draw:(CCRenderer *)renderer transform:(const GLKMatrix4 *)transform
 {
-	// Update the distortion map with whatever is in the distortion node.
-	CCRenderer *rtRenderer = [_distortionMap beginWithClear:0.5 g:0.5 b:0.0 a:0.0];
-	// Use the background's transform so that the distortion node is drawn relative to it.
-	[_distortionNode visit:rtRenderer parentTransform:transform];
-	[_distortionMap end];
+	// Distortions might be disabled, skip the render texture pass.
+	if(self.shader != [CCShader positionTextureColorShader]){
+		// Update the distortion map with whatever is in the distortion node.
+		CCRenderer *rtRenderer = [_distortionMap beginWithClear:0.5 g:0.5 b:0.0 a:0.0];
+			// Use the background's transform so that the distortion node is drawn relative to it.
+			[_distortionNode visit:rtRenderer parentTransform:transform];
+		[_distortionMap end];
+	}
 	
 	[super draw:renderer transform:transform];
 }

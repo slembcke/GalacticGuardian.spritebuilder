@@ -35,7 +35,7 @@
 -(void)toggleDistortionMode:(CCButton *)button
 {
 	NSString *mode = [NebulaBackground toggleDistortionMode];
-	button.title = [NSString stringWithFormat:@"Distortions: %@", mode];
+	button.title = [NSString stringWithFormat:@"Distortion: %@", mode];
 }
 
 -(void)dismiss:(id)sender

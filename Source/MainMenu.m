@@ -108,8 +108,6 @@
 	[pause.menuButton removeFromParent];
 	
 	CCRenderTexture *rt = [CCRenderTexture renderTextureWithWidth:viewSize.width height:viewSize.height];
-	rt.contentScale /= 4.0;
-	rt.texture.antialiased = YES;
 	
 	GLKMatrix4 projection = director.projectionMatrix;
 	CCRenderer *renderer = [rt begin];
@@ -145,8 +143,6 @@
 	newScene.mainMenu = self;
 	
 	CCRenderTexture *rt = [CCRenderTexture renderTextureWithWidth:viewSize.width height:viewSize.height];
-	rt.contentScale /= 4.0;
-	rt.texture.antialiased = YES;
 	
 	GLKMatrix4 projection = director.projectionMatrix;
 	CCRenderer *renderer = [rt begin];

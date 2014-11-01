@@ -2,20 +2,16 @@
 #import "ShipSelectionScene.h"
 
 @implementation ShipSelectionScene {
-	CCProgressNode *shieldBar;
-	CCProgressNode *speedBar;
-	CCProgressNode *powerBar;
-	
-	CCSprite * shieldBarSprite;
-	CCSprite * speedBarSprite;
-	CCSprite * powerBarSprite;
+	CCSprite9Slice *_shieldBarSprite;
+	CCSprite9Slice *_speedBarSprite;
+	CCSprite9Slice *_powerBarSprite;
 
-	CCNode * _shipNode;
-	CCNode * _viewNode;
+	CCNode *_shipNode;
+	CCNode *_viewNode;
 	
 	int _shipIndex;
 	
-	CCLabelTTF *shipNameLabel;
+	CCLabelTTF *_shipNameLabel;
 	
 }
 
@@ -45,10 +41,6 @@ const float ship_powers[] = {30.0f, 80.0f, 100.0f};
 	
 	// Make the "no physics node" warning go away.
 	_shipNode.physicsBody = nil;
-	
-	shieldBar = [self setupBarFromSprite:shieldBarSprite];
-	speedBar  = [self setupBarFromSprite:speedBarSprite];
-	powerBar  = [self setupBarFromSprite:powerBarSprite];
 	
 	[self showShip:_shipIndex];
 }
@@ -86,38 +78,37 @@ const float ship_powers[] = {30.0f, 80.0f, 100.0f};
 	[_shipNode removeFromParent];
 	CCNode *oldShip = _shipNode;
 	{
-		float rotation = 0.0f;
-		rotation = _shipNode.rotation;
+		float rotation = _shipNode.rotation;
 
-		int shipChassis = 1;
 		NSString * shipArt = ship_fileNames[shipType];
-		_shipNode = [CCBReader load:[NSString stringWithFormat:@"%@-%d", shipArt, shipChassis ]];
+		_shipNode = [CCBReader load:[NSString stringWithFormat:@"%@-1", shipArt]];
 		_shipNode.position = [oldShip position];
-		_shipNode.scale = 2.0f;
+		_shipNode.rotation = rotation;
+		_shipNode.scale = 1.5f;
 		_shipNode.physicsBody = nil;
 		[_viewNode addChild:_shipNode];
+		
+		// Rotate constantly
+		[_shipNode runAction:[CCActionRepeatForever actionWithAction:[CCActionRotateBy actionWithDuration:1.0 angle:-180.0]]];
 	}
 	
-	[shipNameLabel setString: ship_names[shipType]];
-	
-	shieldBar.percentage = 0.0f;
-	speedBar.percentage = 0.0f;
-	powerBar.percentage = 0.0f;
-	
-	[shieldBar runAction:
-	 // TODO: EaseBounce has no effect, apparently?
-	 [CCActionEaseBounce actionWithAction:
-	 [CCActionTween actionWithDuration:1.0f key:@"percentage" from:0.0 to:ship_shields[shipType]]]];
+	[_shipNameLabel setString: ship_names[shipType]];
+}
 
-	[speedBar runAction:
-	 [CCActionEaseBounce actionWithAction:
-	 [CCActionTween actionWithDuration:1.0f key:@"percentage" from:0.0 to:ship_speeds[shipType]]]];
+static void
+LerpBarWidth(CCNode *bar, float newWidth, float lerpFactor)
+{
+	CGSize oldSize = bar.contentSize;
+	bar.contentSize = CGSizeMake(oldSize.width + lerpFactor*(newWidth - oldSize.width), oldSize.height);
+}
 
-	[powerBar runAction:
-	 [CCActionEaseBounce actionWithAction:
-	 [CCActionTween actionWithDuration:1.0f key:@"percentage" from:0.0 to:ship_powers[shipType]]]];
-
+-(void)update:(CCTime)delta
+{
+	float factor = 1.0 - powf(0.01, delta); // 99% percent correction per second.
 	
+	LerpBarWidth(_speedBarSprite, 2.0*ship_speeds[_shipIndex], factor);
+	LerpBarWidth(_powerBarSprite, 2.0*ship_powers[_shipIndex], factor);
+	LerpBarWidth(_shieldBarSprite, 2.0*ship_shields[_shipIndex], factor);
 }
 
 @end

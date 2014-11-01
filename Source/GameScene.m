@@ -416,8 +416,6 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 	CCScene *pause = (CCScene *)[CCBReader load:@"PauseScene"];
 	
 	CCRenderTexture *rt = [CCRenderTexture renderTextureWithWidth:viewSize.width height:viewSize.height];
-	rt.contentScale /= 4.0;
-	rt.texture.antialiased = YES;
 	
 	GLKMatrix4 projection = director.projectionMatrix;
 	CCRenderer *renderer = [rt begin];
