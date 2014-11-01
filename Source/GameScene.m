@@ -38,19 +38,22 @@
 	CCProgressNode *levelProgress;
 	
 	int _enemies_killed;
-	int _ship_level;
+	
+	int _level;
+	int _shipLevel;
+	BulletLevel _bulletLevel;
+	RocketLevel _rocketLevel;
+	int _novaBombs;
+	
 	int _spaceBucks;
 	int _spaceBucksTilNextLevel;
 }
 
--(instancetype)initWithShipType:(ShipType) shipType level:(int) shipLevel
+-(instancetype)initWithShipType:(ShipType) shipType
 {
 	if((self = [super init])){
-		
-		_ship_level = shipLevel;
-		
 		_spaceBucks = 0;
-		_spaceBucksTilNextLevel = 40;
+		_spaceBucksTilNextLevel = SpaceBucksTilLevel1;
 		
 		CGSize viewSize = [CCDirector sharedDirector].viewSize;
 		
@@ -92,7 +95,6 @@
 		_enemies = [NSMutableArray array];
 		
 		// Add a ship in the middle of the screen.
-		_ship_level = shipLevel;
 		[self createPlayerShipAt: ccp(GameSceneSize/2.0, GameSceneSize/2.0) withArt:ship_fileNames[shipType]];
 		
 		[self setupEnemySpawnTimer];
@@ -102,8 +104,6 @@
 			float angle = (M_PI * 2.0f / 20.0f) * i;
 			[self addWallAt: ccpAdd(ccpMult(ccpForAngle(angle), 150.0f + 250.0f * CCRANDOM_0_1() ), ccp(512, 512))];
 		}
-		
-		
 		
 		// setup interface:
 		CCSprite *levelProgressBG = [CCSprite spriteWithImageNamed:@"UI/bgBar.png"];
@@ -145,7 +145,7 @@
 	__weak typeof(self) _self = self;
 	[_controls setHandler:^(BOOL state) {if(state) [_self pause];} forButton:ControlPauseButton];
 	[_controls setHandler:^(BOOL state) {if(state) [_self fireRocket];} forButton:ControlRocketButton];
-	[_controls setHandler:^(BOOL state) {if(state) [_self novaBombAt:_self.playerPosition];} forButton:ControlNovaButton];
+	[_controls setHandler:^(BOOL state) {if(state) [_self fireNovaBomb];} forButton:ControlNovaButton];
 }
 
 -(void)addWallAt:(CGPoint) pos
@@ -287,7 +287,7 @@
 	// So by "fancy math" I really just meant knowing what the numbers in a CGAffineTransform are. ;)
 	
 	// Now we can create the bullet with the position and direction.
-	Bullet *bullet = [[Bullet alloc] initWithBulletLevel:_playerShip.bulletLevel];
+	Bullet *bullet = [[Bullet alloc] initWithBulletLevel:_bulletLevel];
 	bullet.position = position;
 	bullet.rotation = -CC_RADIANS_TO_DEGREES(ccpToAngle(direction)) + 90.0f;
 	
@@ -307,8 +307,16 @@
 
 -(void)fireRocket
 {
-	// Don't fire bullets if the ship is destroyed.
-	if([_playerShip isDead]) return;
+	// Don't fire if out of ammo or the ship is destroyed.
+	if(
+		_rocketLevel == RocketNone ||
+		_spaceBucks < SpaceBucksPerRocket ||
+		[_playerShip isDead]
+	){
+		return;
+	}
+	
+	_spaceBucks -= SpaceBucksPerRocket;
 	
 	// TODO missile recharge logic
 	
@@ -316,7 +324,7 @@
 	CGPoint position = ccp(transform.tx, transform.ty);
 	CGPoint direction = ccp(transform.a, transform.b);
 	
-	Rocket *rocket = [Rocket rocketWithLevel:RocketCluster];
+	Rocket *rocket = [Rocket rocketWithLevel:_rocketLevel];
 	rocket.position = position;
 	rocket.rotation = -CC_RADIANS_TO_DEGREES(ccpToAngle(direction));
 	
@@ -325,6 +333,17 @@
 	rocket.physicsBody.velocity = _playerShip.physicsBody.velocity;
 	
 	[_physics addChild:rocket z:Z_BULLET];
+	
+	#warning TODO toggle button
+}
+
+-(void)fireNovaBomb
+{
+	// Don't fire if out of ammo or the ship is destroyed.
+	if(_novaBombs == 0 || [_playerShip isDead]) return;
+	_novaBombs -= 1;
+	
+	[self novaBombAt:_playerPosition];
 }
 
 -(void)novaBombAt:(CGPoint)pos
@@ -350,6 +369,8 @@
 			[enemy scheduleBlock:^(CCTimer *timer) {[self enemyDeath:enemy from:nil];} delay:delay];
 		}
 	}
+	
+	#warning TODO toggle button
 }
 
 void
@@ -373,12 +394,14 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 		// Nodes with bodies should also be sprites.
 		// This is a convenient place to add the fade action.
 		node.color = burnColor;
-		[node runAction: [CCActionSequence actions:
-		 [CCActionDelay actionWithDuration:0.5],
-		 [CCActionFadeOut actionWithDuration:2.0],
-		 [CCActionRemove action],
-		 nil
-		]];
+		
+		[node scheduleBlock:^(CCTimer *timer) {
+			[node runAction: [CCActionSequence actions:
+			 [CCActionFadeOut actionWithDuration:0.75],
+			 [CCActionRemove action],
+			 nil
+			]];
+		} delay:0.5 + 0.5*CCRANDOM_0_1()];
 	}
 	
 	// Recurse on the children.
@@ -417,14 +440,7 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 }
 
 -(void) createPlayerShipAt:(CGPoint) pos withArt:(NSString *) shipArt
-{	
-	_spaceBucks = 0;
-	_spaceBucksTilNextLevel = _ship_level * 60 + 30;
-	if(_ship_level >= 6){
-		// Temp code:
-		_spaceBucksTilNextLevel = 60000;
-	}
-	
+{
 	float rotation = -90.0f;
 	CGPoint velocity = CGPointZero;
 	if(_playerShip){
@@ -434,15 +450,13 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 		[_playerShip removeFromParent];
 	}
 	
-	int shipChassis = MIN((_ship_level) / 2 + 1, 3);
-	_playerShip = (PlayerShip *)[CCBReader load:[NSString stringWithFormat:@"%@-%d", shipArt, shipChassis ]];
+	_playerShip = (PlayerShip *)[CCBReader load:[NSString stringWithFormat:@"%@-%d", shipArt, _shipLevel + 1]];
 	_playerShip.position = pos;
 	_playerShip.rotation = rotation;
 	_playerShip.physicsBody.velocity = velocity;
 	_playerShip.name = shipArt;
 	[_physics addChild:_playerShip z:Z_PLAYER];
 	[_background.distortionNode addChild:_playerShip.shieldDistortionSprite];
-	_playerShip.bulletLevel = MIN(_ship_level, BulletRed2);
 	
 	// Center on the player.
 	self.scrollPosition = _playerShip.position;
@@ -456,18 +470,9 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 	} delay:5];
 }
 
--(void) levelUp;
+-(void)levelUpText:(NSString *)text
 {
-	
-	_ship_level += 1;
-	_playerShip.bulletLevel = MIN(_ship_level, BulletRed2);
-	
-	
-	CGSize viewSize = [CCDirector sharedDirector].viewSize;
-
-	[[OALSimpleAudio sharedInstance] playEffect:@"TempSounds/LevelUp.wav" volume:0.8 pitch:1.0 pan:0.0 loop:NO];
-	
-	CCLabelTTF *levelUpText = [CCLabelTTF labelWithString:@"More Awesome!" fontName:@"kenvector_future.ttf" fontSize:36.0];
+	CCLabelTTF *levelUpText = [CCLabelTTF labelWithString:text fontName:@"kenvector_future.ttf" fontSize:36.0];
 	levelUpText.outlineColor =	[CCColor colorWithWhite:0.5f alpha:1.0f];
 	levelUpText.color =					[CCColor colorWithWhite:0.8f alpha:1.0f];
 	levelUpText.shadowColor =		[CCColor colorWithWhite:0.0f alpha:0.5f];
@@ -475,9 +480,9 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 	levelUpText.shadowOffset = ccp(1.0f, -1.0f);
 	
 	[self addChild:levelUpText];
-	levelUpText.position = ccp(viewSize.width / 2.0f, viewSize.height / 1.5f);
-	levelUpText.anchorPoint = ccp(0.5, 0.5);
-
+	levelUpText.positionType = CCPositionTypeNormalized;
+	levelUpText.position = ccp(0.5, 0.5);
+	levelUpText.anchorPoint = ccp(0.5, 0.66);
 	
 	[levelUpText setScale:2.0f];
 	[levelUpText runAction:[CCActionSequence actions:
@@ -487,12 +492,88 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 				nil
 			],
 			[CCActionDelay actionWithDuration:0.95],
-			[CCActionFadeOut actionWithDuration:0.35],
+			[CCActionSpawn actions:
+				[CCActionFadeOut actionWithDuration:0.35],
+				[CCActionScaleTo actionWithDuration:0.35 scale:1.5],
+				nil
+			],
 			[CCActionRemove action],
 			nil
 	]];
+}
+
+-(void) levelUp;
+{
+	_level += 1;
+	_spaceBucks -= _spaceBucksTilNextLevel;
+	_spaceBucksTilNextLevel *= SpaceBucksLevelMultiplier;
 	
-	[self createPlayerShipAt:_playerShip.position withArt:_playerShip.name];
+	switch(_level){
+		case  1: // Bullet1
+			_bulletLevel += 1;
+			[self levelUpText:@"Laser Level 2"];
+			break;
+		case  2:// Nova Bomb
+			_novaBombs += 1;
+			[self levelUpText:@"Nova Bomb"];
+			break;
+		case  3:// Bullet 2
+			_bulletLevel += 1;
+			[self levelUpText:@"Laser Level 3"];
+			break;
+		case  4:// Rocket 0
+			_rocketLevel += 1;
+			[self levelUpText:@"Rockets"];
+			break;
+		case  5:// Ship 2
+			_shipLevel += 1;
+			[self createPlayerShipAt:_playerShip.position withArt:_playerShip.name];
+			[self levelUpText:@"Ship Level 2"];
+			break;
+		case  6:// Nova Bomb
+			_novaBombs += 1;
+			[self levelUpText:@"Nova Bomb"];
+			break;
+		case  7:// Bullet 3
+			_bulletLevel += 1;
+			[self levelUpText:@"Laser Level 4"];
+			break;
+		case  8://Nova Bomb
+			_novaBombs += 1;
+			[self levelUpText:@"Nova Bomb"];
+			break;
+		case  9://Heavy Rocket
+			_rocketLevel += 1;
+			[self levelUpText:@"Heavy Rockets"];
+			break;
+		case 10://Ship 3
+			_shipLevel += 1;
+			[self createPlayerShipAt:_playerShip.position withArt:_playerShip.name];
+			[self levelUpText:@"Ship Level 3"];
+			break;
+		case 11://Bullet 4
+			_bulletLevel += 1;
+			[self levelUpText:@"Laser Level 5"];
+			break;
+		case 12://Nova Bomb
+			_novaBombs += 1;
+			[self levelUpText:@"Nova Bomb"];
+			break;
+		case 13://Bullet 5
+			_bulletLevel += 1;
+			[self levelUpText:@"Laser Level 6"];
+			break;
+		case 14://Rocket 3
+			_rocketLevel += 1;
+			[self levelUpText:@"Cluster Rockets"];
+			break;
+		default: // Nova Bomb forever.
+			_novaBombs += 1;
+			[self levelUpText:@"Nova Bomb"];
+			break;
+	}
+	
+	[[OALSimpleAudio sharedInstance] playEffect:@"TempSounds/LevelUp.wav" volume:0.8 pitch:1.0 pan:0.0 loop:NO];
 }
 
 -(void)setupEnemySpawnTimer
@@ -522,8 +603,6 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 				(0.5 + 0.5*dir.x)*GameSceneSize + dir.x*GroupRadius,
 				(0.5 + 0.5*dir.y)*GameSceneSize + dir.y*GroupRadius
 			);
-			
-//			NSLog(@"Spawning enemies from %@", NSStringFromCGPoint(enemySpawnLocation));
 		}
 		
 		// for levels 3 to 6, there's a 5% chance of a big guy.
@@ -538,8 +617,6 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 		enemy.position = ccpAdd(enemySpawnLocation, ccpMult(CCRANDOM_IN_UNIT_CIRCLE(), GroupRadius));
 		[_physics addChild:enemy z:Z_ENEMY];
 		[_enemies addObject:enemy];
-		
-//		NSLog(@"Enemy spawned at %@", NSStringFromCGPoint(enemy.position));
 		
 		spawnCounter++;
 	} delay:0.0];

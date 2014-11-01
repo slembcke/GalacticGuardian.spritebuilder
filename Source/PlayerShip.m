@@ -79,8 +79,6 @@ VisitAll(CCNode *node, void (^block)(CCNode *))
 	// Make the shield spin
 	[_shield runAction:[CCActionRepeatForever actionWithAction:[CCActionRotateBy actionWithDuration:0.5 angle:360.0]]];
 	
-	_bulletLevel = BulletBlue1;
-	
 	_gunPorts = [NSMutableArray array];
 	VisitAll(self, ^(CCNode *node){
 		if([node.name hasPrefix:@"gun"]){
@@ -223,6 +221,7 @@ VisitAll(CCNode *node, void (^block)(CCNode *))
 	} delay:5];
 	
 	[scene novaBombAt:pos];
+	[[OALSimpleAudio sharedInstance] playEffect:@"TempSounds/Explosion.wav" volume:2.0 pitch:1.0 pan:0.0 loop:NO];
 	
 	[self removeFromParent];
 }

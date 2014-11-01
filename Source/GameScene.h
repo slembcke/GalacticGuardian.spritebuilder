@@ -10,7 +10,7 @@
 @property(nonatomic, readonly) PlayerShip *playerShip;
 @property(nonatomic, readonly) CGPoint playerPosition;
 
--(instancetype)initWithShipType:(ShipType) shipType level:(int) shipLevel;
+-(instancetype)initWithShipType:(ShipType) shipType;
 
 -(void)splashDamageAt:(CGPoint)center radius:(float)radius damage:(int)damage;
 

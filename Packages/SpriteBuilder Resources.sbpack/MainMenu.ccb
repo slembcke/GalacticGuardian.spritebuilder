@@ -138,7 +138,7 @@
 				<key>displayName</key>
 				<string>PlayButton</string>
 				<key>memberVarAssignmentName</key>
-				<string></string>
+				<string>_playButton</string>
 				<key>memberVarAssignmentType</key>
 				<integer>1</integer>
 				<key>properties</key>
@@ -632,10 +632,10 @@
 						<string>Color4</string>
 						<key>value</key>
 						<array>
+							<real>0.19056475162506104</real>
 							<real>0.0</real>
-							<real>0.0</real>
-							<real>0.0</real>
-							<real>0.5</real>
+							<real>0.20563732087612152</real>
+							<real>1</real>
 						</array>
 					</dict>
 					<dict>
@@ -645,7 +645,7 @@
 						<string>FloatScale</string>
 						<key>value</key>
 						<array>
-							<real>1</real>
+							<real>5</real>
 							<integer>0</integer>
 						</array>
 					</dict>
@@ -656,8 +656,8 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>2</real>
-							<real>-2</real>
+							<real>0.0</real>
+							<real>0.0</real>
 							<integer>0</integer>
 							<integer>0</integer>
 							<integer>0</integer>
@@ -757,8 +757,8 @@
 								<string>Position</string>
 								<key>value</key>
 								<array>
-									<real>97</real>
-									<real>100</real>
+									<real>0.0</real>
+									<real>0.0</real>
 									<integer>0</integer>
 									<integer>0</integer>
 									<integer>0</integer>
@@ -776,14 +776,6 @@
 									<false/>
 									<integer>0</integer>
 								</array>
-							</dict>
-							<dict>
-								<key>name</key>
-								<string>rotation</string>
-								<key>type</key>
-								<string>Degrees</string>
-								<key>value</key>
-								<real>270</real>
 							</dict>
 							<dict>
 								<key>name</key>
@@ -821,8 +813,8 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>0.0</real>
-							<real>0.0</real>
+							<real>102</real>
+							<real>63</real>
 							<integer>0</integer>
 							<integer>0</integer>
 							<integer>0</integer>
@@ -959,8 +951,8 @@
 								<string>Position</string>
 								<key>value</key>
 								<array>
-									<real>370</real>
-									<real>100</real>
+									<real>0.0</real>
+									<real>0.0</real>
 									<integer>0</integer>
 									<integer>0</integer>
 									<integer>0</integer>
@@ -978,14 +970,6 @@
 									<false/>
 									<integer>0</integer>
 								</array>
-							</dict>
-							<dict>
-								<key>name</key>
-								<string>rotation</string>
-								<key>type</key>
-								<string>Degrees</string>
-								<key>value</key>
-								<real>270</real>
 							</dict>
 							<dict>
 								<key>name</key>
@@ -1023,8 +1007,8 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>0.0</real>
-							<real>0.0</real>
+							<real>158</real>
+							<real>95</real>
 							<integer>0</integer>
 							<integer>0</integer>
 							<integer>0</integer>
@@ -1161,8 +1145,8 @@
 								<string>Position</string>
 								<key>value</key>
 								<array>
-									<real>431</real>
-									<real>100</real>
+									<real>0.0</real>
+									<real>0.0</real>
 									<integer>0</integer>
 									<integer>0</integer>
 									<integer>0</integer>
@@ -1180,14 +1164,6 @@
 									<false/>
 									<integer>0</integer>
 								</array>
-							</dict>
-							<dict>
-								<key>name</key>
-								<string>rotation</string>
-								<key>type</key>
-								<string>Degrees</string>
-								<key>value</key>
-								<real>270</real>
 							</dict>
 							<dict>
 								<key>name</key>
@@ -1225,8 +1201,8 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>0.0</real>
-							<real>0.0</real>
+							<real>354</real>
+							<real>103</real>
 							<integer>0</integer>
 							<integer>0</integer>
 							<integer>0</integer>
@@ -1270,6 +1246,8 @@
 						</array>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>

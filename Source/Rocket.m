@@ -10,7 +10,7 @@
 static const float RocketAcceleration = 1000.0;
 static const float RocketDistance = 125.0;
 
-static const float RocketDamage[] = {7.0, 10.0, 5.0};
+static const float RocketDamage[] = {0.0, 7.0, 10.0, 5.0};
 static const float RocketSplash = 150.0;
 
 static const int RocketClusters = 3;
@@ -24,6 +24,8 @@ static const float RocketClusterRange = 25.0;
 
 +(instancetype)rocketWithLevel:(RocketLevel)level
 {
+	NSAssert(level != RocketNone, @"Not a valid rocket level.");
+	
 	Rocket *rocket = (Rocket *)[CCBReader load:@"Rocket"];
 	rocket->_level = level;
 	

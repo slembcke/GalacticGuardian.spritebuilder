@@ -1,5 +1,5 @@
 typedef NS_ENUM(NSUInteger, RocketLevel){
-	RocketSmall, RocketLarge, RocketCluster,
+	RocketNone, RocketSmall, RocketLarge, RocketCluster,
 };
 
 @interface Rocket : CCNode
