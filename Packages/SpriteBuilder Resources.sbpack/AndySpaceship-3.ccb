@@ -10,7 +10,7 @@
 		<false/>
 	</dict>
 	<key>UUID</key>
-	<integer>22</integer>
+	<integer>24</integer>
 	<key>centeredOrigin</key>
 	<false/>
 	<key>currentResolution</key>
@@ -1411,7 +1411,7 @@
 										<key>type</key>
 										<string>Degrees</string>
 										<key>value</key>
-										<real>95</real>
+										<real>85</real>
 									</dict>
 								</array>
 							</dict>
@@ -2311,8 +2311,6 @@
 				</array>
 			</dict>
 		</array>
-		<key>selected</key>
-		<true/>
 	</dict>
 	<key>notes</key>
 	<array/>
