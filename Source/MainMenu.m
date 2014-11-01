@@ -55,6 +55,9 @@
 	
 	// Arbitrary positive number to avoid layering issues with the ships.
 	_playButton.zOrder = 100;
+	
+	// Force an update early to run the positioning code before the transition runs
+	[self update:0.0];
 }
 
 -(void)update:(CCTime)delta

@@ -19,6 +19,7 @@
 #import "Bullet.h"
 #import "Rocket.h"
 #import "SpaceBucks.h"
+#import "BurnTransition.h"
 
 
 @implementation GameScene
@@ -631,7 +632,7 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 		
 		[self scheduleBlock:^(CCTimer *timer){
 			// Go back to the menu after a short delay.
-			[[CCDirector sharedDirector] replaceScene:[CCBReader loadAsScene:@"MainMenu"]];
+			[[CCDirector sharedDirector] replaceScene:[CCBReader loadAsScene:@"MainMenu"] withTransition:[BurnTransition burnTransitionWithDuration:1.0]];
 		} delay:5.0];
 		
 		// Don't process the collision so the enemy spaceship will survive and mock you.

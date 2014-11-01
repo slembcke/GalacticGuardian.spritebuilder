@@ -14,7 +14,15 @@ static CCShader *BurnShader = nil;
 	burnTexture.texParameters = &(ccTexParams){GL_LINEAR, GL_LINEAR, GL_REPEAT, GL_REPEAT};
 	[burnTexture generateMipmap];
 	
-	[CCDirector sharedDirector].globalShaderUniforms[@"u_BurnTexture"] = burnTexture;
+	// Set up global uniforms so we can batch the sprites.
+	NSMutableDictionary *globals = [CCDirector sharedDirector].globalShaderUniforms;
+	globals[@"u_BurnScale"] = @(3.0);
+	globals[@"u_BurnTexture"] = burnTexture;
+	globals[@"u_MinChar"] = @(0.40);
+	globals[@"u_MaxChar"] = @(0.20);
+	globals[@"u_CharSmooth"] = @(0.05);
+	globals[@"u_CharWidth"] = @(0.35);
+	globals[@"u_GlowSmooth"] = @(0.15);
 	
 	BurnShader = [CCShader shaderNamed:@"BurnSprite"];
 }
