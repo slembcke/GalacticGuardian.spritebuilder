@@ -11,6 +11,17 @@ static NSString * const spriteNames[] = {@"Sprites/Powerups/pill_blue.png", @"Sp
 static NSString * const spriteFlashes[] = {@"Sprites/Bullets/laserBlue08.png", @"Sprites/Bullets/laserGreen14.png", @"Sprites/Bullets/laserRed08.png"};
 const int values[] = {1, 4, 8};
 
+static NSArray *CollisionCategories = nil;
+static NSArray *CollisionMask = nil;
+
++(void)initialize
+{
+	if(self != [SpaceBucks class]) return;
+	
+	CollisionCategories = @[CollisionCategoryPickup];
+	CollisionMask = @[CollisionCategoryPlayer, CollisionCategoryBarrier];
+}
+
 -(instancetype)initWithAmount:(SpaceBuckType) type
 {
 	if((self = [super initWithImageNamed:spriteNames[type]])){
@@ -24,9 +35,9 @@ const int values[] = {1, 4, 8};
 		
 		// This sets up simple collision rules.
 		// First you list the categories (strings) that the object belongs to.
-		body.collisionCategories = @[CollisionCategoryPickup];
+		body.collisionCategories = CollisionCategories;
 		// Then you list which categories its allowed to collide with.
-		body.collisionMask = @[CollisionCategoryPlayer, CollisionCategoryBarrier];
+		body.collisionMask = CollisionMask;
 		body.angularVelocity = CCRANDOM_MINUS1_1() * 20.0f;
 		body.velocity = ccpMult(CCRANDOM_IN_UNIT_CIRCLE(), 200.0f);
 	}

@@ -371,12 +371,21 @@
 	#warning TODO toggle button
 }
 
+static NSArray *DebrisCollisionCategories = nil;
+
++(void)initialize
+{
+	if(self != [GameScene class]) return;
+	
+	DebrisCollisionCategories = @[CollisionCategoryDebris];
+}
+
 void
 InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 {
 	// If the node has a body, set some properties.
 	CCPhysicsBody *body = node.physicsBody;
-	body.collisionCategories = @[CollisionCategoryDebris];
+	body.collisionCategories = DebrisCollisionCategories;
 	
 	if(body){
 		// Bodies with the same group reference don't collide.

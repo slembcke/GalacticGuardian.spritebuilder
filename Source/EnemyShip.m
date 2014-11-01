@@ -31,6 +31,21 @@ static const NSUInteger PickupCount = 5;
 	GameScene *_scene;
 }
 
+static NSArray *CollisionCategories = nil;
+static NSArray *CollisionMask = nil;
+
++(void)initialize
+{
+	if(self != [EnemyShip class]) return;
+	
+	CollisionCategories = @[CollisionCategoryEnemy];
+	CollisionMask = @[
+		CollisionCategoryPlayer,
+		CollisionCategoryBullet,
+		CollisionCategoryEnemy
+	];
+}
+
 -(void)didLoadFromCCB
 {
 	CCPhysicsBody *body = self.physicsBody;
@@ -43,13 +58,9 @@ static const NSUInteger PickupCount = 5;
 	
 	// This sets up simple collision rules.
 	// First you list the categories (strings) that the object belongs to.
-	body.collisionCategories = @[CollisionCategoryEnemy];
+	body.collisionCategories = CollisionCategories;
 	// Then you list which categories its allowed to collide with.
-	body.collisionMask = @[
-		CollisionCategoryPlayer,
-		CollisionCategoryBullet,
-		CollisionCategoryEnemy
-	];
+	body.collisionMask = CollisionMask;
 	
 	// Make the thruster pulse
 	float scaleX = _mainThruster.scaleX;

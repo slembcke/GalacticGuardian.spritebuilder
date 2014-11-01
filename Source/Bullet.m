@@ -37,6 +37,17 @@ const float bulletDurations[] = {
 
 @implementation Bullet
 
+static NSArray *CollisionCategories = nil;
+static NSArray *CollisionMask = nil;
+
++(void)initialize
+{
+	if(self != [Bullet class]) return;
+	
+	CollisionCategories = @[CollisionCategoryBullet];
+	CollisionMask = @[CollisionCategoryEnemy, CollisionCategoryAsteroid];
+}
+
 -(instancetype)initWithBulletLevel:(BulletLevel) level
 {
 	if((self = [super initWithImageNamed:bulletImageNames[level] ])){
@@ -51,9 +62,9 @@ const float bulletDurations[] = {
 		
 		// This sets up simple collision rules.
 		// First you list the categories (strings) that the object belongs to.
-		body.collisionCategories = @[CollisionCategoryBullet];
+		body.collisionCategories = CollisionCategories;
 		// Then you list which categories its allowed to collide with.
-		body.collisionMask = @[CollisionCategoryEnemy, CollisionCategoryAsteroid];
+		body.collisionMask = CollisionMask;
 	}
 	
 	return self;

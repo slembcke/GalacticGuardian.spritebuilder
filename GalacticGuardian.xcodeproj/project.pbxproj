@@ -148,6 +148,9 @@
 		D3A7E8F619FDCB5E00695965 /* Nebula.fsh in Resources */ = {isa = PBXBuildFile; fileRef = D3A7E8F519FDCB5E00695965 /* Nebula.fsh */; };
 		D3A7E8F719FDCB5E00695965 /* Nebula.fsh in Resources */ = {isa = PBXBuildFile; fileRef = D3A7E8F519FDCB5E00695965 /* Nebula.fsh */; };
 		D3A7E8F819FDCB5E00695965 /* Nebula.fsh in Resources */ = {isa = PBXBuildFile; fileRef = D3A7E8F519FDCB5E00695965 /* Nebula.fsh */; };
+		D3CCBE091A04BBBF0082EA65 /* BurnTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = D3EA632F1A04973D00325F0F /* BurnTransition.m */; };
+		D3CCBE0A1A04BBBF0082EA65 /* BurnTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = D3EA632F1A04973D00325F0F /* BurnTransition.m */; };
+		D3EA63301A04973D00325F0F /* BurnTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = D3EA632F1A04973D00325F0F /* BurnTransition.m */; };
 		D3EAD2BB1A009F8D002AA0D2 /* PauseScene.m in Sources */ = {isa = PBXBuildFile; fileRef = D3EAD2BA1A009F8D002AA0D2 /* PauseScene.m */; };
 		D3EAD2BC1A00A855002AA0D2 /* PauseScene.m in Sources */ = {isa = PBXBuildFile; fileRef = D3EAD2BA1A009F8D002AA0D2 /* PauseScene.m */; };
 		D3EAD2BD1A00A855002AA0D2 /* PauseScene.m in Sources */ = {isa = PBXBuildFile; fileRef = D3EAD2BA1A009F8D002AA0D2 /* PauseScene.m */; };
@@ -254,7 +257,7 @@
 		5B121013197483EE004C1E1D /* ic_launcher.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_launcher.png; sourceTree = "<group>"; };
 		5B121015197483EE004C1E1D /* ic_launcher.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_launcher.png; sourceTree = "<group>"; };
 		5B12101B19748413004C1E1D /* GalacticGuardianActivity.java */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.java; name = GalacticGuardianActivity.java; path = java/org/cocos2d/GalacticGuardian/GalacticGuardianActivity.java; sourceTree = "<group>"; };
-		5B121021197484A3004C1E1D /* GalacticGuardian Java.jar */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = archive.jar; path = "GalacticGuardian Java.jar"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5B121021197484A3004C1E1D /* GalacticGuardian Java.jar */ = {isa = PBXFileReference; explicitFileType = compiled.java.jar; includeInIndex = 0; path = "GalacticGuardian Java.jar"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B12102E197484FA004C1E1D /* GalacticGuardianActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GalacticGuardianActivity.h; sourceTree = "<group>"; };
 		5B12102F197484FA004C1E1D /* GalacticGuardianActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GalacticGuardianActivity.m; sourceTree = "<group>"; };
 		5B121033197485FE004C1E1D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Platforms/Android/Info.plist; sourceTree = "<group>"; };
@@ -341,6 +344,8 @@
 		D3A7E8DE19FDC88600695965 /* NebulaDepth.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NebulaDepth.png; sourceTree = "<group>"; };
 		D3A7E8F119FDCABE00695965 /* Nebula.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Nebula.vsh; sourceTree = "<group>"; };
 		D3A7E8F519FDCB5E00695965 /* Nebula.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Nebula.fsh; sourceTree = "<group>"; };
+		D3CCBE081A04A5170082EA65 /* BurnTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BurnTransition.h; sourceTree = "<group>"; };
+		D3EA632F1A04973D00325F0F /* BurnTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BurnTransition.m; sourceTree = "<group>"; };
 		D3EAD2BA1A009F8D002AA0D2 /* PauseScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PauseScene.m; sourceTree = "<group>"; };
 		D3EAD2BE1A00AD2B002AA0D2 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		D3EAD2BF1A00B448002AA0D2 /* NebulaDebug.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = NebulaDebug.fsh; sourceTree = "<group>"; };
@@ -718,8 +723,8 @@
 				B7378993180767190076A88C /* MainMenu.m */,
 				758488711A04310D005F0B48 /* PauseScene.h */,
 				D3EAD2BA1A009F8D002AA0D2 /* PauseScene.m */,
-				7584885F1A02C24A005F0B48 /* ShipSelectionScene.m */,
 				758488641A02E3EB005F0B48 /* ShipSelectionScene.h */,
+				7584885F1A02C24A005F0B48 /* ShipSelectionScene.m */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -730,6 +735,8 @@
 				D3937FBD19FDD9AB0074009E /* NebulaBackground.h */,
 				D3A7E8D919FDC86000695965 /* NebulaBackground.m */,
 				D3ED616419FF327C00DF3A43 /* BurnSprite.m */,
+				D3CCBE081A04A5170082EA65 /* BurnTransition.h */,
+				D3EA632F1A04973D00325F0F /* BurnTransition.m */,
 			);
 			name = Effects;
 			sourceTree = "<group>";
@@ -1092,6 +1099,7 @@
 				75058A3419FEC27F001AA9C6 /* GameScene.m in Sources */,
 				D3450BD81A0395F200E63B3A /* SpaceBucks.m in Sources */,
 				7A40360419DDEE84007B6E8F /* main.m in Sources */,
+				D3CCBE0A1A04BBBF0082EA65 /* BurnTransition.m in Sources */,
 				D3ED616719FF327C00DF3A43 /* BurnSprite.m in Sources */,
 				7A59498E19E3941300F65F90 /* AppDelegate.m in Sources */,
 			);
@@ -1112,6 +1120,7 @@
 				D3ED616619FF327C00DF3A43 /* BurnSprite.m in Sources */,
 				5B121030197484FA004C1E1D /* GalacticGuardianActivity.m in Sources */,
 				D3450BBC1A01FEAD00E63B3A /* FancyJoystick.m in Sources */,
+				D3CCBE091A04BBBF0082EA65 /* BurnTransition.m in Sources */,
 				75058A4819FECF95001AA9C6 /* Bullet.m in Sources */,
 				D3450BCD1A02EB8500E63B3A /* Rocket.m in Sources */,
 				758488611A02C24A005F0B48 /* ShipSelectionScene.m in Sources */,
@@ -1135,6 +1144,7 @@
 				7A046D8C19E8A20E004C4763 /* MainMenu.m in Sources */,
 				75058A3119FEC27F001AA9C6 /* GameScene.m in Sources */,
 				5B121038197487F2004C1E1D /* AppDelegate.m in Sources */,
+				D3EA63301A04973D00325F0F /* BurnTransition.m in Sources */,
 				75058A4219FECE64001AA9C6 /* PlayerShip.m in Sources */,
 				D3450BCC1A02EB8500E63B3A /* Rocket.m in Sources */,
 			);
