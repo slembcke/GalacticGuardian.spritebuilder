@@ -612,7 +612,15 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 			);
 		}
 		
-		EnemyShip *enemy = (EnemyShip *)[CCBReader load:@"BadGuy1"];
+		// for levels 3 to 6, there's a 5% chance of a big guy.
+		// For levels above 6, there's a 1.0 - (0.95 * 0.85) ~= 20% chance of a big guy.
+		bool bigBadGuy = (_ship_level > 3 && CCRANDOM_0_1() > 0.95) || (_ship_level > 6 && CCRANDOM_0_1() > 0.85);
+		
+		EnemyShip *enemy = (EnemyShip *)[CCBReader load:bigBadGuy ? @"BadGuy2" : @"BadGuy1"];
+		if(bigBadGuy){
+			enemy.hp = 15;
+		}
+		
 		enemy.position = ccpAdd(enemySpawnLocation, ccpMult(CCRANDOM_IN_UNIT_CIRCLE(), GroupRadius));
 		[_physics addChild:enemy z:Z_ENEMY];
 		[_enemies addObject:enemy];
