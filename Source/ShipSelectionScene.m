@@ -45,6 +45,11 @@ const float ship_powers[] = {30.0f, 80.0f, 100.0f};
 	[self showShip:_shipIndex];
 }
 
+-(void)dealloc
+{
+	NSLog(@"ShipSelection dealloc");
+}
+
 -(void)dismiss:(id)sender
 {
 	[[NSUserDefaults standardUserDefaults] synchronize];

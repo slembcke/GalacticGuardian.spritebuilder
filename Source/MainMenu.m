@@ -60,6 +60,11 @@
 	[self update:0.0];
 }
 
+-(void)dealloc
+{
+	NSLog(@"MainMenu dealloc");
+}
+
 -(void)update:(CCTime)delta
 {
 	_time += delta;

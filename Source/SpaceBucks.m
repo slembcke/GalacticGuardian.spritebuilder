@@ -4,7 +4,7 @@
 #import "PlayerShip.h"
 
 @implementation SpaceBucks {
-	GameScene *_scene;
+	__unsafe_unretained GameScene *_scene;
 }
 
 static NSString * const spriteNames[] = {@"Sprites/Powerups/pill_blue.png", @"Sprites/Powerups/pill_green.png", @"Sprites/Powerups/pill_red.png"};

@@ -17,6 +17,11 @@
 	_soundSlider.sliderValue = [[defaults objectForKey:DefaultsSoundKey] floatValue];
 }
 
+-(void)dealloc
+{
+	NSLog(@"PauseScene dealloc");
+}
+
 -(void)musicVolumeChanged:(CCSlider *)slider
 {
 	[[NSUserDefaults standardUserDefaults] setFloat:slider.sliderValue forKey:DefaultsMusicKey];

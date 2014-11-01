@@ -28,7 +28,7 @@ static const NSUInteger PickupCount = 5;
 	CCNode *_distortion;
 	CCNode *_pickups[PickupCount];
 	
-	GameScene *_scene;
+	__unsafe_unretained GameScene *_scene;
 }
 
 static NSArray *CollisionCategories = nil;
