@@ -92,12 +92,13 @@
 	float depth = cosf(t + phase);
 	float scale = (fakeDistance + depth)/fakeDistance;
 	
-	float yOffset = 100.0f + sinf(t / 3.0f + phase) * 40.0f;
+	CGSize size = self.contentSizeInPoints;
+	float yOffset = 0.25*size.height + sinf(t / 3.0f + phase) * 40.0f;
 	
 	// They rotate +/- 15 degrees.
 	// We are modifying the parent node so we can animate the ship independently for the fly-away animation.
 	ship.parent.rotation = shipRotation;
-	ship.parent.position = ccp(xPos * 90.0f + offset * 20.0f + 256.0f, yOffset);
+	ship.parent.position = ccp(xPos * 90.0f + offset * 20.0f + 0.5*size.width, yOffset);
 	ship.parent.scale = scale;
 	
 	// Fiddle with the zOrder for layering effects.
