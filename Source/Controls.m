@@ -142,8 +142,9 @@
 		
 		CCButton *pauseButton = [CCButton buttonWithTitle:@"Pause" fontName:@"kenvector_future.ttf" fontSize:18.0f];
 		pauseButton.anchorPoint = ccp(1, 1);
-		pauseButton.positionType = CCPositionTypeMake(CCPositionUnitUIPoints, CCPositionUnitUIPoints, CCPositionReferenceCornerTopRight);
-		pauseButton.position = ccp(20, 20);
+		pauseButton.positionType = CCPositionTypeMake(CCPositionUnitPoints, CCPositionUnitPoints, CCPositionReferenceCornerTopRight);
+		pauseButton.position = ccp(5, 5 + 30); // HUD is 30
+		pauseButton.hitAreaExpansion = 2.0;
 		[self addChild:pauseButton];
 		
 		__weak typeof(self) _self = self;

@@ -20,7 +20,7 @@
 @property(nonatomic) float fireRate;
 @property(nonatomic) float lastFireTime;
 
-
+@property(nonatomic) float health;
 
 @property(nonatomic) CCSprite *shieldDistortionSprite;
 

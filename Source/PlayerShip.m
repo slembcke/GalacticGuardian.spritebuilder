@@ -34,6 +34,7 @@
 	float _speed;
 	float _accelTime;
 	int _hp;
+	int _maxHP;
 }
 
 -(void)didLoadFromCCB
@@ -45,6 +46,8 @@
 	
 	// Rotate the distortion sprite to twist the space behind it.
 	[_shieldDistortionSprite runAction:[CCActionRepeatForever actionWithAction:[CCActionRotateBy actionWithDuration:1.0 angle:-360.0]]];
+	
+	_maxHP = _hp;
 }
 
 static void
@@ -193,6 +196,11 @@ VisitAll(CCNode *node, void (^block)(CCNode *))
 -(BOOL) isDead
 {
 	return _hp <= 0;
+}
+
+-(float)health
+{
+	return (float)(_hp - 1.0)/(float)(_maxHP - 1.0);
 }
 
 -(void)destroy

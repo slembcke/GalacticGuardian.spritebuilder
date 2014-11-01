@@ -30,6 +30,7 @@ enum Z_ORDER {
 	Z_PICKUPS,
 	Z_FIRE,
 	Z_CONTROLS,
+	Z_HUD,
 };
 
 #define CollisionCategoryPlayer @"Player"

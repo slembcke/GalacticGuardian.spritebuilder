@@ -22,6 +22,13 @@
 #import "BurnTransition.h"
 
 
+@interface GameScene()
+@property(nonatomic, assign) int novaBombs;
+@property(nonatomic, assign) int spaceBucks;
+@property(nonatomic, assign) int level;
+@end
+
+
 @implementation GameScene
 {
 	CCNode *_scrollNode;
@@ -32,29 +39,37 @@
 	
 	Controls *_controls;
 	
+	// HUD elements
+	CCLabelTTF *_levelLabel;
+	CCLabelTTF *_bombLabel;
+	CCNode *_shieldBar;
+	CCNode *_moneyBar;
+	
 	NSMutableArray *_enemies;
 	
 	CCTime _fixedTime;
 	
-	CCProgressNode *levelProgress;
-	
 	int _enemies_killed;
 	
-	int _level;
 	int _shipLevel;
 	BulletLevel _bulletLevel;
 	RocketLevel _rocketLevel;
-	int _novaBombs;
 	
-	int _spaceBucks;
 	int _spaceBucksTilNextLevel;
 }
 
 -(instancetype)initWithShipType:(ShipType) shipType
 {
 	if((self = [super init])){
-		_spaceBucks = 0;
+		CCNode *hud = [CCBReader load:@"HUD" owner:self];
+		[self addChild:hud z:Z_HUD];
+		
+		self.spaceBucks = 0;
 		_spaceBucksTilNextLevel = SpaceBucksTilLevel1;
+		
+		self.level = 0;
+		self.spaceBucks = 0;
+		self.novaBombs = 0;
 		
 		CGSize viewSize = [CCDirector sharedDirector].viewSize;
 		
@@ -105,24 +120,6 @@
 			float angle = (M_PI * 2.0f / 20.0f) * i;
 			[self addWallAt: ccpAdd(ccpMult(ccpForAngle(angle), 150.0f + 250.0f * CCRANDOM_0_1() ), ccp(512, 512))];
 		}
-		
-		// setup interface:
-		CCSprite *levelProgressBG = [CCSprite spriteWithImageNamed:@"UI/bgBar.png"];
-		levelProgressBG.anchorPoint = ccp(0, 1);
-		levelProgressBG.positionType = CCPositionTypeMake(CCPositionUnitUIPoints, CCPositionUnitUIPoints, CCPositionReferenceCornerTopLeft);
-		levelProgressBG.position = ccp(20, 20);
-		[self addChild:levelProgressBG];
-		
-		levelProgress = [CCProgressNode progressWithSprite:[CCSprite spriteWithImageNamed:@"UI/yellowBar.png"]];
-		levelProgress.type = CCProgressNodeTypeBar;
-		levelProgress.midpoint = CGPointZero;
-		levelProgress.barChangeRate = ccp(1.0f, 0.0f);
-		levelProgress.anchorPoint = ccp(0, 1);
-		levelProgress.positionType = CCPositionTypeMake(CCPositionUnitUIPoints, CCPositionUnitUIPoints, CCPositionReferenceCornerTopLeft);
-		levelProgress.position = ccp(20, 20);
-		[self addChild:levelProgress];
-		
-		levelProgress.percentage = (float) _spaceBucks;
 		
 		// Enable touch events.
 		// The entire scene is used as a shoot button.
@@ -317,7 +314,7 @@
 		return;
 	}
 	
-	_spaceBucks -= SpaceBucksPerRocket;
+	self.spaceBucks -= SpaceBucksPerRocket;
 	
 	// TODO missile recharge logic
 	
@@ -341,8 +338,8 @@
 -(void)fireNovaBomb
 {
 	// Don't fire if out of ammo or the ship is destroyed.
-	if(_novaBombs == 0 || [_playerShip isDead]) return;
-	_novaBombs -= 1;
+	if(self.novaBombs == 0 || [_playerShip isDead]) return;
+	self.novaBombs -= 1;
 	
 	[self novaBombAt:_playerPosition];
 }
@@ -457,6 +454,8 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 	[_physics addChild:_playerShip z:Z_PLAYER];
 	[_background.distortionNode addChild:_playerShip.shieldDistortionSprite];
 	
+	[self updateShieldBar];
+	
 	// Center on the player.
 	self.scrollPosition = _playerShip.position;
 	
@@ -503,17 +502,17 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 
 -(void) levelUp;
 {
-	_level += 1;
-	_spaceBucks -= _spaceBucksTilNextLevel;
+	self.level += 1;
+	self.spaceBucks -= _spaceBucksTilNextLevel;
 	_spaceBucksTilNextLevel *= SpaceBucksLevelMultiplier;
 	
-	switch(_level){
+	switch(self.level){
 		case  1: // Bullet1
 			_bulletLevel += 1;
 			[self levelUpText:@"Laser Level 2"];
 			break;
 		case  2:// Nova Bomb
-			_novaBombs += 1;
+			self.novaBombs += 1;
 			[self levelUpText:@"Nova Bomb"];
 			break;
 		case  3:// Bullet 2
@@ -530,7 +529,7 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 			[self levelUpText:@"Ship Level 2"];
 			break;
 		case  6:// Nova Bomb
-			_novaBombs += 1;
+			self.novaBombs += 1;
 			[self levelUpText:@"Nova Bomb"];
 			break;
 		case  7:// Bullet 3
@@ -538,7 +537,7 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 			[self levelUpText:@"Laser Level 4"];
 			break;
 		case  8://Nova Bomb
-			_novaBombs += 1;
+			self.novaBombs += 1;
 			[self levelUpText:@"Nova Bomb"];
 			break;
 		case  9://Heavy Rocket
@@ -555,7 +554,7 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 			[self levelUpText:@"Laser Level 5"];
 			break;
 		case 12://Nova Bomb
-			_novaBombs += 1;
+			self.novaBombs += 1;
 			[self levelUpText:@"Nova Bomb"];
 			break;
 		case 13://Bullet 5
@@ -567,7 +566,7 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 			[self levelUpText:@"Cluster Rockets"];
 			break;
 		default: // Nova Bomb forever.
-			_novaBombs += 1;
+			self.novaBombs += 1;
 			[self levelUpText:@"Nova Bomb"];
 			break;
 	}
@@ -621,6 +620,42 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 	return _background.distortionNode;
 }
 
+static const float MinBarWidth = 5.0;
+
+-(void)setSpaceBucks:(int)spaceBucks
+{
+	_spaceBucks = spaceBucks;
+	
+	CGSize size = _moneyBar.parent.contentSize;
+	float width = (float)spaceBucks/(float)_spaceBucksTilNextLevel*size.width;
+	_moneyBar.contentSize = CGSizeMake(MAX(width, MinBarWidth), size.height);
+	
+	#warning TODO
+	//rocketButton.enabled = (spaceBucks > SpaceBucksPerRocket);
+}
+
+-(void)updateShieldBar
+{
+	CGSize size = _shieldBar.parent.contentSize;
+	float width = _playerShip.health*size.width;
+	_shieldBar.contentSize = CGSizeMake(MAX(width, MinBarWidth), size.height);
+}
+
+-(void)setNovaBombs:(int)novaBombs
+{
+	_novaBombs = novaBombs;
+	_bombLabel.string = [NSString stringWithFormat:@"Bombs: %d", novaBombs];
+	
+	#warning TODO
+	//novaButton.enabled = (novaBombs > 0);
+}
+
+-(void)setLevel:(int)level
+{
+	_level = level;
+	_levelLabel.string = [NSString stringWithFormat:@"Level: %d", level + 1];
+}
+
 
 #pragma mark - CCPhysicsCollisionDelegate methods
 
@@ -638,6 +673,8 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 		// Don't process the collision so the enemy spaceship will survive and mock you.
 		return NO;
 	}else{
+		[self updateShieldBar];
+		
 		// Player took damage, the enemy should self destruct.
 		[self enemyDeath: enemy from:nil];
 		return YES;
@@ -676,9 +713,8 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 	[self drawFlash:pickup.position withImage:pickup.flashImage];
 	[[OALSimpleAudio sharedInstance] playEffect:@"TempSounds/Pickup.wav" volume:0.25 pitch:1.0 pan:0.0 loop:NO];
 	
-	_spaceBucks += [pickup amount];
-	levelProgress.percentage = ((float) _spaceBucks/ _spaceBucksTilNextLevel) * 100.0f;
-	if(_spaceBucks >= _spaceBucksTilNextLevel){
+	self.spaceBucks += [pickup amount];
+	if(self.spaceBucks >= _spaceBucksTilNextLevel){
 		[self levelUp];
 	}
 	
