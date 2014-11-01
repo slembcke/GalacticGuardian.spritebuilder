@@ -582,29 +582,13 @@
 				7A40362019DDEF0D007B6E8F /* Platforms */,
 				D352B48019EC608A00829775 /* MetalShaders */,
 				D3EAD2BE1A00AD2B002AA0D2 /* Constants.h */,
-				B7378992180767190076A88C /* MainMenu.h */,
-				B7378993180767190076A88C /* MainMenu.m */,
-				758488711A04310D005F0B48 /* PauseScene.h */,
-				D3EAD2BA1A009F8D002AA0D2 /* PauseScene.m */,
+				D3EA632B1A0496EC00325F0F /* UI */,
 				75058A2F19FEC27F001AA9C6 /* GameScene.h */,
 				75058A3019FEC27F001AA9C6 /* GameScene.m */,
-				D3937FBD19FDD9AB0074009E /* NebulaBackground.h */,
-				D3A7E8D919FDC86000695965 /* NebulaBackground.m */,
-				75058A4419FECE7D001AA9C6 /* PlayerShip.h */,
-				75058A4119FECE64001AA9C6 /* PlayerShip.m */,
-				75058A4519FECF95001AA9C6 /* Bullet.h */,
-				75058A4619FECF95001AA9C6 /* Bullet.m */,
-				D3450BCF1A02EBA100E63B3A /* Rocket.h */,
-				D3450BCB1A02EB8500E63B3A /* Rocket.m */,
-				75058A5019FEE7B7001AA9C6 /* EnemyShip.h */,
-				75058A5119FEE7B7001AA9C6 /* EnemyShip.m */,
-				D3ED616419FF327C00DF3A43 /* BurnSprite.m */,
-				75058A681A005881001AA9C6 /* SpaceBucks.h */,
-				75058A691A005881001AA9C6 /* SpaceBucks.m */,
 				D31D3DCE1A0041A80085DB5B /* Controls.h */,
 				D31D3DCA1A00418C0085DB5B /* Controls.m */,
-				7584885F1A02C24A005F0B48 /* ShipSelectionScene.m */,
-				758488641A02E3EB005F0B48 /* ShipSelectionScene.h */,
+				D3EA632D1A0496FB00325F0F /* Effects */,
+				D3EA632E1A04970600325F0F /* GameObjects */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -725,6 +709,46 @@
 			);
 			name = FancyJoystick;
 			path = Source/libs/FancyJoystick;
+			sourceTree = "<group>";
+		};
+		D3EA632B1A0496EC00325F0F /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				B7378992180767190076A88C /* MainMenu.h */,
+				B7378993180767190076A88C /* MainMenu.m */,
+				758488711A04310D005F0B48 /* PauseScene.h */,
+				D3EAD2BA1A009F8D002AA0D2 /* PauseScene.m */,
+				7584885F1A02C24A005F0B48 /* ShipSelectionScene.m */,
+				758488641A02E3EB005F0B48 /* ShipSelectionScene.h */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
+		D3EA632D1A0496FB00325F0F /* Effects */ = {
+			isa = PBXGroup;
+			children = (
+				D3937FBD19FDD9AB0074009E /* NebulaBackground.h */,
+				D3A7E8D919FDC86000695965 /* NebulaBackground.m */,
+				D3ED616419FF327C00DF3A43 /* BurnSprite.m */,
+			);
+			name = Effects;
+			sourceTree = "<group>";
+		};
+		D3EA632E1A04970600325F0F /* GameObjects */ = {
+			isa = PBXGroup;
+			children = (
+				75058A4419FECE7D001AA9C6 /* PlayerShip.h */,
+				75058A4119FECE64001AA9C6 /* PlayerShip.m */,
+				75058A4519FECF95001AA9C6 /* Bullet.h */,
+				75058A4619FECF95001AA9C6 /* Bullet.m */,
+				D3450BCF1A02EBA100E63B3A /* Rocket.h */,
+				D3450BCB1A02EB8500E63B3A /* Rocket.m */,
+				75058A5019FEE7B7001AA9C6 /* EnemyShip.h */,
+				75058A5119FEE7B7001AA9C6 /* EnemyShip.m */,
+				75058A681A005881001AA9C6 /* SpaceBucks.h */,
+				75058A691A005881001AA9C6 /* SpaceBucks.m */,
+			);
+			name = GameObjects;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -871,7 +895,7 @@
 		};
 		7A97910219E62E40001FFC4D /* cocos2dJava.jar */ = {
 			isa = PBXReferenceProxy;
-			fileType = archive.jar;
+			fileType = compiled.java.jar;
 			path = cocos2dJava.jar;
 			remoteRef = 7A97910119E62E40001FFC4D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
