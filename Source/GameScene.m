@@ -394,12 +394,14 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 		// Nodes with bodies should also be sprites.
 		// This is a convenient place to add the fade action.
 		node.color = burnColor;
-		[node runAction: [CCActionSequence actions:
-		 [CCActionDelay actionWithDuration:0.5],
-		 [CCActionFadeOut actionWithDuration:2.0],
-		 [CCActionRemove action],
-		 nil
-		]];
+		
+		[node scheduleBlock:^(CCTimer *timer) {
+			[node runAction: [CCActionSequence actions:
+			 [CCActionFadeOut actionWithDuration:0.75],
+			 [CCActionRemove action],
+			 nil
+			]];
+		} delay:0.5 + 0.5*CCRANDOM_0_1()];
 	}
 	
 	// Recurse on the children.

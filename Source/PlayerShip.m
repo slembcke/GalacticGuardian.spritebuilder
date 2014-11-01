@@ -223,6 +223,7 @@ VisitAll(CCNode *node, void (^block)(CCNode *))
 	} delay:5];
 	
 	[scene novaBombAt:pos];
+	[[OALSimpleAudio sharedInstance] playEffect:@"TempSounds/Explosion.wav" volume:2.0 pitch:1.0 pan:0.0 loop:NO];
 	
 	[self removeFromParent];
 }
