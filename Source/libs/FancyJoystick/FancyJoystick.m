@@ -36,13 +36,17 @@
 
 @implementation FancyJoystick
 
+CCTexture *FancyJoystickTexture = nil;
+
 +(void)initialize
 {
 	if(self != [FancyJoystick class]) return;
 	
-	CCTexture *texture = [CCTexture textureWithFile:@"joystick.png"];
-	[texture generateMipmap];
-	texture.contentScale = 2.0;
+	// Load this into a global variable so the cache can't flush it.
+	// (that would reset the mipmap and content scale settings)
+	FancyJoystickTexture = [CCTexture textureWithFile:@"joystick.png"];
+	[FancyJoystickTexture generateMipmap];
+	FancyJoystickTexture.contentScale = 2.0;
 	
 	[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"joystick.plist"];
 }
