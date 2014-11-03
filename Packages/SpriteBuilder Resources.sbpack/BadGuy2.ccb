@@ -1032,6 +1032,26 @@
 				<key>value</key>
 				<string>BadGuy2Debris</string>
 			</dict>
+			<dict>
+				<key>name</key>
+				<string>_hp</string>
+				<key>optimized</key>
+				<false/>
+				<key>type</key>
+				<integer>0</integer>
+				<key>value</key>
+				<string>15</string>
+			</dict>
+			<dict>
+				<key>name</key>
+				<string>_speed</string>
+				<key>optimized</key>
+				<false/>
+				<key>type</key>
+				<integer>1</integer>
+				<key>value</key>
+				<string>70.000000</string>
+			</dict>
 		</array>
 		<key>displayName</key>
 		<string>BadGuyNode</string>
@@ -1135,6 +1155,8 @@
 				</array>
 			</dict>
 		</array>
+		<key>selected</key>
+		<true/>
 	</dict>
 	<key>notes</key>
 	<array/>

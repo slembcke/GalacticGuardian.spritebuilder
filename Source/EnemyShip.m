@@ -16,8 +16,6 @@ static const NSUInteger PickupCount = 5;
 
 @implementation EnemyShip
 {
-	CCNode *_mainThruster;
-	
 	float _speed;
 	float _accelTime;
 
@@ -48,10 +46,9 @@ static NSArray *CollisionMask = nil;
 
 -(void)didLoadFromCCB
 {
-	CCPhysicsBody *body = self.physicsBody;
+	_accelTime = 1.0;
 	
-	_hp = 5;
-	_speed = 50;
+	CCPhysicsBody *body = self.physicsBody;
 	
 	// This is used to pick which collision delegate method to call, see GameScene.m for more info.
 	body.collisionType = @"enemy";
@@ -61,15 +58,6 @@ static NSArray *CollisionMask = nil;
 	body.collisionCategories = CollisionCategories;
 	// Then you list which categories its allowed to collide with.
 	body.collisionMask = CollisionMask;
-	
-	// Make the thruster pulse
-	float scaleX = _mainThruster.scaleX;
-	float scaleY = _mainThruster.scaleY;
-	[_mainThruster runAction:[CCActionRepeatForever actionWithAction:[CCActionSequence actions:
-		[CCActionScaleTo actionWithDuration:0.1 scaleX:scaleX scaleY:0.5*scaleY],
-		[CCActionScaleTo actionWithDuration:0.05 scaleX:scaleX scaleY:scaleY],
-		nil
-	]]];
 	
 	// Preload some of the destruction assets now since ships are often destroyed at the same time.
 	_debrisNode = [CCBReader load:self.debris];
@@ -106,11 +94,10 @@ static NSArray *CollisionMask = nil;
 	CGPoint velocity = cpvlerpconst(body.velocity, targetVelocity, _speed/_accelTime*delta);
 	
 	body.velocity = velocity;
-	if(cpvlengthsq(velocity)){
-		self.rotation = -CC_RADIANS_TO_DEGREES(atan2f(velocity.y, velocity.x));
-		_mainThruster.visible = YES;
-	} else {
-		_mainThruster.visible = NO;
+	if(cpvlengthsq(velocity) > 0.0){
+		const float maxTurn = 360.0*delta;
+		CGPoint relativeDirection = cpTransformVect(cpTransformInverse(body.absoluteTransform), velocity);
+		self.rotation += clampf(-CC_RADIANS_TO_DEGREES(ccpToAngle(relativeDirection)), -maxTurn, maxTurn);
 	}
 }
 
@@ -122,6 +109,7 @@ static NSArray *CollisionMask = nil;
 
 -(void)destroyWithWeaponColor:(CCColor *)weaponColor
 {
+	// TODO should catch this in the collision handler instead.
 	if(![self isRunningInActiveScene]){
 		NSLog(@"Probably this enemy was destroyed twice.");
 		return;

@@ -108,12 +108,8 @@
 		bounds.physicsBody.elasticity = 1.0;
 		[_physics addChild:bounds];
 		
-		_enemies = [NSMutableArray array];
-		
 		// Add a ship in the middle of the screen.
 		[self createPlayerShipAt: ccp(GameSceneSize/2.0, GameSceneSize/2.0) withArt:ship_fileNames[shipType]];
-		
-		[self setupEnemySpawnTimer];
 		
 		for(int i = 0; i < 20; i++){
 			// maybe this spoke/circle pattern will be cool.
@@ -125,6 +121,8 @@
 		// The entire scene is used as a shoot button.
 		self.userInteractionEnabled = YES;
 		
+		_enemies = [NSMutableArray array];
+		[self setupEnemySpawnTimer];
 	}
 	
 	return self;
@@ -583,53 +581,69 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 	[[OALSimpleAudio sharedInstance] playEffect:@"TempSounds/LevelUp.wav" volume:0.8 pitch:1.0 pan:0.0 loop:NO];
 }
 
--(void)setupEnemySpawnTimer
+static CGPoint
+RandomGroupPosition(float padding)
 {
-	__block NSUInteger spawnCounter = 0;
-	__block CGPoint enemySpawnLocation = CGPointZero;
+	// Start with a random direction.
+	CGPoint dir = CCRANDOM_ON_UNIT_CIRCLE();
 	
-	const NSUInteger GroupCount = 8;
+	// Project that direction onto a unit square so we can spawn them just outside the screen's bounds.
+	dir = ccpMult(dir, 1.0/MAX(fabs(dir.x), fabs(dir.y)));
+	
+	// Now just need to turn that into an actual location.
+	return CGPointMake(
+		(0.5 + 0.5*dir.x)*GameSceneSize + dir.x*padding,
+		(0.5 + 0.5*dir.y)*GameSceneSize + dir.y*padding
+	);
+}
+
+// Set up timers to spawn a group of enemies.
+-(void)spawnGroup
+{
+	static NSUInteger spawnCounter = 0;
+	NSUInteger maxAllowedEnemies = MIN(10 + _level*3, 40);
+	
+	NSUInteger MinGroupSize = 3;
+	NSUInteger MaxGroupSize = 8;
+	
+	NSUInteger openSlots = maxAllowedEnemies - _enemies.count;
+	if(openSlots < MinGroupSize) return;
+	
+	NSUInteger groupCount = MinGroupSize + random()%(MaxGroupSize - MinGroupSize);
+	groupCount = MIN(groupCount, openSlots);
+	
 	const float GroupRadius = 100.0;
+	CGPoint groupPosition = RandomGroupPosition(GroupRadius);
 	
 	CCTimer *spawnTimer = [self scheduleBlock:^(CCTimer *timer) {
-		NSUInteger currentlyAllowed = MIN(spawnCounter/20 + 20, 40);
-		if(_enemies.count >= currentlyAllowed) return;
+		NSUInteger bigEnemyProbability = MAX(0, MIN(_level - 10, 5));
 		
-		// Every few enemies spawned, move the spawn area.
-		// That way the enemies come in groups from random directions.
-		if(spawnCounter%GroupCount == 0){
-			// Randomize the starting location.
-			// Start with a random direction.
-			CGPoint dir = CCRANDOM_ON_UNIT_CIRCLE();
-			
-			// Project that direction onto a unit square so we can spawn them just outside the screen's bounds.
-			dir = ccpMult(dir, 1.0/MAX(fabs(dir.x), fabs(dir.y)));
-			
-			// Now just need to turn that into an actual location.
-			enemySpawnLocation = CGPointMake(
-				(0.5 + 0.5*dir.x)*GameSceneSize + dir.x*GroupRadius,
-				(0.5 + 0.5*dir.y)*GameSceneSize + dir.y*GroupRadius
-			);
-		}
+		BOOL isBig = (bigEnemyProbability > spawnCounter%5);
+		EnemyShip *enemy = (EnemyShip *)[CCBReader load:isBig ? @"BadGuy2" : @"BadGuy1"];
 		
-		// for levels 3 to 6, there's a 5% chance of a big guy.
-		// For levels above 6, there's a 1.0 - (0.95 * 0.85) ~= 20% chance of a big guy.
-		bool bigBadGuy = (_ship_level > 3 && CCRANDOM_0_1() > 0.95) || (_ship_level > 6 && CCRANDOM_0_1() > 0.85);
-		
-		EnemyShip *enemy = (EnemyShip *)[CCBReader load:bigBadGuy ? @"BadGuy2" : @"BadGuy1"];
-		if(bigBadGuy){
-			enemy.hp = 15;
-		}
-		
-		enemy.position = ccpAdd(enemySpawnLocation, ccpMult(CCRANDOM_IN_UNIT_CIRCLE(), GroupRadius));
+		enemy.position = ccpAdd(groupPosition, ccpMult(CCRANDOM_IN_UNIT_CIRCLE(), GroupRadius));
 		[_physics addChild:enemy z:Z_ENEMY];
 		[_enemies addObject:enemy];
 		
 		spawnCounter++;
 	} delay:0.0];
 	
+	// Configure the timer to repeat to spawn the rest of the enemies too.
+	// Scatter the spawn times to avoid frame spikes.
 	spawnTimer.repeatInterval = 0.1;
-	spawnTimer.repeatCount = CCTimerRepeatForever;
+	spawnTimer.repeatCount = groupCount - 1;
+}
+
+-(void)setupEnemySpawnTimer
+{
+	CCTimer *groupSpawnTimer = [self scheduleBlock:^(CCTimer *timer) {
+		// Try once per second to add a group of enemies to the game.
+		[self spawnGroup];
+	} delay:0.0];
+	
+	// Configure the timer to repeat.
+	groupSpawnTimer.repeatInterval = 1.0;
+	groupSpawnTimer.repeatCount = CCTimerRepeatForever;
 }
 
 -(CCNode *)distortionNode
