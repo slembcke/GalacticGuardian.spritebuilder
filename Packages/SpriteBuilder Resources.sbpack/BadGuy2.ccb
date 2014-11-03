@@ -1052,6 +1052,16 @@
 				<key>value</key>
 				<string>60.000000</string>
 			</dict>
+			<dict>
+				<key>name</key>
+				<string>_accelTime</string>
+				<key>optimized</key>
+				<false/>
+				<key>type</key>
+				<integer>1</integer>
+				<key>value</key>
+				<string>3.000000</string>
+			</dict>
 		</array>
 		<key>displayName</key>
 		<string>BadGuyNode</string>

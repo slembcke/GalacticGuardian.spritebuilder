@@ -12,7 +12,7 @@ typedef NS_ENUM(NSUInteger, ShipType){
 	Ship_Retribution, Ship_Defiant, Ship_Herald
 };
 
-static const int SpaceBucksTilLevel1 = 30;
+static const int SpaceBucksTilLevel1 = 200;
 static const float SpaceBucksLevelMultiplier = 1.15;
 
 static const float RocketRange = 125.0;

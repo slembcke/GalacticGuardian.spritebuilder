@@ -46,8 +46,6 @@ static NSArray *CollisionMask = nil;
 
 -(void)didLoadFromCCB
 {
-	_accelTime = 1.0;
-	
 	CCPhysicsBody *body = self.physicsBody;
 	
 	// This is used to pick which collision delegate method to call, see GameScene.m for more info.
