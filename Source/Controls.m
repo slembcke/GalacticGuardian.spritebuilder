@@ -95,6 +95,9 @@
 	FancyJoystick *_virtualJoystick;
 	FancyJoystick *_virtualAimJoystick;
 	
+	CCButton *_rocketButton;
+	CCButton *_novaButton;
+	
 #if !ANDROID
 	GCController *_controller;
 	GCControllerDirectionPad *_controllerStick;
@@ -116,19 +119,21 @@
 		
 		CGFloat joystickOffset = viewSize.width/8.0;
 		
-		CCNode *rocketButton = [CCBReader load:@"RocketButton" owner:self];
-		rocketButton.position = ccp(2.0*joystickOffset, joystickOffset);
-		rocketButton.contentSize = CGSizeMake(0.7*joystickOffset, 0.7*joystickOffset);
-		[self addChild:rocketButton];
+		// _rocketButton ivar is set by the CCB file, but wrapped in a regular node.
+		CCNode *rocketButtonNode = [CCBReader load:@"RocketButton" owner:self];
+		rocketButtonNode.position = ccp(2.0*joystickOffset, joystickOffset);
+		rocketButtonNode.contentSize = CGSizeMake(0.7*joystickOffset, 0.7*joystickOffset);
+		[self addChild:rocketButtonNode];
 		
-		CCNode *novaButton = [CCBReader load:@"NovaButton" owner:self];
-		novaButton.position = ccp(viewSize.width - 2.0*joystickOffset, joystickOffset);
-		novaButton.contentSize = CGSizeMake(0.7*joystickOffset, 0.7*joystickOffset);
-		[self addChild:novaButton];
+		// _novaButton ivar is set by the CCB file, but wrapped in a regular node.
+		CCNode *novaButtonNode = [CCBReader load:@"NovaButton" owner:self];
+		novaButtonNode.position = ccp(viewSize.width - 2.0*joystickOffset, joystickOffset);
+		novaButtonNode.contentSize = CGSizeMake(0.7*joystickOffset, 0.7*joystickOffset);
+		[self addChild:novaButtonNode];
 		
-		// Quick hack to disable the default exclusive touch property of CCButtons.
-		[(CCButton *)rocketButton.children[0] setExclusiveTouch:NO];
-		[(CCButton *)novaButton.children[0] setExclusiveTouch:NO];
+		// Exclusive touch would steal touches from the joysticks.
+		_rocketButton.exclusiveTouch = NO;
+		_novaButton.exclusiveTouch = NO;
 		
 		_virtualJoystick = [FancyJoystick node];
 		_virtualJoystick.scale = 2.0*joystickOffset/_virtualJoystick.contentSize.width;
@@ -355,5 +360,15 @@
 	[self setButtonValue:ControlNovaButton value:YES];
 	[self setButtonValue:ControlNovaButton value:NO];
 }
+
+-(BOOL)rocketButtonEnabled {return _rocketButton.enabled;}
+-(void)setRocketButtonEnabled:(BOOL)rocketButtonEnabled {_rocketButton.enabled = rocketButtonEnabled;}
+-(BOOL)rocketButtonVisible {return _rocketButton.parent.visible;}
+-(void)setRocketButtonVisible:(BOOL)rocketButtonVisible {_rocketButton.parent.visible = rocketButtonVisible;}
+
+-(BOOL)novaButtonEnabled {return _novaButton.enabled;}
+-(void)setNovaButtonEnabled:(BOOL)novaButtonEnabled {_novaButton.enabled = novaButtonEnabled;}
+-(BOOL)novaButtonVisible {return _novaButton.parent.visible;}
+-(void)setNovaButtonVisible:(BOOL)novaButtonVisible {_novaButton.parent.visible = novaButtonVisible;}
 
 @end

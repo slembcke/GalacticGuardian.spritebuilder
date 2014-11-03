@@ -38,6 +38,7 @@
 	NebulaBackground *_background;
 	
 	Controls *_controls;
+	CCProgressNode *_rocketReticle;
 	
 	// HUD elements
 	CCLabelTTF *_levelLabel;
@@ -79,6 +80,18 @@
 		_scrollNode.contentSize = CGSizeMake(1.0, 1.0);
 		_scrollNode.position = ccp(viewSize.width/2.0, viewSize.height/2.0);
 		[self addChild:_scrollNode z:Z_SCROLL_NODE];
+		
+		_rocketReticle = [CCProgressNode progressWithSprite:[CCSprite spriteWithImageNamed:@"RocketReticle.png"]];
+		_rocketReticle.type = CCProgressNodeTypeRadial;
+		_rocketReticle.position = ccp(512, 512);
+		[_scrollNode addChild:_rocketReticle z:Z_RETICLE];
+		
+		_rocketReticle.color = [CCColor redColor];
+		_rocketReticle.percentage = 100.0;
+		_rocketReticle.visible = NO;
+		
+		// Make the reticle spin.
+		[_rocketReticle runAction:[CCActionRepeatForever actionWithAction:[CCActionRotateBy actionWithDuration:1.0 angle:-360.0]]];
 		
 		_clampWidth = (GameSceneSize - viewSize.width)/2.0;
 		_clampHeight = (GameSceneSize - viewSize.height)/2.0;
@@ -138,6 +151,10 @@
 	_controls = [Controls node];
 	[self addChild:_controls z:Z_CONTROLS];
 	
+	// Hide the buttons until you unlock the upgrades.
+	_controls.rocketButtonVisible = NO;
+	_controls.novaButtonVisible = NO;
+	
 	__weak typeof(self) _self = self;
 	[_controls setHandler:^(BOOL state) {if(state) [_self pause];} forButton:ControlPauseButton];
 	[_controls setHandler:^(BOOL state) {if(state) [_self fireRocket];} forButton:ControlRocketButton];
@@ -187,6 +204,9 @@
 -(void)update:(CCTime)delta
 {
 	self.scrollPosition = _playerShip.position;
+	
+	// Update the reticle's position.
+	_rocketReticle.position = CGPointApplyAffineTransform(ccp(RocketRange, 0.0), _playerShip.nodeToParentTransform);
 }
 
 -(void)enemyDeath:(EnemyShip *)enemy from:(Bullet *) bullet;
@@ -306,15 +326,11 @@
 	// Don't fire if out of ammo or the ship is destroyed.
 	if(
 		_rocketLevel == RocketNone ||
-		_spaceBucks < SpaceBucksPerRocket ||
+		_rocketReticle.percentage < 100.0 ||
 		[_playerShip isDead]
 	){
 		return;
 	}
-	
-	self.spaceBucks -= SpaceBucksPerRocket;
-	
-	// TODO missile recharge logic
 	
 	CGAffineTransform transform = _playerShip.physicsBody.absoluteTransform;
 	CGPoint position = ccp(transform.tx, transform.ty);
@@ -330,7 +346,24 @@
 	
 	[_physics addChild:rocket z:Z_BULLET];
 	
-	#warning TODO toggle button
+	_controls.rocketButtonEnabled = NO;
+	
+	_rocketReticle.percentage = 0.0;
+	_rocketReticle.color = [CCColor whiteColor];
+	_rocketReticle.opacity = 0.5;
+	
+	[self scheduleBlock:^(CCTimer *timer) {
+		_rocketReticle.percentage += 10.0;
+		
+		if(_rocketReticle.percentage == 100.0){
+			_controls.rocketButtonEnabled = YES;
+			
+			_rocketReticle.color = [CCColor redColor];
+			_rocketReticle.opacity = 0.5;
+		} else {
+			[timer repeatOnceWithInterval:1.0];
+		}
+	} delay:1.0];
 }
 
 -(void)fireNovaBomb
@@ -365,8 +398,6 @@
 			[enemy scheduleBlock:^(CCTimer *timer) {[self enemyDeath:enemy from:nil];} delay:delay];
 		}
 	}
-	
-	#warning TODO toggle button
 }
 
 static NSArray *DebrisCollisionCategories = nil;
@@ -529,6 +560,9 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 		case  4:// Rocket 0
 			_rocketLevel += 1;
 			[self levelUpText:@"Rockets"];
+			
+			_controls.rocketButtonVisible = YES;
+			_rocketReticle.visible = YES;
 			break;
 		case  5:// Ship 2
 			_shipLevel += 1;
@@ -660,9 +694,6 @@ static const float MinBarWidth = 5.0;
 	CGSize size = _moneyBar.parent.contentSize;
 	float width = (float)spaceBucks/(float)_spaceBucksTilNextLevel*size.width;
 	_moneyBar.contentSize = CGSizeMake(MAX(width, MinBarWidth), size.height);
-	
-	#warning TODO
-	//rocketButton.enabled = (spaceBucks > SpaceBucksPerRocket);
 }
 
 -(void)updateShieldBar
@@ -677,8 +708,8 @@ static const float MinBarWidth = 5.0;
 	_novaBombs = novaBombs;
 	_bombLabel.string = [NSString stringWithFormat:@"Bombs: %d", novaBombs];
 	
-	#warning TODO
-	//novaButton.enabled = (novaBombs > 0);
+	_controls.novaButtonVisible = YES;
+	_controls.novaButtonEnabled = (novaBombs > 0);
 }
 
 -(void)setLevel:(int)level

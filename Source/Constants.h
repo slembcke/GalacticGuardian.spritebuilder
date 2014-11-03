@@ -12,10 +12,10 @@ typedef NS_ENUM(NSUInteger, ShipType){
 	Ship_Retribution, Ship_Defiant, Ship_Herald
 };
 
-static const int SpaceBucksTilLevel1 = 200;
+static const int SpaceBucksTilLevel1 = 30;
 static const float SpaceBucksLevelMultiplier = 1.15;
 
-static const int SpaceBucksPerRocket = 50;
+static const float RocketRange = 125.0;
 
 enum Z_ORDER {
 	Z_SCROLL_NODE,
@@ -29,6 +29,7 @@ enum Z_ORDER {
 	Z_FLASH,
 	Z_PICKUPS,
 	Z_FIRE,
+	Z_RETICLE,
 	Z_CONTROLS,
 	Z_HUD,
 };

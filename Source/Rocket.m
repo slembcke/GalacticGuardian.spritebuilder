@@ -8,7 +8,6 @@
 
 
 static const float RocketAcceleration = 1000.0;
-static const float RocketDistance = 125.0;
 
 static const float RocketDamage[] = {0.0, 7.0, 10.0, 5.0};
 static const float RocketSplash = 150.0;
@@ -37,7 +36,7 @@ static const float RocketClusterRange = 25.0;
 	body.collisionCategories = @[CollisionCategoryBullet];
 	body.collisionMask = @[CollisionCategoryEnemy, CollisionCategoryAsteroid];
 	
-	CCTime fuse = sqrt(2.0*RocketDistance/RocketAcceleration);
+	CCTime fuse = sqrt(2.0*RocketRange/RocketAcceleration);
 	[rocket scheduleBlock:^(CCTimer *timer) {
 		[rocket destroy];
 	} delay:fuse];
