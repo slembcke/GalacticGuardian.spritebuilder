@@ -110,6 +110,7 @@
 		D31D3DCB1A00418C0085DB5B /* Controls.m in Sources */ = {isa = PBXBuildFile; fileRef = D31D3DCA1A00418C0085DB5B /* Controls.m */; };
 		D31D3DCC1A00418C0085DB5B /* Controls.m in Sources */ = {isa = PBXBuildFile; fileRef = D31D3DCA1A00418C0085DB5B /* Controls.m */; };
 		D31D3DCD1A00418C0085DB5B /* Controls.m in Sources */ = {isa = PBXBuildFile; fileRef = D31D3DCA1A00418C0085DB5B /* Controls.m */; };
+		D3383ACE1A09BAD900E13478 /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3383ACD1A09BAD900E13478 /* Launch Screen.xib */; };
 		D3450BB61A01FEA100E63B3A /* FancyJoystick.m in Sources */ = {isa = PBXBuildFile; fileRef = D3450BB11A01FEA100E63B3A /* FancyJoystick.m */; };
 		D3450BB71A01FEA100E63B3A /* joystick.plist in Resources */ = {isa = PBXBuildFile; fileRef = D3450BB21A01FEA100E63B3A /* joystick.plist */; };
 		D3450BB81A01FEA100E63B3A /* joystick.png in Resources */ = {isa = PBXBuildFile; fileRef = D3450BB31A01FEA100E63B3A /* joystick.png */; };
@@ -257,7 +258,7 @@
 		5B121013197483EE004C1E1D /* ic_launcher.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_launcher.png; sourceTree = "<group>"; };
 		5B121015197483EE004C1E1D /* ic_launcher.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_launcher.png; sourceTree = "<group>"; };
 		5B12101B19748413004C1E1D /* GalacticGuardianActivity.java */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.java; name = GalacticGuardianActivity.java; path = java/org/cocos2d/GalacticGuardian/GalacticGuardianActivity.java; sourceTree = "<group>"; };
-		5B121021197484A3004C1E1D /* GalacticGuardian Java.jar */ = {isa = PBXFileReference; explicitFileType = compiled.java.jar; includeInIndex = 0; path = "GalacticGuardian Java.jar"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5B121021197484A3004C1E1D /* GalacticGuardian Java.jar */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = archive.jar; path = "GalacticGuardian Java.jar"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B12102E197484FA004C1E1D /* GalacticGuardianActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GalacticGuardianActivity.h; sourceTree = "<group>"; };
 		5B12102F197484FA004C1E1D /* GalacticGuardianActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GalacticGuardianActivity.m; sourceTree = "<group>"; };
 		5B121033197485FE004C1E1D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Platforms/Android/Info.plist; sourceTree = "<group>"; };
@@ -326,6 +327,7 @@
 		D31D3DC81A00108A0085DB5B /* GameController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameController.framework; path = System/Library/Frameworks/GameController.framework; sourceTree = SDKROOT; };
 		D31D3DCA1A00418C0085DB5B /* Controls.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Controls.m; sourceTree = "<group>"; };
 		D31D3DCE1A0041A80085DB5B /* Controls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Controls.h; sourceTree = "<group>"; };
+		D3383ACD1A09BAD900E13478 /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = "Launch Screen.xib"; path = "Platforms/iOS/Launch Screen.xib"; sourceTree = "<group>"; };
 		D3450BB01A01FEA100E63B3A /* FancyJoystick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FancyJoystick.h; sourceTree = "<group>"; };
 		D3450BB11A01FEA100E63B3A /* FancyJoystick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FancyJoystick.m; sourceTree = "<group>"; };
 		D3450BB21A01FEA100E63B3A /* joystick.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = joystick.plist; sourceTree = "<group>"; };
@@ -616,6 +618,7 @@
 				B737896C180762440076A88C /* Default-Landscape~ipad.png */,
 				B737896D180762440076A88C /* Default.png */,
 				B737896E180762440076A88C /* Default@2x.png */,
+				D3383ACD1A09BAD900E13478 /* Launch Screen.xib */,
 			);
 			name = Icons;
 			sourceTree = "<group>";
@@ -1023,6 +1026,7 @@
 				B7378977180762440076A88C /* Default.png in Resources */,
 				B71F5911188484E7003F4D28 /* iPad-old.png in Resources */,
 				D3450BB81A01FEA100E63B3A /* joystick.png in Resources */,
+				D3383ACE1A09BAD900E13478 /* Launch Screen.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1524,7 +1528,7 @@
 					"\"Source/libs/cocos2d-iphone/external/ObjectAL\"/**",
 				);
 				INFOPLIST_FILE = Source/Resources/Platforms/iOS/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
@@ -1558,7 +1562,7 @@
 					"\"Source/libs/cocos2d-iphone/external/ObjectAL\"/**",
 				);
 				INFOPLIST_FILE = Source/Resources/Platforms/iOS/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"-lz",
