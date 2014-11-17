@@ -163,7 +163,9 @@
 
 -(void)addWallAt:(CGPoint) pos
 {
-	CCNode *wall = (CCNode *)[CCBReader load:@"Asteroid"];
+	int type = rand()%3;
+	
+	CCNode *wall = (CCNode *)[CCBReader load:[NSString stringWithFormat:@"Asteroid%d", type]];
 	wall.position = pos;
 	wall.rotation = CCRANDOM_0_1() * 360.0f;
 	[_physics addChild:wall z:Z_ENEMY];
