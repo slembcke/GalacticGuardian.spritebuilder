@@ -74,7 +74,7 @@ static CCTexture *DistortionTexture = nil;
 		
 		// Apply the Nebula shader that applies some subtle parallax mapping and distortions.
 		self.shader = ShaderMode;
-		self.shaderUniforms[@"u_ParallaxAmount"] = @(0.05);
+		self.shaderUniforms[@"u_ParallaxAmount"] = @(0.06);
 		self.shaderUniforms[@"u_DepthMap"] = DepthMap;
 		self.shaderUniforms[@"u_DistortionMap"] = _distortionMap.texture;
 		
