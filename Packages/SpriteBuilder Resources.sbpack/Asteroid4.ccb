@@ -62,7 +62,7 @@
 			<key>collisionType</key>
 			<string>wall</string>
 			<key>cornerRadius</key>
-			<real>22.110160827636719</real>
+			<real>11.265872955322266</real>
 			<key>density</key>
 			<real>1</real>
 			<key>dynamic</key>
@@ -74,8 +74,8 @@
 			<key>points</key>
 			<array>
 				<array>
-					<real>23.160221099853516</real>
-					<real>21.273696899414062</real>
+					<real>12.218207359313965</real>
+					<real>13.320642471313477</real>
 				</array>
 			</array>
 			<key>polygons</key>
@@ -137,7 +137,7 @@
 				<key>value</key>
 				<array>
 					<string></string>
-					<string>Sprites/Asteroids/asteroid_big_003.png</string>
+					<string>Sprites/Asteroids/asteroid_small_002.png</string>
 				</array>
 			</dict>
 			<dict>

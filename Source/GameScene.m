@@ -124,10 +124,10 @@
 		// Add a ship in the middle of the screen.
 		[self createPlayerShipAt: ccp(GameSceneSize/2.0, GameSceneSize/2.0) withArt:ship_fileNames[shipType]];
 		
-		for(int i = 0; i < 20; i++){
+		for(int i = 0; i < 15; i++){
 			// maybe this spoke/circle pattern will be cool.
-			float angle = (M_PI * 2.0f / 20.0f) * i;
-			[self addWallAt: ccpAdd(ccpMult(ccpForAngle(angle), 150.0f + 250.0f * CCRANDOM_0_1() ), ccp(512, 512))];
+			float angle = (M_PI * 2.0f / 15.0f) * i;
+			[self addWallAt: ccpAdd(ccpMult(ccpForAngle(angle), 200.0f + 250.0f * CCRANDOM_0_1() ), ccp(512, 512))];
 		}
 		
 		// Enable touch events.
@@ -163,7 +163,7 @@
 
 -(void)addWallAt:(CGPoint) pos
 {
-	int type = rand()%3;
+	int type = rand()%6;
 	
 	CCNode *wall = (CCNode *)[CCBReader load:[NSString stringWithFormat:@"Asteroid%d", type]];
 	wall.position = pos;
