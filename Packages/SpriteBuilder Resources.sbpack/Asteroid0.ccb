@@ -10,7 +10,7 @@
 		<false/>
 	</dict>
 	<key>UUID</key>
-	<integer>1</integer>
+	<integer>2</integer>
 	<key>centeredOrigin</key>
 	<false/>
 	<key>currentResolution</key>
@@ -137,7 +137,7 @@
 				<key>value</key>
 				<array>
 					<string></string>
-					<string>Sprites/Asteroids/asteroid_big_001.png</string>
+					<string>Sprites/Effects/asteroid_big_001.png</string>
 				</array>
 			</dict>
 			<dict>

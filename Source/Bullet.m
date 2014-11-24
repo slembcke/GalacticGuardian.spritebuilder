@@ -12,26 +12,28 @@
 
 
 static NSString * const bulletImageNames[] = {
-	@"Sprites/Bullets/laserBlue02.png",
-	@"Sprites/Bullets/laserGreen04.png",
-	@"Sprites/Bullets/laserRed02.png",
-	@"Sprites/Bullets/laserBlue14.png",
-	@"Sprites/Bullets/laserGreen06.png",
-	@"Sprites/Bullets/laserRed14.png",
+	@"Sprites/Effects/laserBlue.png",
+    @"Sprites/Effects/laserPurple.png",
+	@"Sprites/Effects/laserGreen.png",
+    @"Sprites/Effects/laserYellow.png",
+	@"Sprites/Effects/laserRed.png",
+	@"Sprites/Effects/laserRed.png",
 };
 static NSString * const bulletFlashes[] ={
-	@"Sprites/Bullets/laserBlue08.png",
-	@"Sprites/Bullets/laserGreen14.png",
-	@"Sprites/Bullets/laserRed08.png",
-	@"Sprites/Bullets/laserBlue08.png",
-	@"Sprites/Bullets/laserGreen14.png",
-	@"Sprites/Bullets/laserRed08.png"};
+    @"Sprites/Effects/laserFlashBlue.png",
+    @"Sprites/Effects/laserFlashPurple.png",
+    @"Sprites/Effects/laserFlashGreen.png",
+    @"Sprites/Effects/laserFlashYellow.png",
+    @"Sprites/Effects/laserFlashRed.png",
+    @"Sprites/Effects/laserFlashRed.png",
+};
+static NSArray * bulletColors;
 
 const float bulletSpeeds[] = {
-	200, 225, 250, 225, 260, 295
+	200, 225, 250, 225, 260, 275
 };
 const float bulletDurations[] = {
-	0.5, 0.52, 0.54, 0.64, 0.66, 0.70
+	0.5, 0.52, 0.54, 0.64, 0.66, 0.8
 };
 
 
@@ -46,6 +48,15 @@ static NSArray *CollisionMask = nil;
 	
 	CollisionCategories = @[CollisionCategoryBullet];
 	CollisionMask = @[CollisionCategoryEnemy, CollisionCategoryAsteroid];
+    
+    bulletColors = @[
+        [CCColor colorWithRed:0.3f green:0.2f blue:1.0f],
+        [CCColor colorWithRed:0.8f green:0.1f blue:1.0f],
+        [CCColor colorWithRed:0.3f green:1.0f blue:0.2f],
+        [CCColor colorWithRed:0.8f green:0.8f blue:0.0f],
+        [CCColor colorWithRed:1.0f green:0.2f blue:0.2f],
+        [CCColor colorWithRed:1.0f green:0.2f blue:0.2f],
+    ];
 }
 
 -(instancetype)initWithBulletLevel:(BulletLevel) level
@@ -94,15 +105,8 @@ static NSArray *CollisionMask = nil;
 
 -(CCColor *)bulletColor
 {
-	if(_bulletLevel % 3 == 0){
-		return 	[CCColor colorWithRed:0.3f green:0.8f blue:1.0f];
-	}else if(_bulletLevel % 3 == 1){
-		return 	[CCColor colorWithRed:0.3f green:1.0f blue:0.5f];
-	}else{
-		return 	[CCColor colorWithRed:1.0f green:0.2f blue:0.2f];
-	}
+    return bulletColors[_bulletLevel];
 }
-
 
 -(void)destroy
 {
