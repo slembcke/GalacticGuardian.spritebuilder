@@ -5,6 +5,7 @@
 @implementation PauseScene {
 	CCSlider *_musicSlider;
 	CCSlider *_soundSlider;
+    bool _hardMode;
 }
 
 -(void)didLoadFromCCB
@@ -14,7 +15,8 @@
 	
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	_musicSlider.sliderValue = [[defaults objectForKey:DefaultsMusicKey] floatValue];
-	_soundSlider.sliderValue = [[defaults objectForKey:DefaultsSoundKey] floatValue];
+    _soundSlider.sliderValue = [[defaults objectForKey:DefaultsSoundKey] floatValue];
+    _hardMode = [defaults boolForKey:DefaultsDifficultyHardKey];
 }
 
 -(void)dealloc
@@ -35,6 +37,15 @@
 	
 	[OALSimpleAudio sharedInstance].effectsVolume = slider.sliderValue;
 	[[OALSimpleAudio sharedInstance] playEffect:@"TempSounds/Laser.wav" volume:0.25 pitch:1.0 pan:0.0 loop:NO];
+}
+
+-(void)toggleDemoMode:(CCButton *)button
+{
+    _hardMode = !_hardMode;
+    
+    [[NSUserDefaults standardUserDefaults] setBool:_hardMode forKey:DefaultsDifficultyHardKey];
+    
+    button.title = [NSString stringWithFormat:@"Difficulty: %@", _hardMode ? @"Hard" : @"Demo"];
 }
 
 -(void)toggleDistortionMode:(CCButton *)button

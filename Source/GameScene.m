@@ -66,7 +66,12 @@
 		[self addChild:hud z:Z_HUD];
 		
 		self.spaceBucks = 0;
-		_spaceBucksTilNextLevel = SpaceBucksTilLevel1;
+        
+        if([[NSUserDefaults standardUserDefaults] boolForKey:DefaultsDifficultyHardKey]){
+            _spaceBucksTilNextLevel = SpaceBucksTilLevel1HardMode;
+        }else{
+            _spaceBucksTilNextLevel = SpaceBucksTilLevel1EasyMode;
+        }
 		
 		self.level = 0;
 		self.spaceBucks = 0;
