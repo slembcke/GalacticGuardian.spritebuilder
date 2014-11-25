@@ -875,7 +875,7 @@
 										<key>value</key>
 										<array>
 											<string></string>
-											<string>Sprites/Powerups/pill_red.png</string>
+											<string>Sprites/Effects/pill_red.png</string>
 										</array>
 									</dict>
 									<dict>
@@ -1257,8 +1257,6 @@
 								</array>
 							</dict>
 						</array>
-						<key>selected</key>
-						<true/>
 					</dict>
 				</array>
 				<key>customClass</key>
@@ -1424,6 +1422,8 @@
 				</array>
 			</dict>
 		</array>
+		<key>selected</key>
+		<true/>
 	</dict>
 	<key>notes</key>
 	<array/>
