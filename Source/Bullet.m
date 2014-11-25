@@ -50,10 +50,10 @@ static NSArray *CollisionMask = nil;
 	CollisionMask = @[CollisionCategoryEnemy, CollisionCategoryAsteroid];
     
     bulletColors = @[
-        [CCColor colorWithRed:0.3f green:0.2f blue:1.0f],
-        [CCColor colorWithRed:0.8f green:0.1f blue:1.0f],
-        [CCColor colorWithRed:0.3f green:1.0f blue:0.2f],
-        [CCColor colorWithRed:0.8f green:0.8f blue:0.0f],
+        [CCColor colorWithRed:0.2f green:0.7f blue:1.0f],
+        [CCColor colorWithRed:0.6f green:0.3f blue:1.0f],
+        [CCColor colorWithRed:0.2f green:1.0f blue:0.4f],
+        [CCColor colorWithRed:0.95f green:0.8f blue:0.15f],
         [CCColor colorWithRed:1.0f green:0.2f blue:0.2f],
         [CCColor colorWithRed:1.0f green:0.2f blue:0.2f],
     ];
