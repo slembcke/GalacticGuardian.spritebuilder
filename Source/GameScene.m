@@ -363,9 +363,9 @@
 			_rocketReticle.color = [CCColor redColor];
 			_rocketReticle.opacity = 0.5;
 		} else {
-			[timer repeatOnceWithInterval:1.0];
+			[timer repeatOnceWithInterval:0.5];
 		}
-	} delay:1.0];
+	} delay:0.5];
 }
 
 -(void)fireNovaBomb
