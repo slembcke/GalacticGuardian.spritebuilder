@@ -90,6 +90,11 @@ static CCTexture *DistortionTexture = nil;
 	[_distortionNode setContentSize:contentSize];
 }
 
+- (void)viewDidResizeTo:(CGSize)newViewSize
+{
+    [self setTextureRect:(CGRect){CGPointZero, newViewSize}];
+}
+
 -(void)onEnter
 {
 	// Set the shader again just in case the setting was changed in the pause menu.
