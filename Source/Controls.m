@@ -7,6 +7,7 @@
 #import "Controls.h"
 #import "FancyJoystick.h"
 
+#import "CCNode_Private.h"
 
 // I replaced my simple joystick class with the much prettier FancyJoystick class.
 // I'll leave it here for posterity though.
@@ -115,19 +116,26 @@
 {
 	if((self = [super init])){
 		CGSize viewSize = [CCDirector sharedDirector].viewSize;
-		self.contentSize = viewSize;
+        self.contentSizeType = CCSizeTypeNormalized;
+		self.contentSize = CGSizeMake(1.0, 1.0);
 		
 		CGFloat joystickOffset = viewSize.width/8.0;
 		
+        CCPositionType br =CCPositionTypeMake(CCPositionUnitPoints, CCPositionUnitPoints, CCPositionReferenceCornerBottomRight);
+        CCPositionType bl =CCPositionTypeMake(CCPositionUnitPoints, CCPositionUnitPoints, CCPositionReferenceCornerBottomLeft);
+        
+        
 		// _rocketButton ivar is set by the CCB file, but wrapped in a regular node.
 		CCNode *rocketButtonNode = [CCBReader load:@"RocketButton" owner:self];
-		rocketButtonNode.position = ccp(2.0*joystickOffset, joystickOffset);
+        rocketButtonNode.positionType = bl;
+        rocketButtonNode.position = ccp(2.0*joystickOffset, joystickOffset);
 		rocketButtonNode.contentSize = CGSizeMake(0.7*joystickOffset, 0.7*joystickOffset);
 		[self addChild:rocketButtonNode];
 		
 		// _novaButton ivar is set by the CCB file, but wrapped in a regular node.
 		CCNode *novaButtonNode = [CCBReader load:@"NovaButton" owner:self];
-		novaButtonNode.position = ccp(viewSize.width - 2.0*joystickOffset, joystickOffset);
+        novaButtonNode.positionType = br;
+		novaButtonNode.position = ccp(2.0*joystickOffset, joystickOffset);
 		novaButtonNode.contentSize = CGSizeMake(0.7*joystickOffset, 0.7*joystickOffset);
 		[self addChild:novaButtonNode];
 		
@@ -137,12 +145,14 @@
 		
 		_virtualJoystick = [FancyJoystick node];
 		_virtualJoystick.scale = 2.0*joystickOffset/_virtualJoystick.contentSize.width;
+        _virtualJoystick.positionType = bl;
 		_virtualJoystick.position = ccp(joystickOffset, joystickOffset);
 		[self addChild:_virtualJoystick];
 		
 		_virtualAimJoystick = [FancyJoystick node];
 		_virtualAimJoystick.scale = 2.0*joystickOffset/_virtualJoystick.contentSize.width;
-		_virtualAimJoystick.position = ccp(viewSize.width - joystickOffset, joystickOffset);
+        _virtualAimJoystick.positionType = br;
+		_virtualAimJoystick.position = ccp(joystickOffset, joystickOffset);
 		[self addChild:_virtualAimJoystick];
 		
 		CCButton *pauseButton = [CCButton buttonWithTitle:@"Pause" fontName:@"kenvector_future.ttf" fontSize:18.0f];

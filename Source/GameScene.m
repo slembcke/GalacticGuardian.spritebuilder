@@ -32,7 +32,6 @@
 @implementation GameScene
 {
 	CCNode *_scrollNode;
-	float _clampWidth, _clampHeight;
 	
 	CCPhysicsNode *_physics;
 	NebulaBackground *_background;
@@ -83,7 +82,8 @@
 		
 		_scrollNode = [CCNode node];
 		_scrollNode.contentSize = CGSizeMake(1.0, 1.0);
-		_scrollNode.position = ccp(viewSize.width/2.0, viewSize.height/2.0);
+        _scrollNode.positionType = CCPositionTypeNormalized;
+		_scrollNode.position = ccp(0.5, 0.5);
 		[self addChild:_scrollNode z:Z_SCROLL_NODE];
 		
 		_rocketReticle = [CCProgressNode progressWithSprite:[CCSprite spriteWithImageNamed:@"RocketReticle.png"]];
@@ -97,9 +97,6 @@
 		
 		// Make the reticle spin.
 		[_rocketReticle runAction:[CCActionRepeatForever actionWithAction:[CCActionRotateBy actionWithDuration:1.0 angle:-360.0]]];
-		
-		_clampWidth = (GameSceneSize - viewSize.width)/2.0;
-		_clampHeight = (GameSceneSize - viewSize.height)/2.0;
 		
 		_background = [NebulaBackground node];
 		_background.contentSize = CGSizeMake(GameSceneSize, GameSceneSize);
@@ -195,14 +192,19 @@
 {
 	float smoothing = 1e3;
 	
+    CGSize contentSize = self.contentSizeInPoints;
+
+    float clampWidth = (GameSceneSize - contentSize.width)/2.0;
+    float clampHeight = (GameSceneSize - contentSize.height)/2.0;
+    
 	CGPoint exp = CGPointMake(
-		(scrollPosition.x - GameSceneSize/2.0)/_clampWidth,
-		(scrollPosition.y - GameSceneSize/2.0)/_clampHeight
+		(scrollPosition.x - GameSceneSize/2.0)/clampWidth,
+		(scrollPosition.y - GameSceneSize/2.0)/clampHeight
 	);
 	
 	CGPoint offset = CGPointMake(
-		 _clampWidth*(log(pow(smoothing, -exp.x - 1.0) + 1.01) - log(pow(smoothing, exp.x - 1.0) + 1.01)),
-		_clampHeight*(log(pow(smoothing, -exp.y - 1.0) + 1.01) - log(pow(smoothing, exp.y - 1.0) + 1.01))
+		clampWidth*(log(pow(smoothing, -exp.x - 1.0) + 1.01) - log(pow(smoothing, exp.x - 1.0) + 1.01)),
+		clampHeight*(log(pow(smoothing, -exp.y - 1.0) + 1.01) - log(pow(smoothing, exp.y - 1.0) + 1.01))
 	);
 	
 	_scrollNode.anchorPoint = ccpAdd(scrollPosition, ccpMult(offset, 1.0/log(smoothing)));
