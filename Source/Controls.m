@@ -7,8 +7,6 @@
 #import "Controls.h"
 #import "FancyJoystick.h"
 
-#import "CCNode_Private.h"
-
 // I replaced my simple joystick class with the much prettier FancyJoystick class.
 // I'll leave it here for posterity though.
 
