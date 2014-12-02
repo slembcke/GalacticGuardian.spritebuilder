@@ -10,7 +10,7 @@
 		<false/>
 	</dict>
 	<key>UUID</key>
-	<integer>22</integer>
+	<integer>23</integer>
 	<key>centeredOrigin</key>
 	<false/>
 	<key>currentResolution</key>
@@ -93,7 +93,7 @@
 								<key>value</key>
 								<array>
 									<real>0.5</real>
-									<real>1</real>
+									<real>0.0</real>
 								</array>
 							</dict>
 							<dict>
@@ -103,19 +103,11 @@
 								<string>ScaleLock</string>
 								<key>value</key>
 								<array>
-									<real>2.5</real>
+									<real>1.5</real>
 									<real>1.5</real>
 									<false/>
 									<integer>0</integer>
 								</array>
-							</dict>
-							<dict>
-								<key>name</key>
-								<string>rotation</string>
-								<key>type</key>
-								<string>Degrees</string>
-								<key>value</key>
-								<real>180</real>
 							</dict>
 							<dict>
 								<key>name</key>
@@ -125,7 +117,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>Sprites/ShipParts/fire12.png</string>
+									<string>Sprites/ShipParts/fire03.png</string>
 								</array>
 							</dict>
 							<dict>
@@ -164,102 +156,15 @@
 					</dict>
 					<dict>
 						<key>UUID</key>
-						<integer>7</integer>
+						<integer>13</integer>
 						<key>baseClass</key>
-						<string>CCSprite</string>
+						<string>CCNode</string>
 						<key>children</key>
-						<array>
-							<dict>
-								<key>UUID</key>
-								<integer>13</integer>
-								<key>baseClass</key>
-								<string>CCNode</string>
-								<key>children</key>
-								<array/>
-								<key>customClass</key>
-								<string></string>
-								<key>displayName</key>
-								<string>muzzle</string>
-								<key>memberVarAssignmentName</key>
-								<string></string>
-								<key>memberVarAssignmentType</key>
-								<integer>1</integer>
-								<key>properties</key>
-								<array>
-									<dict>
-										<key>name</key>
-										<string>name</string>
-										<key>type</key>
-										<string>StringSimple</string>
-										<key>value</key>
-										<string>gun</string>
-									</dict>
-									<dict>
-										<key>name</key>
-										<string>position</string>
-										<key>type</key>
-										<string>Position</string>
-										<key>value</key>
-										<array>
-											<real>1.6047194004058838</real>
-											<real>1.0310516357421875</real>
-											<integer>0</integer>
-											<integer>0</integer>
-											<integer>0</integer>
-										</array>
-									</dict>
-									<dict>
-										<key>name</key>
-										<string>contentSize</string>
-										<key>type</key>
-										<string>Size</string>
-										<key>value</key>
-										<array>
-											<real>0.0</real>
-											<real>0.0</real>
-											<integer>0</integer>
-											<integer>0</integer>
-										</array>
-									</dict>
-									<dict>
-										<key>name</key>
-										<string>anchorPoint</string>
-										<key>type</key>
-										<string>Point</string>
-										<key>value</key>
-										<array>
-											<real>0.0</real>
-											<real>0.0</real>
-										</array>
-									</dict>
-									<dict>
-										<key>name</key>
-										<string>scale</string>
-										<key>type</key>
-										<string>ScaleLock</string>
-										<key>value</key>
-										<array>
-											<real>1</real>
-											<real>1</real>
-											<false/>
-											<integer>0</integer>
-										</array>
-									</dict>
-									<dict>
-										<key>name</key>
-										<string>rotation</string>
-										<key>type</key>
-										<string>Degrees</string>
-										<key>value</key>
-										<real>90</real>
-									</dict>
-								</array>
-							</dict>
-						</array>
+						<array/>
 						<key>customClass</key>
 						<string></string>
 						<key>displayName</key>
-						<string>gun</string>
+						<string>muzzle</string>
 						<key>memberVarAssignmentName</key>
 						<string></string>
 						<key>memberVarAssignmentType</key>
@@ -272,7 +177,7 @@
 								<key>type</key>
 								<string>StringSimple</string>
 								<key>value</key>
-								<string></string>
+								<string>gun</string>
 							</dict>
 							<dict>
 								<key>name</key>
@@ -281,9 +186,22 @@
 								<string>Position</string>
 								<key>value</key>
 								<array>
-									<real>-7.0871664092919673e-07</real>
-									<real>-15.300153732299805</real>
+									<real>-6.7515420913696289</real>
+									<real>13.006173133850098</real>
 									<integer>0</integer>
+									<integer>0</integer>
+									<integer>0</integer>
+								</array>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>contentSize</string>
+								<key>type</key>
+								<string>Size</string>
+								<key>value</key>
+								<array>
+									<real>0.0</real>
+									<real>0.0</real>
 									<integer>0</integer>
 									<integer>0</integer>
 								</array>
@@ -295,8 +213,8 @@
 								<string>Point</string>
 								<key>value</key>
 								<array>
-									<real>0.5</real>
-									<real>0.5</real>
+									<real>0.0</real>
+									<real>0.0</real>
 								</array>
 							</dict>
 							<dict>
@@ -306,7 +224,7 @@
 								<string>ScaleLock</string>
 								<key>value</key>
 								<array>
-									<real>-1</real>
+									<real>1</real>
 									<real>1</real>
 									<false/>
 									<integer>0</integer>
@@ -314,46 +232,99 @@
 							</dict>
 							<dict>
 								<key>name</key>
-								<string>spriteFrame</string>
+								<string>rotation</string>
 								<key>type</key>
-								<string>SpriteFrame</string>
+								<string>Degrees</string>
+								<key>value</key>
+								<real>90</real>
+							</dict>
+						</array>
+						<key>selected</key>
+						<true/>
+					</dict>
+					<dict>
+						<key>UUID</key>
+						<integer>22</integer>
+						<key>baseClass</key>
+						<string>CCNode</string>
+						<key>children</key>
+						<array/>
+						<key>customClass</key>
+						<string></string>
+						<key>displayName</key>
+						<string>muzzle</string>
+						<key>memberVarAssignmentName</key>
+						<string></string>
+						<key>memberVarAssignmentType</key>
+						<integer>1</integer>
+						<key>properties</key>
+						<array>
+							<dict>
+								<key>name</key>
+								<string>name</string>
+								<key>type</key>
+								<string>StringSimple</string>
+								<key>value</key>
+								<string>gun</string>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>position</string>
+								<key>type</key>
+								<string>Position</string>
 								<key>value</key>
 								<array>
-									<string></string>
-									<string>Sprites/ShipParts/gun07.png</string>
+									<real>6.2692909240722656</real>
+									<real>13.006172180175781</real>
+									<integer>0</integer>
+									<integer>0</integer>
+									<integer>0</integer>
 								</array>
 							</dict>
 							<dict>
 								<key>name</key>
-								<string>normalMapSpriteFrame</string>
+								<string>contentSize</string>
 								<key>type</key>
-								<string>SpriteFrame</string>
+								<string>Size</string>
 								<key>value</key>
 								<array>
-									<string></string>
-									<string></string>
+									<real>0.0</real>
+									<real>0.0</real>
+									<integer>0</integer>
+									<integer>0</integer>
 								</array>
 							</dict>
 							<dict>
 								<key>name</key>
-								<string>color</string>
+								<string>anchorPoint</string>
 								<key>type</key>
-								<string>Color3</string>
+								<string>Point</string>
 								<key>value</key>
 								<array>
-									<real>1</real>
-									<real>1</real>
-									<real>1</real>
-									<real>1</real>
+									<real>0.0</real>
+									<real>0.0</real>
 								</array>
 							</dict>
 							<dict>
 								<key>name</key>
-								<string>effects</string>
+								<string>scale</string>
 								<key>type</key>
-								<string>EffectControl</string>
+								<string>ScaleLock</string>
 								<key>value</key>
-								<array/>
+								<array>
+									<real>1</real>
+									<real>1</real>
+									<false/>
+									<integer>0</integer>
+								</array>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>rotation</string>
+								<key>type</key>
+								<string>Degrees</string>
+								<key>value</key>
+								<real>90</real>
 							</dict>
 						</array>
 					</dict>
@@ -544,8 +515,6 @@
 						<array/>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
