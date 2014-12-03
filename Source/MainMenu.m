@@ -144,6 +144,7 @@
 	// Remove label so it doesn't show through the background and so it makes a good cinematic when we select a ship.
 	[_titleLabel removeFromParent];
 	[_particles removeFromParent];
+    [_playButton removeFromParent];
 	
 	CCDirector *director = [CCDirector sharedDirector];
 	CGSize viewSize = director.viewSize;
