@@ -50,6 +50,8 @@
 				<string>BurnSprite</string>
 				<key>displayName</key>
 				<string>ship_enemy1_lvl1_debris_Rwing</string>
+				<key>hidden</key>
+				<true/>
 				<key>memberVarAssignmentName</key>
 				<string></string>
 				<key>memberVarAssignmentType</key>
@@ -71,7 +73,7 @@
 					<key>cornerRadius</key>
 					<real>0.0</real>
 					<key>density</key>
-					<real>1</real>
+					<real>0.5</real>
 					<key>dynamic</key>
 					<true/>
 					<key>elasticity</key>
@@ -81,40 +83,40 @@
 					<key>points</key>
 					<array>
 						<array>
-							<real>0.0</real>
-							<real>0.0</real>
+							<real>20.2890625</real>
+							<real>5.583984375</real>
 						</array>
 						<array>
-							<real>0.0</real>
-							<real>47</real>
+							<real>8.99609375</real>
+							<real>14.228515625</real>
 						</array>
 						<array>
-							<real>47</real>
-							<real>47</real>
+							<real>13.8828125</real>
+							<real>23.373046875</real>
 						</array>
 						<array>
-							<real>47</real>
-							<real>0.0</real>
+							<real>36.927734375</real>
+							<real>14.0546875</real>
 						</array>
 					</array>
 					<key>polygons</key>
 					<array>
 						<array>
 							<array>
-								<real>47</real>
-								<real>0.0</real>
+								<real>36.927734375</real>
+								<real>14.0546875</real>
 							</array>
 							<array>
-								<real>47</real>
-								<real>47</real>
+								<real>13.8828125</real>
+								<real>23.373046875</real>
 							</array>
 							<array>
-								<real>0.0</real>
-								<real>47</real>
+								<real>8.99609375</real>
+								<real>14.228515625</real>
 							</array>
 							<array>
-								<real>0.0</real>
-								<real>0.0</real>
+								<real>20.2890625</real>
+								<real>5.583984375</real>
 							</array>
 						</array>
 					</array>
@@ -223,6 +225,8 @@
 				<string>BurnSprite</string>
 				<key>displayName</key>
 				<string>ship_enemy1_lvl1_debris_Lwing</string>
+				<key>hidden</key>
+				<true/>
 				<key>memberVarAssignmentName</key>
 				<string></string>
 				<key>memberVarAssignmentType</key>
@@ -244,7 +248,7 @@
 					<key>cornerRadius</key>
 					<real>0.0</real>
 					<key>density</key>
-					<real>1</real>
+					<real>0.5</real>
 					<key>dynamic</key>
 					<true/>
 					<key>elasticity</key>
@@ -254,40 +258,40 @@
 					<key>points</key>
 					<array>
 						<array>
-							<real>0.0</real>
-							<real>0.0</real>
+							<real>14.623046875</real>
+							<real>20.75</real>
 						</array>
 						<array>
-							<real>0.0</real>
-							<real>47</real>
+							<real>10.474609375</real>
+							<real>29.025390625</real>
 						</array>
 						<array>
-							<real>47</real>
-							<real>47</real>
+							<real>22.2890625</real>
+							<real>39.234375</real>
 						</array>
 						<array>
-							<real>47</real>
-							<real>0.0</real>
+							<real>37.2109375</real>
+							<real>28.33203125</real>
 						</array>
 					</array>
 					<key>polygons</key>
 					<array>
 						<array>
 							<array>
-								<real>47</real>
-								<real>0.0</real>
+								<real>37.2109375</real>
+								<real>28.33203125</real>
 							</array>
 							<array>
-								<real>47</real>
-								<real>47</real>
+								<real>22.2890625</real>
+								<real>39.234375</real>
 							</array>
 							<array>
-								<real>0.0</real>
-								<real>47</real>
+								<real>10.474609375</real>
+								<real>29.025390625</real>
 							</array>
 							<array>
-								<real>0.0</real>
-								<real>0.0</real>
+								<real>14.623046875</real>
+								<real>20.75</real>
 							</array>
 						</array>
 					</array>
@@ -427,40 +431,48 @@
 					<key>points</key>
 					<array>
 						<array>
-							<real>0.0</real>
-							<real>0.0</real>
+							<real>14.134765625</real>
+							<real>16.888671875</real>
 						</array>
 						<array>
-							<real>0.0</real>
-							<real>47</real>
+							<real>14.65625</real>
+							<real>26.529296875</real>
 						</array>
 						<array>
-							<real>47</real>
-							<real>47</real>
+							<real>20.80078125</real>
+							<real>32.2421875</real>
 						</array>
 						<array>
-							<real>47</real>
-							<real>0.0</real>
+							<real>31.8359375</real>
+							<real>22.380859375</real>
+						</array>
+						<array>
+							<real>20.083984375</real>
+							<real>11.21875</real>
 						</array>
 					</array>
 					<key>polygons</key>
 					<array>
 						<array>
 							<array>
-								<real>47</real>
-								<real>0.0</real>
+								<real>20.083984375</real>
+								<real>11.21875</real>
 							</array>
 							<array>
-								<real>47</real>
-								<real>47</real>
+								<real>31.8359375</real>
+								<real>22.380859375</real>
 							</array>
 							<array>
-								<real>0.0</real>
-								<real>47</real>
+								<real>20.80078125</real>
+								<real>32.2421875</real>
 							</array>
 							<array>
-								<real>0.0</real>
-								<real>0.0</real>
+								<real>14.65625</real>
+								<real>26.529296875</real>
+							</array>
+							<array>
+								<real>14.134765625</real>
+								<real>16.888671875</real>
 							</array>
 						</array>
 					</array>
