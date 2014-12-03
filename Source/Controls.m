@@ -117,7 +117,8 @@
         self.contentSizeType = CCSizeTypeNormalized;
 		self.contentSize = CGSizeMake(1.0, 1.0);
 		
-		CGFloat joystickOffset = viewSize.width/8.0;
+        // Joystick offsets (and sizes) will be relative to actual screen size.
+		CGFloat joystickOffset = (viewSize.width + viewSize.height) / 16.0;
 		
         CCPositionType br =CCPositionTypeMake(CCPositionUnitPoints, CCPositionUnitPoints, CCPositionReferenceCornerBottomRight);
         CCPositionType bl =CCPositionTypeMake(CCPositionUnitPoints, CCPositionUnitPoints, CCPositionReferenceCornerBottomLeft);
