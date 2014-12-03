@@ -117,7 +117,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>Sprites/ShipParts/gun07.png</string>
+									<string>Sprites/gun07.png</string>
 								</array>
 							</dict>
 							<dict>
@@ -225,7 +225,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>Sprites/ShipParts/fire01.png</string>
+									<string>Sprites/fire01.png</string>
 								</array>
 							</dict>
 							<dict>
@@ -333,7 +333,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>Sprites/ShipParts/gun01.png</string>
+									<string>Sprites/gun01.png</string>
 								</array>
 							</dict>
 							<dict>
@@ -441,7 +441,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>Sprites/ShipParts/engine2.png</string>
+									<string>Sprites/engine2.png</string>
 								</array>
 							</dict>
 							<dict>
@@ -477,6 +477,8 @@
 								<array/>
 							</dict>
 						</array>
+						<key>selected</key>
+						<true/>
 					</dict>
 				</array>
 				<key>customClass</key>
@@ -629,8 +631,6 @@
 				</array>
 			</dict>
 		</array>
-		<key>selected</key>
-		<true/>
 	</dict>
 	<key>notes</key>
 	<array/>

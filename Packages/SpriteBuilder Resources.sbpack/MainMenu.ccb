@@ -338,8 +338,6 @@
 						</array>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -367,7 +365,7 @@
 								<key>type</key>
 								<integer>1</integer>
 								<key>value</key>
-								<string>200.000000</string>
+								<string>150.000000</string>
 							</dict>
 							<dict>
 								<key>name</key>
@@ -377,7 +375,7 @@
 								<key>type</key>
 								<integer>1</integer>
 								<key>value</key>
-								<string>0.250000</string>
+								<string>0.500000</string>
 							</dict>
 							<dict>
 								<key>name</key>
@@ -387,7 +385,7 @@
 								<key>type</key>
 								<integer>3</integer>
 								<key>value</key>
-								<string>AndySpaceshipDebris</string>
+								<string>ScottSpaceship-1Debris</string>
 							</dict>
 							<dict>
 								<key>name</key>
@@ -397,7 +395,7 @@
 								<key>type</key>
 								<integer>1</integer>
 								<key>value</key>
-								<string>8.000000</string>
+								<string>10.000000</string>
 							</dict>
 							<dict>
 								<key>name</key>
@@ -407,7 +405,7 @@
 								<key>type</key>
 								<integer>0</integer>
 								<key>value</key>
-								<string>2</string>
+								<string>4</string>
 							</dict>
 						</array>
 						<key>displayName</key>
@@ -467,7 +465,7 @@
 								<key>type</key>
 								<string>CCBFile</string>
 								<key>value</key>
-								<string>AndySpaceship-1.ccb</string>
+								<string>ShipBlue-1.ccb</string>
 							</dict>
 						</array>
 					</dict>
@@ -569,7 +567,7 @@
 								<key>type</key>
 								<integer>1</integer>
 								<key>value</key>
-								<string>200.000000</string>
+								<string>180.000000</string>
 							</dict>
 							<dict>
 								<key>name</key>
@@ -579,7 +577,7 @@
 								<key>type</key>
 								<integer>1</integer>
 								<key>value</key>
-								<string>0.500000</string>
+								<string>0.250000</string>
 							</dict>
 							<dict>
 								<key>name</key>
@@ -589,7 +587,7 @@
 								<key>type</key>
 								<integer>3</integer>
 								<key>value</key>
-								<string>ScottSpaceshipDebris</string>
+								<string>AndySpaceship-1Debris</string>
 							</dict>
 							<dict>
 								<key>name</key>
@@ -599,7 +597,7 @@
 								<key>type</key>
 								<integer>1</integer>
 								<key>value</key>
-								<string>10.000000</string>
+								<string>12.000000</string>
 							</dict>
 							<dict>
 								<key>name</key>
@@ -609,7 +607,7 @@
 								<key>type</key>
 								<integer>0</integer>
 								<key>value</key>
-								<string>4</string>
+								<string>2</string>
 							</dict>
 						</array>
 						<key>displayName</key>
@@ -669,7 +667,7 @@
 								<key>type</key>
 								<string>CCBFile</string>
 								<key>value</key>
-								<string>ScottSpaceship-1.ccb</string>
+								<string>ShipGreen-1.ccb</string>
 							</dict>
 						</array>
 					</dict>
@@ -871,9 +869,11 @@
 								<key>type</key>
 								<string>CCBFile</string>
 								<key>value</key>
-								<string>Retribution-1.ccb</string>
+								<string>ShipPink-1.ccb</string>
 							</dict>
 						</array>
+						<key>selected</key>
+						<true/>
 					</dict>
 				</array>
 				<key>customClass</key>

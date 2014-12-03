@@ -12,20 +12,20 @@
 
 
 static NSString * const bulletImageNames[] = {
-	@"Sprites/Effects/laserBlue.png",
-    @"Sprites/Effects/laserPurple.png",
-	@"Sprites/Effects/laserGreen.png",
-    @"Sprites/Effects/laserYellow.png",
-	@"Sprites/Effects/laserRed.png",
-	@"Sprites/Effects/laserRed.png",
+	@"Sprites/laserBlue.png",
+    @"Sprites/laserPurple.png",
+	@"Sprites/laserGreen.png",
+    @"Sprites/laserYellow.png",
+	@"Sprites/laserRed.png",
+	@"Sprites/laserRed.png",
 };
 static NSString * const bulletFlashes[] ={
-    @"Sprites/Effects/laserFlashBlue.png",
-    @"Sprites/Effects/laserFlashPurple.png",
-    @"Sprites/Effects/laserFlashGreen.png",
-    @"Sprites/Effects/laserFlashYellow.png",
-    @"Sprites/Effects/laserFlashRed.png",
-    @"Sprites/Effects/laserFlashRed.png",
+    @"Sprites/laserFlashBlue.png",
+    @"Sprites/laserFlashPurple.png",
+    @"Sprites/laserFlashGreen.png",
+    @"Sprites/laserFlashYellow.png",
+    @"Sprites/laserFlashRed.png",
+    @"Sprites/laserFlashRed.png",
 };
 static NSArray * bulletColors;
 

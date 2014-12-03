@@ -1165,7 +1165,7 @@
 								<key>type</key>
 								<integer>3</integer>
 								<key>value</key>
-								<string>AndySpaceshipDebris</string>
+								<string>Retribution-1Debris</string>
 							</dict>
 							<dict>
 								<key>name</key>
@@ -1185,7 +1185,7 @@
 								<key>type</key>
 								<integer>0</integer>
 								<key>value</key>
-								<string>2</string>
+								<string>3</string>
 							</dict>
 						</array>
 						<key>displayName</key>
@@ -1239,9 +1239,11 @@
 								<key>type</key>
 								<string>CCBFile</string>
 								<key>value</key>
-								<string>AndySpaceship-1.ccb</string>
+								<string>ShipPink-1.ccb</string>
 							</dict>
 						</array>
+						<key>selected</key>
+						<true/>
 					</dict>
 					<dict>
 						<key>UUID</key>
@@ -1935,7 +1937,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>Sprites/Powerups/shield_bronze.png</string>
+									<string>Sprites/shield_bronze.png</string>
 								</array>
 							</dict>
 							<dict>
@@ -2043,7 +2045,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>Sprites/Powerups/bolt_bronze.png</string>
+									<string>Sprites/bolt_bronze.png</string>
 								</array>
 							</dict>
 							<dict>
@@ -2151,7 +2153,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>Sprites/Powerups/things_bronze.png</string>
+									<string>Sprites/things_bronze.png</string>
 								</array>
 							</dict>
 							<dict>
@@ -3519,8 +3521,6 @@
 						<real>0.33000001311302185</real>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 		</array>
 		<key>customClass</key>

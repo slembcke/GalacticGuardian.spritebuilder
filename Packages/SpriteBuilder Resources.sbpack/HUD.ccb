@@ -476,7 +476,7 @@
 										<key>value</key>
 										<array>
 											<string></string>
-											<string>Sprites/Powerups/shield_bronze.png</string>
+											<string>Sprites/shield_bronze.png</string>
 										</array>
 									</dict>
 									<dict>
@@ -875,7 +875,7 @@
 										<key>value</key>
 										<array>
 											<string></string>
-											<string>Sprites/Effects/pill_red.png</string>
+											<string>Sprites/pill_red.png</string>
 										</array>
 									</dict>
 									<dict>
@@ -1422,6 +1422,8 @@
 				</array>
 			</dict>
 		</array>
+		<key>selected</key>
+		<true/>
 	</dict>
 	<key>notes</key>
 	<array/>

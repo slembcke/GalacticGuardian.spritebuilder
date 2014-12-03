@@ -6,8 +6,8 @@
 #define GameSceneSize 1024.0
 
 
-static NSString * const ship_names[] =			{@"Retribution", @"Defiant", @"Herald"};
-static NSString * const ship_fileNames[] =	{@"Retribution", @"ScottSpaceship", @"AndySpaceship"};
+static NSString * const ship_names[] =			{@"Retribution", @"Defiant", @"Freedom"};
+static NSString * const ship_fileNames[] =	{@"ShipPink", @"ShipGreen", @"ShipBlue"};
 
 typedef NS_ENUM(NSUInteger, ShipType){
 	Ship_Retribution, Ship_Defiant, Ship_Herald

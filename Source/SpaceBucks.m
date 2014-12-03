@@ -7,8 +7,17 @@
 	__unsafe_unretained GameScene *_scene;
 }
 
-static NSString * const spriteNames[] = {@"Sprites/Effects/pill_blue.png", @"Sprites/Effects/pill_green.png", @"Sprites/Effects/pill_red.png"};
-static NSString * const spriteFlashes[] = {@"Sprites/Effects/laserFlashBlue.png", @"Sprites/Effects/laserFlashGreen.png", @"Sprites/Effects/laserFlashRed.png"};
+static NSString * const spriteNames[] ={
+    @"Sprites/pill_blue.png",
+    @"Sprites/pill_green.png",
+    @"Sprites/pill_red.png",
+};
+static NSString * const spriteFlashes[] = {
+    @"Sprites/laserFlashBlue.png",
+    @"Sprites/laserFlashGreen.png",
+    @"Sprites/laserFlashRed.png",
+};
+
 const int values[] = {1, 4, 8};
 
 static NSArray *CollisionCategories = nil;

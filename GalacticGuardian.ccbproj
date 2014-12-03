@@ -84,29 +84,17 @@
 		<dict/>
 		<key>Sprites</key>
 		<dict/>
-		<key>Sprites/Effects</key>
-		<dict>
-			<key>isSmartSpriteSheet</key>
-			<true/>
-			<key>trimSprites</key>
-			<true/>
-		</dict>
-		<key>Sprites/Effects/pill_blue.png</key>
-		<dict/>
-		<key>Sprites/Powerups</key>
-		<dict>
-			<key>isSmartSpriteSheet</key>
-			<true/>
-			<key>trimSprites</key>
-			<true/>
-		</dict>
 		<key>Sprites/ShipParts</key>
 		<dict>
+			<key>isDirty</key>
+			<true/>
 			<key>isSmartSpriteSheet</key>
 			<true/>
 			<key>trimSprites</key>
 			<true/>
 		</dict>
+		<key>Sprites/ShipParts/Effects/pill_blue.png</key>
+		<dict/>
 		<key>UI</key>
 		<dict>
 			<key>isSmartSpriteSheet</key>

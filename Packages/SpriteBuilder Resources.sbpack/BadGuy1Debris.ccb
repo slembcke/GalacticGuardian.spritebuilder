@@ -86,14 +86,14 @@
 						</array>
 						<array>
 							<real>0.0</real>
-							<real>15.5</real>
+							<real>47</real>
 						</array>
 						<array>
-							<real>26.5</real>
-							<real>15.5</real>
+							<real>47</real>
+							<real>47</real>
 						</array>
 						<array>
-							<real>26.5</real>
+							<real>47</real>
 							<real>0.0</real>
 						</array>
 					</array>
@@ -101,16 +101,16 @@
 					<array>
 						<array>
 							<array>
-								<real>26.5</real>
+								<real>47</real>
 								<real>0.0</real>
 							</array>
 							<array>
-								<real>26.5</real>
-								<real>15.5</real>
+								<real>47</real>
+								<real>47</real>
 							</array>
 							<array>
 								<real>0.0</real>
-								<real>15.5</real>
+								<real>47</real>
 							</array>
 							<array>
 								<real>0.0</real>
@@ -136,8 +136,8 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>1</real>
-							<real>-8</real>
+							<real>0.0</real>
+							<real>0.0</real>
 							<integer>0</integer>
 							<integer>0</integer>
 							<integer>0</integer>
@@ -175,7 +175,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>Sprites/ShipParts/ship_enemy1_lvl1_debris_Rwing.png</string>
+							<string>Sprites/enemyship01_R.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -259,14 +259,14 @@
 						</array>
 						<array>
 							<real>0.0</real>
-							<real>16</real>
+							<real>47</real>
 						</array>
 						<array>
-							<real>26.5</real>
-							<real>16</real>
+							<real>47</real>
+							<real>47</real>
 						</array>
 						<array>
-							<real>26.5</real>
+							<real>47</real>
 							<real>0.0</real>
 						</array>
 					</array>
@@ -274,16 +274,16 @@
 					<array>
 						<array>
 							<array>
-								<real>26.5</real>
+								<real>47</real>
 								<real>0.0</real>
 							</array>
 							<array>
-								<real>26.5</real>
-								<real>16</real>
+								<real>47</real>
+								<real>47</real>
 							</array>
 							<array>
 								<real>0.0</real>
-								<real>16</real>
+								<real>47</real>
 							</array>
 							<array>
 								<real>0.0</real>
@@ -309,8 +309,8 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>1</real>
-							<real>8</real>
+							<real>0.0</real>
+							<real>0.0</real>
 							<integer>0</integer>
 							<integer>0</integer>
 							<integer>0</integer>
@@ -348,7 +348,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>Sprites/ShipParts/ship_enemy1_lvl1_debris_Lwing.png</string>
+							<string>Sprites/enemyship01_L.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -432,14 +432,14 @@
 						</array>
 						<array>
 							<real>0.0</real>
-							<real>22</real>
+							<real>47</real>
 						</array>
 						<array>
-							<real>17.5</real>
-							<real>22</real>
+							<real>47</real>
+							<real>47</real>
 						</array>
 						<array>
-							<real>17.5</real>
+							<real>47</real>
 							<real>0.0</real>
 						</array>
 					</array>
@@ -447,16 +447,16 @@
 					<array>
 						<array>
 							<array>
-								<real>17.5</real>
+								<real>47</real>
 								<real>0.0</real>
 							</array>
 							<array>
-								<real>17.5</real>
-								<real>22</real>
+								<real>47</real>
+								<real>47</real>
 							</array>
 							<array>
 								<real>0.0</real>
-								<real>22</real>
+								<real>47</real>
 							</array>
 							<array>
 								<real>0.0</real>
@@ -521,7 +521,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>Sprites/ShipParts/ship_enemy1_lvl1_debris_body.png</string>
+							<string>Sprites/enemyship01_body.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -557,6 +557,8 @@
 						<array/>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 		</array>
 		<key>customClass</key>

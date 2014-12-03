@@ -436,7 +436,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>Sprites/Effects/laserFlashBlue.png</string>
+							<string>Sprites/laserFlashBlue.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -472,6 +472,8 @@
 						<array/>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 		</array>
 		<key>customClass</key>

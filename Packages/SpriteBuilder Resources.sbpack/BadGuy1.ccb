@@ -71,7 +71,7 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>2</real>
+							<real>0.0</real>
 							<real>0.0</real>
 							<integer>0</integer>
 							<integer>0</integer>
@@ -110,7 +110,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>Sprites/ShipParts/ship_enemy_v1_lvl1.png</string>
+							<string>Sprites/enemyship01.png</string>
 						</array>
 					</dict>
 					<dict>
