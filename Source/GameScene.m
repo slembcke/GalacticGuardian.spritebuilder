@@ -21,6 +21,7 @@
 #import "SpaceBucks.h"
 #import "BurnTransition.h"
 
+#import "CCDirector_Private.h"
 
 @interface GameScene()
 @property(nonatomic, assign) int novaBombs;
@@ -75,9 +76,7 @@
 		self.level = 0;
 		self.spaceBucks = 0;
 		self.novaBombs = 0;
-		
-		CGSize viewSize = [CCDirector sharedDirector].viewSize;
-		
+				
 		[self setupControls];
 		
 		_scrollNode = [CCNode node];
@@ -736,10 +735,17 @@ static const float MinBarWidth = 5.0;
 	if([_playerShip takeDamage]){
 		[_playerShip destroy];
 		
-		[self scheduleBlock:^(CCTimer *timer){
+        // slow time:
+        [CCDirector sharedDirector].scheduler.timeScale = 0.25f;
+        
+        // and zoom in on the player?
+        [_scrollNode runAction:[CCActionEaseInOut actionWithAction: [CCActionScaleTo actionWithDuration:0.1f scale:1.65f] rate:2.0] ];
+        
+        [self scheduleBlock:^(CCTimer *timer){
 			// Go back to the menu after a short delay.
+            [CCDirector sharedDirector].scheduler.timeScale = 1.0f;
 			[[CCDirector sharedDirector] replaceScene:[CCBReader loadAsScene:@"MainMenu"] withTransition:[BurnTransition burnTransitionWithDuration:1.0]];
-		} delay:5.0];
+		} delay:1.75f];
 		
 		// Don't process the collision so the enemy spaceship will survive and mock you.
 		return NO;
