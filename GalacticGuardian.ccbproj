@@ -83,11 +83,7 @@
 		<key>ShipParts/ShipParts/wingYellow_2.png</key>
 		<dict/>
 		<key>Sprites</key>
-		<dict/>
-		<key>Sprites/ShipParts</key>
 		<dict>
-			<key>isDirty</key>
-			<true/>
 			<key>isSmartSpriteSheet</key>
 			<true/>
 			<key>trimSprites</key>
