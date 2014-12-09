@@ -364,8 +364,6 @@
 						</array>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -406,8 +404,8 @@
 								<string>Position</string>
 								<key>value</key>
 								<array>
-									<real>-1</real>
-									<real>7</real>
+									<real>13.142135620117188</real>
+									<real>9.8284273147583008</real>
 									<integer>0</integer>
 									<integer>0</integer>
 									<integer>0</integer>
@@ -435,6 +433,8 @@
 								<string>Rocket.ccb</string>
 							</dict>
 						</array>
+						<key>selected</key>
+						<true/>
 					</dict>
 					<dict>
 						<key>UUID</key>
@@ -468,8 +468,8 @@
 								<string>Position</string>
 								<key>value</key>
 								<array>
-									<real>6</real>
-									<real>0.0</real>
+									<real>20.142135620117188</real>
+									<real>2.8284270763397217</real>
 									<integer>0</integer>
 									<integer>0</integer>
 									<integer>0</integer>
@@ -530,8 +530,8 @@
 								<string>Position</string>
 								<key>value</key>
 								<array>
-									<real>-1</real>
-									<real>-7</real>
+									<real>13.142135620117188</real>
+									<real>-4.1715726852416992</real>
 									<integer>0</integer>
 									<integer>0</integer>
 									<integer>0</integer>
