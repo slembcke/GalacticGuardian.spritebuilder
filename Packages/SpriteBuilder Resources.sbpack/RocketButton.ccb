@@ -51,7 +51,7 @@
 				<key>displayName</key>
 				<string>CCButton</string>
 				<key>memberVarAssignmentName</key>
-				<string>_novaButton</string>
+				<string>_rocketButton</string>
 				<key>memberVarAssignmentType</key>
 				<integer>2</integer>
 				<key>properties</key>
@@ -109,7 +109,7 @@
 						<string>Block</string>
 						<key>value</key>
 						<array>
-							<string>fireNova:</string>
+							<string>fireRocket:</string>
 							<integer>2</integer>
 						</array>
 					</dict>
@@ -364,6 +364,8 @@
 						</array>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -470,8 +472,8 @@
 						<string>Blendmode</string>
 						<key>value</key>
 						<array>
-							<integer>-1912905707</integer>
-							<integer>32767</integer>
+							<integer>-1960186512</integer>
+							<integer>32747</integer>
 						</array>
 					</dict>
 					<dict>
@@ -483,8 +485,6 @@
 						<array/>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 		</array>
 		<key>customClass</key>
