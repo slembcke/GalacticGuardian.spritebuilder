@@ -78,7 +78,7 @@
 								<string>Position</string>
 								<key>value</key>
 								<array>
-									<real>6.4498863220214844</real>
+									<real>6.0999999046325684</real>
 									<real>-9.132171630859375</real>
 									<integer>0</integer>
 									<integer>0</integer>
@@ -131,6 +131,8 @@
 								<real>90</real>
 							</dict>
 						</array>
+						<key>selected</key>
+						<true/>
 					</dict>
 					<dict>
 						<key>UUID</key>
@@ -288,8 +290,8 @@
 								<string>ScaleLock</string>
 								<key>value</key>
 								<array>
-									<real>162.86082458496094</real>
-									<real>19.846046447753906</real>
+									<real>1</real>
+									<real>1</real>
 									<false/>
 									<integer>0</integer>
 								</array>
@@ -484,6 +486,17 @@
 					</dict>
 					<dict>
 						<key>name</key>
+						<string>blendFunc</string>
+						<key>type</key>
+						<string>Blendmode</string>
+						<key>value</key>
+						<array>
+							<integer>-1912905707</integer>
+							<integer>32767</integer>
+						</array>
+					</dict>
+					<dict>
+						<key>name</key>
 						<string>effects</string>
 						<key>type</key>
 						<string>EffectControl</string>
@@ -491,8 +504,6 @@
 						<array/>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -590,6 +601,17 @@
 							<real>1</real>
 							<real>1</real>
 							<real>1</real>
+						</array>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>blendFunc</string>
+						<key>type</key>
+						<string>Blendmode</string>
+						<key>value</key>
+						<array>
+							<integer>-1912905707</integer>
+							<integer>32767</integer>
 						</array>
 					</dict>
 					<dict>
@@ -709,6 +731,17 @@
 							</dict>
 							<dict>
 								<key>name</key>
+								<string>blendFunc</string>
+								<key>type</key>
+								<string>Blendmode</string>
+								<key>value</key>
+								<array>
+									<integer>-1912905707</integer>
+									<integer>32767</integer>
+								</array>
+							</dict>
+							<dict>
+								<key>name</key>
 								<string>effects</string>
 								<key>type</key>
 								<string>EffectControl</string>
@@ -813,6 +846,17 @@
 									<real>1</real>
 									<real>1</real>
 									<real>1</real>
+								</array>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>blendFunc</string>
+								<key>type</key>
+								<string>Blendmode</string>
+								<key>value</key>
+								<array>
+									<integer>-1912905707</integer>
+									<integer>32767</integer>
 								</array>
 							</dict>
 							<dict>
