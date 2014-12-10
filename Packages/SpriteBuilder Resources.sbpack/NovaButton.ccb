@@ -166,7 +166,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>UI/red_button06.png</string>
+							<string>Sprites/buttonBG.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -177,7 +177,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>UI/red_button07.png</string>
+							<string>Sprites/buttonBG.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -201,7 +201,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>UI/grey_button07.png</string>
+							<string>Sprites/buttonBG.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -220,7 +220,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>UI/green_button07.png</string>
+							<string>Sprites/buttonBG.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -364,6 +364,8 @@
 						</array>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -465,6 +467,17 @@
 					</dict>
 					<dict>
 						<key>name</key>
+						<string>blendFunc</string>
+						<key>type</key>
+						<string>Blendmode</string>
+						<key>value</key>
+						<array>
+							<integer>-1912905707</integer>
+							<integer>32767</integer>
+						</array>
+					</dict>
+					<dict>
+						<key>name</key>
 						<string>effects</string>
 						<key>type</key>
 						<string>EffectControl</string>
@@ -472,8 +485,6 @@
 						<array/>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 		</array>
 		<key>customClass</key>

@@ -129,6 +129,7 @@
         rocketButtonNode.positionType = bl;
         rocketButtonNode.position = ccp(2.0*joystickOffset, joystickOffset);
 		rocketButtonNode.contentSize = CGSizeMake(0.7*joystickOffset, 0.7*joystickOffset);
+        [((CCButton*) rocketButtonNode.children[0]).background setMargin: 0.0f];
 		[self addChild:rocketButtonNode];
 		
 		// _novaButton ivar is set by the CCB file, but wrapped in a regular node.
