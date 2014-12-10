@@ -114,27 +114,26 @@
 {
 	if((self = [super init])){
 		CGSize viewSize = [CCDirector sharedDirector].viewSize;
-        self.contentSizeType = CCSizeTypeNormalized;
+		self.contentSizeType = CCSizeTypeNormalized;
 		self.contentSize = CGSizeMake(1.0, 1.0);
 		
-        // Joystick offsets (and sizes) will be relative to actual screen size.
+		// Joystick offsets (and sizes) will be relative to actual screen size.
 		CGFloat joystickOffset = (viewSize.width + viewSize.height) / 16.0;
 		
-        CCPositionType br =CCPositionTypeMake(CCPositionUnitPoints, CCPositionUnitPoints, CCPositionReferenceCornerBottomRight);
-        CCPositionType bl =CCPositionTypeMake(CCPositionUnitPoints, CCPositionUnitPoints, CCPositionReferenceCornerBottomLeft);
-        
+		CCPositionType br =CCPositionTypeMake(CCPositionUnitPoints, CCPositionUnitPoints, CCPositionReferenceCornerBottomRight);
+		CCPositionType bl =CCPositionTypeMake(CCPositionUnitPoints, CCPositionUnitPoints, CCPositionReferenceCornerBottomLeft);
         
 		// _rocketButton ivar is set by the CCB file, but wrapped in a regular node.
 		CCNode *rocketButtonNode = [CCBReader load:@"RocketButton" owner:self];
-        rocketButtonNode.positionType = bl;
-        rocketButtonNode.position = ccp(2.0*joystickOffset, joystickOffset);
+		rocketButtonNode.positionType = bl;
+		rocketButtonNode.position = ccp(2.0*joystickOffset, joystickOffset);
 		rocketButtonNode.contentSize = CGSizeMake(0.7*joystickOffset, 0.7*joystickOffset);
-        [((CCButton*) rocketButtonNode.children[0]).background setMargin: 0.0f];
+		[((CCButton*) rocketButtonNode.children[0]).background setMargin: 0.0f];
 		[self addChild:rocketButtonNode];
 		
 		// _novaButton ivar is set by the CCB file, but wrapped in a regular node.
 		CCNode *novaButtonNode = [CCBReader load:@"NovaButton" owner:self];
-        novaButtonNode.positionType = br;
+		novaButtonNode.positionType = br;
 		novaButtonNode.position = ccp(2.0*joystickOffset, joystickOffset);
 		novaButtonNode.contentSize = CGSizeMake(0.7*joystickOffset, 0.7*joystickOffset);
 		[self addChild:novaButtonNode];
@@ -145,13 +144,13 @@
 		
 		_virtualJoystick = [FancyJoystick node];
 		_virtualJoystick.scale = 2.0*joystickOffset/_virtualJoystick.contentSize.width;
-        _virtualJoystick.positionType = bl;
+		_virtualJoystick.positionType = bl;
 		_virtualJoystick.position = ccp(joystickOffset, joystickOffset);
 		[self addChild:_virtualJoystick];
 		
 		_virtualAimJoystick = [FancyJoystick node];
 		_virtualAimJoystick.scale = 2.0*joystickOffset/_virtualJoystick.contentSize.width;
-        _virtualAimJoystick.positionType = br;
+		_virtualAimJoystick.positionType = br;
 		_virtualAimJoystick.position = ccp(joystickOffset, joystickOffset);
 		[self addChild:_virtualAimJoystick];
 		
