@@ -1,5 +1,5 @@
 #if !ANDROID
-#import <GameController/GameController.h>
+#import "CCController.h"
 #endif
 
 #import "ObjectiveChipmunk/ObjectiveChipmunk.h"
@@ -249,7 +249,7 @@
 {
 	if(NSClassFromString(@"GCController") == nil) return;
 
-	NSArray *controllers = [GCController controllers];
+	NSArray *controllers = [CCController controllers];
 	NSLog(@"%d controllers found.", (int)controllers.count);
 	
 	for(GCController *controller in controllers){
