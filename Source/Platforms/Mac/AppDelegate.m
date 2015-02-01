@@ -17,6 +17,8 @@
 
     // connect the OpenGL view with the director
     [director setView:self.glView];
+		director.resizeMode = kCCDirectorResize_NoScale;
+		director.contentScaleFactor *= 2.0;
 
     // 'Effects' don't work correctly when autoscale is turned on.
     // Use kCCDirectorResize_NoScale if you don't want auto-scaling.
