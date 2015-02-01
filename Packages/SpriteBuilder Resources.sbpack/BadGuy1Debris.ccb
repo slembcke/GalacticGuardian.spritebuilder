@@ -50,8 +50,6 @@
 				<string>BurnSprite</string>
 				<key>displayName</key>
 				<string>ship_enemy1_lvl1_debris_Rwing</string>
-				<key>hidden</key>
-				<true/>
 				<key>memberVarAssignmentName</key>
 				<string></string>
 				<key>memberVarAssignmentType</key>
@@ -73,7 +71,7 @@
 					<key>cornerRadius</key>
 					<real>0.0</real>
 					<key>density</key>
-					<real>0.5</real>
+					<real>0.05000000074505806</real>
 					<key>dynamic</key>
 					<true/>
 					<key>elasticity</key>
@@ -225,8 +223,6 @@
 				<string>BurnSprite</string>
 				<key>displayName</key>
 				<string>ship_enemy1_lvl1_debris_Lwing</string>
-				<key>hidden</key>
-				<true/>
 				<key>memberVarAssignmentName</key>
 				<string></string>
 				<key>memberVarAssignmentType</key>
@@ -248,7 +244,7 @@
 					<key>cornerRadius</key>
 					<real>0.0</real>
 					<key>density</key>
-					<real>0.5</real>
+					<real>0.05000000074505806</real>
 					<key>dynamic</key>
 					<true/>
 					<key>elasticity</key>
@@ -421,7 +417,7 @@
 					<key>cornerRadius</key>
 					<real>0.0</real>
 					<key>density</key>
-					<real>1</real>
+					<real>0.10000000149011612</real>
 					<key>dynamic</key>
 					<true/>
 					<key>elasticity</key>

@@ -71,7 +71,7 @@
 					<key>cornerRadius</key>
 					<real>0.0</real>
 					<key>density</key>
-					<real>1</real>
+					<real>0.10000000149011612</real>
 					<key>dynamic</key>
 					<true/>
 					<key>elasticity</key>
@@ -252,7 +252,7 @@
 					<key>cornerRadius</key>
 					<real>0.0</real>
 					<key>density</key>
-					<real>1</real>
+					<real>0.10000000149011612</real>
 					<key>dynamic</key>
 					<true/>
 					<key>elasticity</key>
@@ -425,7 +425,7 @@
 					<key>cornerRadius</key>
 					<real>0.0</real>
 					<key>density</key>
-					<real>1</real>
+					<real>0.10000000149011612</real>
 					<key>dynamic</key>
 					<true/>
 					<key>elasticity</key>
@@ -565,8 +565,6 @@
 						<array/>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 		</array>
 		<key>customClass</key>
