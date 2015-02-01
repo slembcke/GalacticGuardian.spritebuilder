@@ -29,10 +29,29 @@
 
     // Center main window
     [self.window center];
-
+	
+	
     // Configure CCFileUtils to work with SpriteBuilder
-    [CCBReader configureCCFileUtils];
-
+//    [CCBReader configureCCFileUtils];
+	
+		[[CCFileUtils sharedFileUtils] setMacContentScaleFactor:2.0];
+		[CCFileUtils sharedFileUtils].directoriesDict = [@{
+			@"mac": @"resources-phonehd",
+			@"machd": @"resources-tablethd",
+			@"": @"",
+		} mutableCopy];
+	
+		[CCFileUtils sharedFileUtils].searchPath = @[
+			[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Published-iOS"],
+			[[NSBundle mainBundle] resourcePath],
+		];
+		
+    [CCFileUtils sharedFileUtils].searchMode = CCFileUtilsSearchModeDirectory;
+    [[CCFileUtils sharedFileUtils] buildSearchResolutionsOrder];
+	
+    [[CCFileUtils sharedFileUtils] loadFilenameLookupDictionaryFromFile:@"fileLookup.plist"];
+    [[CCSpriteFrameCache sharedSpriteFrameCache] loadSpriteFrameLookupDictionaryFromFile:@"spriteFrameFileList.plist"];
+	
     [director runWithScene:[CCBReader loadAsScene:@"MainMenu"]];
 }
 
