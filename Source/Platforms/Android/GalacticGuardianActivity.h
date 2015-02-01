@@ -25,7 +25,7 @@
 
 #import "CCActivity.h"
 
-BRIDGE_CLASS("org.cocos2d.GalacticGuardian.GalacticGuardianActivity")
+BRIDGE_CLASS("com.apportable.GLActivity")
 @interface GalacticGuardianActivity : CCActivity
 
 @end

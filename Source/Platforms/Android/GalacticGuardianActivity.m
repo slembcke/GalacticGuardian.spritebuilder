@@ -24,6 +24,7 @@
 
 
 #import "GalacticGuardianActivity.h"
+#import <AndroidKit/AndroidKeyEvent.h>
 
 @implementation GalacticGuardianActivity
 
