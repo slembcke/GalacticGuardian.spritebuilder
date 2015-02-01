@@ -131,8 +131,6 @@
 								<real>90</real>
 							</dict>
 						</array>
-						<key>selected</key>
-						<true/>
 					</dict>
 					<dict>
 						<key>UUID</key>
@@ -486,17 +484,6 @@
 					</dict>
 					<dict>
 						<key>name</key>
-						<string>blendFunc</string>
-						<key>type</key>
-						<string>Blendmode</string>
-						<key>value</key>
-						<array>
-							<integer>-1912905707</integer>
-							<integer>32767</integer>
-						</array>
-					</dict>
-					<dict>
-						<key>name</key>
 						<string>effects</string>
 						<key>type</key>
 						<string>EffectControl</string>
@@ -601,17 +588,6 @@
 							<real>1</real>
 							<real>1</real>
 							<real>1</real>
-						</array>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>blendFunc</string>
-						<key>type</key>
-						<string>Blendmode</string>
-						<key>value</key>
-						<array>
-							<integer>-1912905707</integer>
-							<integer>32767</integer>
 						</array>
 					</dict>
 					<dict>
@@ -731,17 +707,6 @@
 							</dict>
 							<dict>
 								<key>name</key>
-								<string>blendFunc</string>
-								<key>type</key>
-								<string>Blendmode</string>
-								<key>value</key>
-								<array>
-									<integer>-1912905707</integer>
-									<integer>32767</integer>
-								</array>
-							</dict>
-							<dict>
-								<key>name</key>
 								<string>effects</string>
 								<key>type</key>
 								<string>EffectControl</string>
@@ -749,6 +714,8 @@
 								<array/>
 							</dict>
 						</array>
+						<key>selected</key>
+						<true/>
 					</dict>
 					<dict>
 						<key>UUID</key>
@@ -846,17 +813,6 @@
 									<real>1</real>
 									<real>1</real>
 									<real>1</real>
-								</array>
-							</dict>
-							<dict>
-								<key>name</key>
-								<string>blendFunc</string>
-								<key>type</key>
-								<string>Blendmode</string>
-								<key>value</key>
-								<array>
-									<integer>-1912905707</integer>
-									<integer>32767</integer>
 								</array>
 							</dict>
 							<dict>
