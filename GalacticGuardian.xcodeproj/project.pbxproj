@@ -151,9 +151,8 @@
 		D3ED617019FF3B8000DF3A43 /* BurnSprite.vsh in Resources */ = {isa = PBXBuildFile; fileRef = D3ED616D19FF3B8000DF3A43 /* BurnSprite.vsh */; };
 		D3ED617119FF57A000DF3A43 /* PlayerShip.m in Sources */ = {isa = PBXBuildFile; fileRef = 75058A4119FECE64001AA9C6 /* PlayerShip.m */; };
 		D3ED617219FF57A100DF3A43 /* PlayerShip.m in Sources */ = {isa = PBXBuildFile; fileRef = 75058A4119FECE64001AA9C6 /* PlayerShip.m */; };
-		D3F2C5511A7D83EA0038B42C /* CCController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3F2C5501A7D83EA0038B42C /* CCController.m */; };
-		D3F2C5521A7D83EA0038B42C /* CCController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3F2C5501A7D83EA0038B42C /* CCController.m */; };
-		D3F2C5531A7D83EA0038B42C /* CCController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3F2C5501A7D83EA0038B42C /* CCController.m */; };
+		D3F714521A7E102200930BBE /* CCController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3F714511A7E102200930BBE /* CCController.m */; };
+		D3F714531A7E104B00930BBE /* CCController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3F714511A7E102200930BBE /* CCController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -178,26 +177,12 @@
 			remoteGlobalIDString = D2FEB74F194F6C9E00FC0574;
 			remoteInfo = cocos2dAndroid;
 		};
-		7A97910119E62E40001FFC4D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B7378940180761A80076A88C /* cocos2d.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 5BF3267A195F8D8800D9A51A;
-			remoteInfo = cocos2dJava;
-		};
 		7A97910319E62E40001FFC4D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B7378940180761A80076A88C /* cocos2d.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 7A4037A819E37038007B6E8F;
 			remoteInfo = "cocos2d-mac";
-		};
-		7A97910519E62E4C001FFC4D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B7378940180761A80076A88C /* cocos2d.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 5BF32679195F8D8800D9A51A;
-			remoteInfo = cocos2dJava;
 		};
 		7A97910F19E6319A001FFC4D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -212,13 +197,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 7A4037A719E37038007B6E8F;
 			remoteInfo = "cocos2d-mac";
-		};
-		7A97911F19E63219001FFC4D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B7378940180761A80076A88C /* cocos2d.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 5BF32679195F8D8800D9A51A;
-			remoteInfo = cocos2dJava;
 		};
 		7A97912119E6321C001FFC4D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -341,8 +319,8 @@
 		D3ED616419FF327C00DF3A43 /* BurnSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BurnSprite.m; sourceTree = "<group>"; };
 		D3ED616919FF3B7400DF3A43 /* BurnSprite.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = BurnSprite.fsh; sourceTree = "<group>"; };
 		D3ED616D19FF3B8000DF3A43 /* BurnSprite.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = BurnSprite.vsh; sourceTree = "<group>"; };
-		D3F2C54F1A7D83EA0038B42C /* CCController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCController.h; path = ../../ControllerTest/CCController/CCController.h; sourceTree = "<group>"; };
-		D3F2C5501A7D83EA0038B42C /* CCController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CCController.m; path = ../../ControllerTest/CCController/CCController.m; sourceTree = "<group>"; };
+		D3F714501A7E102200930BBE /* CCController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCController.h; sourceTree = "<group>"; };
+		D3F714511A7E102200930BBE /* CCController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -546,7 +524,6 @@
 			children = (
 				7A9790FE19E62E40001FFC4D /* libcocos2d.a */,
 				7A97910019E62E40001FFC4D /* libcocos2dAndroid.a */,
-				7A97910219E62E40001FFC4D /* cocos2dJava.jar */,
 				7A97910419E62E40001FFC4D /* libcocos2d-mac.a */,
 			);
 			name = Products;
@@ -583,8 +560,8 @@
 				75058A3019FEC27F001AA9C6 /* GameScene.m */,
 				D31D3DCE1A0041A80085DB5B /* Controls.h */,
 				D31D3DCA1A00418C0085DB5B /* Controls.m */,
-				D3F2C54F1A7D83EA0038B42C /* CCController.h */,
-				D3F2C5501A7D83EA0038B42C /* CCController.m */,
+				D3F714501A7E102200930BBE /* CCController.h */,
+				D3F714511A7E102200930BBE /* CCController.m */,
 				D3EA632D1A0496FB00325F0F /* Effects */,
 				D3EA632E1A04970600325F0F /* GameObjects */,
 			);
@@ -769,7 +746,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				7A97910619E62E4C001FFC4D /* PBXTargetDependency */,
 			);
 			name = "GalacticGuardian Java";
 			productName = "GalacticGuardian Java";
@@ -807,7 +783,6 @@
 			);
 			dependencies = (
 				7A97912219E6321C001FFC4D /* PBXTargetDependency */,
-				7A97912019E63219001FFC4D /* PBXTargetDependency */,
 				5B121032197485D1004C1E1D /* PBXTargetDependency */,
 			);
 			name = "GalacticGuardian Android";
@@ -896,13 +871,6 @@
 			fileType = archive.ar;
 			path = libcocos2dAndroid.a;
 			remoteRef = 7A9790FF19E62E40001FFC4D /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		7A97910219E62E40001FFC4D /* cocos2dJava.jar */ = {
-			isa = PBXReferenceProxy;
-			fileType = compiled.java.jar;
-			path = cocos2dJava.jar;
-			remoteRef = 7A97910119E62E40001FFC4D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		7A97910419E62E40001FFC4D /* libcocos2d-mac.a */ = {
@@ -1061,7 +1029,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D3F2C5531A7D83EA0038B42C /* CCController.m in Sources */,
+				D3F714531A7E104B00930BBE /* CCController.m in Sources */,
 				D3450BCE1A02EB8500E63B3A /* Rocket.m in Sources */,
 				75058A5419FEE7B7001AA9C6 /* EnemyShip.m in Sources */,
 				75058A4919FECF95001AA9C6 /* Bullet.m in Sources */,
@@ -1088,7 +1056,6 @@
 				D3ED617119FF57A000DF3A43 /* PlayerShip.m in Sources */,
 				D3450BD61A0395F100E63B3A /* SpaceBucks.m in Sources */,
 				D3A7E8DB19FDC86000695965 /* NebulaBackground.m in Sources */,
-				D3F2C5521A7D83EA0038B42C /* CCController.m in Sources */,
 				D31D3DCC1A00418C0085DB5B /* Controls.m in Sources */,
 				D3EAD2BC1A00A855002AA0D2 /* PauseScene.m in Sources */,
 				927F619E196C771E000F43EF /* MainMenu.m in Sources */,
@@ -1108,7 +1075,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D3F2C5511A7D83EA0038B42C /* CCController.m in Sources */,
+				D3F714521A7E102200930BBE /* CCController.m in Sources */,
 				D3450BB61A01FEA100E63B3A /* FancyJoystick.m in Sources */,
 				D3A7E8DA19FDC86000695965 /* NebulaBackground.m in Sources */,
 				D3ED616519FF327C00DF3A43 /* BurnSprite.m in Sources */,
@@ -1136,11 +1103,6 @@
 			target = 5B121020197484A3004C1E1D /* GalacticGuardian Java */;
 			targetProxy = 5B121031197485D1004C1E1D /* PBXContainerItemProxy */;
 		};
-		7A97910619E62E4C001FFC4D /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = cocos2dJava;
-			targetProxy = 7A97910519E62E4C001FFC4D /* PBXContainerItemProxy */;
-		};
 		7A97911019E6319A001FFC4D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "cocos2d-ios";
@@ -1150,11 +1112,6 @@
 			isa = PBXTargetDependency;
 			name = "cocos2d-mac";
 			targetProxy = 7A97911519E631A1001FFC4D /* PBXContainerItemProxy */;
-		};
-		7A97912019E63219001FFC4D /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = cocos2dJava;
-			targetProxy = 7A97911F19E63219001FFC4D /* PBXContainerItemProxy */;
 		};
 		7A97912219E6321C001FFC4D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
