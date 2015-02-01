@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment identifier="macosx"/>
+        <deployment version="1070" identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
     </dependencies>
     <objects>
@@ -677,10 +677,16 @@
                 <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <openGLView fixedFrame="YES" colorSize="5bit_RGB_8bit_Alpha" useAuxiliaryDepthBufferStencil="NO" useDoubleBufferingEnabled="YES" allowOffline="YES" wantsBestResolutionOpenGLSurface="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TdD-9J-RVA" customClass="CCGLView">
+                    <openGLView colorSize="5bit_RGB_8bit_Alpha" useAuxiliaryDepthBufferStencil="NO" useDoubleBufferingEnabled="YES" allowOffline="YES" wantsBestResolutionOpenGLSurface="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TdD-9J-RVA" customClass="CCGLView">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                     </openGLView>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="TdD-9J-RVA" firstAttribute="leading" secondItem="1Kl-CE-vX6" secondAttribute="leading" id="8GF-rW-2P3"/>
+                    <constraint firstAttribute="bottom" secondItem="TdD-9J-RVA" secondAttribute="bottom" id="Mmk-eb-oyb"/>
+                    <constraint firstItem="TdD-9J-RVA" firstAttribute="top" secondItem="1Kl-CE-vX6" secondAttribute="top" id="RpL-tv-6vW"/>
+                    <constraint firstAttribute="trailing" secondItem="TdD-9J-RVA" secondAttribute="trailing" id="ehf-Rd-IdK"/>
+                </constraints>
             </view>
         </window>
     </objects>

@@ -10,49 +10,50 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    CCDirectorMac *director = (CCDirectorMac*) [CCDirector sharedDirector];
+	CGSize defaultSize = CGSizeMake(640.0, 360.0);
+	CGRect screenFrame = [NSScreen mainScreen].visibleFrame;
+	CGFloat inset = 100.0;
+	
+	CGFloat scaleW = (screenFrame.size.width - 2.0*inset)/defaultSize.width;
+	CGFloat scaleH = (screenFrame.size.height - 2.0*inset)/defaultSize.height;
+	CGFloat windowScale = MAX(1.0, MIN(scaleW, scaleH));
+	
+	CGSize windowSize = CC_SIZE_SCALE(defaultSize, windowScale);
+	CGRect windowFrame = CGRectMake(
+		(screenFrame.size.width - windowSize.width)/2.0,
+		(screenFrame.size.height - windowSize.height)/2.0,
+		windowSize.width,
+		windowSize.height
+	);
+	
+	[self.window setFrame:windowFrame display:NO animate:NO];
 
-    // enable FPS and SPF
-    // [director setDisplayStats:YES];
+	CCDirectorMac *director = (CCDirectorMac*)[CCDirector sharedDirector];
 
-    // connect the OpenGL view with the director
-    [director setView:self.glView];
-		director.resizeMode = kCCDirectorResize_NoScale;
-		director.contentScaleFactor *= 2.0;
+	// connect the OpenGL view with the director
+	[director setView:self.glView];
+	director.resizeMode = kCCDirectorResize_NoScale;
+	director.contentScaleFactor = windowScale*[NSScreen mainScreen].backingScaleFactor;
 
-    // 'Effects' don't work correctly when autoscale is turned on.
-    // Use kCCDirectorResize_NoScale if you don't want auto-scaling.
-    //[director setResizeMode:kCCDirectorResize_NoScale];
+	[[CCFileUtils sharedFileUtils] setMacContentScaleFactor:2.0];
+	[CCFileUtils sharedFileUtils].directoriesDict = [@{
+		@"mac": @"resources-phonehd",
+		@"machd": @"resources-tablethd",
+		@"": @"",
+	} mutableCopy];
 
-    // Enable "moving" mouse event. Default no.
-    [self.window setAcceptsMouseMovedEvents:NO];
+	[CCFileUtils sharedFileUtils].searchPath = @[
+		[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Published-iOS"],
+		[[NSBundle mainBundle] resourcePath],
+	];
 
-    // Center main window
-    [self.window center];
-	
-	
-    // Configure CCFileUtils to work with SpriteBuilder
-//    [CCBReader configureCCFileUtils];
-	
-		[[CCFileUtils sharedFileUtils] setMacContentScaleFactor:2.0];
-		[CCFileUtils sharedFileUtils].directoriesDict = [@{
-			@"mac": @"resources-phonehd",
-			@"machd": @"resources-tablethd",
-			@"": @"",
-		} mutableCopy];
-	
-		[CCFileUtils sharedFileUtils].searchPath = @[
-			[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Published-iOS"],
-			[[NSBundle mainBundle] resourcePath],
-		];
-		
-    [CCFileUtils sharedFileUtils].searchMode = CCFileUtilsSearchModeDirectory;
-    [[CCFileUtils sharedFileUtils] buildSearchResolutionsOrder];
-	
-    [[CCFileUtils sharedFileUtils] loadFilenameLookupDictionaryFromFile:@"fileLookup.plist"];
-    [[CCSpriteFrameCache sharedSpriteFrameCache] loadSpriteFrameLookupDictionaryFromFile:@"spriteFrameFileList.plist"];
-	
-    [director runWithScene:[CCBReader loadAsScene:@"MainMenu"]];
+	[CCFileUtils sharedFileUtils].searchMode = CCFileUtilsSearchModeDirectory;
+	[[CCFileUtils sharedFileUtils] buildSearchResolutionsOrder];
+
+	[[CCFileUtils sharedFileUtils] loadFilenameLookupDictionaryFromFile:@"fileLookup.plist"];
+	[[CCSpriteFrameCache sharedSpriteFrameCache] loadSpriteFrameLookupDictionaryFromFile:@"spriteFrameFileList.plist"];
+
+	[director runWithScene:[CCBReader loadAsScene:@"MainMenu"]];
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification
