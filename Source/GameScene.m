@@ -203,7 +203,7 @@
 {
 	float smoothing = 1e3;
 	
-	CGSize contentSize = self.contentSizeInPoints;
+	CGSize contentSize = CC_SIZE_SCALE(self.contentSizeInPoints, 1.0/_scrollNode.scale);
 	
 	float clampWidth = (GameSceneSize - contentSize.width)/2.0;
 	float clampHeight = (GameSceneSize - contentSize.height)/2.0;
