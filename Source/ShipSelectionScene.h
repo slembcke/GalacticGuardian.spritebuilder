@@ -4,5 +4,4 @@
 
 @property(nonatomic) MainMenu *mainMenu;
 
-
 @end

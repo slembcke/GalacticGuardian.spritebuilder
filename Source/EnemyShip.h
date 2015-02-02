@@ -5,6 +5,7 @@
 #import "PlayerShip.h"
 #import "GameScene.h"
 
+
 @interface EnemyShip : CCNode
 
 @property(nonatomic) int hp;

@@ -7,6 +7,7 @@ typedef NS_ENUM(NSUInteger, ControlButton){
 
 typedef void (^ControlHandler)(BOOL state);
 
+
 @interface Controls : CCNode
 
 @property(nonatomic, assign) BOOL rocketButtonEnabled;

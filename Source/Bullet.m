@@ -13,19 +13,19 @@
 
 static NSString * const bulletImageNames[] = {
 	@"Sprites/laserBlue.png",
-    @"Sprites/laserPurple.png",
+	@"Sprites/laserPurple.png",
 	@"Sprites/laserGreen.png",
-    @"Sprites/laserYellow.png",
+	@"Sprites/laserYellow.png",
 	@"Sprites/laserRed.png",
 	@"Sprites/laserRed.png",
 };
 static NSString * const bulletFlashes[] ={
-    @"Sprites/laserFlashBlue.png",
-    @"Sprites/laserFlashPurple.png",
-    @"Sprites/laserFlashGreen.png",
-    @"Sprites/laserFlashYellow.png",
-    @"Sprites/laserFlashRed.png",
-    @"Sprites/laserFlashRed.png",
+	@"Sprites/laserFlashBlue.png",
+	@"Sprites/laserFlashPurple.png",
+	@"Sprites/laserFlashGreen.png",
+	@"Sprites/laserFlashYellow.png",
+	@"Sprites/laserFlashRed.png",
+	@"Sprites/laserFlashRed.png",
 };
 static NSArray * bulletColors;
 
@@ -48,15 +48,15 @@ static NSArray *CollisionMask = nil;
 	
 	CollisionCategories = @[CollisionCategoryBullet];
 	CollisionMask = @[CollisionCategoryEnemy, CollisionCategoryAsteroid];
-    
-    bulletColors = @[
-        [CCColor colorWithRed:0.2f green:0.7f blue:1.0f],
-        [CCColor colorWithRed:0.6f green:0.3f blue:1.0f],
-        [CCColor colorWithRed:0.2f green:1.0f blue:0.4f],
-        [CCColor colorWithRed:0.95f green:0.8f blue:0.15f],
-        [CCColor colorWithRed:1.0f green:0.2f blue:0.2f],
-        [CCColor colorWithRed:1.0f green:0.2f blue:0.2f],
-    ];
+	
+	bulletColors = @[
+		[CCColor colorWithRed:0.2f green:0.7f blue:1.0f],
+		[CCColor colorWithRed:0.6f green:0.3f blue:1.0f],
+		[CCColor colorWithRed:0.2f green:1.0f blue:0.4f],
+		[CCColor colorWithRed:0.95f green:0.8f blue:0.15f],
+		[CCColor colorWithRed:1.0f green:0.2f blue:0.2f],
+		[CCColor colorWithRed:1.0f green:0.2f blue:0.2f],
+	];
 }
 
 -(instancetype)initWithBulletLevel:(BulletLevel) level

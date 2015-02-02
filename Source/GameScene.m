@@ -66,12 +66,12 @@
 		[self addChild:hud z:Z_HUD];
 		
 		self.spaceBucks = 0;
-        
-        if([[NSUserDefaults standardUserDefaults] boolForKey:DefaultsDifficultyHardKey]){
-            _spaceBucksTilNextLevel = SpaceBucksTilLevel1HardMode;
-        }else{
-            _spaceBucksTilNextLevel = SpaceBucksTilLevel1EasyMode;
-        }
+		
+		if([[NSUserDefaults standardUserDefaults] boolForKey:DefaultsDifficultyHardKey]){
+			_spaceBucksTilNextLevel = SpaceBucksTilLevel1HardMode;
+		}else{
+			_spaceBucksTilNextLevel = SpaceBucksTilLevel1EasyMode;
+		}
 		
 		self.level = 0;
 		self.spaceBucks = 0;
@@ -81,7 +81,7 @@
 		
 		_scrollNode = [CCNode node];
 		_scrollNode.contentSize = CGSizeMake(1.0, 1.0);
-        _scrollNode.positionType = CCPositionTypeNormalized;
+		_scrollNode.positionType = CCPositionTypeNormalized;
 		_scrollNode.position = ccp(0.5, 0.5);
 		[self addChild:_scrollNode z:Z_SCROLL_NODE];
 		
@@ -734,7 +734,6 @@ static const float MinBarWidth = 5.0;
 {
 	if([_playerShip takeDamage]){
 		[_playerShip destroy];
-		
         // slow time:
         [CCDirector sharedDirector].scheduler.timeScale = 0.25f;
         
@@ -756,8 +755,6 @@ static const float MinBarWidth = 5.0;
 		[self enemyDeath: enemy from:nil];
 		return YES;
 	}
-	
-	
 }
 
 -(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair bullet:(Bullet *)bullet enemy:(EnemyShip *)enemy
@@ -794,7 +791,6 @@ static const float MinBarWidth = 5.0;
 	if(self.spaceBucks >= _spaceBucksTilNextLevel){
 		[self levelUp];
 	}
-	
 	
 	return NO;
 }

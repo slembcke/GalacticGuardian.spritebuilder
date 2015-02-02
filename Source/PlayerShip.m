@@ -17,7 +17,6 @@
 // To access some of Chipmunk's handy vector functions like cpvlerpconst().
 #import "ObjectiveChipmunk/ObjectiveChipmunk.h"
 
-// TODO
 #import "CCPhysics+ObjectiveChipmunk.h"
 
 @implementation PlayerShip
@@ -94,7 +93,6 @@ VisitAll(CCNode *node, void (^block)(CCNode *))
 	}];
 	
 	NSAssert([_gunPorts count] > 0, @"Missing gunports on ship in spritebuilder");
-	
 	
 	[super onEnter];
 }

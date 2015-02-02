@@ -127,12 +127,13 @@
 	screenGrab.anchorPoint = ccp(0.0, 0.0);
 	screenGrab.effect = [CCEffectStack effects:
 #if !CC_DIRECTOR_IOS_THREADED_RENDERING
-											 // BUG!
-											 [CCEffectBlur effectWithBlurRadius:4.0],
+		// BUG!
+		[CCEffectBlur effectWithBlurRadius:4.0],
 #endif
-											 [CCEffectSaturation effectWithSaturation:-0.5],
-											 nil
-											 ];
+		[CCEffectSaturation effectWithSaturation:-0.5],
+		nil
+	];
+	
 	[pause addChild:screenGrab z:-1];
 	
 	[director pushScene:pause withTransition:[CCTransition transitionCrossFadeWithDuration:0.25]];
@@ -163,12 +164,13 @@
 	screenGrab.anchorPoint = ccp(0.0, 0.0);
 	screenGrab.effect = [CCEffectStack effects:
 #if !CC_DIRECTOR_IOS_THREADED_RENDERING
-		// BUG!
-											 [CCEffectBlur effectWithBlurRadius:4.0],
+			// BUG!
+			[CCEffectBlur effectWithBlurRadius:4.0],
 #endif
-											 [CCEffectSaturation effectWithSaturation:-0.5],
-											 nil
-											 ];
+		[CCEffectSaturation effectWithSaturation:-0.5],
+		nil
+	];
+	
 	[newScene addChild:screenGrab z:-1];
 	
 	[director pushScene:newScene withTransition:[CCTransition transitionCrossFadeWithDuration:0.25]];
@@ -186,7 +188,5 @@
 	[ship runAction:[CCActionMoveBy actionWithDuration:2.5f position:ccp(0.0f, 400.0f)] ];
 	[ship runAction:[CCActionScaleTo actionWithDuration:2.5f scale:2.5f]];
 }
-
-
 
 @end
