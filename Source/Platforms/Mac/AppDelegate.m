@@ -73,9 +73,14 @@
 		[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Published-iOS"],
 		[[NSBundle mainBundle] resourcePath],
 	];
+	
+	[CCFileUtils sharedFileUtils].searchResolutionsOrder = [@[
+		@"machd",
+		@"mac",
+		@"default",
+	] mutableCopy];
 
 	[CCFileUtils sharedFileUtils].searchMode = CCFileUtilsSearchModeDirectory;
-	[[CCFileUtils sharedFileUtils] buildSearchResolutionsOrder];
 
 	[[CCFileUtils sharedFileUtils] loadFilenameLookupDictionaryFromFile:@"fileLookup.plist"];
 	[[CCSpriteFrameCache sharedSpriteFrameCache] loadSpriteFrameLookupDictionaryFromFile:@"spriteFrameFileList.plist"];
