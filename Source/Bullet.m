@@ -58,6 +58,7 @@ const float bulletDurations[] = {
 static NSArray *CollisionCategories = nil;
 static NSArray *CollisionMask = nil;
 
+// Cache some of these values when the class is loaded to avoid recreating them constantly.
 +(void)initialize
 {
 	if(self != [Bullet class]) return;

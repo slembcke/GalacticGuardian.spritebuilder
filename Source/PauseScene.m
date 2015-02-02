@@ -38,15 +38,16 @@
 	self.contentSize = [CCDirector sharedDirector].designSize;
 	self.contentSizeType = CCSizeTypePoints;
 	
+	// Set the button values to the ones stored in the user preferences.
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	_musicSlider.sliderValue = [[defaults objectForKey:DefaultsMusicKey] floatValue];
-    _soundSlider.sliderValue = [[defaults objectForKey:DefaultsSoundKey] floatValue];
-    _hardMode = [defaults boolForKey:DefaultsDifficultyHardKey];
+	_soundSlider.sliderValue = [[defaults objectForKey:DefaultsSoundKey] floatValue];
+	_hardMode = [defaults boolForKey:DefaultsDifficultyHardKey];
 }
 
 -(void)dealloc
 {
-	NSLog(@"PauseScene dealloc");
+	CCLOG(@"PauseScene dealloc");
 }
 
 -(void)musicVolumeChanged:(CCSlider *)slider

@@ -45,17 +45,26 @@ static CCTexture *DistortionTexture = nil;
 {
 	ShaderMode = [CCShader shaderNamed:@"Nebula"];
 	
+	// This is the purple-ish texture for the nebula.
 	NebulaTexture = [CCTexture textureWithFile:@"Nebula.png"];
 	NebulaTexture.contentScale = 2.0;
+	
+	// We want to make the texture repeate endlessly, but it's not exposed by the public API in 3.x...
+	// This is not generally safe to do with cached textures.
+	// Cocos2D 4.0 will fix the API problems however.
 	NebulaTexture.texParameters = &(ccTexParams){GL_LINEAR, GL_LINEAR, GL_REPEAT, GL_REPEAT};
 	
+	// This is a grayscale texture that holds how far away the background is.
+	// The Nebula.fsh shader uses this to apply some subtle, but cheap 3D effects.
 	DepthMap = [CCTexture textureWithFile:@"NebulaDepth.png"];
 	DepthMap.texParameters = &(ccTexParams){GL_LINEAR, GL_LINEAR, GL_REPEAT, GL_REPEAT};
 	
+	// This is the texture that is used by sprites/particles for drawing into the distortion map.
 	DistortionTexture = [CCTexture textureWithFile:@"DistortionTexture.png"];
 	[DistortionTexture generateMipmap];
 }
 
+// Toggled from the pause menu.
 +(NSString *)toggleDistortionMode
 {
 	static int mode = 0;
@@ -84,19 +93,27 @@ static CCTexture *DistortionTexture = nil;
 		// Disable alpha blending to save some fillrate.
 		self.blendMode = [CCBlendMode disabledMode];
 		
-		// Set up the distortion map render texture;
+		// Set up the distortion map render texture.
+		// This is a used to apply distortions to the screen.
+		// The red channel controls how much distortion in the x direction.
+		// The green channel controls the distortion in the y direction.
 		CGSize size = [CCDirector sharedDirector].viewSize;
 		_distortionMap = [CCRenderTexture renderTextureWithWidth:size.width height:size.height];
+		
+		// Create the distortion texture to be 1/4 the size of the screen (in pixels).
+		// This saves a lot of fillrate on the GPU for slower devices like the iPad 2.
 		_distortionMap.contentScale /= 4.0;
 		_distortionMap.texture.antialiased = YES;
 		
-		// Set the distortion map to no offset. 
+		// Clear the red/green channels to 0.5 so there is no distortion.
 		[_distortionMap beginWithClear:0.5 g:0.5 b:0.0 a:0.0];
 		[_distortionMap end];
 		
-		// Apply the Nebula shader that applies some subtle parallax mapping and distortions.
+		// Set up the Nebula shader.
 		self.shader = ShaderMode;
-		self.shaderUniforms[@"u_ParallaxAmount"] = @(0.06);
+		
+		// The values are read by the shaders (Nebula.fsh/vsh)
+		self.shaderUniforms[@"u_ParallaxAmount"] = @(0.07);
 		self.shaderUniforms[@"u_DepthMap"] = DepthMap;
 		self.shaderUniforms[@"u_DistortionMap"] = _distortionMap.texture;
 		

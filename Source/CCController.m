@@ -183,12 +183,6 @@ ControllerConnected(void *context, IOReturn result, void *sender, IOHIDDeviceRef
 			}
 		}
 
-		// How to reduce the sampling rate?
-		// Eats up a lot of CPU processing sub-ms samples.
-//		IOHIDDeviceSetProperty(device, CFSTR(kIOHIDSampleIntervalKey), (__bridge CFTypeRef)@(1e-64));
-//		double interval = [(__bridge NSNumber *)IOHIDDeviceGetProperty(device, CFSTR(kIOHIDSampleIntervalKey)) doubleValue];
-//		NSLog(@"interval: %f", interval);
-		
 		IOHIDDeviceSetInputValueMatchingMultiple(device, (__bridge CFArrayRef)matches);
 		IOHIDDeviceRegisterInputValueCallback(device, valueCallback, (__bridge void *)controller);
 		IOHIDDeviceRegisterRemovalCallback(device, ControllerDisconnected, (void *)CFBridgingRetain(controller));

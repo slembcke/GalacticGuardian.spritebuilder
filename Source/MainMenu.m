@@ -86,7 +86,7 @@
 
 -(void)dealloc
 {
-	NSLog(@"MainMenu dealloc");
+	CCLOG(@"MainMenu dealloc");
 }
 
 -(void)update:(CCTime)delta

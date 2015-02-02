@@ -76,7 +76,8 @@ static NSArray *CollisionMask = nil;
 	// Then you list which categories its allowed to collide with.
 	body.collisionMask = CollisionMask;
 	
-	// Preload some of the destruction assets now since ships are often destroyed at the same time.
+	// Enemies are often destroyed in large groups (bombs, rockets), but their spawning is spread over several frames.
+	// Preload their destruction objects to spread out the CPU work more evenly.
 	_debrisNode = [CCBReader load:self.debris];
 	_explosion = [CCBReader load:@"Particles/ShipExplosion"];
 	_smoke = [CCBReader load:@"Particles/Smoke"];
@@ -107,11 +108,13 @@ static NSArray *CollisionMask = nil;
 	
 	CCPhysicsBody *body = self.physicsBody;
 	
-	CGPoint targetVelocity = ccpMult(ccpNormalize(ccpSub(_scene.playerPosition, body.absolutePosition)), _speed);
-	CGPoint velocity = cpvlerpconst(body.velocity, targetVelocity, _speed/_accelTime*delta);
+	// The enemies are dumb. They just attempt to fly towards the player.
+	CGPoint desiredVelocity = ccpMult(ccpNormalize(ccpSub(_scene.playerPosition, body.absolutePosition)), _speed);
+	CGPoint velocity = cpvlerpconst(body.velocity, desiredVelocity, _speed/_accelTime*delta);
 	
 	body.velocity = velocity;
 	if(cpvlengthsq(velocity) > 0.0){
+		// Rotate the enemy towards the direction it's moving.
 		const float maxTurn = 360.0*delta;
 		CGPoint relativeDirection = cpTransformVect(cpTransformInverse(body.absoluteTransform), velocity);
 		self.rotation += clampf(-CC_RADIANS_TO_DEGREES(ccpToAngle(relativeDirection)), -maxTurn, maxTurn);
@@ -128,7 +131,7 @@ static NSArray *CollisionMask = nil;
 {
 	// TODO should catch this in the collision handler instead.
 	if(![self isRunningInActiveScene]){
-		NSLog(@"Probably this enemy was destroyed twice.");
+		CCLOG(@"Probably this enemy was destroyed twice.");
 		return;
 	}
 	

@@ -41,8 +41,7 @@
 	id<ALSoundSource> _engineNoise;
 	
 	CCNode *_shield;
-
-	// TODO: dynamic number of gunports based on ship. CCNode *_gunPort1, *_gunPort2;
+	
 	NSUInteger _currentGunPort;
 	NSMutableArray *_gunPorts;
 	
@@ -56,6 +55,8 @@
 {
 	const float distortAmount = 0.25;
 	
+	// Set up the distortion effect for the shield.
+	// This will be added to the distortion field effect when the ship is added to the game.
 	_shieldDistortionSprite = [CCSprite spriteWithImageNamed:@"DistortionTexture.png"];
 	_shieldDistortionSprite.opacity = distortAmount;
 	
@@ -121,7 +122,8 @@ VisitAll(CCNode *node, void (^block)(CCNode *))
 	[super onExit];
 }
 
-// This method is called from [GameScene fixedUpdate:], not from Cocos2D.
+// This method is called from [GameScene fixedUpdate:], not directly from Cocos2D.
+// I use a bunch of Chipmunk math functions in here since it's a bit more complete than Cocos's.
 -(void)ggFixedUpdate:(CCTime)delta withControls:(Controls *)controls
 {
 	CCPhysicsBody *body = self.physicsBody;
@@ -131,9 +133,10 @@ VisitAll(CCNode *node, void (^block)(CCNode *))
 	CGPoint thrust = controls.thrustDirection;
 	if(cpvlength(thrust) > deadZone){
 		float removeDeadZone = MAX(cpvlength(thrust) - deadZone, 0.0f)/(1.0 - deadZone);
-		CGPoint targetVelocity = ccpMult(thrust, removeDeadZone*_speed);
+		CGPoint desiredVelocity = ccpMult(thrust, removeDeadZone*_speed);
 		
-		CGPoint velocity = cpvlerpconst(body.velocity, targetVelocity, _speed*delta/_accelTime);
+		// Accelerate the ship towards the desired velocity.
+		CGPoint velocity = cpvlerpconst(body.velocity, desiredVelocity, _speed*delta/_accelTime);
 		body.velocity = velocity;
 		
 		_mainThruster.visible = YES;
@@ -162,12 +165,13 @@ VisitAll(CCNode *node, void (^block)(CCNode *))
 
 -(void)update:(CCTime)delta
 {
+	// The distortion sprite is not a child of the ship so we have to sync their positions manually.
 	_shieldDistortionSprite.position = self.position;
 }
 
 -(CGAffineTransform)gunPortTransform
 {
-	// Constantly switch between gunports.
+	// Switch to a different gunport each time it's fired.
 	_currentGunPort = (_currentGunPort + 1) % [_gunPorts count];
 
 	CCNode *gun = _gunPorts[_currentGunPort];
@@ -222,12 +226,14 @@ VisitAll(CCNode *node, void (^block)(CCNode *))
 	CGPoint pos = self.position;
 	GameScene *scene = (GameScene *)self.scene;
 	
+	// Spawn some debris pieces.
 	CCNode *debris = [CCBReader load:self.debris];
 	debris.position = pos;
 	debris.rotation = self.rotation;
 	InitDebris(debris, debris, self.physicsBody.velocity, [CCColor colorWithRed:1.0f green:1.0f blue:0.3f]);
 	[self.parent addChild:debris z:Z_DEBRIS];
 	
+	// Add explosion and smoke particles.
 	CCNode *explosion = [CCBReader load:@"Particles/ShipExplosion"];
 	explosion.position = pos;
 	[self.parent addChild:explosion z:Z_FIRE];
@@ -242,6 +248,7 @@ VisitAll(CCNode *node, void (^block)(CCNode *))
 		[smoke removeFromParent];
 	} delay:5];
 	
+	// For dramatic effect. Killing the player sets off a nova explosion.
 	[scene novaBombAt:pos];
 	[[OALSimpleAudio sharedInstance] playEffect:@"TempSounds/Explosion.wav" volume:2.0 pitch:1.0 pan:0.0 loop:NO];
 	

@@ -72,7 +72,7 @@ const float ship_powers[] = {30.0f, 80.0f, 100.0f};
 
 -(void)dealloc
 {
-	NSLog(@"ShipSelection dealloc");
+	CCLOG(@"ShipSelection dealloc");
 }
 
 -(void)dismiss:(id)sender
@@ -115,7 +115,10 @@ const float ship_powers[] = {30.0f, 80.0f, 100.0f};
 		_shipNode.position = [oldShip position];
 		_shipNode.rotation = rotation;
 		_shipNode.scale = 1.5f;
+		
+		// The CCB file had physics set up in it, but we want to disable that on the menu.
 		_shipNode.physicsBody = nil;
+		
 		[_viewNode addChild:_shipNode];
 		
 		// Rotate constantly
@@ -125,6 +128,7 @@ const float ship_powers[] = {30.0f, 80.0f, 100.0f};
 	[_shipNameLabel setString: ship_names[shipType]];
 }
 
+// Animate the 9-slice sprite's width.
 static void
 LerpBarWidth(CCNode *bar, float newWidth, float lerpFactor)
 {
@@ -134,7 +138,8 @@ LerpBarWidth(CCNode *bar, float newWidth, float lerpFactor)
 
 -(void)update:(CCTime)delta
 {
-	float factor = 1.0 - powf(0.01, delta); // 99% percent correction per second.
+	// Lerp to within 1% of the desired value when compared to one second ago.
+	float factor = 1.0 - powf(0.01, delta);
 	
 	LerpBarWidth(_speedBarSprite, 2.0*ship_speeds[_shipIndex], factor);
 	LerpBarWidth(_powerBarSprite, 2.0*ship_powers[_shipIndex], factor);

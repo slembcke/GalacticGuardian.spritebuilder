@@ -118,7 +118,7 @@ const float AccelMax = 600.0;
 	float distance = ccpDistance(targetPoint, pos);
 	
 	if(distance < AccelRange){
-		// then consider accellerating towards player
+		// Accelerate towards the player if they are nearby.
 		float accel = AccelMin + AccelMax*(AccelRange - distance)/AccelRange;
 		CGPoint direction = ccpNormalize(ccpSub(targetPoint, self.position));
 		body.velocity = ccpAdd(body.velocity, ccpMult(direction, delta * accel));

@@ -37,11 +37,13 @@
 	return (BurnTransition *)[self transitionCrossFadeWithDuration:duration];
 }
 
+// Transitions are not meant to be subclassable in v3.x, but this was too good to pass up.
+// This code is *not* going to be very future proof, but it works okay with 3.3 and 3.4.
 - (void)startTransition:(CCScene *)scene
 {
 	[super startTransition:scene];
 	
-	
+	// Force the BurnSprite class to be loaded since we use the shader and global shader uniforms set there.
 	[NSClassFromString(@"BurnSprite") class];
 	
 	CCShader *shader = [CCShader shaderNamed:@"BurnSprite"];
@@ -55,6 +57,8 @@
 	};
 	
 	CCColor *burnColor = [CCColor colorWithCcColor3b:ccc3(255, 134, 36)];
+	
+	// Use Obj-C reflection to access the private variables of the transition class so we can set up the shader.
 	
 	CCRenderTexture *incoming = object_getIvar(self, class_getInstanceVariable(self.class, "_incomingTexture"));
 	incoming.sprite.shader = shader;

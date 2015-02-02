@@ -60,7 +60,7 @@
 			<key>collisionMask</key>
 			<array/>
 			<key>collisionType</key>
-			<string>wall</string>
+			<string>asteroid</string>
 			<key>cornerRadius</key>
 			<real>22.110160827636719</real>
 			<key>density</key>

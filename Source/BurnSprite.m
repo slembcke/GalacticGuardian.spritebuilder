@@ -39,7 +39,12 @@ static CCShader *BurnShader = nil;
 	burnTexture.texParameters = &(ccTexParams){GL_LINEAR, GL_LINEAR, GL_REPEAT, GL_REPEAT};
 	[burnTexture generateMipmap];
 	
-	// Set up global uniforms so we can batch the sprites.
+	// Normally when you use shaders, you set the shader uniforms for each node.
+	// This is easy to use, but custom shader uniforms disable batching.
+	// Since we will be drawing many pieces of burning debris at a time, we want to batch them!
+	
+	// Instead, you can use the global shader uniforms to pass the same shader values for every object drawn.
+	// That's okay because we only need to pass the burn color for each sprite, and we can pass that using the sprite's regular color property.
 	NSMutableDictionary *globals = [CCDirector sharedDirector].globalShaderUniforms;
 	globals[@"u_BurnScale"] = @(3.0);
 	globals[@"u_BurnTexture"] = burnTexture;

@@ -75,6 +75,7 @@ static const float RocketClusterRange = 25.0;
 	body.velocity = ccpAdd(body.velocity, ccpMult(direction, RocketAcceleration*delta));
 }
 
+// Apply splash damage.
 -(void)splashAt:(CGPoint)pos parent:(CCNode *)parent
 {
 	GameScene *scene = (GameScene *)parent.scene;

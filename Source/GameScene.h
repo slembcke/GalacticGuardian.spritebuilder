@@ -47,4 +47,5 @@
 @end
 
 // Recursive helper function to set up physics on the debris child nodes.
+// It sets up collision properties, initial motion due to the explosion and the burn animation.
 void InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor);

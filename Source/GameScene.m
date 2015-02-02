@@ -39,6 +39,7 @@
 
 #import "CCDirector_Private.h"
 
+
 @interface GameScene()
 @property(nonatomic, assign) int novaBombs;
 @property(nonatomic, assign) int spaceBucks;
@@ -48,6 +49,7 @@
 
 @implementation GameScene
 {
+	// This is the parent node to all of the content on the screen that scrolls around.
 	CCNode *_scrollNode;
 	
 	CCPhysicsNode *_physics;
@@ -64,9 +66,8 @@
 	
 	NSMutableArray *_enemies;
 	
+	// Time that the most recent fixed update ran at.
 	CCTime _fixedTime;
-	
-	int _enemies_killed;
 	
 	int _shipLevel;
 	BulletLevel _bulletLevel;
@@ -120,6 +121,7 @@
 		_physics = [CCPhysicsNode node];
 		[_scrollNode addChild:_physics z:Z_PHYSICS];
 		
+		// Reduce the physics collision quality to save CPU time.
 		_physics.iterations = 1;
 		
 		// Use the gamescene as the collision delegate.
@@ -129,6 +131,8 @@
 		// Enable to show debug outlines for Physics shapes.
 //		_physics.debugDraw = YES;
 		
+		// Set up a box around the screen that only the player collides with.
+		// This keeps the player in the game area while allowing enemies to enter.
 		CCNode *bounds = [CCNode node];
 		CGFloat boundsWidth = 50.0;
 		CGRect boundsRect = CGRectMake(-boundsWidth, -boundsWidth, GameSceneSize + 2.0*boundsWidth, GameSceneSize + 2.0*boundsWidth);
@@ -138,18 +142,20 @@
 		bounds.physicsBody.elasticity = 1.0;
 		[_physics addChild:bounds];
 		
-		// Add a ship in the middle of the screen.
+		// Add the player's ship in the center of the game area.
 		[self createPlayerShipAt: ccp(GameSceneSize/2.0, GameSceneSize/2.0) withArt:ship_fileNames[shipType]];
 		
-		for(int i = 0; i < 15; i++){
-			// maybe this spoke/circle pattern will be cool.
-			float angle = (M_PI * 2.0f / 15.0f) * i;
-			[self addWallAt: ccpAdd(ccpMult(ccpForAngle(angle), 200.0f + 250.0f * CCRANDOM_0_1() ), ccp(512, 512))];
-		}
 		
-		// Enable touch events.
-		// The entire scene is used as a shoot button.
-		self.userInteractionEnabled = YES;
+		// Make a random, circular-ish pattern of asteroids.
+		for(int i = 0; i < 15; i++){
+			float angle = (M_PI * 2.0f / 15.0f) * i;
+			int type = rand()%6;
+			
+			CCNode *asteroid = (CCNode *)[CCBReader load:[NSString stringWithFormat:@"Asteroid%d", type]];
+			asteroid.position = ccpAdd(ccpMult(ccpForAngle(angle), 200.0f + 250.0f * CCRANDOM_0_1()), ccp(GameSceneSize/2.0, GameSceneSize/2.0));
+			asteroid.rotation = CCRANDOM_0_1() * 360.0f;
+			[_physics addChild:asteroid z:Z_ENEMY];
+		}
 		
 		_enemies = [NSMutableArray array];
 		[self setupEnemySpawnTimer];
@@ -160,7 +166,7 @@
 
 -(void)dealloc
 {
-	NSLog(@"Dealloc GameScene.");
+	CCLOG(@"Dealloc GameScene.");
 }
 
 -(void)setupControls
@@ -178,21 +184,11 @@
 	[_controls setHandler:^(BOOL state) {if(state) [_self fireNovaBomb];} forButton:ControlNovaButton];
 }
 
--(void)addWallAt:(CGPoint) pos
-{
-	int type = rand()%6;
-	
-	CCNode *wall = (CCNode *)[CCBReader load:[NSString stringWithFormat:@"Asteroid%d", type]];
-	wall.position = pos;
-	wall.rotation = CCRANDOM_0_1() * 360.0f;
-	[_physics addChild:wall z:Z_ENEMY];
-}
-
 -(void)fixedUpdate:(CCTime)delta
 {
 	_fixedTime += delta;
 	
-	// Fly the ship using the joystick controls.
+	// Send the joystick input to the ship.
 	[_playerShip ggFixedUpdate:delta withControls:_controls];
 	_playerPosition = _playerShip.position;
 	
@@ -207,16 +203,18 @@
 {
 	float smoothing = 1e3;
 	
-    CGSize contentSize = self.contentSizeInPoints;
-
-    float clampWidth = (GameSceneSize - contentSize.width)/2.0;
-    float clampHeight = (GameSceneSize - contentSize.height)/2.0;
-    
+	CGSize contentSize = self.contentSizeInPoints;
+	
+	float clampWidth = (GameSceneSize - contentSize.width)/2.0;
+	float clampHeight = (GameSceneSize - contentSize.height)/2.0;
+	
 	CGPoint exp = CGPointMake(
 		(scrollPosition.x - GameSceneSize/2.0)/clampWidth,
 		(scrollPosition.y - GameSceneSize/2.0)/clampHeight
 	);
 	
+	// Admittedly this is an overcomplicated way to smoothly clamp the screen to the game area.
+	// I was having fun with math...
 	CGPoint offset = CGPointMake(
 		clampWidth*(log(pow(smoothing, -exp.x - 1.0) + 1.01) - log(pow(smoothing, exp.x - 1.0) + 1.01)),
 		clampHeight*(log(pow(smoothing, -exp.y - 1.0) + 1.01) - log(pow(smoothing, exp.y - 1.0) + 1.01))
@@ -230,6 +228,7 @@
 	self.scrollPosition = _playerShip.position;
 	
 	// Update the reticle's position.
+	// TODO Only works when the player is at rest. Is this wrong or the rocket firing code?
 	_rocketReticle.position = CGPointApplyAffineTransform(ccp(RocketRange, 0.0), _playerShip.nodeToParentTransform);
 }
 
@@ -237,16 +236,14 @@
 {
 	[_enemies removeObject:enemy];
 	
-	if(![_playerShip isDead]){
-		_enemies_killed += 1;
-	}
-	
+	// Set color of the burn animation for the enemy's debris to match the bullet that killed it.
 	CCColor *weaponColor = bullet.bulletColor ?: [CCColor colorWithRed:1.0f green:1.0f blue:0.3f];
 	[enemy destroyWithWeaponColor:weaponColor];
 }
 
 -(void)splashDamageAt:(CGPoint)center radius:(float)radius damage:(int)damage;
 {
+	// Iterate a copy of the array since enemies can be destroyed inside the loop.
 	for(EnemyShip *enemy in [_enemies copy]){
 		float dist = ccpDistance(center, enemy.position);
 		float splash = 1.0 - dist/radius;
@@ -266,6 +263,7 @@
 {
 	float duration = 0.15;
 	
+	// Set up the flash sprite and it's animation.
 	CCSprite *flash = [CCSprite spriteWithImageNamed:imagePath];
 	flash.position = position;
 	flash.rotation = 360.0*CCRANDOM_0_1();
@@ -281,7 +279,7 @@
 		nil
 	]];
 	
-	// Draw a little distortion too
+	// Draw some distortion to use with it.
 	CCSprite *distortion = [CCSprite spriteWithImageNamed:@"DistortionTexture.png"];
 	distortion.position = position;
 	distortion.scale = 0.15;
@@ -314,22 +312,25 @@
 	// An affine transform looks like this when written as a matrix:
 	// | a, c, tx |
 	// | b, d, ty |
-	// The first column, (a, b), is the direction the new x-axis will point in.
-	// The second column, (c, d), is the direction the new y-axis will point in.
-	// The last column, (tx, ty), is the location of the origin of the new transform.
+	// The first column, (a, b), is the direction the new x-axis will point after applying the transformation.
+	// The second column, (c, d), is the direction the new y-axis will point.
+	// The last column, (tx, ty), is the location of the origin after applying the transform.
 	
-	// The position of the gunport is just the matrix's origin point (tx, ty).
+	// So the position of the gunport is just the matrix's origin point (tx, ty).
 	CGPoint position = ccp(transform.tx, transform.ty);
 
-	// The transform's x-axis, (c, d), will point in the direction of the gunport.
+	// The node's in the CCB file point along the x-axis.
+	// That means the direction the gun is pointing is the first column of the matrix.
 	CGPoint direction = ccp(transform.a, transform.b);
 	
 	// So by "fancy math" I really just meant knowing what the numbers in a CGAffineTransform are. ;)
+	// All we had to do was copy the values we wanted out.
 	
 	// Now we can create the bullet with the position and direction.
+	// The bullet sprite points along the y-axis, so we need to rotate by 90 degrees.
 	Bullet *bullet = [[Bullet alloc] initWithBulletLevel:_bulletLevel];
 	bullet.position = position;
-	bullet.rotation = -CC_RADIANS_TO_DEGREES(ccpToAngle(direction)) + 90.0f;
+	bullet.rotation = 90.0f - CC_RADIANS_TO_DEGREES(ccpToAngle(direction));
 	
 	// Make the bullet move in the direction it's pointed.
 	bullet.physicsBody.velocity = ccpMult(direction, bullet.speed);
@@ -339,7 +340,7 @@
 	// Draw a muzzle flash too!
 	[self drawBulletFlash:bullet];
 	
-	// Make some noise. Add a little chromatically tuned pitch bending to make it more musical.
+	// Make some noise. Add a little chromatically tuned pitch bending to make it sound more musical.
 	int half_steps = (arc4random()%(2*4 + 1) - 4);
 	float pitch = pow(2.0f, half_steps/12.0f);
 	[[OALSimpleAudio sharedInstance] playEffect:@"TempSounds/Laser.wav" volume:0.25 pitch:pitch pan:0.0 loop:NO];
@@ -347,15 +348,18 @@
 
 -(void)fireRocket
 {
-	// Don't fire if out of ammo or the ship is destroyed.
 	if(
+		// Don't fire until the player unlocks rockets.
 		_rocketLevel == RocketNone ||
+		// Don't fire until the missile timer is ready.
 		_rocketReticle.percentage < 100.0 ||
+		// don't fire if the player is dead.
 		[_playerShip isDead]
 	){
 		return;
 	}
 	
+	// Apply the same transform trick used in the bullet firing method.
 	CGAffineTransform transform = _playerShip.physicsBody.absoluteTransform;
 	CGPoint position = ccp(transform.tx, transform.ty);
 	CGPoint direction = ccp(transform.a, transform.b);
@@ -370,21 +374,25 @@
 	
 	[_physics addChild:rocket z:Z_BULLET];
 	
+	// Disable the rocket button and reset the charging reticle.
 	_controls.rocketButtonEnabled = NO;
 	
 	_rocketReticle.percentage = 0.0;
 	_rocketReticle.color = [CCColor whiteColor];
 	_rocketReticle.opacity = 0.5;
 	
+	// Use a timer to charge the reticle.
 	[self scheduleBlock:^(CCTimer *timer) {
 		_rocketReticle.percentage += 10.0;
 		
 		if(_rocketReticle.percentage == 100.0){
+			// Reenable the button and reticle when done charging.
 			_controls.rocketButtonEnabled = YES;
 			
 			_rocketReticle.color = [CCColor redColor];
 			_rocketReticle.opacity = 0.5;
 		} else {
+			// Schedule the timer to run again if it's not done charging.
 			[timer repeatOnceWithInterval:0.5];
 		}
 	} delay:0.5];
@@ -412,6 +420,7 @@
 	float accel = distortion.radialAccel;
 	float limit = distortion.life + distortion.lifeVar;
 	
+	// Set up timers to destroy nearby enemies as the nova ring expands.
 	for (EnemyShip *enemy in _enemies) {
 		// explode based on distance from player and particle system values.
 		// Things are gnerally moving towards the player, so fudge the numbers a little.
@@ -430,6 +439,7 @@ static NSArray *DebrisCollisionCategories = nil;
 {
 	if(self != [GameScene class]) return;
 	
+	// Initialize this array when the class loads so it doesn't have to be re-created every time a piece of debris is created.
 	DebrisCollisionCategories = @[CollisionCategoryDebris];
 }
 
@@ -438,9 +448,9 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 {
 	// If the node has a body, set some properties.
 	CCPhysicsBody *body = node.physicsBody;
-	body.collisionCategories = DebrisCollisionCategories;
-	
 	if(body){
+		body.collisionCategories = DebrisCollisionCategories;
+		
 		// Bodies with the same group reference don't collide.
 		// Any type of object will do. It's the object reference that is important.
 		// In this case, I want the debris to collide with everything except other debris from the same ship.
@@ -455,6 +465,7 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 		// This is a convenient place to add the fade action.
 		node.color = burnColor;
 		
+		// Fade out and destroy the debris after a short random delay.
 		[node scheduleBlock:^(CCTimer *timer) {
 			[node runAction: [CCActionSequence actions:
 			 [CCActionFadeOut actionWithDuration:0.75],
@@ -468,6 +479,7 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 	for(CCNode *child in node.children) InitDebris(root, child, velocity, burnColor);
 }
 
+// Called when the pause button is pressed.
 -(void)pause
 {
 	CCDirector *director = [CCDirector sharedDirector];
@@ -477,6 +489,8 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 	
 	CCRenderTexture *rt = [CCRenderTexture renderTextureWithWidth:viewSize.width height:viewSize.height];
 	
+	// Use the director's projection to render into the texture as though it were the screen.
+	// When this texture is stretched to screen size, it will look the same.
 	GLKMatrix4 projection = director.projectionMatrix;
 	CCRenderer *renderer = [rt begin];
 		[self visit:renderer parentTransform:&projection];
@@ -486,18 +500,20 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 	screenGrab.anchorPoint = ccp(0.0, 0.0);
 	screenGrab.effect = [CCEffectStack effects:
 #if !CC_DIRECTOR_IOS_THREADED_RENDERING
-		// BUG!
+		// TODO MT BUG in the blur effect!
 		[CCEffectBlur effectWithBlurRadius:4.0],
 #endif
 		[CCEffectSaturation effectWithSaturation:-0.5],
 		nil
 	];
+	
+	// Add the screen grab sprite to the bottom of the pause screen.
 	[pause addChild:screenGrab z:-1];
 	
 	[director pushScene:pause withTransition:[CCTransition transitionCrossFadeWithDuration:0.25]];
 }
 
--(void) createPlayerShipAt:(CGPoint) pos withArt:(NSString *) shipArt
+-(void)createPlayerShipAt:(CGPoint)pos withArt:(NSString *)shipArt
 {
 	float rotation = -90.0f;
 	CGPoint velocity = CGPointZero;
@@ -518,9 +534,10 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 	
 	[self updateShieldBar];
 	
-	// Center on the player.
+	// Center the screen on the player.
 	self.scrollPosition = _playerShip.position;
 	
+	// Warp the space aronud the player as they appear.
 	CCNode *distortion = [CCBReader load:@"DistortionParticles/SmallRing"];
 	distortion.position = pos;
 	[_background.distortionNode addChild:distortion];
@@ -584,7 +601,6 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 		case  4:// Rocket 0
 			_rocketLevel += 1;
 			[self levelUpText:@"Rockets"];
-			
 			_controls.rocketButtonVisible = YES;
 			_rocketReticle.visible = YES;
 			break;
@@ -639,6 +655,7 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 	[[OALSimpleAudio sharedInstance] playEffect:@"TempSounds/LevelUp.wav" volume:0.8 pitch:1.0 pan:0.0 loop:NO];
 }
 
+// Find a random position just outside the game area's bounds to spawn a group of enemies.
 static CGPoint
 RandomGroupPosition(float padding)
 {
@@ -648,14 +665,14 @@ RandomGroupPosition(float padding)
 	// Project that direction onto a unit square so we can spawn them just outside the screen's bounds.
 	dir = ccpMult(dir, 1.0/MAX(fabs(dir.x), fabs(dir.y)));
 	
-	// Now just need to turn that into an actual location.
+	// Now just need to stretch that square onto the game area's bounds.
 	return CGPointMake(
 		(0.5 + 0.5*dir.x)*GameSceneSize + dir.x*padding,
 		(0.5 + 0.5*dir.y)*GameSceneSize + dir.y*padding
 	);
 }
 
-// Set up timers to spawn a group of enemies.
+// Set up a timer to spawn a group of enemies.
 -(void)spawnGroup
 {
 	static NSUInteger spawnCounter = 0;
@@ -687,7 +704,7 @@ RandomGroupPosition(float padding)
 	} delay:0.0];
 	
 	// Configure the timer to repeat to spawn the rest of the enemies too.
-	// Scatter the spawn times to avoid frame spikes.
+	// Scatter the spawn times to avoid doing too much work in a single frame.
 	spawnTimer.repeatInterval = 0.1;
 	spawnTimer.repeatCount = groupCount - 1;
 }
@@ -699,7 +716,7 @@ RandomGroupPosition(float padding)
 		[self spawnGroup];
 	} delay:0.0];
 	
-	// Configure the timer to repeat.
+	// Configure the timer to repeat endlessly.
 	groupSpawnTimer.repeatInterval = 1.0;
 	groupSpawnTimer.repeatCount = CCTimerRepeatForever;
 }
@@ -742,27 +759,24 @@ static const float MinBarWidth = 5.0;
 	_levelLabel.string = [NSString stringWithFormat:@"Level: %d", level + 1];
 }
 
-
-#pragma mark - CCPhysicsCollisionDelegate methods
-
+//MARK: - CCPhysicsCollisionDelegate methods
 
 -(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair ship:(PlayerShip *)player enemy:(EnemyShip *)enemy
 {
 	if([_playerShip takeDamage]){
 		[_playerShip destroy];
-        // slow time:
-        [CCDirector sharedDirector].scheduler.timeScale = 0.25f;
-        
-        // and zoom in on the player?
-        [_scrollNode runAction:[CCActionEaseInOut actionWithAction: [CCActionScaleTo actionWithDuration:0.1f scale:1.65f] rate:2.0] ];
-        
-        [self scheduleBlock:^(CCTimer *timer){
+		// slow time:
+		[CCDirector sharedDirector].scheduler.timeScale = 0.25f;
+		
+		// and zoom in on the player?
+		[_scrollNode runAction:[CCActionEaseInOut actionWithAction: [CCActionScaleTo actionWithDuration:0.1f scale:1.65f] rate:2.0] ];
+		
+		[self scheduleBlock:^(CCTimer *timer){
 			// Go back to the menu after a short delay.
-            [CCDirector sharedDirector].scheduler.timeScale = 1.0f;
+			[CCDirector sharedDirector].scheduler.timeScale = 1.0f;
 			[[CCDirector sharedDirector] replaceScene:[CCBReader loadAsScene:@"MainMenu"] withTransition:[BurnTransition burnTransitionWithDuration:1.0]];
 		} delay:1.75f];
 		
-		// Don't process the collision so the enemy spaceship will survive and mock you.
 		return NO;
 	}else{
 		[self updateShieldBar];
@@ -784,7 +798,7 @@ static const float MinBarWidth = 5.0;
 	return NO;
 }
 
--(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair bullet:(Bullet *)bullet wall:(CCNode *)wall
+-(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair bullet:(Bullet *)bullet asteroid:(CCNode *)asteroid
 {
 	[bullet destroy];
 	return NO;

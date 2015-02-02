@@ -40,10 +40,14 @@ typedef void (^ControlHandler)(BOOL state);
 @property(nonatomic, assign) BOOL novaButtonEnabled;
 @property(nonatomic, assign) BOOL novaButtonVisible;
 
+// Left/right joystick values.
 -(CGPoint)thrustDirection;
 -(CGPoint)aimDirection;
 
+// Check if a certain button is pressed.
 -(BOOL)getButton:(ControlButton)button;
+
+// Set a callback for when a button is pressed or released.
 -(void)setHandler:(ControlHandler)block forButton:(ControlButton)button;
 
 @end

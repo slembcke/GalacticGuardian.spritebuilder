@@ -145,8 +145,6 @@
 						<real>1</real>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -524,6 +522,8 @@
 								</array>
 							</dict>
 						</array>
+						<key>selected</key>
+						<true/>
 					</dict>
 					<dict>
 						<key>UUID</key>
@@ -2108,7 +2108,7 @@
 						<key>displayName</key>
 						<string>CCButton</string>
 						<key>memberVarAssignmentName</key>
-						<string></string>
+						<string>_hardMode</string>
 						<key>memberVarAssignmentType</key>
 						<integer>1</integer>
 						<key>properties</key>
