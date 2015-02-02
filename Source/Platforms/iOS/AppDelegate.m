@@ -1,8 +1,7 @@
 /*
- * SpriteBuilder: http://www.spritebuilder.org
+ * Galactic Guardian
  *
- * Copyright (c) 2012 Zynga Inc.
- * Copyright (c) 2013 Apportable Inc.
+ * Copyright (c) 2015 Scott Lembcke and Andy Korth
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,11 +22,12 @@
  * THE SOFTWARE.
  */
 
+#import <UIKit/UIKit.h>
+
 #import "cocos2d.h"
 
-#import "AppDelegate.h"
-#import "CCBuilderReader.h"
 
+@interface AppController : CCAppDelegate @end
 @implementation AppController
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions

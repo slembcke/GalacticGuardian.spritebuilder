@@ -1,7 +1,7 @@
 /*
- * SpriteBuilder: http://www.spritebuilder.org
+ * Galactic Guardian
  *
- * Copyright (c) 2014 Apportable Inc.
+ * Copyright (c) 2015 Scott Lembcke and Andy Korth
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,10 +22,12 @@
  * THE SOFTWARE.
  */
 
-
-#import "GalacticGuardianActivity.h"
 #import <AndroidKit/AndroidKeyEvent.h>
 
+#import "CCActivity.h"
+
+BRIDGE_CLASS("com.apportable.GLActivity")
+@interface GalacticGuardianActivity : CCActivity @end
 @implementation GalacticGuardianActivity
 
 - (CCScene *)startScene
