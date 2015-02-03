@@ -27,6 +27,8 @@
 
 @implementation GameController
 
+#if GameControllerSupported
+
 static GCController *SHARED_CONTROLLER = nil;
 
 // Immutable array to avoid the need to copy during iteration.
@@ -100,7 +102,7 @@ static NSArray *CONTROLLER_DELEGATES = nil;
 +(void)addDelegate:(id<GameControllerDelegate>)delegate
 {
 	CONTROLLER_DELEGATES = [CONTROLLER_DELEGATES arrayByAddingObject:delegate];
-	if([delegate respondsToSelector:@selector(controllerDidConnect)]) [delegate controllerDidConnect];
+	if(SHARED_CONTROLLER && [delegate respondsToSelector:@selector(controllerDidConnect)]) [delegate controllerDidConnect];
 }
 
 +(void)removeDelegate:(id<GameControllerDelegate>)delegate
@@ -109,7 +111,14 @@ static NSArray *CONTROLLER_DELEGATES = nil;
 	[arr removeObject:delegate];
 	
 	CONTROLLER_DELEGATES = arr;
-	if([delegate respondsToSelector:@selector(controllerDidDisconnect)]) [delegate controllerDidDisconnect];
+	if(SHARED_CONTROLLER && [delegate respondsToSelector:@selector(controllerDidDisconnect)]) [delegate controllerDidDisconnect];
 }
+
+#else
+
++(void)addDelegate:(id<GameControllerDelegate>)delegate {}
++(void)removeDelegate:(id<GameControllerDelegate>)delegate {}
+
+#endif
 
 @end
