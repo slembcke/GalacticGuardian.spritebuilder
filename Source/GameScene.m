@@ -83,12 +83,7 @@
 		[self addChild:hud z:Z_HUD];
 		
 		self.spaceBucks = 0;
-		
-		if([[NSUserDefaults standardUserDefaults] boolForKey:DefaultsDifficultyHardKey]){
-			_spaceBucksTilNextLevel = SpaceBucksTilLevel1HardMode;
-		}else{
-			_spaceBucksTilNextLevel = SpaceBucksTilLevel1EasyMode;
-		}
+		_spaceBucksTilNextLevel = SpaceBucksTilLevel1HardMode;
 		
 		self.level = 0;
 		self.spaceBucks = 0;
@@ -142,10 +137,6 @@
 		bounds.physicsBody.elasticity = 1.0;
 		[_physics addChild:bounds];
 		
-		// Add the player's ship in the center of the game area.
-		[self createPlayerShipAt: ccp(GameSceneSize/2.0, GameSceneSize/2.0) withArt:ship_fileNames[shipType]];
-		
-		
 		// Make a random, circular-ish pattern of asteroids.
 		for(int i = 0; i < 15; i++){
 			float angle = (M_PI * 2.0f / 15.0f) * i;
@@ -159,6 +150,25 @@
 		
 		_enemies = [NSMutableArray array];
 		[self setupEnemySpawnTimer];
+		
+		// Skip to level 6 in demo mode.
+		if(!([[NSUserDefaults standardUserDefaults] boolForKey:DefaultsDifficultyHardKey])){
+			self.level = 6;
+			
+			_spaceBucksTilNextLevel *= pow(SpaceBucksLevelMultiplier, 5.0);
+			
+			_bulletLevel = 2;
+			self.novaBombs += 1;
+			
+			_rocketLevel = 1;
+			_controls.rocketButtonVisible = YES;
+			_rocketReticle.visible = YES;
+			
+			_shipLevel = 1;
+		}
+		
+		// Add the player's ship in the center of the game area.
+		[self createPlayerShipAt: ccp(GameSceneSize/2.0, GameSceneSize/2.0) withArt:ship_fileNames[shipType]];
 	}
 	
 	return self;
