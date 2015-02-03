@@ -132,6 +132,9 @@
 		D3A7E8F819FDCB5E00695965 /* Nebula.fsh in Resources */ = {isa = PBXBuildFile; fileRef = D3A7E8F519FDCB5E00695965 /* Nebula.fsh */; };
 		D3CCBE091A04BBBF0082EA65 /* BurnTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = D3EA632F1A04973D00325F0F /* BurnTransition.m */; };
 		D3CCBE0A1A04BBBF0082EA65 /* BurnTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = D3EA632F1A04973D00325F0F /* BurnTransition.m */; };
+		D3E4BCA71A80AD0900FF2FA5 /* GameController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3E4BCA61A80AD0900FF2FA5 /* GameController.m */; };
+		D3E4BCA81A80AD0900FF2FA5 /* GameController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3E4BCA61A80AD0900FF2FA5 /* GameController.m */; };
+		D3E4BCA91A80AD0900FF2FA5 /* GameController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3E4BCA61A80AD0900FF2FA5 /* GameController.m */; };
 		D3EA63301A04973D00325F0F /* BurnTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = D3EA632F1A04973D00325F0F /* BurnTransition.m */; };
 		D3EAD2BB1A009F8D002AA0D2 /* PauseScene.m in Sources */ = {isa = PBXBuildFile; fileRef = D3EAD2BA1A009F8D002AA0D2 /* PauseScene.m */; };
 		D3EAD2BC1A00A855002AA0D2 /* PauseScene.m in Sources */ = {isa = PBXBuildFile; fileRef = D3EAD2BA1A009F8D002AA0D2 /* PauseScene.m */; };
@@ -306,6 +309,8 @@
 		D3A7E8F119FDCABE00695965 /* Nebula.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Nebula.vsh; sourceTree = "<group>"; };
 		D3A7E8F519FDCB5E00695965 /* Nebula.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Nebula.fsh; sourceTree = "<group>"; };
 		D3CCBE081A04A5170082EA65 /* BurnTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BurnTransition.h; sourceTree = "<group>"; };
+		D3E4BCA61A80AD0900FF2FA5 /* GameController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameController.m; sourceTree = "<group>"; };
+		D3E4BCAC1A80AD2400FF2FA5 /* GameController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameController.h; sourceTree = "<group>"; };
 		D3EA632F1A04973D00325F0F /* BurnTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BurnTransition.m; sourceTree = "<group>"; };
 		D3EAD2BA1A009F8D002AA0D2 /* PauseScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PauseScene.m; sourceTree = "<group>"; };
 		D3EAD2BE1A00AD2B002AA0D2 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
@@ -545,6 +550,8 @@
 				D3EA632B1A0496EC00325F0F /* UI */,
 				75058A2F19FEC27F001AA9C6 /* GameScene.h */,
 				75058A3019FEC27F001AA9C6 /* GameScene.m */,
+				D3E4BCAC1A80AD2400FF2FA5 /* GameController.h */,
+				D3E4BCA61A80AD0900FF2FA5 /* GameController.m */,
 				D31D3DCE1A0041A80085DB5B /* Controls.h */,
 				D31D3DCA1A00418C0085DB5B /* Controls.m */,
 				D3F714501A7E102200930BBE /* CCController.h */,
@@ -1011,6 +1018,7 @@
 				D3CCBE0A1A04BBBF0082EA65 /* BurnTransition.m in Sources */,
 				D3ED616719FF327C00DF3A43 /* BurnSprite.m in Sources */,
 				7A59498E19E3941300F65F90 /* AppDelegate.m in Sources */,
+				D3E4BCA91A80AD0900FF2FA5 /* GameController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1021,6 +1029,7 @@
 				D3ED617119FF57A000DF3A43 /* PlayerShip.m in Sources */,
 				D3450BD61A0395F100E63B3A /* SpaceBucks.m in Sources */,
 				D3A7E8DB19FDC86000695965 /* NebulaBackground.m in Sources */,
+				D3E4BCA81A80AD0900FF2FA5 /* GameController.m in Sources */,
 				D31D3DCC1A00418C0085DB5B /* Controls.m in Sources */,
 				D3EAD2BC1A00A855002AA0D2 /* PauseScene.m in Sources */,
 				927F619E196C771E000F43EF /* MainMenu.m in Sources */,
@@ -1057,6 +1066,7 @@
 				D3EA63301A04973D00325F0F /* BurnTransition.m in Sources */,
 				75058A4219FECE64001AA9C6 /* PlayerShip.m in Sources */,
 				D3450BCC1A02EB8500E63B3A /* Rocket.m in Sources */,
+				D3E4BCA71A80AD0900FF2FA5 /* GameController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

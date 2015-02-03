@@ -24,6 +24,17 @@
 
 #import "Constants.h"
 #import "ShipSelectionScene.h"
+#import "GameController.h"
+
+
+#if GameControllerSupported
+@interface ShipSelectionScene()<GameControllerDelegate> {
+	GCExtendedGamepadSnapshot *_gamepad;
+	BOOL _gamepadDebounce;
+}
+
+@end
+#endif
 
 
 @implementation ShipSelectionScene {
@@ -74,6 +85,57 @@ const float ship_powers[] = {30.0f, 80.0f, 100.0f};
 {
 	CCLOG(@"ShipSelection dealloc");
 }
+
+#if GameControllerSupported
+-(void)onEnterTransitionDidFinish
+{
+	[super onEnterTransitionDidFinish];
+	
+	[GameController addDelegate:self];
+}
+
+-(void)onExitTransitionDidStart
+{
+	[super onExitTransitionDidStart];
+	
+	[GameController removeDelegate:self];
+	_gamepad = nil;
+}
+
+-(void)snapshotDidChange:(NSData *)snapshotData
+{
+	_gamepad.snapshotData = snapshotData;
+}
+
+-(void)controllerDidConnect
+{
+	_gamepad = [[GCExtendedGamepadSnapshot alloc] init];
+	
+	GCControllerAxisValueChangedHandler axisHandler = ^(GCControllerAxisInput *axis, float value){
+		if(fabsf(value) > 0.75 && _gamepadDebounce == NO){
+			if(value > 0.0){
+				[self nextShip];
+			} else {
+				[self prevShip];
+			}
+		} else if(fabsf(value) < 0.25) {
+			_gamepadDebounce = NO;
+		}
+	};
+	
+	_gamepad.dpad.xAxis.valueChangedHandler = axisHandler;
+	_gamepad.leftThumbstick.xAxis.valueChangedHandler = axisHandler;
+
+	_gamepad.buttonA.valueChangedHandler = ^(GCControllerButtonInput *button, float value, BOOL pressed){
+		if(pressed) [self launch];
+	};
+}
+
+-(void)controllerDidDisconnect
+{
+	_gamepad = nil;
+}
+#endif
 
 -(void)dismiss:(id)sender
 {

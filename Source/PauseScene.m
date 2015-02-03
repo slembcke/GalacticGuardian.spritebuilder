@@ -25,6 +25,13 @@
 #import "Constants.h"
 #import "NebulaBackground.h"
 #import "PauseScene.h"
+#import "GameController.h"
+
+
+#if GameControllerSupported
+@interface PauseScene()<GameControllerDelegate>
+@end
+#endif
 
 
 @implementation PauseScene {
@@ -49,6 +56,27 @@
 {
 	CCLOG(@"PauseScene dealloc");
 }
+
+#if GameControllerSupported
+-(void)onEnterTransitionDidFinish
+{
+	[super onEnterTransitionDidFinish];
+	
+	[GameController addDelegate:self];
+}
+
+-(void)onExitTransitionDidStart
+{
+	[super onExitTransitionDidStart];
+	
+	[GameController removeDelegate:self];
+}
+
+-(void)pausePressed
+{
+	[self dismiss:nil];
+}
+#endif
 
 -(void)musicVolumeChanged:(CCSlider *)slider
 {

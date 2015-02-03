@@ -29,6 +29,17 @@
 #import "GameScene.h"
 #import "ShipSelectionScene.h"
 #import "PauseScene.h"
+#import "GameController.h"
+
+
+#if GameControllerSupported
+@interface MainMenu()<GameControllerDelegate> {
+	GCExtendedGamepadSnapshot *_gamepad;
+}
+
+@end
+#endif
+
 
 @implementation MainMenu {
 	NebulaBackground *_background;
@@ -88,6 +99,45 @@
 {
 	CCLOG(@"MainMenu dealloc");
 }
+
+#if GameControllerSupported
+-(void)onEnterTransitionDidFinish
+{
+	[super onEnterTransitionDidFinish];
+	
+	[GameController addDelegate:self];
+}
+
+-(void)onExitTransitionDidStart
+{
+	[super onExitTransitionDidStart];
+	
+	[GameController removeDelegate:self];
+}
+
+-(void)pausePressed
+{
+	[self showOptionsMenu];
+}
+
+-(void)snapshotDidChange:(NSData *)snapshotData
+{
+	_gamepad.snapshotData = snapshotData;
+}
+
+-(void)controllerDidConnect
+{
+	_gamepad = [[GCExtendedGamepadSnapshot alloc] init];
+	_gamepad.buttonA.valueChangedHandler = ^(GCControllerButtonInput *button, float value, BOOL pressed){
+		if(pressed && _playButton.enabled) [self showShipSelector];
+	};
+}
+
+-(void)controllerDidDisconnect
+{
+	_gamepad = nil;
+}
+#endif
 
 -(void)update:(CCTime)delta
 {
@@ -169,7 +219,7 @@
 	// Remove label so it doesn't show through the background and so it makes a good cinematic when we select a ship.
 	[_titleLabel removeFromParent];
 	[_particles removeFromParent];
-    [_playButton removeFromParent];
+	_playButton.enabled = NO;
 	
 	CCDirector *director = [CCDirector sharedDirector];
 	CGSize viewSize = director.viewSize;

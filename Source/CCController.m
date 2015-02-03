@@ -206,60 +206,69 @@ ControllerDisconnected(void *context, IOReturn result, void *sender)
 
 //MARK: Input callbacks
 
+-(void)callPauseHandler
+{
+	if(self.controllerPausedHandler){
+		self.controllerPausedHandler(self);
+	}
+}
+
 // Currently hardcoded for Dualshock 4 since that is all I have to test with.
 static void
 ControllerInputGeneric(void *context, IOReturn result, void *sender, IOHIDValueRef value)
 {
 	if(result == kIOReturnSuccess){
-		CCController *controller = (__bridge CCController *)context;
-		GCExtendedGamepadSnapShotDataV100 *snapshot = &controller->_snapshot;
-		
-		IOHIDElementRef element = IOHIDValueGetElement(value);
-		
-		uint32_t usagePage = IOHIDElementGetUsagePage(element);
-		uint32_t usage = IOHIDElementGetUsage(element);
-		
-		int state = (int)IOHIDValueGetIntegerValue(value);
-		float analog = IOHIDValueGetScaledValue(value, kIOHIDValueScaleTypeCalibrated);
-		
-//		NSLog(@"usagePage: 0x%02X, usage 0x%02X, value: %d / %f", usagePage, usage, state, analog);
-		
-		if(usagePage == kHIDPage_Button){
-			switch(usage){
-				case 0x02: snapshot->buttonA = state; break;
-				case 0x03: snapshot->buttonB = state; break;
-				case 0x01: snapshot->buttonX = state; break;
-				case 0x04: snapshot->buttonY = state; break;
-				case 0x05: snapshot->leftShoulder = state; break;
-				case 0x06: snapshot->rightShoulder = state; break;
-				case 0x0A: if(state) controller.controllerPausedHandler(controller); break;
-			}
-		} else if(usagePage == kHIDPage_GenericDesktop){
-			if(usage == 0x39){
-				switch(state){
-					case  0: snapshot->dpadX =  0.0; snapshot->dpadY =  1.0; break;
-					case  1: snapshot->dpadX =  1.0; snapshot->dpadY =  1.0; break;
-					case  2: snapshot->dpadX =  1.0; snapshot->dpadY =  0.0; break;
-					case  3: snapshot->dpadX =  1.0; snapshot->dpadY = -1.0; break;
-					case  4: snapshot->dpadX =  0.0; snapshot->dpadY = -1.0; break;
-					case  5: snapshot->dpadX = -1.0; snapshot->dpadY = -1.0; break;
-					case  6: snapshot->dpadX = -1.0; snapshot->dpadY =  0.0; break;
-					case  7: snapshot->dpadX = -1.0; snapshot->dpadY =  1.0; break;
-					default: snapshot->dpadX =  0.0; snapshot->dpadY =  0.0; break;
-				}
-			} else {
+		@autoreleasepool {
+			CCController *controller = (__bridge CCController *)context;
+			GCExtendedGamepadSnapShotDataV100 *snapshot = &controller->_snapshot;
+			
+			IOHIDElementRef element = IOHIDValueGetElement(value);
+			
+			uint32_t usagePage = IOHIDElementGetUsagePage(element);
+			uint32_t usage = IOHIDElementGetUsage(element);
+			
+			int state = (int)IOHIDValueGetIntegerValue(value);
+			float analog = IOHIDValueGetScaledValue(value, kIOHIDValueScaleTypeCalibrated);
+			
+//			NSLog(@"usagePage: 0x%02X, usage 0x%02X, value: %d / %f", usagePage, usage, state, analog);
+			
+			if(usagePage == kHIDPage_Button){
 				switch(usage){
-					case 0x30: snapshot->leftThumbstickX = analog; break;
-					case 0x31: snapshot->leftThumbstickY = analog; break;
-					case 0x32: snapshot->rightThumbstickX = analog; break;
-					case 0x35: snapshot->rightThumbstickY = analog; break;
-					case 0x33: snapshot->leftTrigger = analog; break;
-					case 0x34: snapshot->rightTrigger = analog; break;
+					case 0x02: snapshot->buttonA = state; break;
+					case 0x03: snapshot->buttonB = state; break;
+					case 0x01: snapshot->buttonX = state; break;
+					case 0x04: snapshot->buttonY = state; break;
+					case 0x05: snapshot->leftShoulder = state; break;
+					case 0x06: snapshot->rightShoulder = state; break;
+					case 0x0A: if(state) [controller callPauseHandler]; break;
+				}
+			} else if(usagePage == kHIDPage_GenericDesktop){
+				if(usage == 0x39){
+					switch(state){
+						case  0: snapshot->dpadX =  0.0; snapshot->dpadY =  1.0; break;
+						case  1: snapshot->dpadX =  1.0; snapshot->dpadY =  1.0; break;
+						case  2: snapshot->dpadX =  1.0; snapshot->dpadY =  0.0; break;
+						case  3: snapshot->dpadX =  1.0; snapshot->dpadY = -1.0; break;
+						case  4: snapshot->dpadX =  0.0; snapshot->dpadY = -1.0; break;
+						case  5: snapshot->dpadX = -1.0; snapshot->dpadY = -1.0; break;
+						case  6: snapshot->dpadX = -1.0; snapshot->dpadY =  0.0; break;
+						case  7: snapshot->dpadX = -1.0; snapshot->dpadY =  1.0; break;
+						default: snapshot->dpadX =  0.0; snapshot->dpadY =  0.0; break;
+					}
+				} else {
+					switch(usage){
+						case 0x30: snapshot->leftThumbstickX = analog; break;
+						case 0x31: snapshot->leftThumbstickY = analog; break;
+						case 0x32: snapshot->rightThumbstickX = analog; break;
+						case 0x35: snapshot->rightThumbstickY = analog; break;
+						case 0x33: snapshot->leftTrigger = analog; break;
+						case 0x34: snapshot->rightTrigger = analog; break;
+					}
 				}
 			}
+			
+			controller->_gamepad.snapshotData = NSDataFromGCExtendedGamepadSnapShotDataV100(snapshot);
 		}
-		
-		controller->_gamepad.snapshotData = NSDataFromGCExtendedGamepadSnapShotDataV100(snapshot);
 	}
 }
 

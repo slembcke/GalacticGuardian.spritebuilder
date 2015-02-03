@@ -22,14 +22,23 @@
  * THE SOFTWARE.
  */
 
-#if !ANDROID
-#import "CCController.h"
-#endif
-
 #import "ObjectiveChipmunk/ObjectiveChipmunk.h"
 
 #import "Controls.h"
 #import "FancyJoystick.h"
+#import "GameController.h"
+
+
+#if GameControllerSupported
+@interface Controls()<GameControllerDelegate> {
+	GCExtendedGamepadSnapshot *_gamepad;
+	
+	GCControllerDirectionPad *_controllerStick;
+	GCControllerDirectionPad *_controllerAim;
+}
+
+@end
+#endif
 
 
 @implementation Controls {
@@ -38,12 +47,6 @@
 	
 	CCButton *_rocketButton;
 	CCButton *_novaButton;
-	
-#if !ANDROID
-	GCController *_controller;
-	GCControllerDirectionPad *_controllerStick;
-	GCControllerDirectionPad *_controllerAim;
-#endif
 	
 	NSMutableDictionary *_buttonStates;
 	NSMutableDictionary *_buttonHandlers;
@@ -112,144 +115,78 @@
 		_buttonHandlers = [NSMutableDictionary dictionary];
 		
 		self.userInteractionEnabled = YES;
-		
-#if !ANDROID
-		[self setupGamepadSupport];
-#endif
 	}
 	
 	return self;
 }
 
-#if !ANDROID
--(void)logController:(GCController *)controller
+#if GameControllerSupported
+-(void)onEnterTransitionDidFinish
 {
-	NSLog(@"Controller: %@", controller);
-	NSLog(@"	Extended: %@", controller.extendedGamepad);
-	NSLog(@"	VendorName: %@", controller.vendorName);
+	[super onEnterTransitionDidFinish];
+	
+	[GameController addDelegate:self];
 }
 
-// This is called whenever a controller is connected or found.
--(BOOL)activateController:(GCController *)controller
+-(void)onExitTransitionDidStart
 {
-	// Ignore the controller if we already have one set or it doesn't support the exteded profile.
-	if(_controller || controller.extendedGamepad == nil) return NO;
+	[super onExitTransitionDidStart];
 	
-	NSLog(@"Using controller %@", controller);
-	_controller = controller;
-	controller.playerIndex = 0;
+	[GameController removeDelegate:self];
+}
+
+-(void)pausePressed
+{
+	[self callHandler:@(ControlPauseButton) value:YES];
+}
+
+-(void)snapshotDidChange:(NSData *)snapshotData
+{
+	_gamepad.snapshotData = snapshotData;
+}
+
+-(void)controllerDidConnect
+{
+	_gamepad = [[GCExtendedGamepadSnapshot alloc] init];
 	
-	_controllerStick = controller.extendedGamepad.leftThumbstick;
-	_controllerAim = controller.extendedGamepad.rightThumbstick;
+	_controllerStick = _gamepad.leftThumbstick;
+	_controllerAim = _gamepad.rightThumbstick;
 	
-	// Need to make a weak copy of self to avoid retain cycles.
-	__weak typeof(self) _self = self;
-	
-	controller.extendedGamepad.rightShoulder.valueChangedHandler = ^(GCControllerButtonInput *button, float value, BOOL pressed){
-		[_self setButtonValue:ControlRocketButton value:pressed];
+	_gamepad.rightShoulder.valueChangedHandler = ^(GCControllerButtonInput *button, float value, BOOL pressed){
+		[self setButtonValue:ControlRocketButton value:pressed];
 	};
 	
-	controller.extendedGamepad.buttonA.valueChangedHandler = ^(GCControllerButtonInput *button, float value, BOOL pressed){
-		[_self setButtonValue:ControlNovaButton value:pressed];
+	_gamepad.buttonA.valueChangedHandler = ^(GCControllerButtonInput *button, float value, BOOL pressed){
+		[self setButtonValue:ControlNovaButton value:pressed];
 	};
 	
-	controller.controllerPausedHandler = ^(GCController *controller){
-		[_self callHandler:@(ControlPauseButton) value:YES];
-	};
-	
-	// Set up to receive notifications if the controller is disconnected.
-	_controllerDisconnectedObserver = [[NSNotificationCenter defaultCenter] addObserverForName:GCControllerDidDisconnectNotification object:controller queue:nil
-		usingBlock:^(NSNotification *notification){
-			NSLog(@"Controller disconnected.");
-			
-			GCController *controller = notification.object;
-			[_self logController:controller];
-			[_self deactivateController:controller];
-		}
-	];
-	
-	// When using a controller, don't show the onscreen controls.
 	self.visible = NO;
-	
-	return YES;
 }
 
-// Called when a controller is disconnected, or the control object is deallocated.
--(void)deactivateController:(GCController *)controller
+-(void)controllerDidDisconnect
 {
-	if(controller == nil) return;
-	
-	NSAssert(controller == _controller, @"Deactivating some other controller!?");
-	
-	// Reset all of the callbacks on the controller object.
-	_controller.extendedGamepad.rightShoulder.valueChangedHandler = nil;
-	_controller.controllerPausedHandler = nil;
-	
-	_controller = nil;
+	_gamepad = nil;
 	_controllerStick = nil;
 	_controllerAim = nil;
 	
-	// Stop listening for controller disconnect events.
-	[[NSNotificationCenter defaultCenter] removeObserver:_controllerDisconnectedObserver];
-	_controllerDisconnectedObserver = nil;
-	
-	// Show the on screen controls again.
 	self.visible = YES;
-}
-
-// Called on iOS and Mac to search for and connect to game controllers.
--(void)setupGamepadSupport
-{
-	// Check that the OS has support for controllers. (iOS 7+, OS X 10.9+)
-	if(NSClassFromString(@"GCController") == nil) return;
-	
-	// Note that I'm calling CCController and not GCController.
-	// This is a subclass I made that adds support for USB gamepads on Mac.
-	NSArray *controllers = [CCController controllers];
-	NSLog(@"%d controllers found.", (int)controllers.count);
-	
-	for(GCController *controller in controllers){
-		[self logController:controller];
-		if(_controller == nil) [self activateController:controller];
-	}
-	
-	// Register for notifications when new controllers are connected.
-	__weak typeof(self) _self = self;
-	_controllerConnectedObserver = [[NSNotificationCenter defaultCenter] addObserverForName:GCControllerDidConnectNotification object:nil queue:nil
-		usingBlock:^(NSNotification *notification){
-			NSLog(@"Controller connected.");
-			
-			GCController *controller = notification.object;
-			[_self logController:controller];
-			[_self activateController:controller];
-		}
-	];
-}
-
--(void)dealloc
-{
-	CCLOG(@"Dealloc Controls.");
-	[self deactivateController:_controller];
-	
-	[[NSNotificationCenter defaultCenter] removeObserver:_controllerConnectedObserver];
-	_controllerConnectedObserver = nil;
 }
 #endif
 
 -(void)update:(CCTime)delta
 {
-#if ANDROID
-	CGPoint aim = _virtualAimJoystick.direction;
-#else
+#if GameControllerSupported
 	CGPoint aim = CGPointZero;
 	
 	// If a controller is connected, read from that.
 	// Otherwise read from the onscreen joystick.
-	if(_controller){
+	if(_controllerAim){
 		aim = CGPointMake(_controllerAim.xAxis.value, _controllerAim.yAxis.value);
 	} else {
 		aim = _virtualAimJoystick.direction;
 	}
+#else
+	CGPoint aim = _virtualAimJoystick.direction;
 #endif
 	
 	// Virtual fire button that is pressed when the aim joystick is used.
@@ -277,10 +214,8 @@
 
 -(CGPoint)thrustDirection
 {
-#if ANDROID
-	return _virtualJoystick.direction;
-#else
-	if(_controller){
+#if GameControllerSupported
+	if(_controllerStick){
 		return cpvclamp(cpv(
 			_controllerStick.xAxis.value,
 			_controllerStick.yAxis.value
@@ -288,15 +223,15 @@
 	} else {
 		return _virtualJoystick.direction;
 	}
+#else
+	return _virtualJoystick.direction;
 #endif
 }
 
 -(CGPoint)aimDirection
 {
-#if ANDROID
-	return _virtualAimJoystick.direction;
-#else
-	if(_controller){
+#if GameControllerSupported
+	if(_controllerAim){
 		return cpvclamp(cpv(
 			_controllerAim.xAxis.value,
 			_controllerAim.yAxis.value
@@ -304,6 +239,8 @@
 	} else {
 		return _virtualAimJoystick.direction;
 	}
+#else
+	return _virtualAimJoystick.direction;
 #endif
 }
 
