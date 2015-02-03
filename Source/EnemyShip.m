@@ -135,40 +135,53 @@ static NSArray *CollisionMask = nil;
 		return;
 	}
 	
-	CCNode *parent = self.parent;
-	CGPoint pos = self.position;
+	CCPhysicsBody *body = self.physicsBody;
 	
-	for(int i=0; i<PickupCount; i++){
-		CCNode *pickup = _pickups[i];
-		pickup.position = pos;
-		[parent addChild:pickup z:Z_PICKUPS];
-	}
+	// Tell it not to collide with anything anymore.
+	body.collisionMask = @[];
 	
-	_debrisNode.position = pos;
-	_debrisNode.rotation = self.rotation;
+	// Give them a little death spin.
+	body.angularVelocity = 1.0;
 	
-	InitDebris(_debrisNode, _debrisNode, self.physicsBody.velocity, weaponColor);
-	[parent addChild:_debrisNode z:Z_DEBRIS];
-	
-	_explosion.position = pos;
-	[parent addChild:_explosion z:Z_FIRE];
-	
-	_smoke.position = pos;
-	[parent addChild:_smoke z:Z_SMOKE];
-	
-	_distortion.position = pos;
-	[_scene.distortionNode addChild:_distortion];
-	
-	[parent scheduleBlock:^(CCTimer *timer) {
-		[_debrisNode removeFromParent];
-		[_explosion removeFromParent];
-		[_smoke removeFromParent];
-		[_distortion removeFromParent];
-	} delay:3.0];
-	
-	[[OALSimpleAudio sharedInstance] playEffect:@"TempSounds/Explosion.wav" volume:2.0 pitch:1.0 pan:0.0 loop:NO];
-	
-	[self removeFromParent];
+	// Delay destroying an enemy by a short duration.
+	// For big explosions, this scatters the sound effects and CPU usage for destroying the objects.
+	// It also just looks kinda cool.
+	[self scheduleBlock:^(CCTimer *timer){
+		CCNode *parent = self.parent;
+		CGPoint pos = self.position;
+		
+		for(int i=0; i<PickupCount; i++){
+			CCNode *pickup = _pickups[i];
+			pickup.position = pos;
+			[parent addChild:pickup z:Z_PICKUPS];
+		}
+		
+		_debrisNode.position = pos;
+		_debrisNode.rotation = self.rotation;
+		
+		InitDebris(_debrisNode, _debrisNode, self.physicsBody.velocity, weaponColor);
+		[parent addChild:_debrisNode z:Z_DEBRIS];
+		
+		_explosion.position = pos;
+		[parent addChild:_explosion z:Z_FIRE];
+		
+		_smoke.position = pos;
+		[parent addChild:_smoke z:Z_SMOKE];
+		
+		_distortion.position = pos;
+		[_scene.distortionNode addChild:_distortion];
+		
+		[parent scheduleBlock:^(CCTimer *timer) {
+			[_debrisNode removeFromParent];
+			[_explosion removeFromParent];
+			[_smoke removeFromParent];
+			[_distortion removeFromParent];
+		} delay:3.0];
+		
+		[[OALSimpleAudio sharedInstance] playEffect:@"TempSounds/Explosion.wav" volume:2.0 pitch:1.0 pan:0.0 loop:NO];
+		
+		[self removeFromParent];
+	} delay:CCRANDOM_0_1()*0.25];
 }
 
 @end
