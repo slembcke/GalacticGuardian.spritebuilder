@@ -48,10 +48,10 @@ static CCShader *BurnShader = nil;
 	NSMutableDictionary *globals = [CCDirector sharedDirector].globalShaderUniforms;
 	globals[@"u_BurnScale"] = @(3.0);
 	globals[@"u_BurnTexture"] = burnTexture;
-	globals[@"u_MinChar"] = @(0.70);
-	globals[@"u_MaxChar"] = @(0.40);
+	globals[@"u_MinChar"] = @(0.20);
+	globals[@"u_MaxChar"] = @(0.05);
 	globals[@"u_CharSmooth"] = @(0.05);
-	globals[@"u_CharWidth"] = @(0.35);
+	globals[@"u_CharWidth"] = @(0.50);
 	globals[@"u_GlowSmooth"] = @(0.15);
 	
 	BurnShader = [CCShader shaderNamed:@"BurnSprite"];
