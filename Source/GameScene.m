@@ -378,10 +378,6 @@
 	rocket.position = position;
 	rocket.rotation = -CC_RADIANS_TO_DEGREES(ccpToAngle(direction));
 	
-	// Make the rocket start at the ship's velocity.
-	// Let it accelerate itself.
-	rocket.physicsBody.velocity = _playerShip.physicsBody.velocity;
-	
 	[_physics addChild:rocket z:Z_BULLET];
 	
 	// Disable the rocket button and reset the charging reticle.
