@@ -30,7 +30,7 @@
 @implementation PauseScene {
 	CCSlider *_musicSlider;
 	CCSlider *_soundSlider;
-    bool _hardMode;
+	CCButton *_hardMode;
 }
 
 -(void)didLoadFromCCB
@@ -42,7 +42,7 @@
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	_musicSlider.sliderValue = [[defaults objectForKey:DefaultsMusicKey] floatValue];
 	_soundSlider.sliderValue = [[defaults objectForKey:DefaultsSoundKey] floatValue];
-	_hardMode = [defaults boolForKey:DefaultsDifficultyHardKey];
+	_hardMode.title = [NSString stringWithFormat:@"Difficulty: %@", [defaults boolForKey:DefaultsDifficultyHardKey] ? @"Hard" : @"Demo"];
 }
 
 -(void)dealloc
@@ -66,12 +66,13 @@
 }
 
 -(void)toggleDemoMode:(CCButton *)button
-{
-    _hardMode = !_hardMode;
-    
-    [[NSUserDefaults standardUserDefaults] setBool:_hardMode forKey:DefaultsDifficultyHardKey];
-    
-    button.title = [NSString stringWithFormat:@"Difficulty: %@", _hardMode ? @"Hard" : @"Demo"];
+{	
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	
+	BOOL value = ![defaults boolForKey:DefaultsDifficultyHardKey];
+	[defaults setBool:value forKey:DefaultsDifficultyHardKey];
+	
+	button.title = [NSString stringWithFormat:@"Difficulty: %@", value ? @"Hard" : @"Demo"];
 }
 
 -(void)toggleDistortionMode:(CCButton *)button
