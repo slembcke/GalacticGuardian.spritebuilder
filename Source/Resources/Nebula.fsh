@@ -3,7 +3,7 @@ uniform sampler2D u_DistortionMap;
 
 varying mediump vec2 v_ParallaxOffset;
 
-const float DistortionAmount = 0.5;
+const float DistortionAmount = 0.25;
 
 void main(){
 	// Calculate the amount of distortion to apply for the parallax mapping effect.

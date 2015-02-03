@@ -113,7 +113,7 @@ static CCTexture *DistortionTexture = nil;
 		self.shader = ShaderMode;
 		
 		// The values are read by the shaders (Nebula.fsh/vsh)
-		self.shaderUniforms[@"u_ParallaxAmount"] = @(0.07);
+		self.shaderUniforms[@"u_ParallaxAmount"] = @(0.09);
 		self.shaderUniforms[@"u_DepthMap"] = DepthMap;
 		self.shaderUniforms[@"u_DistortionMap"] = _distortionMap.texture;
 		
