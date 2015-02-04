@@ -99,8 +99,6 @@ static const float RocketClusterRange = 25.0;
 		[distortion removeFromParent];
 	} delay:2];
 	
-	[scene drawGlow:pos];
-	
 	[[OALSimpleAudio sharedInstance] playEffect:@"TempSounds/Explosion.wav" volume:2.0 pitch:1.0 pan:0.0 loop:NO];
 }
 
@@ -119,6 +117,8 @@ static const float RocketClusterRange = 25.0;
 			} delay:i*RocketClusterInterval];
 		}
 	}
+	
+	[(GameScene *)parent.scene drawGlow:pos];
 	
 	[self removeFromParent];
 }

@@ -74,6 +74,9 @@
 	RocketLevel _rocketLevel;
 	
 	int _spaceBucksTilNextLevel;
+	
+	// This light is recycled for each explosion.
+	CCLightNode *_glowLight;
 }
 
 -(instancetype)initWithShipType:(ShipType) shipType
@@ -157,6 +160,11 @@
 		light.ambientIntensity = 0.2;
 		light.depth = 20.0;
 		[_scrollNode addChild:light];
+		
+		_glowLight = [CCLightNode lightWithType:CCLightPoint groups:nil color:[CCColor whiteColor] intensity:0.0];
+		_glowLight.ambientIntensity = 0.0;
+		_glowLight.depth = 0;
+		[_scrollNode addChild:_glowLight];
 		
 		// Skip to level 6 in demo mode.
 		if(!([[NSUserDefaults standardUserDefaults] boolForKey:DefaultsDifficultyHardKey])){
@@ -336,16 +344,10 @@
 		nil
 	]];
 	
-	CCLightNode *light = [CCLightNode lightWithType:CCLightPoint groups:nil color:color intensity:intensity];
-	light.position = glow.anchorPointInPoints;
-	light.ambientIntensity = 0.0;
-	light.cutoffRadius = 0.0;
-	light.halfRadius = 0.0;
-	light.depth = 0;
-	[glow addChild:light];
-
-	[light runAction:[CCActionTween actionWithDuration:duration key:@"intensity" from:intensity to:0.0]];
-	[light runAction:[CCActionTween actionWithDuration:duration key:@"specularIntensity" from:intensity to:0.0]];
+	_glowLight.position = position;
+	
+	[_glowLight runAction:[CCActionTween actionWithDuration:duration key:@"intensity" from:intensity to:0.0]];
+	[_glowLight runAction:[CCActionTween actionWithDuration:duration key:@"specularIntensity" from:intensity to:0.0]];
 }
 
 -(void)fireBullet
@@ -741,7 +743,7 @@ RandomGroupPosition(float padding)
 	CGPoint groupPosition = RandomGroupPosition(GroupRadius);
 	
 	CCTimer *spawnTimer = [self scheduleBlock:^(CCTimer *timer) {
-		NSUInteger bigEnemyProbability = MAX(0, MIN(_level/2, 5));
+		NSUInteger bigEnemyProbability = 0;// TODO MAX(0, MIN(_level/2, 5));
 		
 		BOOL isBig = (bigEnemyProbability > spawnCounter%10);
 		EnemyShip *enemy = (EnemyShip *)[CCBReader load:isBig ? @"BadGuy2" : @"BadGuy1"];
