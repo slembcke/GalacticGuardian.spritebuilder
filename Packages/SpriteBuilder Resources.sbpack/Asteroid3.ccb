@@ -10,7 +10,7 @@
 		<false/>
 	</dict>
 	<key>UUID</key>
-	<integer>7</integer>
+	<integer>10</integer>
 	<key>centeredOrigin</key>
 	<false/>
 	<key>currentResolution</key>
@@ -194,7 +194,9 @@
 								<key>type</key>
 								<string>TokenArray</string>
 								<key>value</key>
-								<array/>
+								<array>
+									<string>main</string>
+								</array>
 							</dict>
 							<dict>
 								<key>name</key>

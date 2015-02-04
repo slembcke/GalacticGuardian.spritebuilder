@@ -41,6 +41,7 @@
 	id<ALSoundSource> _engineNoise;
 	
 	CCNode *_shield;
+	CCLightNode *_shieldLight;
 	
 	NSUInteger _currentGunPort;
 	NSMutableArray *_gunPorts;
@@ -197,6 +198,7 @@ VisitAll(CCNode *node, void (^block)(CCNode *))
 		nil
 	]];
 	
+	_shieldLight.intensity = 0.0;
 	_shieldDistortionSprite.visible = NO;
 }
 
