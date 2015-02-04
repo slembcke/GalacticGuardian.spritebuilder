@@ -151,6 +151,13 @@
 		_enemies = [NSMutableArray array];
 		[self setupEnemySpawnTimer];
 		
+		// Setup the global light.
+		CCLightNode *light = [CCLightNode lightWithType:CCLightPoint groups:nil color:[CCColor whiteColor] intensity:0.4];
+		light.position = ccp(GameSceneSize/2.0, GameSceneSize/2.0);
+		light.ambientIntensity = 0.2;
+		light.depth = 20.0;
+		[_scrollNode addChild:light];
+		
 		// Skip to level 6 in demo mode.
 		if(!([[NSUserDefaults standardUserDefaults] boolForKey:DefaultsDifficultyHardKey])){
 			self.level = 6;
@@ -308,6 +315,39 @@
 	]];
 }
 
+-(void)drawGlow:(CGPoint)position
+{
+	float intensity = 10.0;
+	CCColor *color = [CCColor whiteColor];
+	float duration = 1.0;
+	
+	// TODO need a higher res asset.
+	CCSprite *glow = [CCSprite spriteWithImageNamed:@"ccbResources/ccbParticleFire.png"];
+	glow.position = position;
+	glow.scale = 20.0;
+	glow.color = color;
+	glow.blendMode = [CCBlendMode addMode];
+	[_scrollNode addChild:glow z:Z_FIRE];
+	
+	[glow runAction:[CCActionSequence actions:
+		[CCActionScaleTo actionWithDuration:duration scale:glow.scale/2.0],
+		[CCActionFadeOut actionWithDuration:duration/2],
+		[CCActionRemove action],
+		nil
+	]];
+	
+	CCLightNode *light = [CCLightNode lightWithType:CCLightPoint groups:nil color:color intensity:intensity];
+	light.position = glow.anchorPointInPoints;
+	light.ambientIntensity = 0.0;
+	light.cutoffRadius = 0.0;
+	light.halfRadius = 0.0;
+	light.depth = 0;
+	[glow addChild:light];
+
+	[light runAction:[CCActionTween actionWithDuration:duration key:@"intensity" from:intensity to:0.0]];
+	[light runAction:[CCActionTween actionWithDuration:duration key:@"specularIntensity" from:intensity to:0.0]];
+}
+
 -(void)fireBullet
 {
 	// Don't fire bullets if the ship is destroyed.
@@ -418,6 +458,8 @@
 	CCParticleSystem *distortion = (CCParticleSystem *)[CCBReader load:@"DistortionParticles/LargeRing"];
 	distortion.position = pos;
 	[_background.distortionNode addChild:distortion];
+	
+	[self drawGlow:pos];
 	
 	[self scheduleBlock:^(CCTimer *timer) {
 		[distortion removeFromParent];

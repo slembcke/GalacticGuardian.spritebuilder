@@ -39,8 +39,10 @@
 
 -(void)splashDamageAt:(CGPoint)center radius:(float)radius damage:(int)damage;
 
--(void)drawFlash:(CGPoint) position withImage:(NSString*) imagePath;
+-(void)drawFlash:(CGPoint)position withImage:(NSString*)imagePath;
 -(void)drawBulletFlash:(Bullet *)fromBullet;
+
+-(void)drawGlow:(CGPoint)position;
 
 -(void)novaBombAt:(CGPoint)pos;
 
