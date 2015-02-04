@@ -26,6 +26,9 @@
 
 #import "cocos2d.h"
 
+#import "MainMenu.h"
+#import "GameScene.h"
+
 
 @interface AppController : CCAppDelegate @end
 @implementation AppController
@@ -63,7 +66,8 @@
 
 - (CCScene*) startScene
 {
-    return [CCBReader loadAsScene:@"MainMenu"];
+    [MainMenu class];
+    return [[GameScene alloc] initWithShipType:Ship_Defiant];
 }
 
 @end

@@ -31,7 +31,7 @@
 #import "SpaceBucks.h"
 
 
-static const NSUInteger PickupCount = 5;
+static const NSUInteger PickupCount = 8;
 
 
 @implementation EnemyShip

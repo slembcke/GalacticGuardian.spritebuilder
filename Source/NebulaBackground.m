@@ -129,10 +129,10 @@ static CCTexture *DistortionTexture = nil;
 	[_distortionNode setContentSize:contentSize];
 }
 
-- (void)viewDidResizeTo:(CGSize)newViewSize
-{
-    [self setTextureRect:(CGRect){CGPointZero, newViewSize}];
-}
+//- (void)viewDidResizeTo:(CGSize)newViewSize
+//{
+//    [self setTextureRect:(CGRect){CGPointZero, newViewSize}];
+//}
 
 -(void)onEnter
 {

@@ -24,6 +24,9 @@
 
 #import <Cocoa/Cocoa.h>
 
+#import "MainMenu.h"
+#import "GameScene.h"
+
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>
 
@@ -84,8 +87,9 @@
 
 	[[CCFileUtils sharedFileUtils] loadFilenameLookupDictionaryFromFile:@"fileLookup.plist"];
 	[[CCSpriteFrameCache sharedSpriteFrameCache] loadSpriteFrameLookupDictionaryFromFile:@"spriteFrameFileList.plist"];
-
-	[director runWithScene:[CCBReader loadAsScene:@"MainMenu"]];
+	
+	[MainMenu class];
+	[director runWithScene:[[GameScene alloc] initWithShipType:Ship_Defiant]];
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification

@@ -486,7 +486,9 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 }
 
 // Called when the pause button is pressed.
--(void)pause
+-(void)pause{}
+
+-(void)pause_
 {
 	CCDirector *director = [CCDirector sharedDirector];
 	CGSize viewSize = director.viewSize;
@@ -682,7 +684,7 @@ RandomGroupPosition(float padding)
 -(void)spawnGroup
 {
 	static NSUInteger spawnCounter = 0;
-	NSUInteger maxAllowedEnemies = MIN(10 + _level*3, 40);
+	NSUInteger maxAllowedEnemies = MIN(20 + _level*4, 80);
 	
 	NSUInteger MinGroupSize = 3;
 	NSUInteger MaxGroupSize = 8;
@@ -697,9 +699,9 @@ RandomGroupPosition(float padding)
 	CGPoint groupPosition = RandomGroupPosition(GroupRadius);
 	
 	CCTimer *spawnTimer = [self scheduleBlock:^(CCTimer *timer) {
-		NSUInteger bigEnemyProbability = MAX(0, MIN(_level - 10, 5));
+		NSUInteger bigEnemyProbability = MAX(0, MIN(_level/2, 5));
 		
-		BOOL isBig = (bigEnemyProbability > spawnCounter%5);
+		BOOL isBig = (bigEnemyProbability > spawnCounter%10);
 		EnemyShip *enemy = (EnemyShip *)[CCBReader load:isBig ? @"BadGuy2" : @"BadGuy1"];
 		
 		enemy.position = ccpAdd(groupPosition, ccpMult(CCRANDOM_IN_UNIT_CIRCLE(), GroupRadius));
@@ -780,7 +782,7 @@ static const float MinBarWidth = 5.0;
 		[self scheduleBlock:^(CCTimer *timer){
 			// Go back to the menu after a short delay.
 			[CCDirector sharedDirector].scheduler.timeScale = 1.0f;
-			[[CCDirector sharedDirector] replaceScene:[CCBReader loadAsScene:@"MainMenu"] withTransition:[BurnTransition burnTransitionWithDuration:1.0]];
+			[[CCDirector sharedDirector] replaceScene:[[GameScene alloc] initWithShipType:Ship_Defiant] withTransition:[BurnTransition burnTransitionWithDuration:1.0]];
 		} delay:1.75f];
 		
 		return NO;

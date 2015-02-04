@@ -1266,7 +1266,7 @@
 				<key>type</key>
 				<integer>1</integer>
 				<key>value</key>
-				<string>26.000000</string>
+				<string>40.000000</string>
 			</dict>
 			<dict>
 				<key>name</key>
@@ -1276,7 +1276,7 @@
 				<key>type</key>
 				<integer>0</integer>
 				<key>value</key>
-				<string>3</string>
+				<string>8</string>
 			</dict>
 		</array>
 		<key>displayName</key>
