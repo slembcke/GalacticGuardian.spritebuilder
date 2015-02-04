@@ -1,6 +1,6 @@
-uniform float u_StarfieldDepth;
-uniform float u_NebulaDepth1;
-uniform float u_NebulaDepth2;
+uniform highp float u_StarfieldDepth;
+uniform highp float u_NebulaDepth1;
+uniform highp float u_NebulaDepth2;
 
 uniform sampler2D u_NebulaTexture;
 uniform sampler2D u_DepthMap;
@@ -21,13 +21,13 @@ void main(){
 	// Starfield
 	gl_FragColor = texture2D(cc_MainTexture, cc_FragTexCoord1 + u_StarfieldDepth*distortion);
 	
-	// Nebula1
-	float depth1 = texture2D(u_DepthMap, v_ParallaxCoords1).r;
-	mediump vec2 parallax1 = 0.2*v_ParallaxOffset*(1.0 - depth1);
-	gl_FragColor = composite(0.3*texture2D(u_NebulaTexture, v_ParallaxCoords1 + parallax1 + u_NebulaDepth1*distortion), gl_FragColor);
+//	// Nebula1
+//	float depth1 = texture2D(u_DepthMap, v_ParallaxCoords1).r;
+//	mediump vec2 parallax1 = 0.2*v_ParallaxOffset*(1.0 - depth1);
+//	gl_FragColor = composite(0.7*texture2D(u_NebulaTexture, v_ParallaxCoords1 + parallax1 + u_NebulaDepth1*distortion), gl_FragColor);
 	
 	// Nebula2
 	float depth2 = texture2D(u_DepthMap, v_ParallaxCoords2).r;
 	mediump vec2 parallax2 = 0.2*v_ParallaxOffset*(1.0 - depth2);
-	gl_FragColor = composite(0.7*texture2D(u_NebulaTexture, v_ParallaxCoords2 + parallax2 + u_NebulaDepth2*distortion), gl_FragColor);
+	gl_FragColor = composite(texture2D(u_NebulaTexture, v_ParallaxCoords2 + parallax2 + u_NebulaDepth2*distortion), gl_FragColor);
 }

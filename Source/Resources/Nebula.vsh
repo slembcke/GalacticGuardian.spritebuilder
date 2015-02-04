@@ -1,7 +1,7 @@
 uniform vec2 u_ScrollOffset;
-uniform float u_StarfieldDepth;
-uniform float u_NebulaDepth1;
-uniform float u_NebulaDepth2;
+uniform highp float u_StarfieldDepth;
+uniform highp float u_NebulaDepth1;
+uniform highp float u_NebulaDepth2;
 
 varying vec2 v_ParallaxCoords1;
 varying vec2 v_ParallaxCoords2;

@@ -114,8 +114,8 @@ static CCTexture *DistortionTexture = nil;
 		
 		// The values are read by the shaders (Nebula.fsh/vsh)
 		self.shaderUniforms[@"u_StarfieldDepth"] = @(1.5);
-		self.shaderUniforms[@"u_NebulaDepth1"] = @(0.50);
-		self.shaderUniforms[@"u_NebulaDepth2"] = @(0.25);
+//		self.shaderUniforms[@"u_NebulaDepth1"] = @(0.50);
+		self.shaderUniforms[@"u_NebulaDepth2"] = @(0.35);
 		self.shaderUniforms[@"u_NebulaTexture"] = NebulaTexture;
 		self.shaderUniforms[@"u_DepthMap"] = DepthMap;
 		self.shaderUniforms[@"u_DistortionMap"] = _distortionMap.texture;
