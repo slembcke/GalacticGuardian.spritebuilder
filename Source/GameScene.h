@@ -42,7 +42,7 @@
 -(void)drawFlash:(CGPoint)position withImage:(NSString*)imagePath;
 -(void)drawBulletFlash:(Bullet *)fromBullet;
 
--(void)drawGlow:(CGPoint)position;
+-(void)drawGlow:(CGPoint)position scale:(float)scale;
 
 -(void)novaBombAt:(CGPoint)pos;
 

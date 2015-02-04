@@ -323,16 +323,15 @@
 	]];
 }
 
--(void)drawGlow:(CGPoint)position
+-(void)drawGlow:(CGPoint)position scale:(float)scale;
 {
-	float intensity = 10.0;
+	float intensity = 2.0*scale;
 	CCColor *color = [CCColor whiteColor];
-	float duration = 1.0;
+	float duration = 0.5;
 	
-	// TODO need a higher res asset.
-	CCSprite *glow = [CCSprite spriteWithImageNamed:@"ccbResources/ccbParticleFire.png"];
+	CCSprite *glow = [CCSprite spriteWithImageNamed:@"Flare.png"];
 	glow.position = position;
-	glow.scale = 20.0;
+	glow.scale = scale;
 	glow.color = color;
 	glow.blendMode = [CCBlendMode addMode];
 	[_scrollNode addChild:glow z:Z_FIRE];
@@ -340,6 +339,35 @@
 	[glow runAction:[CCActionSequence actions:
 		[CCActionScaleTo actionWithDuration:duration scale:glow.scale/2.0],
 		[CCActionFadeOut actionWithDuration:duration/2],
+		[CCActionRemove action],
+		nil
+	]];
+	
+	float flareOffset = scale*30.0;
+	
+	CCSprite *flareLeft = [CCSprite spriteWithImageNamed:@"FlareRGB.png"];
+	flareLeft.position = ccp(position.x - flareOffset, position.y);
+	flareLeft.scale = scale;
+	flareLeft.color = color;
+	flareLeft.blendMode = [CCBlendMode addMode];
+	[_scrollNode addChild:flareLeft z:Z_FIRE];
+	
+	[flareLeft runAction:[CCActionSequence actions:
+		[CCActionFadeTo actionWithDuration:duration],
+		[CCActionRemove action],
+		nil
+	]];
+	
+	CCSprite *flareRight = [CCSprite spriteWithImageNamed:@"FlareRGB.png"];
+	flareRight.position = ccp(position.x + flareOffset, position.y);
+	flareRight.scale = scale;
+	flareRight.flipX = YES;
+	flareRight.color = color;
+	flareRight.blendMode = [CCBlendMode addMode];
+	[_scrollNode addChild:flareRight z:Z_FIRE];
+	
+	[flareRight runAction:[CCActionSequence actions:
+		[CCActionFadeTo actionWithDuration:duration],
 		[CCActionRemove action],
 		nil
 	]];
@@ -461,7 +489,7 @@
 	distortion.position = pos;
 	[_background.distortionNode addChild:distortion];
 	
-	[self drawGlow:pos];
+	[self drawGlow:pos scale:20.0];
 	
 	[self scheduleBlock:^(CCTimer *timer) {
 		[distortion removeFromParent];

@@ -118,7 +118,7 @@ static const float RocketClusterRange = 25.0;
 		}
 	}
 	
-	[(GameScene *)parent.scene drawGlow:pos];
+	[(GameScene *)parent.scene drawGlow:pos scale:3.0];
 	
 	[self removeFromParent];
 }
