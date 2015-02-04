@@ -35,6 +35,7 @@
 
 static CCShader *ShaderMode = nil;
 
+static CCTexture *StarfieldTexture = nil;
 static CCTexture *NebulaTexture = nil;
 static CCTexture *DepthMap = nil;
 static CCTexture *DistortionTexture = nil;
@@ -45,13 +46,12 @@ static CCTexture *DistortionTexture = nil;
 {
 	ShaderMode = [CCShader shaderNamed:@"Nebula"];
 	
-	// This is the purple-ish texture for the nebula.
-	NebulaTexture = [CCTexture textureWithFile:@"Nebula.png"];
-	NebulaTexture.contentScale = 2.0;
+	StarfieldTexture = [CCTexture textureWithFile:@"Starfield.png"];
+	StarfieldTexture.contentScale = 2.0;
+	StarfieldTexture.texParameters = &(ccTexParams){GL_LINEAR, GL_LINEAR, GL_REPEAT, GL_REPEAT};
 	
-	// We want to make the texture repeate endlessly, but it's not exposed by the public API in 3.x...
-	// This is not generally safe to do with cached textures.
-	// Cocos2D 4.0 will fix the API problems however.
+	NebulaTexture = [CCTexture textureWithFile:@"NebulaClouds.png"];
+	NebulaTexture.contentScale = 2.0;
 	NebulaTexture.texParameters = &(ccTexParams){GL_LINEAR, GL_LINEAR, GL_REPEAT, GL_REPEAT};
 	
 	// This is a grayscale texture that holds how far away the background is.
@@ -72,22 +72,22 @@ static CCTexture *DistortionTexture = nil;
 	
 	CCShader *shaders[] = {
 		[CCShader shaderNamed:@"Nebula"],
-		[CCShader positionTextureColorShader],
-		[CCShader shaderNamed:@"NebulaDebug"],
+//		[CCShader positionTextureColorShader],
+//		[CCShader shaderNamed:@"NebulaDebug"],
 	};
 	ShaderMode = shaders[mode];
 	
 	NSString *names[] = {
 		@"On",
-		@"Off",
-		@"Debug",
+//		@"Off",
+//		@"Debug",
 	};
 	return names[mode];
 }
 
 -(id)init
 {
-	if((self = [super initWithTexture:NebulaTexture])){
+	if((self = [super initWithTexture:StarfieldTexture])){
 		self.anchorPoint = CGPointZero;
 		
 		// Disable alpha blending to save some fillrate.
@@ -113,7 +113,10 @@ static CCTexture *DistortionTexture = nil;
 		self.shader = ShaderMode;
 		
 		// The values are read by the shaders (Nebula.fsh/vsh)
-		self.shaderUniforms[@"u_ParallaxAmount"] = @(0.09);
+		self.shaderUniforms[@"u_StarfieldDepth"] = @(1.5);
+		self.shaderUniforms[@"u_NebulaDepth1"] = @(0.50);
+		self.shaderUniforms[@"u_NebulaDepth2"] = @(0.25);
+		self.shaderUniforms[@"u_NebulaTexture"] = NebulaTexture;
 		self.shaderUniforms[@"u_DepthMap"] = DepthMap;
 		self.shaderUniforms[@"u_DistortionMap"] = _distortionMap.texture;
 		

@@ -1,9 +1,11 @@
-uniform float u_ParallaxAmount;
 uniform vec2 u_ScrollOffset;
+uniform float u_StarfieldDepth;
+uniform float u_NebulaDepth1;
+uniform float u_NebulaDepth2;
 
+varying vec2 v_ParallaxCoords1;
+varying vec2 v_ParallaxCoords2;
 varying vec2 v_ParallaxOffset;
-
-const float DepthOffset = 0.5;
 
 void main(){
 	gl_Position = cc_Position;
@@ -11,15 +13,15 @@ void main(){
 	
 	// TODO doesn't respect the view's aspect ratio.
 	// Use a custom varying to pass the parallax offset.
-	v_ParallaxOffset = gl_Position.xy*(u_ParallaxAmount/gl_Position.w);
+	v_ParallaxOffset = gl_Position.xy/(gl_Position.w);
+	v_ParallaxOffset.y *= cc_ViewSize.y/cc_ViewSize.x;
 	
-	// Offset the regular texture coordinates depending on their screen position for a little extra depth.
-	cc_FragTexCoord1 = cc_TexCoord1 + DepthOffset*v_ParallaxOffset;
+	// Starfield
+	cc_FragTexCoord1 = cc_TexCoord1 + u_StarfieldDepth*v_ParallaxOffset;
 	
-	// Use UV2 for the screen space distortion map tex coords.
+	// Distortion Map
 	cc_FragTexCoord2 = 0.5 + gl_Position.xy*(0.5/gl_Position.w);
 	
-	// Apply scroll offset to the background.
-	// This was a simple cheat to make the background on the menu scroll more easily.
-	cc_FragTexCoord1 += u_ScrollOffset;
+	v_ParallaxCoords1 = 0.7*(cc_TexCoord1 + u_NebulaDepth1*v_ParallaxOffset);
+	v_ParallaxCoords2 = 0.4*(cc_TexCoord1 + u_NebulaDepth2*v_ParallaxOffset) + vec2(0.5);
 }

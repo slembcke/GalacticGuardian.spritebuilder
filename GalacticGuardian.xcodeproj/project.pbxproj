@@ -109,6 +109,12 @@
 		D3450BCE1A02EB8500E63B3A /* Rocket.m in Sources */ = {isa = PBXBuildFile; fileRef = D3450BCB1A02EB8500E63B3A /* Rocket.m */; };
 		D3450BD61A0395F100E63B3A /* SpaceBucks.m in Sources */ = {isa = PBXBuildFile; fileRef = 75058A691A005881001AA9C6 /* SpaceBucks.m */; };
 		D3450BD81A0395F200E63B3A /* SpaceBucks.m in Sources */ = {isa = PBXBuildFile; fileRef = 75058A691A005881001AA9C6 /* SpaceBucks.m */; };
+		D34E99A01A82ABFD002FE5D9 /* NebulaClouds.png in Resources */ = {isa = PBXBuildFile; fileRef = D34E999E1A82ABFD002FE5D9 /* NebulaClouds.png */; };
+		D34E99A11A82ABFD002FE5D9 /* NebulaClouds.png in Resources */ = {isa = PBXBuildFile; fileRef = D34E999E1A82ABFD002FE5D9 /* NebulaClouds.png */; };
+		D34E99A21A82ABFD002FE5D9 /* NebulaClouds.png in Resources */ = {isa = PBXBuildFile; fileRef = D34E999E1A82ABFD002FE5D9 /* NebulaClouds.png */; };
+		D34E99A31A82ABFD002FE5D9 /* Starfield.png in Resources */ = {isa = PBXBuildFile; fileRef = D34E999F1A82ABFD002FE5D9 /* Starfield.png */; };
+		D34E99A41A82ABFD002FE5D9 /* Starfield.png in Resources */ = {isa = PBXBuildFile; fileRef = D34E999F1A82ABFD002FE5D9 /* Starfield.png */; };
+		D34E99A51A82ABFD002FE5D9 /* Starfield.png in Resources */ = {isa = PBXBuildFile; fileRef = D34E999F1A82ABFD002FE5D9 /* Starfield.png */; };
 		D3937FC219FE1B2A0074009E /* DistortionParticle.fsh in Resources */ = {isa = PBXBuildFile; fileRef = D3937FC119FE1B2A0074009E /* DistortionParticle.fsh */; };
 		D3937FC319FE1B2A0074009E /* DistortionParticle.fsh in Resources */ = {isa = PBXBuildFile; fileRef = D3937FC119FE1B2A0074009E /* DistortionParticle.fsh */; };
 		D3937FC419FE1B2A0074009E /* DistortionParticle.fsh in Resources */ = {isa = PBXBuildFile; fileRef = D3937FC119FE1B2A0074009E /* DistortionParticle.fsh */; };
@@ -118,9 +124,6 @@
 		D3A7E8DA19FDC86000695965 /* NebulaBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A7E8D919FDC86000695965 /* NebulaBackground.m */; };
 		D3A7E8DB19FDC86000695965 /* NebulaBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A7E8D919FDC86000695965 /* NebulaBackground.m */; };
 		D3A7E8DC19FDC86000695965 /* NebulaBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A7E8D919FDC86000695965 /* NebulaBackground.m */; };
-		D3A7E8DF19FDC88600695965 /* Nebula.png in Resources */ = {isa = PBXBuildFile; fileRef = D3A7E8DD19FDC88600695965 /* Nebula.png */; };
-		D3A7E8E019FDC88600695965 /* Nebula.png in Resources */ = {isa = PBXBuildFile; fileRef = D3A7E8DD19FDC88600695965 /* Nebula.png */; };
-		D3A7E8E119FDC88600695965 /* Nebula.png in Resources */ = {isa = PBXBuildFile; fileRef = D3A7E8DD19FDC88600695965 /* Nebula.png */; };
 		D3A7E8E219FDC88600695965 /* NebulaDepth.png in Resources */ = {isa = PBXBuildFile; fileRef = D3A7E8DE19FDC88600695965 /* NebulaDepth.png */; };
 		D3A7E8E319FDC88600695965 /* NebulaDepth.png in Resources */ = {isa = PBXBuildFile; fileRef = D3A7E8DE19FDC88600695965 /* NebulaDepth.png */; };
 		D3A7E8E419FDC88600695965 /* NebulaDepth.png in Resources */ = {isa = PBXBuildFile; fileRef = D3A7E8DE19FDC88600695965 /* NebulaDepth.png */; };
@@ -299,12 +302,13 @@
 		D3450BC61A0213FD00E63B3A /* TempMusic.aac */ = {isa = PBXFileReference; lastKnownFileType = file; path = TempMusic.aac; sourceTree = "<group>"; };
 		D3450BCB1A02EB8500E63B3A /* Rocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Rocket.m; sourceTree = "<group>"; };
 		D3450BCF1A02EBA100E63B3A /* Rocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rocket.h; sourceTree = "<group>"; };
+		D34E999E1A82ABFD002FE5D9 /* NebulaClouds.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NebulaClouds.png; sourceTree = "<group>"; };
+		D34E999F1A82ABFD002FE5D9 /* Starfield.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Starfield.png; sourceTree = "<group>"; };
 		D352B48019EC608A00829775 /* MetalShaders */ = {isa = PBXFileReference; lastKnownFileType = folder; path = MetalShaders; sourceTree = "<group>"; };
 		D3937FBD19FDD9AB0074009E /* NebulaBackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NebulaBackground.h; sourceTree = "<group>"; };
 		D3937FC119FE1B2A0074009E /* DistortionParticle.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = DistortionParticle.fsh; sourceTree = "<group>"; };
 		D3937FC719FE1C410074009E /* DistortionParticle.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = DistortionParticle.vsh; sourceTree = "<group>"; };
 		D3A7E8D919FDC86000695965 /* NebulaBackground.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NebulaBackground.m; sourceTree = "<group>"; };
-		D3A7E8DD19FDC88600695965 /* Nebula.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Nebula.png; sourceTree = "<group>"; };
 		D3A7E8DE19FDC88600695965 /* NebulaDepth.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NebulaDepth.png; sourceTree = "<group>"; };
 		D3A7E8F119FDCABE00695965 /* Nebula.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Nebula.vsh; sourceTree = "<group>"; };
 		D3A7E8F519FDCB5E00695965 /* Nebula.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Nebula.fsh; sourceTree = "<group>"; };
@@ -643,10 +647,11 @@
 		B77F1B4617B978D7009739AE /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D34E999E1A82ABFD002FE5D9 /* NebulaClouds.png */,
+				D34E999F1A82ABFD002FE5D9 /* Starfield.png */,
 				D3450BC61A0213FD00E63B3A /* TempMusic.aac */,
 				D3EAD2BF1A00B448002AA0D2 /* NebulaDebug.fsh */,
 				D3EAD2C01A00B448002AA0D2 /* NebulaDebug.vsh */,
-				D3A7E8DD19FDC88600695965 /* Nebula.png */,
 				D3A7E8DE19FDC88600695965 /* NebulaDepth.png */,
 				D3A7E8F119FDCABE00695965 /* Nebula.vsh */,
 				D3A7E8F519FDCB5E00695965 /* Nebula.fsh */,
@@ -876,11 +881,12 @@
 				D3937FC419FE1B2A0074009E /* DistortionParticle.fsh in Resources */,
 				D3450BC01A01FEB300E63B3A /* joystick.plist in Resources */,
 				D3A7E8F819FDCB5E00695965 /* Nebula.fsh in Resources */,
-				D3A7E8E119FDC88600695965 /* Nebula.png in Resources */,
 				D3ED617019FF3B8000DF3A43 /* BurnSprite.vsh in Resources */,
 				7A59498B19E38E4A00F65F90 /* MainMenu.xib in Resources */,
 				D3A7E8E419FDC88600695965 /* NebulaDepth.png in Resources */,
+				D34E99A21A82ABFD002FE5D9 /* NebulaClouds.png in Resources */,
 				D3EAD2C31A00B448002AA0D2 /* NebulaDebug.fsh in Resources */,
+				D34E99A51A82ABFD002FE5D9 /* Starfield.png in Resources */,
 				7A4036F619DE3FFC007B6E8F /* Published-iOS in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -892,8 +898,9 @@
 				D3A7E8E319FDC88600695965 /* NebulaDepth.png in Resources */,
 				D3450BBE1A01FEB200E63B3A /* joystick.plist in Resources */,
 				D3ED616F19FF3B8000DF3A43 /* BurnSprite.vsh in Resources */,
-				D3A7E8E019FDC88600695965 /* Nebula.png in Resources */,
+				D34E99A41A82ABFD002FE5D9 /* Starfield.png in Resources */,
 				D3A7E8F319FDCABE00695965 /* Nebula.vsh in Resources */,
+				D34E99A11A82ABFD002FE5D9 /* NebulaClouds.png in Resources */,
 				B78A0B10198AF87200C63841 /* Published-Android in Resources */,
 				D3ED616B19FF3B7400DF3A43 /* BurnSprite.fsh in Resources */,
 				D3937FC919FE1C410074009E /* DistortionParticle.vsh in Resources */,
@@ -921,8 +928,9 @@
 				751BCCF31A38E0E100F11D3D /* Icon-76.png in Resources */,
 				D3ED616E19FF3B8000DF3A43 /* BurnSprite.vsh in Resources */,
 				751BCCD91A38D9D500F11D3D /* GGLandscape.png in Resources */,
-				D3A7E8DF19FDC88600695965 /* Nebula.png in Resources */,
 				D3A7E8F219FDCABE00695965 /* Nebula.vsh in Resources */,
+				D34E99A31A82ABFD002FE5D9 /* Starfield.png in Resources */,
+				D34E99A01A82ABFD002FE5D9 /* NebulaClouds.png in Resources */,
 				751BCCEE1A38E0E100F11D3D /* Icon-40.png in Resources */,
 				751BCCFE1A38E0E100F11D3D /* Icon@2x.png in Resources */,
 				751BCCF71A38E0E100F11D3D /* Icon-Small@3x.png in Resources */,

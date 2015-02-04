@@ -489,7 +489,7 @@
 	distortion.position = pos;
 	[_background.distortionNode addChild:distortion];
 	
-	[self drawGlow:pos scale:20.0];
+	[self drawGlow:pos scale:7.0];
 	
 	[self scheduleBlock:^(CCTimer *timer) {
 		[distortion removeFromParent];
