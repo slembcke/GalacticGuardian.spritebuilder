@@ -76,8 +76,10 @@ static NSArray *CONTROLLER_DELEGATES = nil;
 		};
 		
 		SHARED_CONTROLLER.extendedGamepad.valueChangedHandler = ^(GCExtendedGamepad *gamepad, GCControllerElement *element){
+			NSData *snapshotData = gamepad.snapshotDataFast;
+			
 			for(id<GameControllerDelegate> delegate in CONTROLLER_DELEGATES){
-				if([delegate respondsToSelector:@selector(snapshotDidChange:)]) [delegate snapshotDidChange:gamepad.saveSnapshot.snapshotData];
+				if([delegate respondsToSelector:@selector(snapshotDidChange:)]) [delegate snapshotDidChange:snapshotData];
 			}
 		};
 		

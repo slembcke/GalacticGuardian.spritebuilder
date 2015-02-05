@@ -120,7 +120,12 @@ static CCTexture *DistortionTexture = nil;
 		self.shaderUniforms[@"u_DepthMap"] = DepthMap;
 		self.shaderUniforms[@"u_DistortionMap"] = _distortionMap.texture;
 		
+		CCNode *hidden = [CCNode node];
+		hidden.visible = NO;
+		[self addChild:hidden];
+		
 		_distortionNode = [CCNode node];
+		[hidden addChild:_distortionNode];
 	}
 	
 	return self;
@@ -146,18 +151,7 @@ static CCTexture *DistortionTexture = nil;
 	CGRect rect = {CGPointZero, self.contentSizeInPoints};
 	self.textureRect = rect;
 	
-	// Forward onEnter to the distortion node.
-	[_distortionNode onEnter];
-	
 	[super onEnter];
-}
-
--(void)onExit
-{
-	// Forward onExit to the distortion node.
-	[_distortionNode onExit];
-	
-	[super onExit];
 }
 
 -(void)draw:(CCRenderer *)renderer transform:(const GLKMatrix4 *)transform

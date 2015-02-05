@@ -47,6 +47,7 @@ static const NSUInteger PickupCount = 8;
 	CCNode *_pickups[PickupCount];
 	
 	__unsafe_unretained GameScene *_scene;
+	BOOL _dead;
 }
 
 @synthesize poolKey = _poolKey;
@@ -86,6 +87,7 @@ static NSArray *CollisionMask = nil;
 
 -(void)reset
 {
+	_dead = NO;
 	_hp = _originalHP;
 	
 	CCPhysicsBody *body = self.physicsBody;
@@ -145,6 +147,9 @@ static NSArray *CollisionMask = nil;
 
 -(void)destroyWithWeaponColor:(CCColor *)weaponColor
 {
+	if(_dead) return;
+	_dead = YES;
+	
 	// TODO should catch this in the collision handler instead.
 	if(![self isRunningInActiveScene]){
 		CCLOG(@"Probably this enemy was destroyed twice.");
@@ -159,11 +164,13 @@ static NSArray *CollisionMask = nil;
 	// Give them a little death spin.
 	body.angularVelocity = 1.0;
 	
+	CCNode *parent = self.parent;
+	GameScene *scene = _scene;
+	
 	// Delay destroying an enemy by a short duration.
 	// For big explosions, this scatters the sound effects and CPU usage for destroying the objects.
 	// It also just looks kinda cool.
-	[self scheduleBlock:^(CCTimer *timer){
-		CCNode *parent = self.parent;
+	[parent scheduleBlock:^(CCTimer *timer){
 		CGPoint pos = self.position;
 		
 		for(int i=0; i<PickupCount; i++){
@@ -172,31 +179,36 @@ static NSArray *CollisionMask = nil;
 			[parent addChild:pickup z:Z_PICKUPS];
 		}
 		
-		_debrisNode.position = pos;
-		_debrisNode.rotation = self.rotation;
+		CCNode *debrisNode = _debrisNode;
+		_debrisNode = nil;
+		debrisNode.position = pos;
+		debrisNode.rotation = self.rotation;
 		
-		InitDebris(_debrisNode, _debrisNode, self.physicsBody.velocity, weaponColor);
-		[parent addChild:_debrisNode z:Z_DEBRIS];
+		InitDebris(debrisNode, debrisNode, self.physicsBody.velocity, weaponColor);
+		[parent addChild:debrisNode z:Z_DEBRIS];
 		
-		_explosion.position = pos;
-		[parent addChild:_explosion z:Z_FIRE];
+		CCNode *explosion = _explosion;
+		explosion.position = pos;
+		[parent addChild:explosion z:Z_FIRE];
 		
-		_smoke.position = pos;
-		[parent addChild:_smoke z:Z_SMOKE];
+		CCNode *smoke = _smoke;
+		smoke.position = pos;
+		[parent addChild:smoke z:Z_SMOKE];
 		
-		_distortion.position = pos;
-		[_scene.distortionNode addChild:_distortion];
+		CCNode *distortion = _distortion;
+		distortion.position = pos;
+		[scene.distortionNode addChild:distortion];
 		
-		[parent scheduleBlock:^(CCTimer *timer) {
-			[_debrisNode removeFromParent];
-			[_explosion removeFromParent];
-			[_smoke removeFromParent];
-			[_distortion removeFromParent];
+		[debrisNode scheduleBlock:^(CCTimer *timer) {
+			[debrisNode removeFromParent];
+			[explosion removeFromParent];
+			[smoke removeFromParent];
+			[distortion removeFromParent];
 		} delay:3.0];
 		
 		[[OALSimpleAudio sharedInstance] playEffect:@"TempSounds/Explosion.wav" volume:2.0 pitch:1.0 pan:0.0 loop:NO];
 		
-		[(GameScene *)self.scene poolObject:self];
+		[scene poolObject:self];
 		[self removeFromParent];
 	} delay:CCRANDOM_0_1()*0.25];
 }

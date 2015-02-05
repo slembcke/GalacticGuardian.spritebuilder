@@ -747,7 +747,7 @@
 				<key>children</key>
 				<array/>
 				<key>customClass</key>
-				<string></string>
+				<string>BurnSprite</string>
 				<key>displayName</key>
 				<string>GG_blueship_Lv2_engineR</string>
 				<key>memberVarAssignmentName</key>
