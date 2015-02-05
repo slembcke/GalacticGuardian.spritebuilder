@@ -771,7 +771,7 @@ RandomGroupPosition(float padding)
 	CGPoint groupPosition = RandomGroupPosition(GroupRadius);
 	
 	CCTimer *spawnTimer = [self scheduleBlock:^(CCTimer *timer) {
-		NSUInteger bigEnemyProbability = 0;// TODO MAX(0, MIN(_level/2, 5));
+		NSUInteger bigEnemyProbability = MAX(1, MIN(_level/4, 5));
 		
 		BOOL isBig = (bigEnemyProbability > spawnCounter%10);
 		EnemyShip *enemy = (EnemyShip *)[CCBReader load:isBig ? @"BadGuy2" : @"BadGuy1"];

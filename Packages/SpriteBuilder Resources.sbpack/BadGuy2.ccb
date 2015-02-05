@@ -10,7 +10,7 @@
 		<false/>
 	</dict>
 	<key>UUID</key>
-	<integer>15</integer>
+	<integer>31</integer>
 	<key>centeredOrigin</key>
 	<false/>
 	<key>currentResolution</key>
@@ -28,7 +28,24 @@
 	<key>gridspaceWidth</key>
 	<integer>64</integer>
 	<key>guides</key>
-	<array/>
+	<array>
+		<dict>
+			<key>orientation</key>
+			<integer>1</integer>
+			<key>position</key>
+			<real>0.0</real>
+			<key>type</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>orientation</key>
+			<integer>0</integer>
+			<key>position</key>
+			<real>0.0</real>
+			<key>type</key>
+			<integer>0</integer>
+		</dict>
+	</array>
 	<key>joints</key>
 	<array/>
 	<key>jsControlled</key>
@@ -41,7 +58,7 @@
 		<array>
 			<dict>
 				<key>UUID</key>
-				<integer>12</integer>
+				<integer>15</integer>
 				<key>baseClass</key>
 				<string>CCSprite</string>
 				<key>children</key>
@@ -49,7 +66,7 @@
 				<key>customClass</key>
 				<string></string>
 				<key>displayName</key>
-				<string>enemyship02_body</string>
+				<string>enemyship02</string>
 				<key>memberVarAssignmentName</key>
 				<string></string>
 				<key>memberVarAssignmentType</key>
@@ -72,7 +89,7 @@
 						<key>value</key>
 						<array>
 							<real>0.0</real>
-							<real>0.0</real>
+							<real>2</real>
 							<integer>0</integer>
 							<integer>0</integer>
 							<integer>0</integer>
@@ -110,7 +127,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>Sprites/enemyship02_body.png</string>
+							<string>Sprites/enemyship02.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -121,7 +138,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string></string>
+							<string>Sprites/enemyship02_NORMALS.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -143,225 +160,50 @@
 						<key>type</key>
 						<string>EffectControl</string>
 						<key>value</key>
-						<array/>
-					</dict>
-				</array>
-			</dict>
-			<dict>
-				<key>UUID</key>
-				<integer>13</integer>
-				<key>baseClass</key>
-				<string>CCSprite</string>
-				<key>children</key>
-				<array/>
-				<key>customClass</key>
-				<string></string>
-				<key>displayName</key>
-				<string>enemyship02_L</string>
-				<key>memberVarAssignmentName</key>
-				<string></string>
-				<key>memberVarAssignmentType</key>
-				<integer>1</integer>
-				<key>properties</key>
-				<array>
-					<dict>
-						<key>name</key>
-						<string>name</string>
-						<key>type</key>
-						<string>StringSimple</string>
-						<key>value</key>
-						<string></string>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>position</string>
-						<key>type</key>
-						<string>Position</string>
-						<key>value</key>
 						<array>
-							<real>-6</real>
-							<real>0.0</real>
-							<integer>0</integer>
-							<integer>0</integer>
-							<integer>0</integer>
+							<dict>
+								<key>UUID</key>
+								<integer>16</integer>
+								<key>baseClass</key>
+								<string>CCEffectLighting</string>
+								<key>className</key>
+								<string>CCBPEffectLighting</string>
+								<key>properties</key>
+								<array>
+									<dict>
+										<key>name</key>
+										<string>shininess</string>
+										<key>type</key>
+										<string>Float</string>
+										<key>value</key>
+										<real>0.20999999344348907</real>
+									</dict>
+									<dict>
+										<key>name</key>
+										<string>groups</string>
+										<key>type</key>
+										<string>TokenArray</string>
+										<key>value</key>
+										<array>
+											<string>main</string>
+										</array>
+									</dict>
+									<dict>
+										<key>name</key>
+										<string>specularColor</string>
+										<key>type</key>
+										<string>Color4</string>
+										<key>value</key>
+										<array>
+											<real>1</real>
+											<real>0.53176116943359375</real>
+											<real>0.15344172716140747</real>
+											<real>1</real>
+										</array>
+									</dict>
+								</array>
+							</dict>
 						</array>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>anchorPoint</string>
-						<key>type</key>
-						<string>Point</string>
-						<key>value</key>
-						<array>
-							<real>0.5</real>
-							<real>0.5</real>
-						</array>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>scale</string>
-						<key>type</key>
-						<string>ScaleLock</string>
-						<key>value</key>
-						<array>
-							<real>1</real>
-							<real>1</real>
-							<false/>
-							<integer>0</integer>
-						</array>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>spriteFrame</string>
-						<key>type</key>
-						<string>SpriteFrame</string>
-						<key>value</key>
-						<array>
-							<string></string>
-							<string>Sprites/enemyship02_L.png</string>
-						</array>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>normalMapSpriteFrame</string>
-						<key>type</key>
-						<string>SpriteFrame</string>
-						<key>value</key>
-						<array>
-							<string></string>
-							<string></string>
-						</array>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>color</string>
-						<key>type</key>
-						<string>Color3</string>
-						<key>value</key>
-						<array>
-							<real>1</real>
-							<real>1</real>
-							<real>1</real>
-							<real>1</real>
-						</array>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>effects</string>
-						<key>type</key>
-						<string>EffectControl</string>
-						<key>value</key>
-						<array/>
-					</dict>
-				</array>
-				<key>selected</key>
-				<true/>
-			</dict>
-			<dict>
-				<key>UUID</key>
-				<integer>14</integer>
-				<key>baseClass</key>
-				<string>CCSprite</string>
-				<key>children</key>
-				<array/>
-				<key>customClass</key>
-				<string></string>
-				<key>displayName</key>
-				<string>enemyship02_R</string>
-				<key>memberVarAssignmentName</key>
-				<string></string>
-				<key>memberVarAssignmentType</key>
-				<integer>1</integer>
-				<key>properties</key>
-				<array>
-					<dict>
-						<key>name</key>
-						<string>name</string>
-						<key>type</key>
-						<string>StringSimple</string>
-						<key>value</key>
-						<string></string>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>position</string>
-						<key>type</key>
-						<string>Position</string>
-						<key>value</key>
-						<array>
-							<real>-6</real>
-							<real>0.0</real>
-							<integer>0</integer>
-							<integer>0</integer>
-							<integer>0</integer>
-						</array>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>anchorPoint</string>
-						<key>type</key>
-						<string>Point</string>
-						<key>value</key>
-						<array>
-							<real>0.5</real>
-							<real>0.5</real>
-						</array>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>scale</string>
-						<key>type</key>
-						<string>ScaleLock</string>
-						<key>value</key>
-						<array>
-							<real>1</real>
-							<real>1</real>
-							<false/>
-							<integer>0</integer>
-						</array>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>spriteFrame</string>
-						<key>type</key>
-						<string>SpriteFrame</string>
-						<key>value</key>
-						<array>
-							<string></string>
-							<string>Sprites/enemyship02_R.png</string>
-						</array>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>normalMapSpriteFrame</string>
-						<key>type</key>
-						<string>SpriteFrame</string>
-						<key>value</key>
-						<array>
-							<string></string>
-							<string></string>
-						</array>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>color</string>
-						<key>type</key>
-						<string>Color3</string>
-						<key>value</key>
-						<array>
-							<real>1</real>
-							<real>1</real>
-							<real>1</real>
-							<real>1</real>
-						</array>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>effects</string>
-						<key>type</key>
-						<string>EffectControl</string>
-						<key>value</key>
-						<array/>
 					</dict>
 				</array>
 			</dict>
@@ -388,7 +230,7 @@
 				<key>type</key>
 				<integer>0</integer>
 				<key>value</key>
-				<string>6</string>
+				<string>1</string>
 			</dict>
 			<dict>
 				<key>name</key>
@@ -398,7 +240,7 @@
 				<key>type</key>
 				<integer>1</integer>
 				<key>value</key>
-				<string>60.000000</string>
+				<string>120.000000</string>
 			</dict>
 			<dict>
 				<key>name</key>
@@ -432,7 +274,7 @@
 			<key>collisionType</key>
 			<string></string>
 			<key>cornerRadius</key>
-			<real>15</real>
+			<real>17.508594512939453</real>
 			<key>density</key>
 			<real>1</real>
 			<key>dynamic</key>
@@ -513,6 +355,8 @@
 				</array>
 			</dict>
 		</array>
+		<key>selected</key>
+		<true/>
 	</dict>
 	<key>notes</key>
 	<array/>
