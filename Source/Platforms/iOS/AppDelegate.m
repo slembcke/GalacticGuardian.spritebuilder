@@ -67,7 +67,7 @@
 - (CCScene*) startScene
 {
     [MainMenu class];
-    return [[GameScene alloc] initWithShipType:Ship_Defiant];
+    return [[GameScene alloc] initWithShipType:Ship_Herald];
 }
 
 @end

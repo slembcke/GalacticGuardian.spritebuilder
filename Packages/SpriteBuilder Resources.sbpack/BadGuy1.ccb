@@ -10,7 +10,7 @@
 		<false/>
 	</dict>
 	<key>UUID</key>
-	<integer>38</integer>
+	<integer>86</integer>
 	<key>centeredOrigin</key>
 	<false/>
 	<key>currentResolution</key>
@@ -121,7 +121,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>ShinyBallNormals.png</string>
+							<string>Sprites/enemyship01_NORMALS.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -159,7 +159,7 @@
 										<key>type</key>
 										<string>Float</string>
 										<key>value</key>
-										<real>0.052993223071098328</real>
+										<real>0.21460843086242676</real>
 									</dict>
 									<dict>
 										<key>name</key>
@@ -189,8 +189,6 @@
 						</array>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 		</array>
 		<key>customClass</key>

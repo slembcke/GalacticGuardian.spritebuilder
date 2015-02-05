@@ -10,7 +10,7 @@
 		<false/>
 	</dict>
 	<key>UUID</key>
-	<integer>10</integer>
+	<integer>12</integer>
 	<key>centeredOrigin</key>
 	<false/>
 	<key>currentResolution</key>
@@ -148,7 +148,7 @@
 				<key>value</key>
 				<array>
 					<string></string>
-					<string>ShinyBallNormals.png</string>
+					<string>Sprites/asteroid_small_001_NORMALS.png</string>
 				</array>
 			</dict>
 			<dict>

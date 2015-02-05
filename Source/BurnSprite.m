@@ -46,7 +46,7 @@ static CCShader *BurnShader = nil;
 	// Instead, you can use the global shader uniforms to pass the same shader values for every object drawn.
 	// That's okay because we only need to pass the burn color for each sprite, and we can pass that using the sprite's regular color property.
 	NSMutableDictionary *globals = [CCDirector sharedDirector].globalShaderUniforms;
-	globals[@"u_BurnScale"] = @(3.0);
+	globals[@"u_BurnScale"] = @(6.0);
 	globals[@"u_BurnTexture"] = burnTexture;
 	globals[@"u_MinChar"] = @(0.20);
 	globals[@"u_MaxChar"] = @(0.05);

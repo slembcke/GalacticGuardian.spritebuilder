@@ -89,7 +89,7 @@
 	[[CCSpriteFrameCache sharedSpriteFrameCache] loadSpriteFrameLookupDictionaryFromFile:@"spriteFrameFileList.plist"];
 	
 	[MainMenu class];
-	[director runWithScene:[[GameScene alloc] initWithShipType:Ship_Defiant]];
+	[director runWithScene:[[GameScene alloc] initWithShipType:Ship_Herald]];
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification

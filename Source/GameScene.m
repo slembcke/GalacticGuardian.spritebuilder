@@ -854,7 +854,7 @@ static const float MinBarWidth = 5.0;
 		[self scheduleBlock:^(CCTimer *timer){
 			// Go back to the menu after a short delay.
 			[CCDirector sharedDirector].scheduler.timeScale = 1.0f;
-			[[CCDirector sharedDirector] replaceScene:[[GameScene alloc] initWithShipType:Ship_Defiant] withTransition:[BurnTransition burnTransitionWithDuration:1.0]];
+			[[CCDirector sharedDirector] replaceScene:[[GameScene alloc] initWithShipType:Ship_Herald] withTransition:[BurnTransition burnTransitionWithDuration:1.0]];
 		} delay:1.75f];
 		
 		return NO;

@@ -10,7 +10,7 @@
 		<false/>
 	</dict>
 	<key>UUID</key>
-	<integer>36</integer>
+	<integer>55</integer>
 	<key>centeredOrigin</key>
 	<false/>
 	<key>currentResolution</key>
@@ -45,7 +45,151 @@
 				<key>baseClass</key>
 				<string>CCSprite</string>
 				<key>children</key>
-				<array/>
+				<array>
+					<dict>
+						<key>UUID</key>
+						<integer>37</integer>
+						<key>baseClass</key>
+						<string>CCLightNode</string>
+						<key>children</key>
+						<array/>
+						<key>customClass</key>
+						<string></string>
+						<key>displayName</key>
+						<string>CCLightNode</string>
+						<key>memberVarAssignmentName</key>
+						<string>_shieldLight</string>
+						<key>memberVarAssignmentType</key>
+						<integer>1</integer>
+						<key>properties</key>
+						<array>
+							<dict>
+								<key>name</key>
+								<string>name</string>
+								<key>type</key>
+								<string>StringSimple</string>
+								<key>value</key>
+								<string></string>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>position</string>
+								<key>type</key>
+								<string>Position</string>
+								<key>value</key>
+								<array>
+									<real>46.652793884277344</real>
+									<real>22.847236633300781</real>
+									<integer>0</integer>
+									<integer>0</integer>
+									<integer>0</integer>
+								</array>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>contentSize</string>
+								<key>type</key>
+								<string>Size</string>
+								<key>value</key>
+								<array>
+									<real>0.0</real>
+									<real>0.0</real>
+									<integer>0</integer>
+									<integer>0</integer>
+								</array>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>anchorPoint</string>
+								<key>type</key>
+								<string>Point</string>
+								<key>value</key>
+								<array>
+									<real>0.0</real>
+									<real>0.0</real>
+								</array>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>scale</string>
+								<key>type</key>
+								<string>ScaleLock</string>
+								<key>value</key>
+								<array>
+									<real>1</real>
+									<real>1</real>
+									<false/>
+									<integer>0</integer>
+								</array>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>type</string>
+								<key>type</key>
+								<string>IntegerLabeled</string>
+								<key>value</key>
+								<integer>0</integer>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>groups</string>
+								<key>type</key>
+								<string>TokenArray</string>
+								<key>value</key>
+								<array>
+									<string>player</string>
+								</array>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>color</string>
+								<key>type</key>
+								<string>Color3</string>
+								<key>value</key>
+								<array>
+									<real>0.73230385780334473</real>
+									<real>1</real>
+									<real>0.93954378366470337</real>
+									<real>1</real>
+								</array>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>intensity</string>
+								<key>type</key>
+								<string>Float</string>
+								<key>value</key>
+								<real>0.5</real>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>specularIntensity</string>
+								<key>type</key>
+								<string>Float</string>
+								<key>value</key>
+								<real>0.0</real>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>ambientIntensity</string>
+								<key>type</key>
+								<string>Float</string>
+								<key>value</key>
+								<real>0.0</real>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>depth</string>
+								<key>type</key>
+								<string>Float</string>
+								<key>value</key>
+								<real>5</real>
+							</dict>
+						</array>
+						<key>selected</key>
+						<true/>
+					</dict>
+				</array>
 				<key>customClass</key>
 				<string></string>
 				<key>displayName</key>
@@ -146,8 +290,6 @@
 						<array/>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -231,7 +373,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string></string>
+							<string>Sprites/GG_blueship_Lv2_NORMALS.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -253,7 +395,51 @@
 						<key>type</key>
 						<string>EffectControl</string>
 						<key>value</key>
-						<array/>
+						<array>
+							<dict>
+								<key>UUID</key>
+								<integer>36</integer>
+								<key>baseClass</key>
+								<string>CCEffectLighting</string>
+								<key>className</key>
+								<string>CCBPEffectLighting</string>
+								<key>properties</key>
+								<array>
+									<dict>
+										<key>name</key>
+										<string>shininess</string>
+										<key>type</key>
+										<string>Float</string>
+										<key>value</key>
+										<real>0.072242096066474915</real>
+									</dict>
+									<dict>
+										<key>name</key>
+										<string>groups</string>
+										<key>type</key>
+										<string>TokenArray</string>
+										<key>value</key>
+										<array>
+											<string>main</string>
+											<string>player</string>
+										</array>
+									</dict>
+									<dict>
+										<key>name</key>
+										<string>specularColor</string>
+										<key>type</key>
+										<string>Color4</string>
+										<key>value</key>
+										<array>
+											<real>0.39325454831123352</real>
+											<real>0.26569050550460815</real>
+											<real>1</real>
+											<real>1</real>
+										</array>
+									</dict>
+								</array>
+							</dict>
+						</array>
 					</dict>
 				</array>
 			</dict>
@@ -583,7 +769,7 @@
 						<key>type</key>
 						<string>StringSimple</string>
 						<key>value</key>
-						<string>gun</string>
+						<string>gun2</string>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -592,8 +778,8 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>14.419218063354492</real>
-							<real>8.1311655044555664</real>
+							<real>17.6751708984375</real>
+							<real>0.0</real>
 							<integer>0</integer>
 							<integer>0</integer>
 							<integer>0</integer>
@@ -661,7 +847,7 @@
 						<key>type</key>
 						<string>StringSimple</string>
 						<key>value</key>
-						<string>gun</string>
+						<string>gun1</string>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -672,6 +858,84 @@
 						<array>
 							<real>14.419218063354492</real>
 							<real>-8.1188344955444336</real>
+							<integer>0</integer>
+							<integer>0</integer>
+							<integer>0</integer>
+						</array>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>contentSize</string>
+						<key>type</key>
+						<string>Size</string>
+						<key>value</key>
+						<array>
+							<real>0.0</real>
+							<real>0.0</real>
+							<integer>0</integer>
+							<integer>0</integer>
+						</array>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>anchorPoint</string>
+						<key>type</key>
+						<string>Point</string>
+						<key>value</key>
+						<array>
+							<real>0.0</real>
+							<real>0.0</real>
+						</array>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>scale</string>
+						<key>type</key>
+						<string>ScaleLock</string>
+						<key>value</key>
+						<array>
+							<real>1</real>
+							<real>1</real>
+							<false/>
+							<integer>0</integer>
+						</array>
+					</dict>
+				</array>
+			</dict>
+			<dict>
+				<key>UUID</key>
+				<integer>44</integer>
+				<key>baseClass</key>
+				<string>CCNode</string>
+				<key>children</key>
+				<array/>
+				<key>customClass</key>
+				<string></string>
+				<key>displayName</key>
+				<string>gun</string>
+				<key>memberVarAssignmentName</key>
+				<string></string>
+				<key>memberVarAssignmentType</key>
+				<integer>1</integer>
+				<key>properties</key>
+				<array>
+					<dict>
+						<key>name</key>
+						<string>name</string>
+						<key>type</key>
+						<string>StringSimple</string>
+						<key>value</key>
+						<string>gun0</string>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>position</string>
+						<key>type</key>
+						<string>Position</string>
+						<key>value</key>
+						<array>
+							<real>14.419218063354492</real>
+							<real>8.1311655044555664</real>
 							<integer>0</integer>
 							<integer>0</integer>
 							<integer>0</integer>
@@ -729,7 +993,7 @@
 				<key>type</key>
 				<integer>1</integer>
 				<key>value</key>
-				<string>125.000000</string>
+				<string>170.000000</string>
 			</dict>
 			<dict>
 				<key>name</key>
@@ -739,7 +1003,7 @@
 				<key>type</key>
 				<integer>1</integer>
 				<key>value</key>
-				<string>0.750000</string>
+				<string>0.450000</string>
 			</dict>
 			<dict>
 				<key>name</key>
@@ -759,7 +1023,7 @@
 				<key>type</key>
 				<integer>1</integer>
 				<key>value</key>
-				<string>13.000000</string>
+				<string>30.000000</string>
 			</dict>
 			<dict>
 				<key>name</key>
