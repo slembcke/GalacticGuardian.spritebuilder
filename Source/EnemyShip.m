@@ -38,6 +38,7 @@ static const NSUInteger PickupCount = 8;
 {
 	float _speed;
 	float _accelTime;
+	int _originalHP;
 	
 	CCNode *_debrisNode;
 	CCNode *_explosion;
@@ -47,6 +48,8 @@ static const NSUInteger PickupCount = 8;
 	
 	__unsafe_unretained GameScene *_scene;
 }
+
+@synthesize poolKey = _poolKey;
 
 static NSArray *CollisionCategories = nil;
 static NSArray *CollisionMask = nil;
@@ -65,6 +68,8 @@ static NSArray *CollisionMask = nil;
 
 -(void)didLoadFromCCB
 {
+	_originalHP = _hp;
+	
 	CCPhysicsBody *body = self.physicsBody;
 	
 	// This is used to pick which collision delegate method to call, see GameScene.m for more info.
@@ -74,6 +79,17 @@ static NSArray *CollisionMask = nil;
 	// First you list the categories (strings) that the object belongs to.
 	body.collisionCategories = CollisionCategories;
 	// Then you list which categories its allowed to collide with.
+	body.collisionMask = CollisionMask;
+	
+	[self reset];
+}
+
+-(void)reset
+{
+	_hp = _originalHP;
+	
+	CCPhysicsBody *body = self.physicsBody;
+	body.angularVelocity = 0.0;
 	body.collisionMask = CollisionMask;
 	
 	// Enemies are often destroyed in large groups (bombs, rockets), but their spawning is spread over several frames.
@@ -180,6 +196,7 @@ static NSArray *CollisionMask = nil;
 		
 		[[OALSimpleAudio sharedInstance] playEffect:@"TempSounds/Explosion.wav" volume:2.0 pitch:1.0 pan:0.0 loop:NO];
 		
+		[(GameScene *)self.scene poolObject:self];
 		[self removeFromParent];
 	} delay:CCRANDOM_0_1()*0.25];
 }

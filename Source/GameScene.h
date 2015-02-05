@@ -28,6 +28,15 @@
 @class PlayerShip, EnemyShip, Bullet;
 
 
+@protocol Poolable
+
+@property(nonatomic, copy) NSString *poolKey;
+
+-(void)reset;
+
+@end
+
+
 @interface GameScene : CCScene<CCPhysicsCollisionDelegate>
 
 @property(nonatomic, readonly) CCNode *distortionNode;
@@ -36,6 +45,9 @@
 @property(nonatomic, readonly) CGPoint playerPosition;
 
 -(instancetype)initWithShipType:(ShipType) shipType;
+
+-(id)getPooledObjectForKey:(NSString *)key create:(id<Poolable> (^)(void))block;
+-(void)poolObject:(id)obj;
 
 -(void)splashDamageAt:(CGPoint)center radius:(float)radius damage:(int)damage;
 

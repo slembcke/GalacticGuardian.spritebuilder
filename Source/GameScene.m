@@ -750,6 +750,44 @@ RandomGroupPosition(float padding)
 	);
 }
 
+static NSMutableDictionary *OBJECT_POOL = nil;
+
+-(id)getPooledObjectForKey:(NSString *)key create:(id<Poolable> (^)(void))block
+{
+	if(OBJECT_POOL == nil){
+		OBJECT_POOL = [NSMutableDictionary dictionary];
+	}
+	
+	NSMutableArray *pool = OBJECT_POOL[key];
+	if(pool == nil){
+		pool = [NSMutableArray array];
+		OBJECT_POOL[key] = pool;
+	}
+	
+	id<Poolable> obj = pool.lastObject;
+	if(obj){
+		[pool removeLastObject];
+		[obj reset];
+	} else {
+		obj = block();
+		obj.poolKey = key;
+	}
+	
+	return obj;
+}
+
+-(EnemyShip *)spawnEnemy:(NSString *)name
+{
+	return [self getPooledObjectForKey:name create:^id<Poolable>{
+		return (EnemyShip *)[CCBReader load:name];
+	}];
+}
+
+-(void)poolObject:(id<Poolable>)obj
+{
+	[OBJECT_POOL[obj.poolKey] addObject:obj];
+}
+
 // Set up a timer to spawn a group of enemies.
 -(void)spawnGroup
 {
@@ -772,7 +810,8 @@ RandomGroupPosition(float padding)
 		NSUInteger bigEnemyProbability = MAX(0, MIN((_level - 6)/4, 5));
 		
 		BOOL isBig = (bigEnemyProbability > spawnCounter%10);
-		EnemyShip *enemy = (EnemyShip *)[CCBReader load:isBig ? @"BadGuy2" : @"BadGuy1"];
+		NSString *name = isBig ? @"BadGuy2" : @"BadGuy1";
+		EnemyShip *enemy = [self spawnEnemy:name];
 		
 		enemy.position = ccpAdd(groupPosition, ccpMult(CCRANDOM_IN_UNIT_CIRCLE(), GroupRadius));
 		[_physics addChild:enemy z:Z_ENEMY];

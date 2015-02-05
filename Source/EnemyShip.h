@@ -26,7 +26,7 @@
 #import "GameScene.h"
 
 
-@interface EnemyShip : CCNode
+@interface EnemyShip : CCNode<Poolable>
 
 @property(nonatomic) int hp;
 @property(nonatomic, readonly) NSString *debris;
