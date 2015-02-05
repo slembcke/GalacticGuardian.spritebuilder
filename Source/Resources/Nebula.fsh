@@ -10,7 +10,7 @@ varying vec2 v_ParallaxCoords1;
 varying vec2 v_ParallaxCoords2;
 varying mediump vec2 v_ParallaxOffset;
 
-const float DistortionAmount = 0.35;
+const float DistortionAmount = 0.5;
 
 mediump vec4 composite(vec4 over, vec4 under){return over + under*(1.0 - over.a);}
 

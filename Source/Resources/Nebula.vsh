@@ -17,7 +17,7 @@ void main(){
 	v_ParallaxOffset.y *= cc_ViewSize.y/cc_ViewSize.x;
 	
 	// Starfield
-	cc_FragTexCoord1 = cc_TexCoord1 + u_StarfieldDepth*v_ParallaxOffset;
+	cc_FragTexCoord1 = cc_TexCoord1/u_StarfieldDepth + v_ParallaxOffset;
 	
 	// Distortion Map
 	cc_FragTexCoord2 = 0.5 + gl_Position.xy*(0.5/gl_Position.w);

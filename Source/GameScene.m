@@ -168,12 +168,12 @@
 		
 		// Skip to level 6 in demo mode.
 		if(!([[NSUserDefaults standardUserDefaults] boolForKey:DefaultsDifficultyHardKey])){
-			self.level = 6;
+			self.level = 5;
 			
 			_spaceBucksTilNextLevel *= pow(SpaceBucksLevelMultiplier, 5.0);
 			
 			_bulletLevel = 2;
-			self.novaBombs += 1;
+			self.novaBombs += 2;
 			
 			_rocketLevel = 1;
 			_controls.rocketButtonVisible = YES;
@@ -558,9 +558,7 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 }
 
 // Called when the pause button is pressed.
--(void)pause{}
-
--(void)pause_
+-(void)pause
 {
 	CCDirector *director = [CCDirector sharedDirector];
 	CGSize viewSize = director.viewSize;
@@ -771,7 +769,7 @@ RandomGroupPosition(float padding)
 	CGPoint groupPosition = RandomGroupPosition(GroupRadius);
 	
 	CCTimer *spawnTimer = [self scheduleBlock:^(CCTimer *timer) {
-		NSUInteger bigEnemyProbability = MAX(1, MIN(_level/4, 5));
+		NSUInteger bigEnemyProbability = MAX(0, MIN((_level - 6)/4, 5));
 		
 		BOOL isBig = (bigEnemyProbability > spawnCounter%10);
 		EnemyShip *enemy = (EnemyShip *)[CCBReader load:isBig ? @"BadGuy2" : @"BadGuy1"];
