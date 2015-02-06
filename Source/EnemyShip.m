@@ -31,7 +31,7 @@
 #import "SpaceBucks.h"
 
 
-static const NSUInteger PickupCount = 8;
+static const NSUInteger PickupCount = 10;
 
 
 @implementation EnemyShip
@@ -42,7 +42,6 @@ static const NSUInteger PickupCount = 8;
 	
 	CCNode *_debrisNode;
 	CCNode *_explosion;
-	CCNode *_smoke;
 	CCNode *_distortion;
 	CCNode *_pickups[PickupCount];
 	
@@ -63,6 +62,7 @@ static NSArray *CollisionMask = nil;
 	CollisionMask = @[
 		CollisionCategoryPlayer,
 		CollisionCategoryBullet,
+		CollisionCategoryPickup,
 		CollisionCategoryEnemy
 	];
 }
@@ -97,8 +97,7 @@ static NSArray *CollisionMask = nil;
 	// Enemies are often destroyed in large groups (bombs, rockets), but their spawning is spread over several frames.
 	// Preload their destruction objects to spread out the CPU work more evenly.
 	_debrisNode = [CCBReader load:self.debris];
-	_explosion = [CCBReader load:@"Particles/ShipExplosion"];
-	_smoke = [CCBReader load:@"Particles/Smoke"];
+	_explosion = [CCBReader load:@"Particles/ViktorExplosion"];
 	_distortion = [CCBReader load:@"DistortionParticles/SmallRing"];
 	
 	for(int i = 0; i < PickupCount; i++){
@@ -175,7 +174,7 @@ static NSArray *CollisionMask = nil;
 		
 		for(int i=0; i<PickupCount; i++){
 			CCNode *pickup = _pickups[i];
-			pickup.position = pos;
+			pickup.position = cpvadd(pos, cpvmult(pickup.physicsBody.velocity, 0.05));
 			[parent addChild:pickup z:Z_PICKUPS];
 		}
 		
@@ -189,11 +188,8 @@ static NSArray *CollisionMask = nil;
 		
 		CCNode *explosion = _explosion;
 		explosion.position = pos;
+		explosion.rotation = 360.0*CCRANDOM_0_1();
 		[parent addChild:explosion z:Z_FIRE];
-		
-		CCNode *smoke = _smoke;
-		smoke.position = pos;
-		[parent addChild:smoke z:Z_SMOKE];
 		
 		CCNode *distortion = _distortion;
 		distortion.position = pos;
@@ -202,7 +198,6 @@ static NSArray *CollisionMask = nil;
 		[debrisNode scheduleBlock:^(CCTimer *timer) {
 			[debrisNode removeFromParent];
 			[explosion removeFromParent];
-			[smoke removeFromParent];
 			[distortion removeFromParent];
 		} delay:3.0];
 		

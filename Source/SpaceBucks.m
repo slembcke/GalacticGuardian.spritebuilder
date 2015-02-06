@@ -33,15 +33,15 @@
 }
 
 static NSString * const spriteNames[] ={
-    @"Sprites/pill_blue.png",
-    @"Sprites/pill_green.png",
-    @"Sprites/pill_red.png",
+    @"Sprites/gem1.png",
+    @"Sprites/gem2.png",
+    @"Sprites/gem3.png",
 };
-static NSString * const spriteFlashes[] = {
-    @"Sprites/laserFlashBlue.png",
-    @"Sprites/laserFlashGreen.png",
-    @"Sprites/laserFlashRed.png",
-};
+//static NSString * const spriteFlashes[] = {
+//    @"Sprites/laserFlashBlue.png",
+//    @"Sprites/laserFlashGreen.png",
+//    @"Sprites/laserFlashRed.png",
+//};
 
 const int values[] = {1, 4, 8};
 
@@ -53,16 +53,20 @@ static NSArray *CollisionMask = nil;
 	if(self != [SpaceBucks class]) return;
 	
 	CollisionCategories = @[CollisionCategoryPickup];
-	CollisionMask = @[CollisionCategoryPlayer, CollisionCategoryBarrier];
+	CollisionMask = @[CollisionCategoryPlayer, CollisionCategoryEnemy, CollisionCategoryBarrier, CollisionCategoryPickup];
 }
 
 -(instancetype)initWithAmount:(SpaceBuckType) type
 {
 	if((self = [super initWithImageNamed:spriteNames[type]])){
 		CCPhysicsBody *body = self.physicsBody = [CCPhysicsBody bodyWithCircleOfRadius:3.0f andCenter:self.anchorPointInPoints];
+		body.mass = 0.01;
+		
+		static const float scale[] = {0.4, 0.7, 0.8};
+		self.scale = scale[type];
 		
 		_amount = values[type];
-		_flashImage = spriteFlashes[type];
+		_flashImage = @"Sprites/laserFlashGreen.png";
 		
 		// This is used to pick which collision delegate method to call, see GameScene.m for more info.
 		body.collisionType = @"pickup";

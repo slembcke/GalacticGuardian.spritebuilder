@@ -340,7 +340,7 @@
 	
 	[self glowLight:position intensity:2*scale duration:duration];
 	
-	CCSprite *glow = [CCSprite spriteWithImageNamed:@"Flare.png"];
+	CCSprite *glow = [CCSprite spriteWithImageNamed:@"Sprites/LensFlare.png"];
 	glow.position = position;
 	glow.scale = scale;
 	glow.color = color;
@@ -356,7 +356,7 @@
 	
 	float flareOffset = scale*30.0;
 	
-	CCSprite *flareLeft = [CCSprite spriteWithImageNamed:@"FlareRGB.png"];
+	CCSprite *flareLeft = [CCSprite spriteWithImageNamed:@"Sprites/LensFlareSide.png"];
 	flareLeft.position = ccp(position.x - flareOffset, position.y);
 	flareLeft.scale = scale;
 	flareLeft.color = color;
@@ -369,7 +369,7 @@
 		nil
 	]];
 	
-	CCSprite *flareRight = [CCSprite spriteWithImageNamed:@"FlareRGB.png"];
+	CCSprite *flareRight = [CCSprite spriteWithImageNamed:@"Sprites/LensFlareSide.png"];
 	flareRight.position = ccp(position.x + flareOffset, position.y);
 	flareRight.scale = scale;
 	flareRight.flipX = YES;
@@ -811,7 +811,7 @@ static NSMutableDictionary *OBJECT_POOL = nil;
 -(void)spawnGroup
 {
 	static NSUInteger spawnCounter = 0;
-	NSUInteger maxAllowedEnemies = MIN(20 + _level*4, 80);
+	NSUInteger maxAllowedEnemies = MIN(20 + _level*4, 60);
 	
 	NSUInteger MinGroupSize = 3;
 	NSUInteger MaxGroupSize = 8;
@@ -826,7 +826,7 @@ static NSMutableDictionary *OBJECT_POOL = nil;
 	CGPoint groupPosition = RandomGroupPosition(GroupRadius);
 	
 	CCTimer *spawnTimer = [self scheduleBlock:^(CCTimer *timer) {
-		NSUInteger bigEnemyProbability = MAX(0, MIN((_level - 6)/4, 5));
+		NSUInteger bigEnemyProbability = MAX(0, MIN((_level - 6)/3, 5));
 		
 		BOOL isBig = (bigEnemyProbability > spawnCounter%10);
 		NSString *name = isBig ? @"BadGuy2" : @"BadGuy1";
