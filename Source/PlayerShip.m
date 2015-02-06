@@ -252,7 +252,7 @@ VisitAll(CCNode *node, void (^block)(CCNode *))
 	
 	// For dramatic effect. Killing the player sets off a nova explosion.
 	[scene novaBombAt:pos];
-	[[OALSimpleAudio sharedInstance] playEffect:@"TempSounds/Explosion.wav" volume:2.0 pitch:1.0 pan:0.0 loop:NO];
+	[[OALSimpleAudio sharedInstance] playEffect:@"TempSounds/Explosion.wav" volume:2.0 pitch:scene.pitchScale pan:0.0 loop:NO];
 	
 	[self removeFromParent];
 }

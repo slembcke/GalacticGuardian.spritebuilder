@@ -255,6 +255,11 @@
 	// Update the reticle's position.
 	// TODO Only works when the player is at rest. Is this wrong or the rocket firing code?
 	_rocketReticle.position = CGPointApplyAffineTransform(ccp(RocketRange, 0.0), _playerShip.nodeToParentTransform);
+	
+	if(!_playerShip.isDead){
+		CCScheduler *scheduler = [CCDirector sharedDirector].scheduler;
+		scheduler.timeScale = cpflerpconst(scheduler.timeScale, 1.0, 0.25*delta);
+	}
 }
 
 -(void)enemyDeath:(EnemyShip *)enemy from:(Bullet *) bullet;
@@ -509,6 +514,8 @@
 			[enemy scheduleBlock:^(CCTimer *timer) {[self enemyDeath:enemy from:nil];} delay:delay];
 		}
 	}
+	
+	[CCDirector sharedDirector].scheduler.timeScale = 0.25;
 }
 
 static NSArray *DebrisCollisionCategories = nil;
@@ -838,6 +845,11 @@ static NSMutableDictionary *OBJECT_POOL = nil;
 	groupSpawnTimer.repeatCount = CCTimerRepeatForever;
 }
 
+-(float)pitchScale
+{
+	return powf([CCDirector sharedDirector].scheduler.timeScale, 0.20);
+}
+
 -(CCNode *)distortionNode
 {
 	return _background.distortionNode;
@@ -882,8 +894,6 @@ static const float MinBarWidth = 5.0;
 {
 	if([_playerShip takeDamage]){
 		[_playerShip destroy];
-		// slow time:
-		[CCDirector sharedDirector].scheduler.timeScale = 0.25f;
 		
 		// and zoom in on the player?
 		[_scrollNode runAction:[CCActionEaseInOut actionWithAction: [CCActionScaleTo actionWithDuration:0.1f scale:1.65f] rate:2.0] ];

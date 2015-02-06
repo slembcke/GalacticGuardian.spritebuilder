@@ -99,7 +99,7 @@ static const float RocketClusterRange = 25.0;
 		[distortion removeFromParent];
 	} delay:2];
 	
-	[[OALSimpleAudio sharedInstance] playEffect:@"TempSounds/Explosion.wav" volume:2.0 pitch:1.0 pan:0.0 loop:NO];
+	[[OALSimpleAudio sharedInstance] playEffect:@"TempSounds/Explosion.wav" volume:2.0 pitch:scene.pitchScale pan:0.0 loop:NO];
 }
 
 -(void)destroy

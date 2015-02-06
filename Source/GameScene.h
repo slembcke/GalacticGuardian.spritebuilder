@@ -39,6 +39,8 @@
 
 @interface GameScene : CCScene<CCPhysicsCollisionDelegate>
 
+@property(nonatomic, readonly) float pitchScale;
+
 @property(nonatomic, readonly) CCNode *distortionNode;
 
 @property(nonatomic, readonly) PlayerShip *playerShip;
