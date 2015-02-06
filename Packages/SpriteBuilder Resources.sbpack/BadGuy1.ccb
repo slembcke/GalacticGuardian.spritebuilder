@@ -10,7 +10,7 @@
 		<false/>
 	</dict>
 	<key>UUID</key>
-	<integer>90</integer>
+	<integer>92</integer>
 	<key>centeredOrigin</key>
 	<false/>
 	<key>currentResolution</key>
@@ -159,7 +159,7 @@
 										<key>type</key>
 										<string>Float</string>
 										<key>value</key>
-										<real>0.21460843086242676</real>
+										<real>0.05000000074505806</real>
 									</dict>
 									<dict>
 										<key>name</key>

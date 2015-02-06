@@ -207,6 +207,7 @@ static NSArray *CollisionMask = nil;
 		} delay:3.0];
 		
 		[[OALSimpleAudio sharedInstance] playEffect:@"TempSounds/Explosion.wav" volume:2.0 pitch:scene.pitchScale pan:0.0 loop:NO];
+		[scene glowLight:pos intensity:1.0 duration:0.25];
 		
 		[scene poolObject:self];
 		[self removeFromParent];

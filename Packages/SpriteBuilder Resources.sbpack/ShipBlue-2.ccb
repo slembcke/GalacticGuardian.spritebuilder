@@ -10,7 +10,7 @@
 		<false/>
 	</dict>
 	<key>UUID</key>
-	<integer>62</integer>
+	<integer>67</integer>
 	<key>centeredOrigin</key>
 	<false/>
 	<key>currentResolution</key>
@@ -186,8 +186,6 @@
 								<real>5</real>
 							</dict>
 						</array>
-						<key>selected</key>
-						<true/>
 					</dict>
 				</array>
 				<key>customClass</key>
@@ -411,7 +409,7 @@
 										<key>type</key>
 										<string>Float</string>
 										<key>value</key>
-										<real>0.072242096066474915</real>
+										<real>0.10000000149011612</real>
 									</dict>
 									<dict>
 										<key>name</key>
@@ -442,6 +440,8 @@
 						</array>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -1091,8 +1091,6 @@
 						<real>0.0</real>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 		</array>
 		<key>customClass</key>

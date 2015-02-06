@@ -57,6 +57,7 @@
 -(void)drawBulletFlash:(Bullet *)fromBullet;
 
 -(void)drawGlow:(CGPoint)position scale:(float)scale;
+-(void)glowLight:(CGPoint)position intensity:(float)intensity duration:(float)duration;
 
 -(void)novaBombAt:(CGPoint)pos;
 

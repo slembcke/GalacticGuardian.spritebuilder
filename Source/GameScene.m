@@ -149,6 +149,8 @@
 			asteroid.position = ccpAdd(ccpMult(ccpForAngle(angle), 200.0f + 250.0f * CCRANDOM_0_1()), ccp(GameSceneSize/2.0, GameSceneSize/2.0));
 			asteroid.rotation = CCRANDOM_0_1() * 360.0f;
 			[_physics addChild:asteroid z:Z_ENEMY];
+			
+			[asteroid runAction:[CCActionRepeatForever actionWithAction:[CCActionRotateBy actionWithDuration:1.0 angle:45.0*CCRANDOM_MINUS1_1()]]];
 		}
 		
 		_enemies = [NSMutableArray array];
@@ -156,13 +158,16 @@
 		
 		// Setup the global light.
 		CCLightNode *light = [CCLightNode lightWithType:CCLightPoint groups:nil color:[CCColor whiteColor] intensity:0.4];
-		light.position = ccp(GameSceneSize/2.0, GameSceneSize/2.0);
+		light.position = ccp(GameSceneSize, GameSceneSize);
+		light.intensity = 1.5;
 		light.ambientIntensity = 0.2;
-		light.depth = 20.0;
+		light.depth = 10.0;
 		[_scrollNode addChild:light];
 		
 		_glowLight = [CCLightNode lightWithType:CCLightPoint groups:nil color:[CCColor whiteColor] intensity:0.0];
 		_glowLight.ambientIntensity = 0.0;
+		_glowLight.cutoffRadius = GameSceneSize;
+		_glowLight.halfRadius = 0.1;
 		_glowLight.depth = 0;
 		[_scrollNode addChild:_glowLight];
 		
@@ -330,9 +335,10 @@
 
 -(void)drawGlow:(CGPoint)position scale:(float)scale;
 {
-	float intensity = 2.0*scale;
+	float duration = scale/5.0;
 	CCColor *color = [CCColor whiteColor];
-	float duration = 0.5;
+	
+	[self glowLight:position intensity:2*scale duration:duration];
 	
 	CCSprite *glow = [CCSprite spriteWithImageNamed:@"Flare.png"];
 	glow.position = position;
@@ -376,11 +382,18 @@
 		[CCActionRemove action],
 		nil
 	]];
-	
-	_glowLight.position = position;
-	
-	[_glowLight runAction:[CCActionTween actionWithDuration:duration key:@"intensity" from:intensity to:0.0]];
-	[_glowLight runAction:[CCActionTween actionWithDuration:duration key:@"specularIntensity" from:intensity to:0.0]];
+}
+
+-(void)glowLight:(CGPoint)position intensity:(float)intensity duration:(float)duration
+{
+	// Give priority to brighter effects since we can only afford one light for this.
+	if(intensity > _glowLight.intensity){
+		_glowLight.position = position;
+		
+		[_glowLight stopAllActions];
+		[_glowLight runAction:[CCActionTween actionWithDuration:duration key:@"intensity" from:intensity to:0.0]];
+		[_glowLight runAction:[CCActionTween actionWithDuration:duration key:@"specularIntensity" from:intensity to:0.0]];
+	}
 }
 
 -(void)fireBullet
