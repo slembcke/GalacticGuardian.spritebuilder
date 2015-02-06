@@ -422,8 +422,7 @@
 	
 	[_physics addChild:bullet z:Z_BULLET];
 	
-	// Draw a muzzle flash too!
-	[self drawBulletFlash:bullet];
+	[_playerShip bulletFlash:bullet.bulletColor];
 	
 	// Make some noise. Add a little chromatically tuned pitch bending to make it sound more musical.
 	int half_steps = (arc4random()%(2*4 + 1) - 4);

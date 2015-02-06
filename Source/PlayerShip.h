@@ -42,6 +42,7 @@
 
 -(void)ggFixedUpdate:(CCTime)delta withControls:(Controls *)controls;
 
+-(void)bulletFlash:(CCColor *)color;
 -(BOOL)takeDamage;
 -(BOOL)isDead;
 

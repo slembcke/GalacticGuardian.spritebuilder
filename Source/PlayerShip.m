@@ -42,6 +42,7 @@
 	
 	CCNode *_shield;
 	CCLightNode *_shieldLight;
+	CCLightNode *_bulletLight;
 	
 	NSUInteger _currentGunPort;
 	NSMutableArray *_gunPorts;
@@ -168,6 +169,15 @@ VisitAll(CCNode *node, void (^block)(CCNode *))
 {
 	// The distortion sprite is not a child of the ship so we have to sync their positions manually.
 	_shieldDistortionSprite.position = self.position;
+	
+	float decay = 10.0*delta;
+	_bulletLight.intensity = _bulletLight.specularIntensity = cpflerpconst(_bulletLight.intensity, 0.0f, decay);
+}
+
+-(void)bulletFlash:(CCColor *)color
+{
+	_bulletLight.color = color;
+	_bulletLight.intensity = _bulletLight.specularIntensity = 2.0;
 }
 
 -(CGAffineTransform)gunPortTransform
