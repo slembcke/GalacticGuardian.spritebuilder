@@ -30,16 +30,43 @@
 @implementation CCController
 @end
 
-#elif __CC_PLATFORM_MAC
+#endif
 
+#if __CC_PLATFORM_MAC
+
+#import "CCController.h"
 #import <GameController/GCExtendedGamepad.h>
 
 #include <IOKit/hid/IOHIDLib.h>
 
 
+const float DeadZonePercent = 0.2f;
+
+
 @implementation CCController {
 	GCExtendedGamepadSnapShotDataV100 _snapshot;
 	GCExtendedGamepadSnapshot *_gamepad;
+	
+	CFIndex _lThumbXUsageID;
+	CFIndex _lThumbYUsageID;
+	CFIndex _rThumbXUsageID;
+	CFIndex _rThumbYUsageID;
+	CFIndex _lTriggerUsageID;
+	CFIndex _rTriggerUsageID;
+	
+	BOOL _usesHatSwitch;
+	CFIndex _dpadLUsageID;
+	CFIndex _dpadRUsageID;
+	CFIndex _dpadDUsageID;
+	CFIndex _dpadUUsageID;
+	
+	CFIndex _buttonPauseUsageID;
+	CFIndex _buttonAUsageID;
+	CFIndex _buttonBUsageID;
+	CFIndex _buttonXUsageID;
+	CFIndex _buttonYUsageID;
+	CFIndex _lShoulderUsageID;
+	CFIndex _rShoulderUsageID;
 }
 
 @synthesize controllerPausedHandler = _controllerPausedHandler;
@@ -112,7 +139,7 @@ static NSMutableArray *CONTROLLERS = nil;
 }
 
 static IOHIDElementRef
-GetAxis(IOHIDDeviceRef device, int axis)
+GetAxis(IOHIDDeviceRef device, CFIndex axis)
 {
 	NSDictionary *match = @{
 		@(kIOHIDElementUsagePageKey): @(kHIDPage_GenericDesktop),
@@ -126,30 +153,33 @@ GetAxis(IOHIDDeviceRef device, int axis)
 }
 
 static void
-SetupAxis(IOHIDElementRef element, int dmin, int dmax, float rmin, float rmax, int deadZone)
+SetupAxis(IOHIDDeviceRef device, IOHIDElementRef element, CFIndex dmin, CFIndex dmax, CFIndex rmin, CFIndex rmax, float deadZonePercent)
 {
-	IOHIDElementSetProperty(element, CFSTR(kIOHIDElementCalibrationMinKey), (__bridge CFTypeRef)@(rmin));
-	IOHIDElementSetProperty(element, CFSTR(kIOHIDElementCalibrationMaxKey), (__bridge CFTypeRef)@(rmax));
+	IOHIDElementSetProperty(element, CFSTR(kIOHIDElementCalibrationMinKey), (__bridge CFTypeRef)@(dmin));
+	IOHIDElementSetProperty(element, CFSTR(kIOHIDElementCalibrationMaxKey), (__bridge CFTypeRef)@(dmax));
 	
-	IOHIDElementSetProperty(element, CFSTR(kIOHIDElementCalibrationSaturationMinKey), (__bridge CFTypeRef)@(dmin));
-	IOHIDElementSetProperty(element, CFSTR(kIOHIDElementCalibrationSaturationMaxKey), (__bridge CFTypeRef)@(dmax));
+	IOHIDElementSetProperty(element, CFSTR(kIOHIDElementCalibrationSaturationMinKey), (__bridge CFTypeRef)@(rmin));
+	IOHIDElementSetProperty(element, CFSTR(kIOHIDElementCalibrationSaturationMaxKey), (__bridge CFTypeRef)@(rmax));
 	
-	if(deadZone){
-		IOHIDElementSetProperty(element, CFSTR(kIOHIDElementCalibrationDeadZoneMinKey), (__bridge CFTypeRef)@(127 - deadZone));
-		IOHIDElementSetProperty(element, CFSTR(kIOHIDElementCalibrationDeadZoneMaxKey), (__bridge CFTypeRef)@(127 + deadZone));
+	if(deadZonePercent > 0.0f){
+		CFIndex mid = (rmin + rmax)/2;
+		CFIndex deadZone = (rmax - rmin)*(deadZonePercent/2.0f);
+		
+		IOHIDElementSetProperty(element, CFSTR(kIOHIDElementCalibrationDeadZoneMinKey), (__bridge CFTypeRef)@(mid - deadZone));
+		IOHIDElementSetProperty(element, CFSTR(kIOHIDElementCalibrationDeadZoneMaxKey), (__bridge CFTypeRef)@(mid + deadZone));
 	}
-	
-//	IOHIDElementSetProperty(element, CFSTR(kIOHIDElementCalibrationGranularityKey), (__bridge CFTypeRef)@(1.0/64.0));
 }
 
 static void
 ControllerConnected(void *context, IOReturn result, void *sender, IOHIDDeviceRef device)
 {
 	if(result == kIOReturnSuccess){
-		CCController *controller = [[CCController alloc] initWithDevice:device];
+//		NSURL *url = [[NSBundle mainBundle] URLForResource:@"CCControllerConfig.plist" withExtension:nil];
+//		NSDictionary *config = [NSDictionary dictionaryWithContentsOfURL:url];
+//		
+//		NSAssert(@"CCControllerConfig.plist not found.");
 		
-		// Register event/remove callbacks.for buttons and axes.
-		IOHIDValueCallback valueCallback = ControllerInputGeneric;
+		CCController *controller = [[CCController alloc] initWithDevice:device];
 		
 		NSArray *matches = @[
 			@{@(kIOHIDElementUsagePageKey): @(kHIDPage_GenericDesktop)},
@@ -159,32 +189,76 @@ ControllerConnected(void *context, IOReturn result, void *sender, IOHIDDeviceRef
 		NSUInteger vid = [(__bridge NSNumber *)IOHIDDeviceGetProperty(device, CFSTR(kIOHIDVendorIDKey)) unsignedIntegerValue];
 		NSUInteger pid = [(__bridge NSNumber *)IOHIDDeviceGetProperty(device, CFSTR(kIOHIDProductIDKey)) unsignedIntegerValue];
 		
+		CFIndex axisMin = 0;
+		CFIndex axisMax = 256;
+		
 		if(vid == 0x054C){ // Sony
 			if(pid == 0x5C4){ // DualShock 4
 				NSLog(@"[CCController initWithDevice:] Sony Dualshock 4 detected.");
 				
-				const int deadZone = 10;
+				controller->_lThumbXUsageID = kHIDUsage_GD_X;
+				controller->_lThumbYUsageID = kHIDUsage_GD_Y;
+				controller->_rThumbXUsageID = kHIDUsage_GD_Z;
+				controller->_rThumbYUsageID = kHIDUsage_GD_Rz;
+				controller->_lTriggerUsageID = kHIDUsage_GD_Rx;
+				controller->_rTriggerUsageID = kHIDUsage_GD_Ry;
 				
-				SetupAxis(GetAxis(device, 0x30), 0, 255, -1.0,  1.0, deadZone); // Left thumb x
-				SetupAxis(GetAxis(device, 0x31), 0, 255,  1.0, -1.0, deadZone); // Left thumb y
-				SetupAxis(GetAxis(device, 0x32), 0, 255, -1.0,  1.0, deadZone); // Right thumb x
-				SetupAxis(GetAxis(device, 0x35), 0, 255,  1.0, -1.0, deadZone); // Right thumb y
+				controller->_usesHatSwitch = YES;
 				
-				SetupAxis(GetAxis(device, 0x33), 0, 255,  0.0,  1.0, 0); // Left trigger
-				SetupAxis(GetAxis(device, 0x34), 0, 255,  0.0,  1.0, 0); // Right trigger
+				controller->_buttonPauseUsageID = 0x0A;
+				controller->_buttonAUsageID = 0x02;
+				controller->_buttonBUsageID = 0x03;
+				controller->_buttonXUsageID = 0x01;
+				controller->_buttonYUsageID = 0x04;
+				controller->_lShoulderUsageID = 0x05;
+				controller->_rShoulderUsageID = 0x06;
 			}
 		} else if(vid == 0x045E){ // Microsoft
 			if(pid == 0x028E || pid == 0x028F){ // 360 wired/wireless
 				NSLog(@"[CCController initWithDevice:] Microsoft Xbox 360 controller detected.");
-			}
-		} else if(vid == 0x057E){ // Nintendo
-			if(pid == 0x0306){
-				NSLog(@"[CCController initWithDevice:] Nintendo Wiimote detected.");
+				
+				axisMin = -(1<<15);
+				axisMax =  (1<<15);
+				
+				controller->_lThumbXUsageID = kHIDUsage_GD_X;
+				controller->_lThumbYUsageID = kHIDUsage_GD_Y;
+				controller->_rThumbXUsageID = kHIDUsage_GD_Rx;
+				controller->_rThumbYUsageID = kHIDUsage_GD_Ry;
+				controller->_lTriggerUsageID = kHIDUsage_GD_Z;
+				controller->_rTriggerUsageID = kHIDUsage_GD_Rz;
+				
+				controller->_dpadLUsageID = 0x0E;
+				controller->_dpadRUsageID = 0x0F;
+				controller->_dpadDUsageID = 0x0D;
+				controller->_dpadUUsageID = 0x0C;
+				
+				controller->_buttonPauseUsageID = 0x09;
+				controller->_buttonAUsageID = 0x01;
+				controller->_buttonBUsageID = 0x02;
+				controller->_buttonXUsageID = 0x03;
+				controller->_buttonYUsageID = 0x04;
+				controller->_lShoulderUsageID = 0x05;
+				controller->_rShoulderUsageID = 0x06;
 			}
 		}
+		
+		// TODO can we do anything sensible with this?
+//		else if(vid == 0x057E){ // Nintendo
+//			if(pid == 0x0306){
+//				NSLog(@"[CCController initWithDevice:] Nintendo Wiimote detected.");
+//			}
+//		}
 
+		SetupAxis(device, GetAxis(device, controller->_lThumbXUsageID), -1.0,  1.0, axisMin, axisMax, DeadZonePercent);
+		SetupAxis(device, GetAxis(device, controller->_lThumbYUsageID),  1.0, -1.0, axisMin, axisMax, DeadZonePercent);
+		SetupAxis(device, GetAxis(device, controller->_rThumbXUsageID), -1.0,  1.0, axisMin, axisMax, DeadZonePercent);
+		SetupAxis(device, GetAxis(device, controller->_rThumbYUsageID),  1.0, -1.0, axisMin, axisMax, DeadZonePercent);
+		
+		SetupAxis(device, GetAxis(device, controller->_lTriggerUsageID), 0.0,  1.0, 0, 256, 0.0f);
+		SetupAxis(device, GetAxis(device, controller->_rTriggerUsageID), 0.0,  1.0, 0, 256, 0.0f);
+		
 		IOHIDDeviceSetInputValueMatchingMultiple(device, (__bridge CFArrayRef)matches);
-		IOHIDDeviceRegisterInputValueCallback(device, valueCallback, (__bridge void *)controller);
+		IOHIDDeviceRegisterInputValueCallback(device, ControllerInput, (__bridge void *)controller);
 		IOHIDDeviceRegisterRemovalCallback(device, ControllerDisconnected, (void *)CFBridgingRetain(controller));
 		IOHIDDeviceScheduleWithRunLoop(device, CFRunLoopGetMain(), kCFRunLoopDefaultMode);
 		
@@ -199,6 +273,8 @@ ControllerDisconnected(void *context, IOReturn result, void *sender)
 	if(result == kIOReturnSuccess){
 		CCController *controller = CFBridgingRelease((CFTypeRef)context);
 		
+		NSLog(@"%p, %p, %d", context, sender, result);
+		
 		[CONTROLLERS removeObject:controller];
 		[[NSNotificationCenter defaultCenter] postNotificationName:GCControllerDidDisconnectNotification object:controller];
 	}
@@ -206,19 +282,17 @@ ControllerDisconnected(void *context, IOReturn result, void *sender)
 
 //MARK: Input callbacks
 
--(void)callPauseHandler
-{
-	if(self.controllerPausedHandler){
-		self.controllerPausedHandler(self);
-	}
+static float
+Clamp(float value)
+{	
+	return MAX(-1.0f, MIN(value, 1.0f));
 }
 
-// Currently hardcoded for Dualshock 4 since that is all I have to test with.
 static void
-ControllerInputGeneric(void *context, IOReturn result, void *sender, IOHIDValueRef value)
+ControllerInput(void *context, IOReturn result, void *sender, IOHIDValueRef value)
 {
-	if(result == kIOReturnSuccess){
-		@autoreleasepool {
+	@autoreleasepool {
+		if(result == kIOReturnSuccess){
 			CCController *controller = (__bridge CCController *)context;
 			GCExtendedGamepadSnapShotDataV100 *snapshot = &controller->_snapshot;
 			
@@ -227,23 +301,32 @@ ControllerInputGeneric(void *context, IOReturn result, void *sender, IOHIDValueR
 			uint32_t usagePage = IOHIDElementGetUsagePage(element);
 			uint32_t usage = IOHIDElementGetUsage(element);
 			
-			int state = (int)IOHIDValueGetIntegerValue(value);
+			CFIndex state = (int)IOHIDValueGetIntegerValue(value);
 			float analog = IOHIDValueGetScaledValue(value, kIOHIDValueScaleTypeCalibrated);
 			
 //			NSLog(@"usagePage: 0x%02X, usage 0x%02X, value: %d / %f", usagePage, usage, state, analog);
 			
 			if(usagePage == kHIDPage_Button){
-				switch(usage){
-					case 0x02: snapshot->buttonA = state; break;
-					case 0x03: snapshot->buttonB = state; break;
-					case 0x01: snapshot->buttonX = state; break;
-					case 0x04: snapshot->buttonY = state; break;
-					case 0x05: snapshot->leftShoulder = state; break;
-					case 0x06: snapshot->rightShoulder = state; break;
-					case 0x0A: if(state) [controller callPauseHandler]; break;
-				}
-			} else if(usagePage == kHIDPage_GenericDesktop){
-				if(usage == 0x39){
+					if(usage == controller->_buttonPauseUsageID){if(state) controller.controllerPausedHandler(controller);}
+					if(usage == controller->_buttonAUsageID){snapshot->buttonA = state;}
+					if(usage == controller->_buttonBUsageID){snapshot->buttonB = state;}
+					if(usage == controller->_buttonXUsageID){snapshot->buttonX = state;}
+					if(usage == controller->_buttonYUsageID){snapshot->buttonY = state;}
+					if(usage == controller->_lShoulderUsageID){snapshot->leftShoulder = state;}
+					if(usage == controller->_rShoulderUsageID){snapshot->rightShoulder = state;}
+			}
+			
+			if(usagePage == kHIDPage_GenericDesktop){
+				if(usage == controller->_lThumbXUsageID ){snapshot->leftThumbstickX  = analog;}
+				if(usage == controller->_lThumbYUsageID ){snapshot->leftThumbstickY  = analog;}
+				if(usage == controller->_rThumbXUsageID ){snapshot->rightThumbstickX = analog;}
+				if(usage == controller->_rThumbYUsageID ){snapshot->rightThumbstickY = analog;}
+				if(usage == controller->_lTriggerUsageID){snapshot->leftTrigger     = analog;}
+				if(usage == controller->_rTriggerUsageID){snapshot->rightTrigger    = analog;}
+			}
+			
+			if(controller->_usesHatSwitch){
+				if(usagePage == kHIDPage_GenericDesktop && usage == kHIDUsage_GD_Hatswitch){
 					switch(state){
 						case  0: snapshot->dpadX =  0.0; snapshot->dpadY =  1.0; break;
 						case  1: snapshot->dpadX =  1.0; snapshot->dpadY =  1.0; break;
@@ -255,16 +338,12 @@ ControllerInputGeneric(void *context, IOReturn result, void *sender, IOHIDValueR
 						case  7: snapshot->dpadX = -1.0; snapshot->dpadY =  1.0; break;
 						default: snapshot->dpadX =  0.0; snapshot->dpadY =  0.0; break;
 					}
-				} else {
-					switch(usage){
-						case 0x30: snapshot->leftThumbstickX = analog; break;
-						case 0x31: snapshot->leftThumbstickY = analog; break;
-						case 0x32: snapshot->rightThumbstickX = analog; break;
-						case 0x35: snapshot->rightThumbstickY = analog; break;
-						case 0x33: snapshot->leftTrigger = analog; break;
-						case 0x34: snapshot->rightTrigger = analog; break;
-					}
 				}
+			} else if(usagePage == kHIDPage_Button){
+					if(usage == controller->_dpadLUsageID){snapshot->dpadX = Clamp(snapshot->dpadX - (state ? 1.0f : -1.0f));}
+					if(usage == controller->_dpadRUsageID){snapshot->dpadX = Clamp(snapshot->dpadX + (state ? 1.0f : -1.0f));}
+					if(usage == controller->_dpadDUsageID){snapshot->dpadY = Clamp(snapshot->dpadY - (state ? 1.0f : -1.0f));}
+					if(usage == controller->_dpadUUsageID){snapshot->dpadY = Clamp(snapshot->dpadY + (state ? 1.0f : -1.0f));}
 			}
 			
 			controller->_gamepad.snapshotData = NSDataFromGCExtendedGamepadSnapShotDataV100(snapshot);
@@ -276,18 +355,23 @@ ControllerInputGeneric(void *context, IOReturn result, void *sender, IOHIDValueR
 
 -(GCGamepad *)gamepad
 {
-	// Duck typing hack.
-	// This isn't quite correct since the snapshot property will return data of the wrong format.
-	return (GCGamepad *)_gamepad;
+	// Not implemented for now.
+	return nil;
 }
 
 -(GCExtendedGamepad *)extendedGamepad
 {
+	// TODO should make this weak and lazy.
+	// Then we can pump the gamepad data only when it's active.
 	return _gamepad;
 }
 
 @end
 
+#endif
+
+
+#if __CC_PLATFORM_IOS || __CC_PLATFORM_MAC
 
 @implementation GCExtendedGamepad(SnapshotDataFast)
 
