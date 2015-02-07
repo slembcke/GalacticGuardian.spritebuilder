@@ -51,6 +51,7 @@
 -(id)getPooledObjectForKey:(NSString *)key create:(id<Poolable> (^)(void))block;
 -(void)poolObject:(id)obj;
 
+-(EnemyShip *)rocketTarget:(CGPoint)aim limit:(float)limit;
 -(void)splashDamageAt:(CGPoint)center radius:(float)radius damage:(int)damage;
 
 -(void)drawFlash:(CGPoint)position withImage:(NSString*)imagePath;

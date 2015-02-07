@@ -27,9 +27,10 @@
 #import "Constants.h"
 #import "GameScene.h"
 #import "Rocket.h"
+#import "EnemyShip.h"
 
 
-static const float RocketAcceleration = 1000.0;
+static const float RocketAcceleration = 10.0;
 
 static const float RocketDamage[] = {0.0, 14.0, 20.0, 10.0};
 static const float RocketSplash = 150.0;
@@ -41,14 +42,26 @@ static const float RocketClusterRange = 25.0;
 
 @implementation Rocket {
 	RocketLevel _level;
+	EnemyShip *_target;
+	__weak CCSprite *_lockSprite;
 }
 
-+(instancetype)rocketWithLevel:(RocketLevel)level
++(CCSprite *)lockSprite
+{
+	CCSprite *sprite = [CCSprite spriteWithImageNamed:@"Sprites/targetLock.png"];
+	[sprite runAction:[CCActionRepeatForever actionWithAction:[CCActionRotateBy actionWithDuration:1.0 angle:360.0]]];
+	
+	return sprite;
+}
+
++(instancetype)rocketWithLevel:(RocketLevel)level target:(EnemyShip *)target
 {
 	NSAssert(level != RocketNone, @"Not a valid rocket level.");
 	
 	Rocket *rocket = (Rocket *)[CCBReader load:@"Rocket"];
 	rocket->_level = level;
+	
+	[rocket setTarget:target];
 	
 	CGSize size = rocket.contentSize;
 	CGFloat radius = size.height/2.0;
@@ -58,21 +71,45 @@ static const float RocketClusterRange = 25.0;
 	body.collisionCategories = @[CollisionCategoryBullet];
 	body.collisionMask = @[CollisionCategoryEnemy, CollisionCategoryAsteroid];
 	
-	CCTime fuse = sqrt(2.0*RocketRange/RocketAcceleration);
 	[rocket scheduleBlock:^(CCTimer *timer) {
 		[rocket destroy];
-	} delay:fuse];
+	} delay:1.0];
 	
 	return rocket;
+}
+
+-(void)setTarget:(EnemyShip *)target
+{
+	_target = target;
+	
+	[_lockSprite removeFromParent];
+	
+	CCSprite *lockSprite = [Rocket lockSprite];
+	_lockSprite = lockSprite;
+	[target addChild:lockSprite z:Z_RETICLE];
 }
 
 -(void)fixedUpdate:(CCTime)delta
 {
 	CCPhysicsBody *body = self.physicsBody;
-	CGAffineTransform transform = body.absoluteTransform;
 	
-	CGPoint direction = CGPointMake(transform.a, transform.b);
-	body.velocity = ccpAdd(body.velocity, ccpMult(direction, RocketAcceleration*delta));
+	if(_target.hp <= 0){
+		CGPoint aim = ccpAdd(body.absolutePosition, ccpMult(body.velocity, 1.0));
+		_target = [(GameScene *)self.scene rocketTarget:aim limit:INFINITY];
+	}
+	
+	CGPoint direction = (_target ? ccpSub(_target.position, body.absolutePosition) : body.velocity);
+	
+	const float accelTime = 0.5;
+	const float speed = 200.0;
+
+	CGPoint desiredVelocity = ccpMult(ccpNormalize(direction), speed);
+	CGPoint velocity = cpvlerpconst(body.velocity, desiredVelocity, speed/accelTime*delta);
+	
+	body.velocity = velocity;
+	if(cpvlengthsq(velocity) > 0.0){
+		self.rotation = -CC_RADIANS_TO_DEGREES(ccpToAngle(velocity));
+	}
 }
 
 // Apply splash damage.
@@ -81,21 +118,11 @@ static const float RocketClusterRange = 25.0;
 	GameScene *scene = (GameScene *)parent.scene;
 	[scene splashDamageAt:pos radius:RocketSplash damage:RocketDamage[_level]];
 	
-	CCNode *explosion = [CCBReader load:@"Particles/RocketExplosion"];
-	explosion.position = pos;
-	[parent addChild:explosion z:Z_FIRE];
-	
-	CCNode *smoke = [CCBReader load:@"Particles/Smoke"];
-	smoke.position = pos;
-	[parent addChild:smoke z:Z_SMOKE];
-	
 	CCNode *distortion = [CCBReader load:@"DistortionParticles/RocketRing"];
 	distortion.position = pos;
 	[scene.distortionNode addChild:distortion];
 	
 	[scene scheduleBlock:^(CCTimer *timer) {
-		[explosion removeFromParent];
-		[smoke removeFromParent];
 		[distortion removeFromParent];
 	} delay:2];
 	
@@ -120,6 +147,7 @@ static const float RocketClusterRange = 25.0;
 	
 	[(GameScene *)parent.scene drawGlow:pos scale:3.0];
 	
+	[_lockSprite removeFromParent];
 	[self removeFromParent];
 }
 

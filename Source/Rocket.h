@@ -22,6 +22,10 @@
  * THE SOFTWARE.
  */
 
+
+@class EnemyShip;
+
+
 typedef NS_ENUM(NSUInteger, RocketLevel){
 	RocketNone, RocketSmall, RocketLarge, RocketCluster,
 };
@@ -29,7 +33,9 @@ typedef NS_ENUM(NSUInteger, RocketLevel){
 
 @interface Rocket : CCNode
 
-+(instancetype)rocketWithLevel:(RocketLevel)level;
++(CCSprite *)lockSprite;
+
++(instancetype)rocketWithLevel:(RocketLevel)level target:(EnemyShip *)target;
 
 -(void)destroy;
 

@@ -57,6 +57,8 @@
 	
 	Controls *_controls;
 	CCProgressNode *_rocketReticle;
+	CCSprite *_targetLock;
+	CGPoint _rocketLaunchDirection;
 	
 	// HUD elements
 	CCLabelTTF *_levelLabel;
@@ -111,6 +113,11 @@
 		
 		// Make the reticle spin.
 		[_rocketReticle runAction:[CCActionRepeatForever actionWithAction:[CCActionRotateBy actionWithDuration:1.0 angle:-360.0]]];
+		
+		_targetLock = [Rocket lockSprite];
+		[_scrollNode addChild:_targetLock z:Z_RETICLE];
+		
+		_rocketLaunchDirection = cpv(200.0, 200.0);
 		
 		_background = [NebulaBackground node];
 		_background.contentSize = CGSizeMake(GameSceneSize, GameSceneSize);
@@ -253,13 +260,42 @@
 	_scrollNode.anchorPoint = ccpAdd(scrollPosition, ccpMult(offset, 1.0/log(smoothing)));
 }
 
+-(CGPoint)rocketAim
+{
+	return CGPointApplyAffineTransform(ccp(RocketRange, 0.0), _playerShip.nodeToParentTransform);
+}
+
+-(EnemyShip *)rocketTarget:(CGPoint)aim limit:(float)limit;
+{
+	EnemyShip *target = nil;
+	float closestDist = limit;
+	for(EnemyShip *enemy in _enemies){
+		float dist = ccpDistance(aim, enemy.position);
+		if(dist < closestDist){
+			target = enemy;
+			closestDist = dist;
+		}
+	}
+	
+	return target;
+}
+
 -(void)update:(CCTime)delta
 {
 	self.scrollPosition = _playerShip.position;
 	
 	// Update the reticle's position.
-	// TODO Only works when the player is at rest. Is this wrong or the rocket firing code?
-	_rocketReticle.position = CGPointApplyAffineTransform(ccp(RocketRange, 0.0), _playerShip.nodeToParentTransform);
+	CGPoint aim = [self rocketAim];
+	_rocketReticle.position = aim;
+	
+	EnemyShip *target = [self rocketTarget:aim limit:150.0];
+	if(target){
+		_targetLock.position = target.position;
+		_targetLock.visible = YES;
+	} else {
+		_targetLock.visible = NO;
+	}
+
 	
 	if(!_playerShip.isDead){
 		CCScheduler *scheduler = [CCDirector sharedDirector].scheduler;
@@ -442,6 +478,10 @@
 	int half_steps = (arc4random()%(2*4 + 1) - 4);
 	float pitch = pow(2.0f, half_steps/12.0f);
 	[[OALSimpleAudio sharedInstance] playEffect:@"TempSounds/Laser.wav" volume:0.25 pitch:pitch pan:0.0 loop:NO];
+	
+	if(_rocketReticle.percentage == 100.0){
+		[self fireRocket];
+	}
 }
 
 -(void)fireRocket
@@ -462,9 +502,13 @@
 	CGPoint position = ccp(transform.tx, transform.ty);
 	CGPoint direction = ccp(transform.a, transform.b);
 	
-	Rocket *rocket = [Rocket rocketWithLevel:_rocketLevel];
+	Rocket *rocket = [Rocket rocketWithLevel:_rocketLevel target:[self rocketTarget:[self rocketAim] limit:INFINITY]];
 	rocket.position = position;
 	rocket.rotation = -CC_RADIANS_TO_DEGREES(ccpToAngle(direction));
+	
+	CCPhysicsBody *player = _playerShip.physicsBody;
+	_rocketLaunchDirection.y *= -1.0;
+	rocket.physicsBody.velocity = cpvadd(player.velocity, cpTransformVect(player.absoluteTransform, _rocketLaunchDirection));
 	
 	[_physics addChild:rocket z:Z_BULLET];
 	
@@ -477,7 +521,7 @@
 	
 	// Use a timer to charge the reticle.
 	[self scheduleBlock:^(CCTimer *timer) {
-		_rocketReticle.percentage += 10.0;
+		_rocketReticle.percentage += 20.0;
 		
 		if(_rocketReticle.percentage == 100.0){
 			// Reenable the button and reticle when done charging.
