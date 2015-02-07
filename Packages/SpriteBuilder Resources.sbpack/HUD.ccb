@@ -1284,7 +1284,7 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>1</real>
+							<real>0.0</real>
 							<real>0.0</real>
 							<integer>1</integer>
 							<integer>0</integer>
