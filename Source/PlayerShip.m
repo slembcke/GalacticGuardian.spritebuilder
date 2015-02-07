@@ -40,7 +40,7 @@
 	CCNode *_mainThruster;
 	id<ALSoundSource> _engineNoise;
 	
-	CCNode *_shield;
+	CCSprite *_shield;
 	CCLightNode *_shieldLight;
 	CCLightNode *_bulletLight;
 	
@@ -195,29 +195,36 @@ VisitAll(CCNode *node, void (^block)(CCNode *))
 	// TODO?
 }
 
--(void)destroyShield
+-(void)flashShield
 {
+	CCSprite *sprite = [CCSprite spriteWithSpriteFrame:_shield.spriteFrame];
+	sprite.position = _shield.position;
+	sprite.rotation = _shield.rotation;
+	[_shield.parent addChild:sprite];
+	
 	float duration = 0.25;
-	[_shield runAction:[CCActionSequence actions:
+	[sprite runAction:[CCActionSequence actions:
 		[CCActionSpawn actions:
 			[CCActionScaleTo actionWithDuration:duration scale:4.0],
 			[CCActionFadeOut actionWithDuration:duration],
 			nil
 		],
-		[CCActionHide action],
+		[CCActionRemove action],
 		nil
 	]];
 	
-	_shieldLight.intensity = 0.0;
-	_shieldDistortionSprite.visible = NO;
 }
 
 -(BOOL)takeDamage
 {
 	_hp -= 1;
 	
+	[self flashShield];
+	
 	if(_hp == 1){
-		[self destroyShield];
+		_shield.visible = NO;
+		_shieldLight.intensity = 0.0;
+		_shieldDistortionSprite.visible = NO;
 	}
 		
 	return _hp <= 0;
