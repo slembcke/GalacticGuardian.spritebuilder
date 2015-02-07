@@ -32,17 +32,6 @@
 	__unsafe_unretained GameScene *_scene;
 }
 
-static NSString * const spriteNames[] ={
-    @"Sprites/gem1.png",
-    @"Sprites/gem2.png",
-    @"Sprites/gem3.png",
-};
-//static NSString * const spriteFlashes[] = {
-//    @"Sprites/laserFlashBlue.png",
-//    @"Sprites/laserFlashGreen.png",
-//    @"Sprites/laserFlashRed.png",
-//};
-
 const int values[] = {1, 4, 8};
 
 static NSArray *CollisionCategories = nil;
@@ -58,12 +47,10 @@ static NSArray *CollisionMask = nil;
 
 -(instancetype)initWithAmount:(SpaceBuckType) type
 {
-	if((self = [super initWithImageNamed:spriteNames[type]])){
-		CCPhysicsBody *body = self.physicsBody = [CCPhysicsBody bodyWithCircleOfRadius:3.0f andCenter:self.anchorPointInPoints];
+	if((self = [super initWithImageNamed:@"Sprites/gem.png"])){
+		CGPoint center = self.anchorPointInPoints;
+		CCPhysicsBody *body = self.physicsBody = [CCPhysicsBody bodyWithPillFrom:ccp(center.x, center.y - 1.0) to:ccp(center.x, center.y + 1.0) cornerRadius:1.5];
 		body.mass = 0.01;
-		
-		static const float scale[] = {0.4, 0.7, 0.8};
-		self.scale = scale[type];
 		
 		_amount = values[type];
 		_flashImage = @"Sprites/laserFlashGreen.png";
