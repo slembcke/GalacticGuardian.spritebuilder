@@ -344,6 +344,7 @@
 	glow.position = position;
 	glow.scale = scale;
 	glow.color = color;
+	glow.opacity = 0.9;
 	glow.blendMode = [CCBlendMode addMode];
 	[_scrollNode addChild:glow z:Z_FIRE];
 	
@@ -655,8 +656,8 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 	
 	[self addChild:levelUpText];
 	levelUpText.positionType = CCPositionTypeNormalized;
-	levelUpText.position = ccp(0.5, 0.5);
-	levelUpText.anchorPoint = ccp(0.5, 0.66);
+	levelUpText.position = ccp(0.5, 0.675);
+	levelUpText.anchorPoint = ccp(0.5, 0.5);
 	
 	[levelUpText setScale:2.0f];
 	[levelUpText runAction:[CCActionSequence actions:
