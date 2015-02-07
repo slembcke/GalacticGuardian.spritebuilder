@@ -40,30 +40,34 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-	CGSize defaultSize = CGSizeMake(640.0, 360.0);
-	CGRect screenFrame = [NSScreen mainScreen].visibleFrame;
+	// Use iPhone 5 size a base size/ratio.
+	CGSize defaultSize = CGSizeMake(568.0, 320.0);
+	
+	// Set 0.0 for fullscreen mode.
 	CGFloat inset = 100.0;
 	
-	CGFloat scaleW = (screenFrame.size.width - 2.0*inset)/defaultSize.width;
-	CGFloat scaleH = (screenFrame.size.height - 2.0*inset)/defaultSize.height;
-	CGFloat windowScale = MAX(1.0, MIN(scaleW, scaleH));
+	NSWindow *window = self.window;
+	[window setFrame:CGRectInset([NSScreen mainScreen].visibleFrame, inset, inset) display:NO];
 	
-	CGSize windowSize = CC_SIZE_SCALE(defaultSize, windowScale);
-	CGRect windowFrame = CGRectMake(
-		(screenFrame.size.width - windowSize.width)/2.0,
-		(screenFrame.size.height - windowSize.height)/2.0,
-		windowSize.width,
-		windowSize.height
-	);
+	// Fullscreen?
+	if(inset == 0.0){
+		window.styleMask = NSBorderlessWindowMask;
+		window.backingType = NSBackingStoreBuffered;
+		window.level = NSMainMenuWindowLevel + 1;
+		
+		[window setFrame:[NSScreen mainScreen].frame display:NO];
+	}
 	
-	[self.window setFrame:windowFrame display:NO animate:NO];
+	CGFloat scaleW = (window.frame.size.width)/defaultSize.width;
+	CGFloat scaleH = (window.frame.size.height)/defaultSize.height;
+	CGFloat scale = MAX(1.0, MIN(scaleW, scaleH));
 
 	CCDirectorMac *director = (CCDirectorMac*)[CCDirector sharedDirector];
 
 	// connect the OpenGL view with the director
 	[director setView:self.glView];
 	director.resizeMode = kCCDirectorResize_NoScale;
-	director.contentScaleFactor = windowScale*[NSScreen mainScreen].backingScaleFactor;
+	director.contentScaleFactor = scale*[NSScreen mainScreen].backingScaleFactor;
 
 	[[CCFileUtils sharedFileUtils] setMacContentScaleFactor:2.0];
 	[CCFileUtils sharedFileUtils].directoriesDict = [@{
