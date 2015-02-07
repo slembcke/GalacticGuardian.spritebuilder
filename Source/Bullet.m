@@ -46,10 +46,10 @@ static NSString * const bulletFlashes[] ={
 static NSArray * bulletColors;
 
 const float bulletSpeeds[] = {
-	200, 225, 250, 225, 260, 275
+	200, 225, 400, 450, 500, 550
 };
 const float bulletDurations[] = {
-	0.5, 0.52, 0.54, 0.64, 0.66, 0.8
+	0.5, 0.52, 0.25, 0.30, 0.35, 0.40
 };
 
 
