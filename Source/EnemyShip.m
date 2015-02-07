@@ -132,7 +132,7 @@ static NSArray *CollisionMask = nil;
 	body.velocity = velocity;
 	if(cpvlengthsq(velocity) > 0.0){
 		// Rotate the enemy towards the direction it's moving.
-		const float maxTurn = 360.0*delta;
+		const float maxTurn = 180.0*delta;
 		CGPoint relativeDirection = cpTransformVect(cpTransformInverse(body.absoluteTransform), velocity);
 		self.rotation += clampf(-CC_RADIANS_TO_DEGREES(ccpToAngle(relativeDirection)), -maxTurn, maxTurn);
 	}
