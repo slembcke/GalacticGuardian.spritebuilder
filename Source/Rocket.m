@@ -118,14 +118,6 @@ static const float RocketClusterRange = 25.0;
 	GameScene *scene = (GameScene *)parent.scene;
 	[scene splashDamageAt:pos radius:RocketSplash damage:RocketDamage[_level]];
 	
-	CCNode *distortion = [CCBReader load:@"DistortionParticles/RocketRing"];
-	distortion.position = pos;
-	[scene.distortionNode addChild:distortion];
-	
-	[scene scheduleBlock:^(CCTimer *timer) {
-		[distortion removeFromParent];
-	} delay:2];
-	
 	[[OALSimpleAudio sharedInstance] playEffect:@"TempSounds/Explosion.wav" volume:2.0 pitch:scene.pitchScale pan:0.0 loop:NO];
 }
 

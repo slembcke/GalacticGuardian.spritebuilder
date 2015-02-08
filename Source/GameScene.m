@@ -280,6 +280,8 @@
 	return target;
 }
 
+const float RocketAimLimit = 75.0f;
+
 -(void)update:(CCTime)delta
 {
 	self.scrollPosition = _playerShip.position;
@@ -288,7 +290,7 @@
 	CGPoint aim = [self rocketAim];
 	_rocketReticle.position = aim;
 	
-	EnemyShip *target = [self rocketTarget:aim limit:150.0];
+	EnemyShip *target = [self rocketTarget:aim limit:RocketAimLimit];
 	if(target){
 		_targetLock.position = target.position;
 		_targetLock.visible = YES;
@@ -486,7 +488,10 @@
 
 -(void)fireRocket
 {
+	EnemyShip *target = [self rocketTarget:[self rocketAim] limit:RocketAimLimit];
+	
 	if(
+		target == nil ||
 		// Don't fire until the player unlocks rockets.
 		_rocketLevel == RocketNone ||
 		// Don't fire until the missile timer is ready.
@@ -502,7 +507,7 @@
 	CGPoint position = ccp(transform.tx, transform.ty);
 	CGPoint direction = ccp(transform.a, transform.b);
 	
-	Rocket *rocket = [Rocket rocketWithLevel:_rocketLevel target:[self rocketTarget:[self rocketAim] limit:INFINITY]];
+	Rocket *rocket = [Rocket rocketWithLevel:_rocketLevel target:target];
 	rocket.position = position;
 	rocket.rotation = -CC_RADIANS_TO_DEGREES(ccpToAngle(direction));
 	
