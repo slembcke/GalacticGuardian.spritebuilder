@@ -553,24 +553,25 @@
 	
 	[self drawGlow:pos scale:7.0];
 	
-	[self scheduleBlock:^(CCTimer *timer) {
-		[distortion removeFromParent];
-	} delay:5.0];
-	
-	float accel = distortion.radialAccel;
-	float limit = distortion.life + distortion.lifeVar;
-	
-	// Set up timers to destroy nearby enemies as the nova ring expands.
-	for (EnemyShip *enemy in _enemies) {
-		// explode based on distance from player and particle system values.
-		// Things are gnerally moving towards the player, so fudge the numbers a little.
-		float dist = MAX(ccpLength(ccpSub(pos, enemy.position)) - 30.0, 0.0);
-		float delay = sqrt(2.0*dist/accel);
+	const int repeats = 20;
+	CCTimer *timer = [self scheduleBlock:^(CCTimer *timer) {
+		NSUInteger count = timer.repeatCount;
+		float t = 1.0 - (float)count/(float)repeats;
+//		NSLog(@"t: %f", t);
 		
-		if(delay < limit){
-			[enemy scheduleBlock:^(CCTimer *timer) {[self enemyDeath:enemy from:nil];} delay:delay];
+		float dist = cpflerp(distortion.startRadius, distortion.endRadius, t);
+		
+		for (EnemyShip *enemy in _enemies) {
+			if(ccpDistance(pos, enemy.position) < dist){
+				[self scheduleBlock:^(CCTimer *timer) {[self enemyDeath:enemy from:nil];} delay:0.0];
+			}
 		}
-	}
+		
+		if(count == 0) [distortion removeFromParent];
+	} delay:0.0];
+	
+	timer.repeatCount = repeats;
+	timer.repeatInterval = distortion.life/repeats;
 	
 	[CCDirector sharedDirector].scheduler.timeScale = 0.25;
 }
