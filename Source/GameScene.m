@@ -75,6 +75,7 @@
 	BulletLevel _bulletLevel;
 	RocketLevel _rocketLevel;
 	
+	int _points;
 	int _spaceBucksTilNextLevel;
 	
 	// This light is recycled for each explosion.
@@ -196,6 +197,17 @@
 		
 		// Add the player's ship in the center of the game area.
 		[self createPlayerShipAt: ccp(GameSceneSize/2.0, GameSceneSize/2.0) withArt:ship_fileNames[shipType]];
+		
+		// Schedule a timer to update the points label no more than 3 times a second.
+		__block int lastPoints = _points;
+		CCTimer *pointsTimer = [self scheduleBlock:^(CCTimer *timer) {
+			if(lastPoints != _points){
+				_levelLabel.string = [NSString stringWithFormat:@"Points: % 6d", _points];
+				lastPoints = _points;
+			}
+		} delay:1.0/10.0];
+		
+		pointsTimer.repeatCount = CCTimerRepeatForever;
 	}
 	
 	return self;
@@ -948,7 +960,7 @@ static const float MinBarWidth = 5.0;
 -(void)setLevel:(int)level
 {
 	_level = level;
-	_levelLabel.string = [NSString stringWithFormat:@"Level: %d", level + 1];
+//	_levelLabel.string = [NSString stringWithFormat:@"Level: %d", level + 1];
 }
 
 //MARK: - CCPhysicsCollisionDelegate methods
@@ -1007,7 +1019,9 @@ static const float MinBarWidth = 5.0;
 	[self drawFlash:pickup.position withImage:pickup.flashImage];
 	[[OALSimpleAudio sharedInstance] playEffect:@"TempSounds/Pickup.wav" volume:0.25 pitch:1.0 pan:0.0 loop:NO];
 	
-	self.spaceBucks += [pickup amount];
+	int amount = [pickup amount];
+	_points += amount;
+	self.spaceBucks += amount;
 	if(self.spaceBucks >= _spaceBucksTilNextLevel){
 		[self levelUp];
 	}

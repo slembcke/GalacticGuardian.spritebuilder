@@ -116,7 +116,7 @@
 								<string>Text</string>
 								<key>value</key>
 								<array>
-									<string>Level: 00</string>
+									<string>Points: 000000</string>
 									<false/>
 								</array>
 							</dict>
@@ -154,7 +154,7 @@
 								<string>Size</string>
 								<key>value</key>
 								<array>
-									<real>100</real>
+									<real>150</real>
 									<real>1</real>
 									<integer>0</integer>
 									<integer>2</integer>
@@ -166,7 +166,7 @@
 								<key>type</key>
 								<string>IntegerLabeled</string>
 								<key>value</key>
-								<integer>1</integer>
+								<integer>0</integer>
 							</dict>
 							<dict>
 								<key>name</key>
@@ -252,6 +252,8 @@
 								</array>
 							</dict>
 						</array>
+						<key>selected</key>
+						<true/>
 					</dict>
 					<dict>
 						<key>UUID</key>
@@ -1422,8 +1424,6 @@
 				</array>
 			</dict>
 		</array>
-		<key>selected</key>
-		<true/>
 	</dict>
 	<key>notes</key>
 	<array/>
