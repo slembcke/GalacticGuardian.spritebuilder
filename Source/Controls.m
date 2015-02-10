@@ -45,7 +45,6 @@
 	FancyJoystick *_virtualJoystick;
 	FancyJoystick *_virtualAimJoystick;
 	
-	CCButton *_rocketButton;
 	CCButton *_novaButton;
 	
 	NSMutableDictionary *_buttonStates;
@@ -67,14 +66,6 @@
 		
 		CCPositionType br =CCPositionTypeMake(CCPositionUnitPoints, CCPositionUnitPoints, CCPositionReferenceCornerBottomRight);
 		CCPositionType bl =CCPositionTypeMake(CCPositionUnitPoints, CCPositionUnitPoints, CCPositionReferenceCornerBottomLeft);
-        
-		// _rocketButton ivar is set by the CCB file, but wrapped in a regular node.
-		CCNode *rocketButtonNode = [CCBReader load:@"RocketButton" owner:self];
-		rocketButtonNode.positionType = bl;
-		rocketButtonNode.position = ccp(2.0*joystickOffset, joystickOffset);
-		rocketButtonNode.contentSize = CGSizeMake(0.7*joystickOffset, 0.7*joystickOffset);
-		[((CCButton*) rocketButtonNode.children[0]).background setMargin: 0.0f];
-		[self addChild:rocketButtonNode];
 		
 		// _novaButton ivar is set by the CCB file, but wrapped in a regular node.
 		CCNode *novaButtonNode = [CCBReader load:@"NovaButton" owner:self];
@@ -84,7 +75,6 @@
 		[self addChild:novaButtonNode];
 		
 		// Exclusive touch would steal touches from the joysticks.
-		_rocketButton.exclusiveTouch = NO;
 		_novaButton.exclusiveTouch = NO;
 		
 		_virtualJoystick = [FancyJoystick node];
@@ -158,9 +148,11 @@
 	
 	_gamepad.buttonA.valueChangedHandler = ^(GCControllerButtonInput *button, float value, BOOL pressed){
 		[self setButtonValue:ControlNovaButton value:pressed];
+		
+		_novaButton.highlighted = pressed;
 	};
 	
-	self.visible = NO;
+//	self.visible = NO;
 }
 
 -(void)controllerDidDisconnect
@@ -169,7 +161,7 @@
 	_controllerStick = nil;
 	_controllerAim = nil;
 	
-	self.visible = YES;
+//	self.visible = YES;
 }
 #endif
 
@@ -182,8 +174,13 @@
 	// Otherwise read from the onscreen joystick.
 	if(_controllerAim){
 		aim = CGPointMake(_controllerAim.xAxis.value, _controllerAim.yAxis.value);
+		_virtualAimJoystick.direction = aim;
 	} else {
 		aim = _virtualAimJoystick.direction;
+	}
+	
+	if(_controllerStick){
+		_virtualJoystick.direction = ccp(_controllerStick.xAxis.value, _controllerStick.yAxis.value);
 	}
 #else
 	CGPoint aim = _virtualAimJoystick.direction;
@@ -266,11 +263,6 @@
 	[self setButtonValue:ControlNovaButton value:YES];
 	[self setButtonValue:ControlNovaButton value:NO];
 }
-
--(BOOL)rocketButtonEnabled {return _rocketButton.enabled;}
--(void)setRocketButtonEnabled:(BOOL)rocketButtonEnabled {_rocketButton.enabled = rocketButtonEnabled;}
--(BOOL)rocketButtonVisible {return _rocketButton.parent.visible;}
--(void)setRocketButtonVisible:(BOOL)rocketButtonVisible {_rocketButton.parent.visible = rocketButtonVisible;}
 
 -(BOOL)novaButtonEnabled {return _novaButton.enabled;}
 -(void)setNovaButtonEnabled:(BOOL)novaButtonEnabled {_novaButton.enabled = novaButtonEnabled;}

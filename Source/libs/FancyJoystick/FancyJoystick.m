@@ -116,30 +116,43 @@ CCTexture *FancyJoystickTexture = nil;
     [self stopAllActions];
 }
 
-- (void)touchMoved:(CCTouch *)touch withEvent:(CCTouchEvent *)event
+-(void)setJoyPos:(CGPoint)direction
 {
-    float distance = ccpDistance( touch.locationInWorld, self.positionInPoints);
+		CGPoint pos = ccpAdd(self.positionInPoints, ccpMult(direction, kMaxDistance));
+	
+    float distance = ccpDistance(pos, self.positionInPoints);
     distance =  clampf(distance, 0, kMaxDistance);
-    float angle = [self angleBetween:self.positionInPoints and:touch.locationInWorld];
+    float angle = [self angleBetween:self.positionInPoints and:pos];
     
     float vx = cos(angle * M_PI / 180) * (distance * 1.5);
     float vy = sin(angle * M_PI / 180) * (distance * 1.5);
     
-		CGPoint delta = cpvclamp(cpvsub(touch.locationInWorld, self.positionInPoints), kMaxDistance);
-		_direction = cpvmult(delta, 1.0/kMaxDistance);
-    
     float darkness = (127 * (vy / kMaxDistance));
-    
+	
     float i = 0;
     float count = self.children.count;
     for (CCSprite *layer in self.children) {
-        CGPoint addition = ccpMult( ccp(vx / self.contentSize.width,vy / self.contentSize.height), i / count );
+        CGPoint addition = ccpMult( ccp(vx / self.contentSize.width, vy / self.contentSize.height), i / count );
         layer.position = ccpAdd(joystickNormalizedCenter, addition);
         if ([layer.name isEqualToString:kStickTag]) {
             layer.color = [CCColor colorWithWhite:.8 - (( darkness / 200.0) * (i / count)) alpha:1.0];
         }
         i ++;
     }
+}
+
+-(void)setDirection:(CGPoint)direction
+{
+	// This method is a hack to make gamepad controls show up onscreen!
+	[self setJoyPos:direction];
+}
+
+- (void)touchMoved:(CCTouch *)touch withEvent:(CCTouchEvent *)event
+{
+		CGPoint delta = cpvclamp(cpvsub(touch.locationInWorld, self.positionInPoints), kMaxDistance);
+		_direction = cpvmult(delta, 1.0/kMaxDistance);
+    
+		[self setJoyPos:_direction];
     if (self.delegate != nil) {
         if ([self.delegate respondsToSelector:@selector(joystickUpdatedDirection:)])[self.delegate joystickUpdatedDirection:self];
     }
