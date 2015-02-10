@@ -10,13 +10,14 @@ varying vec2 v_ParallaxCoords1;
 varying vec2 v_ParallaxCoords2;
 varying mediump vec2 v_ParallaxOffset;
 
-const float DistortionAmount = 0.25;
+const float DistortionAmount = 1.0;
 
 mediump vec4 composite(vec4 over, vec4 under){return over + under*(1.0 - over.a);}
 
 void main(){
 	// Sample the distortion offset from the distortion map for the distortion field effect.
 	mediump vec2 distortion = DistortionAmount*(2.0*texture2D(u_DistortionMap, cc_FragTexCoord2).xy - 1.0);
+	distortion *= distortion;
 	
 	// Starfield
 	gl_FragColor = texture2D(cc_MainTexture, cc_FragTexCoord1 + u_StarfieldDepth*distortion);

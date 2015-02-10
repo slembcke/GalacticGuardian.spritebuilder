@@ -24,7 +24,7 @@
  *  Direction the joystick is turning.
  *  Use direction to offset your game sprites position.
  */
-@property (nonatomic,readonly) CGPoint direction;
+@property (nonatomic, assign) CGPoint direction;
 @property (assign) id <FancyJoystickDelegate> delegate;
 
 @end
