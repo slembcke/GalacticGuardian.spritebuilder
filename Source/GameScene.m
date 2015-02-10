@@ -164,11 +164,11 @@
 		[self setupEnemySpawnTimer];
 		
 		// Setup the global light.
-		CCLightNode *light = [CCLightNode lightWithType:CCLightPoint groups:nil color:[CCColor whiteColor] intensity:0.4];
-		light.position = ccp(GameSceneSize, GameSceneSize);
-		light.intensity = 1.5;
+		CCLightNode *light = [CCLightNode lightWithType:CCLightPoint groups:nil color:[CCColor whiteColor] intensity:1.0];
+        light.type = CCLightDirectional;
+        light.rotation = -45;
 		light.ambientIntensity = 0.2;
-		light.depth = 10.0;
+		light.depth = 1;
 		[_scrollNode addChild:light];
 		
 		_glowLight = [CCLightNode lightWithType:CCLightPoint groups:nil color:[CCColor whiteColor] intensity:0.0];
