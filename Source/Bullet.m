@@ -117,7 +117,8 @@ static NSArray *CollisionMask = nil;
 
 -(NSString *)flashImagePath
 {
-	return bulletFlashes[_bulletLevel];
+    return NULL;
+	//return bulletFlashes[_bulletLevel];
 }
 
 -(CCColor *)bulletColor

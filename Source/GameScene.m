@@ -349,20 +349,23 @@ const float RocketAimLimit = 75.0f;
 	float duration = 0.15;
 	
 	// Set up the flash sprite and it's animation.
-	CCSprite *flash = [CCSprite spriteWithImageNamed:imagePath];
-	flash.position = position;
-	flash.rotation = 360.0*CCRANDOM_0_1();
-	[_physics addChild:flash z:Z_FLASH];
-	
-	[flash runAction:[CCActionSequence actions:
-		[CCActionSpawn actions:
-			[CCActionFadeOut actionWithDuration:duration],
-			[CCActionScaleTo actionWithDuration:duration scale:0.25],
-			nil
-		],
-		[CCActionRemove action],
-		nil
-	]];
+    if (imagePath)
+    {
+        CCSprite *flash = [CCSprite spriteWithImageNamed:imagePath];
+        flash.position = position;
+        flash.rotation = 360.0*CCRANDOM_0_1();
+        [_physics addChild:flash z:Z_FLASH];
+        
+        [flash runAction:[CCActionSequence actions:
+            [CCActionSpawn actions:
+                [CCActionFadeOut actionWithDuration:duration],
+                [CCActionScaleTo actionWithDuration:duration scale:0.25],
+                nil
+            ],
+            [CCActionRemove action],
+            nil
+        ]];
+    }
 	
 	// Draw some distortion to use with it.
 	CCSprite *distortion = [CCSprite spriteWithImageNamed:@"DistortionTexture.png"];
