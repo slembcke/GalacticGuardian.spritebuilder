@@ -192,8 +192,9 @@ GLKVector4 GLKVector4FromString(NSString *data)
 
     data = [dict objectForKey:@"gravity"];
 #if __CC_PLATFORM_MAC
-#else
     if (data) _gravity = NSPointToCGPoint(NSPointFromString(data));
+#else
+    if (data) _gravity = CGPointFromString(data);
 #endif
 
     data = [dict objectForKey:@"colorStart"];
