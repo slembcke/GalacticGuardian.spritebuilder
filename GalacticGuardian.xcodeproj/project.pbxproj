@@ -72,6 +72,24 @@
 		927F61AB196C771E000F43EF /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B77F1B4117B978D7009739AE /* CoreText.framework */; };
 		B737893B180761570076A88C /* Published-iOS in Resources */ = {isa = PBXBuildFile; fileRef = B737893A180761570076A88C /* Published-iOS */; };
 		B73789871807631A0076A88C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B73789851807631A0076A88C /* main.m */; };
+		B74895FC1A8BE4670064DB83 /* CCEffectLine.frag in Resources */ = {isa = PBXBuildFile; fileRef = B74895F21A8BE4670064DB83 /* CCEffectLine.frag */; };
+		B74895FD1A8BE4670064DB83 /* CCEffectLine.frag in Resources */ = {isa = PBXBuildFile; fileRef = B74895F21A8BE4670064DB83 /* CCEffectLine.frag */; };
+		B74895FE1A8BE4670064DB83 /* CCEffectLine.frag in Resources */ = {isa = PBXBuildFile; fileRef = B74895F21A8BE4670064DB83 /* CCEffectLine.frag */; };
+		B74895FF1A8BE4670064DB83 /* CCEffectLine.m in Sources */ = {isa = PBXBuildFile; fileRef = B74895F41A8BE4670064DB83 /* CCEffectLine.m */; };
+		B74896001A8BE4670064DB83 /* CCEffectLine.m in Sources */ = {isa = PBXBuildFile; fileRef = B74895F41A8BE4670064DB83 /* CCEffectLine.m */; };
+		B74896011A8BE4670064DB83 /* CCEffectLine.m in Sources */ = {isa = PBXBuildFile; fileRef = B74895F41A8BE4670064DB83 /* CCEffectLine.m */; };
+		B74896021A8BE4670064DB83 /* CCEffectLine.vert in Resources */ = {isa = PBXBuildFile; fileRef = B74895F51A8BE4670064DB83 /* CCEffectLine.vert */; };
+		B74896031A8BE4670064DB83 /* CCEffectLine.vert in Resources */ = {isa = PBXBuildFile; fileRef = B74895F51A8BE4670064DB83 /* CCEffectLine.vert */; };
+		B74896041A8BE4670064DB83 /* CCEffectLine.vert in Resources */ = {isa = PBXBuildFile; fileRef = B74895F51A8BE4670064DB83 /* CCEffectLine.vert */; };
+		B74896051A8BE4670064DB83 /* CCEffectLineFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = B74895F71A8BE4670064DB83 /* CCEffectLineFactory.m */; };
+		B74896061A8BE4670064DB83 /* CCEffectLineFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = B74895F71A8BE4670064DB83 /* CCEffectLineFactory.m */; };
+		B74896071A8BE4670064DB83 /* CCEffectLineFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = B74895F71A8BE4670064DB83 /* CCEffectLineFactory.m */; };
+		B74896081A8BE4670064DB83 /* CCEffectLineSegment.m in Sources */ = {isa = PBXBuildFile; fileRef = B74895F91A8BE4670064DB83 /* CCEffectLineSegment.m */; };
+		B74896091A8BE4670064DB83 /* CCEffectLineSegment.m in Sources */ = {isa = PBXBuildFile; fileRef = B74895F91A8BE4670064DB83 /* CCEffectLineSegment.m */; };
+		B748960A1A8BE4670064DB83 /* CCEffectLineSegment.m in Sources */ = {isa = PBXBuildFile; fileRef = B74895F91A8BE4670064DB83 /* CCEffectLineSegment.m */; };
+		B748960B1A8BE4670064DB83 /* effects.png in Resources */ = {isa = PBXBuildFile; fileRef = B74895FA1A8BE4670064DB83 /* effects.png */; };
+		B748960C1A8BE4670064DB83 /* effects.png in Resources */ = {isa = PBXBuildFile; fileRef = B74895FA1A8BE4670064DB83 /* effects.png */; };
+		B748960D1A8BE4670064DB83 /* effects.png in Resources */ = {isa = PBXBuildFile; fileRef = B74895FA1A8BE4670064DB83 /* effects.png */; };
 		B77F1B3217B978D7009739AE /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B77F1B3117B978D7009739AE /* QuartzCore.framework */; };
 		B77F1B3417B978D7009739AE /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B77F1B3317B978D7009739AE /* OpenGLES.framework */; };
 		B77F1B3617B978D7009739AE /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B77F1B3517B978D7009739AE /* OpenAL.framework */; };
@@ -272,6 +290,15 @@
 		B73789861807631A0076A88C /* Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Prefix.pch; path = Source/Prefix.pch; sourceTree = SOURCE_ROOT; };
 		B7378992180767190076A88C /* MainMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenu.h; sourceTree = "<group>"; };
 		B7378993180767190076A88C /* MainMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenu.m; sourceTree = "<group>"; };
+		B74895F21A8BE4670064DB83 /* CCEffectLine.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = CCEffectLine.frag; sourceTree = "<group>"; };
+		B74895F31A8BE4670064DB83 /* CCEffectLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCEffectLine.h; sourceTree = "<group>"; };
+		B74895F41A8BE4670064DB83 /* CCEffectLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCEffectLine.m; sourceTree = "<group>"; };
+		B74895F51A8BE4670064DB83 /* CCEffectLine.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = CCEffectLine.vert; sourceTree = "<group>"; };
+		B74895F61A8BE4670064DB83 /* CCEffectLineFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCEffectLineFactory.h; sourceTree = "<group>"; };
+		B74895F71A8BE4670064DB83 /* CCEffectLineFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCEffectLineFactory.m; sourceTree = "<group>"; };
+		B74895F81A8BE4670064DB83 /* CCEffectLineSegment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCEffectLineSegment.h; sourceTree = "<group>"; };
+		B74895F91A8BE4670064DB83 /* CCEffectLineSegment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCEffectLineSegment.m; sourceTree = "<group>"; };
+		B74895FA1A8BE4670064DB83 /* effects.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = effects.png; sourceTree = "<group>"; };
 		B77F1B2E17B978D7009739AE /* GalacticGuardian.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GalacticGuardian.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B77F1B3117B978D7009739AE /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		B77F1B3317B978D7009739AE /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -537,6 +564,7 @@
 		9222E2B918734FF800A246C7 /* libs */ = {
 			isa = PBXGroup;
 			children = (
+				B74895F11A8BE4670064DB83 /* CCEffectLine */,
 				D3450BAF1A01FEA100E63B3A /* FancyJoystick */,
 				B7378940180761A80076A88C /* cocos2d.xcodeproj */,
 			);
@@ -591,6 +619,23 @@
 				D3383ACD1A09BAD900E13478 /* Launch Screen.xib */,
 			);
 			name = Icons;
+			sourceTree = "<group>";
+		};
+		B74895F11A8BE4670064DB83 /* CCEffectLine */ = {
+			isa = PBXGroup;
+			children = (
+				B74895F21A8BE4670064DB83 /* CCEffectLine.frag */,
+				B74895F31A8BE4670064DB83 /* CCEffectLine.h */,
+				B74895F41A8BE4670064DB83 /* CCEffectLine.m */,
+				B74895F51A8BE4670064DB83 /* CCEffectLine.vert */,
+				B74895F61A8BE4670064DB83 /* CCEffectLineFactory.h */,
+				B74895F71A8BE4670064DB83 /* CCEffectLineFactory.m */,
+				B74895F81A8BE4670064DB83 /* CCEffectLineSegment.h */,
+				B74895F91A8BE4670064DB83 /* CCEffectLineSegment.m */,
+				B74895FA1A8BE4670064DB83 /* effects.png */,
+			);
+			name = CCEffectLine;
+			path = Source/libs/CCEffectLine;
 			sourceTree = "<group>";
 		};
 		B77F1B2517B978D7009739AE = {
@@ -873,6 +918,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D3EAD2C61A00B448002AA0D2 /* NebulaDebug.vsh in Resources */,
+				B74895FE1A8BE4670064DB83 /* CCEffectLine.frag in Resources */,
 				D3450BC91A0213FD00E63B3A /* TempMusic.aac in Resources */,
 				D3A7E8F419FDCABE00695965 /* Nebula.vsh in Resources */,
 				D3ED616C19FF3B7400DF3A43 /* BurnSprite.fsh in Resources */,
@@ -883,11 +929,13 @@
 				D3A7E8F819FDCB5E00695965 /* Nebula.fsh in Resources */,
 				D3ED617019FF3B8000DF3A43 /* BurnSprite.vsh in Resources */,
 				7A59498B19E38E4A00F65F90 /* MainMenu.xib in Resources */,
+				B748960D1A8BE4670064DB83 /* effects.png in Resources */,
 				D3A7E8E419FDC88600695965 /* NebulaDepth.png in Resources */,
 				D34E99A21A82ABFD002FE5D9 /* NebulaClouds.png in Resources */,
 				D3EAD2C31A00B448002AA0D2 /* NebulaDebug.fsh in Resources */,
 				D34E99A51A82ABFD002FE5D9 /* Starfield.png in Resources */,
 				7A4036F619DE3FFC007B6E8F /* Published-iOS in Resources */,
+				B74896041A8BE4670064DB83 /* CCEffectLine.vert in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -905,8 +953,11 @@
 				D3ED616B19FF3B7400DF3A43 /* BurnSprite.fsh in Resources */,
 				D3937FC919FE1C410074009E /* DistortionParticle.vsh in Resources */,
 				D3EAD2C51A00B448002AA0D2 /* NebulaDebug.vsh in Resources */,
+				B74895FD1A8BE4670064DB83 /* CCEffectLine.frag in Resources */,
 				D3A7E8F719FDCB5E00695965 /* Nebula.fsh in Resources */,
 				D3937FC319FE1B2A0074009E /* DistortionParticle.fsh in Resources */,
+				B74896031A8BE4670064DB83 /* CCEffectLine.vert in Resources */,
+				B748960C1A8BE4670064DB83 /* effects.png in Resources */,
 				D3EAD2C21A00B448002AA0D2 /* NebulaDebug.fsh in Resources */,
 				D3450BC81A0213FD00E63B3A /* TempMusic.aac in Resources */,
 				D3450BBF1A01FEB200E63B3A /* joystick.png in Resources */,
@@ -921,6 +972,7 @@
 				D3937FC219FE1B2A0074009E /* DistortionParticle.fsh in Resources */,
 				751BCCFA1A38E0E100F11D3D /* Icon-72@2x.png in Resources */,
 				751BCCFF1A38E0E100F11D3D /* iTunesArtwork.png in Resources */,
+				B74895FC1A8BE4670064DB83 /* CCEffectLine.frag in Resources */,
 				751BCCDA1A38D9D500F11D3D /* GGPortrait.png in Resources */,
 				751BCCF51A38E0E100F11D3D /* Icon-Small.png in Resources */,
 				D3450BB71A01FEA100E63B3A /* joystick.plist in Resources */,
@@ -930,6 +982,7 @@
 				751BCCD91A38D9D500F11D3D /* GGLandscape.png in Resources */,
 				D3A7E8F219FDCABE00695965 /* Nebula.vsh in Resources */,
 				D34E99A31A82ABFD002FE5D9 /* Starfield.png in Resources */,
+				B74896021A8BE4670064DB83 /* CCEffectLine.vert in Resources */,
 				D34E99A01A82ABFD002FE5D9 /* NebulaClouds.png in Resources */,
 				751BCCEE1A38E0E100F11D3D /* Icon-40.png in Resources */,
 				751BCCFE1A38E0E100F11D3D /* Icon@2x.png in Resources */,
@@ -937,6 +990,7 @@
 				B737893B180761570076A88C /* Published-iOS in Resources */,
 				751BCCF21A38E0E100F11D3D /* Icon-60@3x.png in Resources */,
 				D3ED616A19FF3B7400DF3A43 /* BurnSprite.fsh in Resources */,
+				B748960B1A8BE4670064DB83 /* effects.png in Resources */,
 				751BCCF91A38E0E100F11D3D /* Icon-72.png in Resources */,
 				751BCCFC1A38E0E100F11D3D /* Icon-Small-50@2x.png in Resources */,
 				D3937FC819FE1C410074009E /* DistortionParticle.vsh in Resources */,
@@ -1012,13 +1066,16 @@
 				D3F714531A7E104B00930BBE /* CCController.m in Sources */,
 				D3450BCE1A02EB8500E63B3A /* Rocket.m in Sources */,
 				75058A5419FEE7B7001AA9C6 /* EnemyShip.m in Sources */,
+				B748960A1A8BE4670064DB83 /* CCEffectLineSegment.m in Sources */,
 				75058A4919FECF95001AA9C6 /* Bullet.m in Sources */,
 				D3ED617219FF57A100DF3A43 /* PlayerShip.m in Sources */,
 				D3450BBD1A01FEAD00E63B3A /* FancyJoystick.m in Sources */,
 				D3A7E8DC19FDC86000695965 /* NebulaBackground.m in Sources */,
 				D31D3DCD1A00418C0085DB5B /* Controls.m in Sources */,
+				B74896011A8BE4670064DB83 /* CCEffectLine.m in Sources */,
 				7A4036E819DE3F33007B6E8F /* MainMenu.m in Sources */,
 				D3EAD2BD1A00A855002AA0D2 /* PauseScene.m in Sources */,
+				B74896071A8BE4670064DB83 /* CCEffectLineFactory.m in Sources */,
 				758488621A02C24A005F0B48 /* ShipSelectionScene.m in Sources */,
 				75058A3419FEC27F001AA9C6 /* GameScene.m in Sources */,
 				D3450BD81A0395F200E63B3A /* SpaceBucks.m in Sources */,
@@ -1034,8 +1091,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B74896001A8BE4670064DB83 /* CCEffectLine.m in Sources */,
 				D3ED617119FF57A000DF3A43 /* PlayerShip.m in Sources */,
 				D3450BD61A0395F100E63B3A /* SpaceBucks.m in Sources */,
+				B74896061A8BE4670064DB83 /* CCEffectLineFactory.m in Sources */,
 				D3A7E8DB19FDC86000695965 /* NebulaBackground.m in Sources */,
 				D3E4BCA81A80AD0900FF2FA5 /* GameController.m in Sources */,
 				D31D3DCC1A00418C0085DB5B /* Controls.m in Sources */,
@@ -1043,6 +1102,7 @@
 				927F619E196C771E000F43EF /* MainMenu.m in Sources */,
 				75058A3219FEC27F001AA9C6 /* GameScene.m in Sources */,
 				75058A5319FEE7B7001AA9C6 /* EnemyShip.m in Sources */,
+				B74896091A8BE4670064DB83 /* CCEffectLineSegment.m in Sources */,
 				D3ED616619FF327C00DF3A43 /* BurnSprite.m in Sources */,
 				5B121030197484FA004C1E1D /* GalacticGuardianActivity.m in Sources */,
 				D3450BBC1A01FEAD00E63B3A /* FancyJoystick.m in Sources */,
@@ -1060,13 +1120,16 @@
 				D3F714521A7E102200930BBE /* CCController.m in Sources */,
 				D3450BB61A01FEA100E63B3A /* FancyJoystick.m in Sources */,
 				D3A7E8DA19FDC86000695965 /* NebulaBackground.m in Sources */,
+				B74896081A8BE4670064DB83 /* CCEffectLineSegment.m in Sources */,
 				D3ED616519FF327C00DF3A43 /* BurnSprite.m in Sources */,
 				75058A5219FEE7B7001AA9C6 /* EnemyShip.m in Sources */,
 				D31D3DCB1A00418C0085DB5B /* Controls.m in Sources */,
 				B73789871807631A0076A88C /* main.m in Sources */,
 				75058A4719FECF95001AA9C6 /* Bullet.m in Sources */,
+				B74895FF1A8BE4670064DB83 /* CCEffectLine.m in Sources */,
 				75058A6A1A005881001AA9C6 /* SpaceBucks.m in Sources */,
 				D3EAD2BB1A009F8D002AA0D2 /* PauseScene.m in Sources */,
+				B74896051A8BE4670064DB83 /* CCEffectLineFactory.m in Sources */,
 				758488601A02C24A005F0B48 /* ShipSelectionScene.m in Sources */,
 				7A046D8C19E8A20E004C4763 /* MainMenu.m in Sources */,
 				75058A3119FEC27F001AA9C6 /* GameScene.m in Sources */,
