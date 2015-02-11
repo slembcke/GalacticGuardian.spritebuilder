@@ -61,7 +61,7 @@ static const float RocketClusterRange = 25.0;
 {
     return @{
       // basic setups
-      @"name"               : @"Bullet Tracer",
+      @"name"               : @"Rocket Trail",
       @"image"              : @"effects.png",
       @"lineMode"           : @(CCEffectLineModePointToPoint),
       @"widthMode"          : @(CCEffectLineWidthBarrel),
@@ -109,9 +109,7 @@ static const float RocketClusterRange = 25.0;
 	body.collisionMask = @[CollisionCategoryEnemy, CollisionCategoryAsteroid];
     
     // Setup trail effect
-    NSDictionary* trailSettings = [[[CCEffectLineFactory alloc] init] lineFromName:@"Bullet Tracer"];
     rocket.trail = [CCEffectLine lineWithDictionary:[self trailSetup]];
-    //rocket.trail.blendMode = [CCBlendMode addMode];
 	
 	[rocket scheduleBlock:^(CCTimer *timer) {
 		[rocket destroy];
