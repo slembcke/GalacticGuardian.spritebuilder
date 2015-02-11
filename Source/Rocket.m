@@ -28,6 +28,8 @@
 #import "GameScene.h"
 #import "Rocket.h"
 #import "EnemyShip.h"
+#import "CCEffectLine.h"
+#import "CCEffectLineFactory.h"
 
 
 static const float RocketAcceleration = 10.0;
@@ -44,6 +46,7 @@ static const float RocketClusterRange = 25.0;
 	RocketLevel _level;
 	EnemyShip *_target;
 	__weak CCSprite *_lockSprite;
+    BOOL _trailStarted;
 }
 
 +(CCSprite *)lockSprite
@@ -52,6 +55,40 @@ static const float RocketClusterRange = 25.0;
 	[sprite runAction:[CCActionRepeatForever actionWithAction:[CCActionRotateBy actionWithDuration:1.0 angle:360.0]]];
 	
 	return sprite;
+}
+
++(NSDictionary*) trailSetup
+{
+    return @{
+      // basic setups
+      @"name"               : @"Bullet Tracer",
+      @"image"              : @"effects.png",
+      @"lineMode"           : @(CCEffectLineModePointToPoint),
+      @"widthMode"          : @(CCEffectLineWidthBarrel),
+      @"widthStart"         : @(1.0),
+      @"widthEnd"           : @(10.0),
+      // textures used
+      @"textureCount"       : @(8),
+      @"textureIndex"       : @(0),
+      @"textureList"        : @[@(0), @(1)],
+      @"textureMix"         : @(CCEffectLineTextureBlendLinear),
+      @"textureAnimation"   : @(CCEffectLineAnimationScroll),
+      @"textureScroll"      : @(0.00f),
+      @"textureMixTime"     : @(0.50f),
+      @"textureScale"       : @(0.50),
+      // texture mixing
+      @"life"               : @(3.00f),
+      @"autoRemove"         : @(YES),
+      @"smooth"             : @(YES),
+      @"speedMultiplyer"    : @(1.00f),
+      @"granularity"        : @(1.0f),
+      @"drawLineStart"      : @(YES),
+      @"drawLineEnd"        : @(YES),
+      @"wind"               : @"{0, 0}",
+      @"gravity"            : @"{0, 0}",
+      @"colorStart"         : @"{1.0, 1.0, 1.0, 1.0}",
+      @"colorEnd"           : @"{0.5, 0.5, 0.5, 0.0}",
+      };
 }
 
 +(instancetype)rocketWithLevel:(RocketLevel)level target:(EnemyShip *)target
@@ -70,6 +107,11 @@ static const float RocketClusterRange = 25.0;
 	body.collisionType = @"rocket";
 	body.collisionCategories = @[CollisionCategoryBullet];
 	body.collisionMask = @[CollisionCategoryEnemy, CollisionCategoryAsteroid];
+    
+    // Setup trail effect
+    NSDictionary* trailSettings = [[[CCEffectLineFactory alloc] init] lineFromName:@"Bullet Tracer"];
+    rocket.trail = [CCEffectLine lineWithDictionary:[self trailSetup]];
+    //rocket.trail.blendMode = [CCBlendMode addMode];
 	
 	[rocket scheduleBlock:^(CCTimer *timer) {
 		[rocket destroy];
@@ -110,6 +152,17 @@ static const float RocketClusterRange = 25.0;
 	if(cpvlengthsq(velocity) > 0.0){
 		self.rotation = -CC_RADIANS_TO_DEGREES(ccpToAngle(velocity));
 	}
+    
+    // Add points to trail
+    if (_trailStarted)
+    {
+        [_trail add:self.position timestamp:[NSDate timeIntervalSinceReferenceDate]];
+    }
+    else
+    {
+        [_trail start:self.position timestamp:[NSDate timeIntervalSinceReferenceDate]];
+        _trailStarted = YES;
+    }
 }
 
 // Apply splash damage.
@@ -141,6 +194,7 @@ static const float RocketClusterRange = 25.0;
 	
 	[_lockSprite removeFromParent];
 	[self removeFromParent];
+    [_trail end:self.position timestamp:[NSDate timeIntervalSinceReferenceDate]];
 }
 
 @end

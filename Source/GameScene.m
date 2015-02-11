@@ -36,6 +36,7 @@
 #import "Rocket.h"
 #import "SpaceBucks.h"
 #import "BurnTransition.h"
+#import "CCEffectLine.h"
 
 #import "CCDirector_Private.h"
 
@@ -531,6 +532,7 @@ const float RocketAimLimit = 75.0f;
 	rocket.physicsBody.velocity = cpvadd(player.velocity, cpTransformVect(player.absoluteTransform, _rocketLaunchDirection));
 	
 	[_physics addChild:rocket z:Z_BULLET];
+    [_physics addChild:rocket.trail z:Z_BULLET];
 	
 	// Disable the rocket button and reset the charging reticle.
 	_controls.rocketButtonEnabled = NO;

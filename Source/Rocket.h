@@ -24,6 +24,7 @@
 
 
 @class EnemyShip;
+@class CCEffectLine;
 
 
 typedef NS_ENUM(NSUInteger, RocketLevel){
@@ -32,6 +33,8 @@ typedef NS_ENUM(NSUInteger, RocketLevel){
 
 
 @interface Rocket : CCNode
+
+@property (nonatomic,strong) CCEffectLine* trail;
 
 +(CCSprite *)lockSprite;
 
