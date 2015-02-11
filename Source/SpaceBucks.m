@@ -53,7 +53,7 @@ static NSArray *CollisionMask = nil;
 		body.mass = 0.01;
 		
 		_amount = values[type];
-		_flashImage = @"Sprites/laserFlashGreen.png";
+		_flashImage = @"Sprites/gemSpark.png";
 		
 		// This is used to pick which collision delegate method to call, see GameScene.m for more info.
 		body.collisionType = @"pickup";
