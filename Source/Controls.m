@@ -27,6 +27,7 @@
 #import "Controls.h"
 #import "FancyJoystick.h"
 #import "GameController.h"
+#import "NovaBombButtonNode.h"
 
 
 #if GameControllerSupported
@@ -45,7 +46,8 @@
 	FancyJoystick *_virtualJoystick;
 	FancyJoystick *_virtualAimJoystick;
 	
-	CCButton *_novaButton;
+	//CCButton *_novaButton;
+    NovaBombButtonNode* _novaButtonNode;
 	
 	NSMutableDictionary *_buttonStates;
 	NSMutableDictionary *_buttonHandlers;
@@ -70,14 +72,14 @@
 		CCPositionType bl =CCPositionTypeMake(CCPositionUnitPoints, CCPositionUnitPoints, CCPositionReferenceCornerBottomLeft);
 		
 		// _novaButton ivar is set by the CCB file, but wrapped in a regular node.
-		CCNode *novaButtonNode = [CCBReader load:@"NovaButton" owner:self];
-		novaButtonNode.positionType = br;
-		novaButtonNode.position = ccp(novaButtonOffset, joystickOffset);
-        novaButtonNode.scale = joystickScale * 2;
-		[self addChild:novaButtonNode];
+		_novaButtonNode = (NovaBombButtonNode*)[CCBReader load:@"NovaButton" owner:self];
+		_novaButtonNode.positionType = br;
+		_novaButtonNode.position = ccp(novaButtonOffset, joystickOffset);
+        _novaButtonNode.scale = joystickScale * 2;
+		[self addChild:_novaButtonNode];
 		
 		// Exclusive touch would steal touches from the joysticks.
-		_novaButton.exclusiveTouch = NO;
+        _novaButtonNode.button.exclusiveTouch = NO;
 		
 		_virtualJoystick = [FancyJoystick node];
         _virtualJoystick.scale = joystickScale;
@@ -139,7 +141,7 @@
 	_gamepad.buttonA.valueChangedHandler = ^(GCControllerButtonInput *button, float value, BOOL pressed){
 		[self setButtonValue:ControlNovaButton value:pressed];
 		
-		_novaButton.highlighted = pressed;
+		_novaButtonNode.button.highlighted = pressed;
 	};
 	
 //	self.visible = NO;
@@ -254,9 +256,11 @@
 	[self setButtonValue:ControlNovaButton value:NO];
 }
 
--(BOOL)novaButtonEnabled {return _novaButton.enabled;}
--(void)setNovaButtonEnabled:(BOOL)novaButtonEnabled {_novaButton.enabled = novaButtonEnabled;}
--(BOOL)novaButtonVisible {return _novaButton.parent.visible;}
--(void)setNovaButtonVisible:(BOOL)novaButtonVisible {_novaButton.parent.visible = novaButtonVisible;}
+- (void) setNovaBombs:(int)bombs
+{
+    [_novaButtonNode setNumBombs:bombs];
+    
+    _novaButtonNode.button.enabled = (bombs > 0);
+}
 
 @end

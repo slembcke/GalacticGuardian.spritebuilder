@@ -63,7 +63,6 @@
 	CGPoint _rocketLaunchDirection;
 	
 	// HUD elements
-	CCLabelTTF *_bombLabel;
 	CCNode *_shieldBar;
 	CCNode *_moneyBar;
     ScoreBoard* _scoreBoard;
@@ -227,7 +226,6 @@
 	
 	// Hide the buttons until you unlock the upgrades.
 	_controls.rocketButtonVisible = NO;
-	_controls.novaButtonVisible = NO;
 	
 	__weak typeof(self) _self = self;
 	[_controls setHandler:^(BOOL state) {if(state) [_self pause];} forButton:ControlPauseButton];
@@ -957,10 +955,8 @@ static const float MinBarWidth = 5.0;
 -(void)setNovaBombs:(int)novaBombs
 {
 	_novaBombs = novaBombs;
-	_bombLabel.string = [NSString stringWithFormat:@"Bombs: %d", novaBombs];
-	
-	_controls.novaButtonVisible = YES;
-	_controls.novaButtonEnabled = (novaBombs > 0);
+    
+    [_controls setNovaBombs:novaBombs];
 }
 
 -(void)setLevel:(int)level
