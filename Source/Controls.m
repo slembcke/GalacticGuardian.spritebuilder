@@ -57,12 +57,14 @@
 -(id)init
 {
 	if((self = [super init])){
-		CGSize viewSize = [CCDirector sharedDirector].viewSize;
+        
 		self.contentSizeType = CCSizeTypeNormalized;
 		self.contentSize = CGSizeMake(1.0, 1.0);
 		
 		// Joystick offsets (and sizes) will be relative to actual screen size.
-		CGFloat joystickOffset = (viewSize.width + viewSize.height) / 16.0;
+        CGFloat joystickOffset = 52;
+        CGFloat novaButtonOffset = 128;
+        CGFloat joystickScale = 0.6;
 		
 		CCPositionType br =CCPositionTypeMake(CCPositionUnitPoints, CCPositionUnitPoints, CCPositionReferenceCornerBottomRight);
 		CCPositionType bl =CCPositionTypeMake(CCPositionUnitPoints, CCPositionUnitPoints, CCPositionReferenceCornerBottomLeft);
@@ -70,40 +72,24 @@
 		// _novaButton ivar is set by the CCB file, but wrapped in a regular node.
 		CCNode *novaButtonNode = [CCBReader load:@"NovaButton" owner:self];
 		novaButtonNode.positionType = br;
-		novaButtonNode.position = ccp(2.0*joystickOffset, joystickOffset);
-		novaButtonNode.contentSize = CGSizeMake(0.7*joystickOffset, 0.7*joystickOffset);
-        novaButtonNode.scale = 0.585173011 * 2.0;
+		novaButtonNode.position = ccp(novaButtonOffset, joystickOffset);
+        novaButtonNode.scale = joystickScale * 2;
 		[self addChild:novaButtonNode];
 		
 		// Exclusive touch would steal touches from the joysticks.
 		_novaButton.exclusiveTouch = NO;
 		
 		_virtualJoystick = [FancyJoystick node];
-        _virtualJoystick.scale = 2.0*joystickOffset/_virtualJoystick.contentSize.width;
+        _virtualJoystick.scale = joystickScale;
 		_virtualJoystick.positionType = bl;
 		_virtualJoystick.position = ccp(joystickOffset, joystickOffset);
 		[self addChild:_virtualJoystick];
 		
 		_virtualAimJoystick = [FancyJoystick node];
-        _virtualAimJoystick.scale = 2.0*joystickOffset/_virtualJoystick.contentSize.width;
+        _virtualAimJoystick.scale = joystickScale;
 		_virtualAimJoystick.positionType = br;
 		_virtualAimJoystick.position = ccp(joystickOffset, joystickOffset);
 		[self addChild:_virtualAimJoystick];
-        
-		
-        /*
-		CCButton *pauseButton = [CCButton buttonWithTitle:@"Pause" fontName:@"kenvector_future.ttf" fontSize:18.0f];
-		pauseButton.anchorPoint = ccp(1, 1);
-		pauseButton.positionType = CCPositionTypeMake(CCPositionUnitPoints, CCPositionUnitPoints, CCPositionReferenceCornerTopRight);
-		pauseButton.position = ccp(5, 5 + 30); // HUD is 30
-		pauseButton.hitAreaExpansion = 2.0;
-		[self addChild:pauseButton];
-		
-		__weak typeof(self) _self = self;
-		pauseButton.block = ^(id sender){
-			[_self callHandler:@(ControlPauseButton) value:YES];
-		};
-         */
 		
 		_buttonStates = [NSMutableDictionary dictionary];
 		_buttonHandlers = [NSMutableDictionary dictionary];
