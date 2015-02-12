@@ -89,6 +89,7 @@
 		_virtualAimJoystick.position = ccp(joystickOffset, joystickOffset);
 		[self addChild:_virtualAimJoystick];
 		
+        /*
 		CCButton *pauseButton = [CCButton buttonWithTitle:@"Pause" fontName:@"kenvector_future.ttf" fontSize:18.0f];
 		pauseButton.anchorPoint = ccp(1, 1);
 		pauseButton.positionType = CCPositionTypeMake(CCPositionUnitPoints, CCPositionUnitPoints, CCPositionReferenceCornerTopRight);
@@ -100,6 +101,7 @@
 		pauseButton.block = ^(id sender){
 			[_self callHandler:@(ControlPauseButton) value:YES];
 		};
+         */
 		
 		_buttonStates = [NSMutableDictionary dictionary];
 		_buttonHandlers = [NSMutableDictionary dictionary];
