@@ -37,6 +37,7 @@
 #import "SpaceBucks.h"
 #import "BurnTransition.h"
 #import "CCEffectLine.h"
+#import "ScoreBoard.h"
 
 #import "CCDirector_Private.h"
 
@@ -62,10 +63,10 @@
 	CGPoint _rocketLaunchDirection;
 	
 	// HUD elements
-	CCLabelTTF *_levelLabel;
 	CCLabelTTF *_bombLabel;
 	CCNode *_shieldBar;
 	CCNode *_moneyBar;
+    ScoreBoard* _scoreBoard;
 	
 	NSMutableArray *_enemies;
 	
@@ -199,14 +200,14 @@
 		// Add the player's ship in the center of the game area.
 		[self createPlayerShipAt: ccp(GameSceneSize/2.0, GameSceneSize/2.0) withArt:ship_fileNames[shipType]];
 		
-		// Schedule a timer to update the points label no more than 3 times a second.
+		// Schedule a timer to update the points label no more than 60 times a second.
 		__block int lastPoints = _points;
 		CCTimer *pointsTimer = [self scheduleBlock:^(CCTimer *timer) {
 			if(lastPoints != _points){
-				_levelLabel.string = [NSString stringWithFormat:@"Points: % 6d", _points];
+                _scoreBoard.score = _points;
 				lastPoints = _points;
 			}
-		} delay:1.0/10.0];
+		} delay:1.0/60.0];
 		
 		pointsTimer.repeatCount = CCTimerRepeatForever;
 	}
