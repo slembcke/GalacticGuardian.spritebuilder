@@ -934,22 +934,31 @@ static NSMutableDictionary *OBJECT_POOL = nil;
 	return _background.distortionNode;
 }
 
-static const float MinBarWidth = 5.0;
+static const float MinBarWidth = 8.0;
+static const float MaxBarWidth = 80.0;
 
 -(void)setSpaceBucks:(int)spaceBucks
 {
 	_spaceBucks = spaceBucks;
-	
-	CGSize size = _moneyBar.parent.contentSize;
-	float width = (float)spaceBucks/(float)_spaceBucksTilNextLevel*size.width;
-	_moneyBar.contentSize = CGSizeMake(MAX(width, MinBarWidth), size.height);
+    
+    float width = (float)spaceBucks/(float)_spaceBucksTilNextLevel*MaxBarWidth;
+    float height = _moneyBar.contentSize.height;
+    
+    if (width > MaxBarWidth) width = MaxBarWidth;
+    
+    _moneyBar.contentSize = CGSizeMake(width, height);
+    _moneyBar.visible = (width >= MinBarWidth);
 }
 
 -(void)updateShieldBar
 {
-	CGSize size = _shieldBar.parent.contentSize;
-	float width = _playerShip.health*size.width;
-	_shieldBar.contentSize = CGSizeMake(MAX(width, MinBarWidth), size.height);
+    float width = _playerShip.health*MaxBarWidth;
+    float height = _shieldBar.contentSize.height;
+    
+    if (width > MaxBarWidth) width = MaxBarWidth;
+    
+    _shieldBar.contentSize = CGSizeMake(width, height);
+    _shieldBar.visible = (width >= MinBarWidth);
 }
 
 -(void)setNovaBombs:(int)novaBombs
