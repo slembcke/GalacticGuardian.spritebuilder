@@ -713,12 +713,16 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 
 -(void)levelUpText:(NSString *)text
 {
+    /*
 	CCLabelTTF *levelUpText = [CCLabelTTF labelWithString:text fontName:@"kenvector_future.ttf" fontSize:36.0];
 	levelUpText.outlineColor =	[CCColor colorWithWhite:0.5f alpha:1.0f];
 	levelUpText.color =					[CCColor colorWithWhite:0.8f alpha:1.0f];
 	levelUpText.shadowColor =		[CCColor colorWithWhite:0.0f alpha:0.5f];
 	levelUpText.shadowBlurRadius = 1.0f;
 	levelUpText.shadowOffset = ccp(1.0f, -1.0f);
+     */
+    
+    CCLabelBMFont*levelUpText = [CCLabelBMFont labelWithString:[text uppercaseString] fntFile:@"Fonts/GG.bmfont/GG.fnt"];
 	
 	[self addChild:levelUpText];
 	levelUpText.positionType = CCPositionTypeNormalized;
