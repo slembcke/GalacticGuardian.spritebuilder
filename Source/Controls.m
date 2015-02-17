@@ -27,6 +27,7 @@
 #import "Controls.h"
 #import "FancyJoystick.h"
 #import "GameController.h"
+#import "NovaBombButtonNode.h"
 
 
 #if GameControllerSupported
@@ -45,7 +46,8 @@
 	FancyJoystick *_virtualJoystick;
 	FancyJoystick *_virtualAimJoystick;
 	
-	CCButton *_novaButton;
+	//CCButton *_novaButton;
+    NovaBombButtonNode* _novaButtonNode;
 	
 	NSMutableDictionary *_buttonStates;
 	NSMutableDictionary *_buttonHandlers;
@@ -57,49 +59,39 @@
 -(id)init
 {
 	if((self = [super init])){
-		CGSize viewSize = [CCDirector sharedDirector].viewSize;
+        
 		self.contentSizeType = CCSizeTypeNormalized;
 		self.contentSize = CGSizeMake(1.0, 1.0);
 		
 		// Joystick offsets (and sizes) will be relative to actual screen size.
-		CGFloat joystickOffset = (viewSize.width + viewSize.height) / 16.0;
+        CGFloat joystickOffset = 52;
+        CGFloat novaButtonOffset = 128;
+        CGFloat joystickScale = 0.6;
 		
 		CCPositionType br =CCPositionTypeMake(CCPositionUnitPoints, CCPositionUnitPoints, CCPositionReferenceCornerBottomRight);
 		CCPositionType bl =CCPositionTypeMake(CCPositionUnitPoints, CCPositionUnitPoints, CCPositionReferenceCornerBottomLeft);
 		
 		// _novaButton ivar is set by the CCB file, but wrapped in a regular node.
-		CCNode *novaButtonNode = [CCBReader load:@"NovaButton" owner:self];
-		novaButtonNode.positionType = br;
-		novaButtonNode.position = ccp(2.0*joystickOffset, joystickOffset);
-		novaButtonNode.contentSize = CGSizeMake(0.7*joystickOffset, 0.7*joystickOffset);
-		[self addChild:novaButtonNode];
+		_novaButtonNode = (NovaBombButtonNode*)[CCBReader load:@"NovaButton" owner:self];
+		_novaButtonNode.positionType = br;
+		_novaButtonNode.position = ccp(novaButtonOffset, joystickOffset);
+        _novaButtonNode.scale = joystickScale * 2;
+		[self addChild:_novaButtonNode];
 		
 		// Exclusive touch would steal touches from the joysticks.
-		_novaButton.exclusiveTouch = NO;
+        _novaButtonNode.button.exclusiveTouch = NO;
 		
 		_virtualJoystick = [FancyJoystick node];
-		_virtualJoystick.scale = 2.0*joystickOffset/_virtualJoystick.contentSize.width;
+        _virtualJoystick.scale = joystickScale;
 		_virtualJoystick.positionType = bl;
 		_virtualJoystick.position = ccp(joystickOffset, joystickOffset);
 		[self addChild:_virtualJoystick];
 		
 		_virtualAimJoystick = [FancyJoystick node];
-		_virtualAimJoystick.scale = 2.0*joystickOffset/_virtualJoystick.contentSize.width;
+        _virtualAimJoystick.scale = joystickScale;
 		_virtualAimJoystick.positionType = br;
 		_virtualAimJoystick.position = ccp(joystickOffset, joystickOffset);
 		[self addChild:_virtualAimJoystick];
-		
-		CCButton *pauseButton = [CCButton buttonWithTitle:@"Pause" fontName:@"kenvector_future.ttf" fontSize:18.0f];
-		pauseButton.anchorPoint = ccp(1, 1);
-		pauseButton.positionType = CCPositionTypeMake(CCPositionUnitPoints, CCPositionUnitPoints, CCPositionReferenceCornerTopRight);
-		pauseButton.position = ccp(5, 5 + 30); // HUD is 30
-		pauseButton.hitAreaExpansion = 2.0;
-		[self addChild:pauseButton];
-		
-		__weak typeof(self) _self = self;
-		pauseButton.block = ^(id sender){
-			[_self callHandler:@(ControlPauseButton) value:YES];
-		};
 		
 		_buttonStates = [NSMutableDictionary dictionary];
 		_buttonHandlers = [NSMutableDictionary dictionary];
@@ -149,7 +141,7 @@
 	_gamepad.buttonA.valueChangedHandler = ^(GCControllerButtonInput *button, float value, BOOL pressed){
 		[self setButtonValue:ControlNovaButton value:pressed];
 		
-		_novaButton.highlighted = pressed;
+		_novaButtonNode.button.highlighted = pressed;
 	};
 	
 //	self.visible = NO;
@@ -264,9 +256,11 @@
 	[self setButtonValue:ControlNovaButton value:NO];
 }
 
--(BOOL)novaButtonEnabled {return _novaButton.enabled;}
--(void)setNovaButtonEnabled:(BOOL)novaButtonEnabled {_novaButton.enabled = novaButtonEnabled;}
--(BOOL)novaButtonVisible {return _novaButton.parent.visible;}
--(void)setNovaButtonVisible:(BOOL)novaButtonVisible {_novaButton.parent.visible = novaButtonVisible;}
+- (void) setNovaBombs:(int)bombs
+{
+    [_novaButtonNode setNumBombs:bombs];
+    
+    _novaButtonNode.button.enabled = (bombs > 0);
+}
 
 @end

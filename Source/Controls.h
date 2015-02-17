@@ -31,14 +31,10 @@ typedef NS_ENUM(NSUInteger, ControlButton){
 
 typedef void (^ControlHandler)(BOOL state);
 
-
 @interface Controls : CCNode
 
 @property(nonatomic, assign) BOOL rocketButtonEnabled;
 @property(nonatomic, assign) BOOL rocketButtonVisible;
-
-@property(nonatomic, assign) BOOL novaButtonEnabled;
-@property(nonatomic, assign) BOOL novaButtonVisible;
 
 // Left/right joystick values.
 -(CGPoint)thrustDirection;
@@ -49,5 +45,7 @@ typedef void (^ControlHandler)(BOOL state);
 
 // Set a callback for when a button is pressed or released.
 -(void)setHandler:(ControlHandler)block forButton:(ControlButton)button;
+
+- (void) setNovaBombs:(int)bombs;
 
 @end

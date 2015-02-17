@@ -37,6 +37,7 @@
 #import "SpaceBucks.h"
 #import "BurnTransition.h"
 #import "CCEffectLine.h"
+#import "ScoreBoard.h"
 
 #import "CCDirector_Private.h"
 
@@ -62,10 +63,9 @@
 	CGPoint _rocketLaunchDirection;
 	
 	// HUD elements
-	CCLabelTTF *_levelLabel;
-	CCLabelTTF *_bombLabel;
 	CCNode *_shieldBar;
 	CCNode *_moneyBar;
+    ScoreBoard* _scoreBoard;
 	
 	NSMutableArray *_enemies;
 	
@@ -199,14 +199,14 @@
 		// Add the player's ship in the center of the game area.
 		[self createPlayerShipAt: ccp(GameSceneSize/2.0, GameSceneSize/2.0) withArt:ship_fileNames[shipType]];
 		
-		// Schedule a timer to update the points label no more than 3 times a second.
+		// Schedule a timer to update the points label no more than 60 times a second.
 		__block int lastPoints = _points;
 		CCTimer *pointsTimer = [self scheduleBlock:^(CCTimer *timer) {
 			if(lastPoints != _points){
-				_levelLabel.string = [NSString stringWithFormat:@"Points: % 6d", _points];
+                _scoreBoard.score = _points;
 				lastPoints = _points;
 			}
-		} delay:1.0/10.0];
+		} delay:1.0/60.0];
 		
 		pointsTimer.repeatCount = CCTimerRepeatForever;
 	}
@@ -226,7 +226,6 @@
 	
 	// Hide the buttons until you unlock the upgrades.
 	_controls.rocketButtonVisible = NO;
-	_controls.novaButtonVisible = NO;
 	
 	__weak typeof(self) _self = self;
 	[_controls setHandler:^(BOOL state) {if(state) [_self pause];} forButton:ControlPauseButton];
@@ -935,31 +934,38 @@ static NSMutableDictionary *OBJECT_POOL = nil;
 	return _background.distortionNode;
 }
 
-static const float MinBarWidth = 5.0;
+static const float MinBarWidth = 8.0;
+static const float MaxBarWidth = 80.0;
 
 -(void)setSpaceBucks:(int)spaceBucks
 {
 	_spaceBucks = spaceBucks;
-	
-	CGSize size = _moneyBar.parent.contentSize;
-	float width = (float)spaceBucks/(float)_spaceBucksTilNextLevel*size.width;
-	_moneyBar.contentSize = CGSizeMake(MAX(width, MinBarWidth), size.height);
+    
+    float width = (float)spaceBucks/(float)_spaceBucksTilNextLevel*MaxBarWidth;
+    float height = _moneyBar.contentSize.height;
+    
+    if (width > MaxBarWidth) width = MaxBarWidth;
+    
+    _moneyBar.contentSize = CGSizeMake(width, height);
+    _moneyBar.visible = (width >= MinBarWidth);
 }
 
 -(void)updateShieldBar
 {
-	CGSize size = _shieldBar.parent.contentSize;
-	float width = _playerShip.health*size.width;
-	_shieldBar.contentSize = CGSizeMake(MAX(width, MinBarWidth), size.height);
+    float width = _playerShip.health*MaxBarWidth;
+    float height = _shieldBar.contentSize.height;
+    
+    if (width > MaxBarWidth) width = MaxBarWidth;
+    
+    _shieldBar.contentSize = CGSizeMake(width, height);
+    _shieldBar.visible = (width >= MinBarWidth);
 }
 
 -(void)setNovaBombs:(int)novaBombs
 {
 	_novaBombs = novaBombs;
-	_bombLabel.string = [NSString stringWithFormat:@"Bombs: %d", novaBombs];
-	
-	_controls.novaButtonVisible = YES;
-	_controls.novaButtonEnabled = (novaBombs > 0);
+    
+    [_controls setNovaBombs:novaBombs];
 }
 
 -(void)setLevel:(int)level

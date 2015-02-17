@@ -70,6 +70,9 @@
 		927F61A9196C771E000F43EF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B77F1B3D17B978D7009739AE /* Foundation.framework */; };
 		927F61AA196C771E000F43EF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B77F1B3F17B978D7009739AE /* CoreGraphics.framework */; };
 		927F61AB196C771E000F43EF /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B77F1B4117B978D7009739AE /* CoreText.framework */; };
+		B70F40C41A8D245B0016F2A3 /* NovaBombButtonNode.m in Sources */ = {isa = PBXBuildFile; fileRef = B70F40C31A8D245B0016F2A3 /* NovaBombButtonNode.m */; };
+		B70F40C51A8D245B0016F2A3 /* NovaBombButtonNode.m in Sources */ = {isa = PBXBuildFile; fileRef = B70F40C31A8D245B0016F2A3 /* NovaBombButtonNode.m */; };
+		B70F40C61A8D245B0016F2A3 /* NovaBombButtonNode.m in Sources */ = {isa = PBXBuildFile; fileRef = B70F40C31A8D245B0016F2A3 /* NovaBombButtonNode.m */; };
 		B737893B180761570076A88C /* Published-iOS in Resources */ = {isa = PBXBuildFile; fileRef = B737893A180761570076A88C /* Published-iOS */; };
 		B73789871807631A0076A88C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B73789851807631A0076A88C /* main.m */; };
 		B74895FC1A8BE4670064DB83 /* CCEffectLine.frag in Resources */ = {isa = PBXBuildFile; fileRef = B74895F21A8BE4670064DB83 /* CCEffectLine.frag */; };
@@ -100,6 +103,9 @@
 		B77F1B4017B978D7009739AE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B77F1B3F17B978D7009739AE /* CoreGraphics.framework */; };
 		B77F1B4217B978D7009739AE /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B77F1B4117B978D7009739AE /* CoreText.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		B78A0B10198AF87200C63841 /* Published-Android in Resources */ = {isa = PBXBuildFile; fileRef = B78A0B0F198AF87200C63841 /* Published-Android */; };
+		B7E4168D1A8C213700825FE5 /* ScoreBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = B7E4168C1A8C213700825FE5 /* ScoreBoard.m */; };
+		B7E4168E1A8C213700825FE5 /* ScoreBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = B7E4168C1A8C213700825FE5 /* ScoreBoard.m */; };
+		B7E4168F1A8C213700825FE5 /* ScoreBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = B7E4168C1A8C213700825FE5 /* ScoreBoard.m */; };
 		D31D3DC91A00108B0085DB5B /* GameController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D31D3DC81A00108A0085DB5B /* GameController.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		D31D3DCB1A00418C0085DB5B /* Controls.m in Sources */ = {isa = PBXBuildFile; fileRef = D31D3DCA1A00418C0085DB5B /* Controls.m */; };
 		D31D3DCC1A00418C0085DB5B /* Controls.m in Sources */ = {isa = PBXBuildFile; fileRef = D31D3DCA1A00418C0085DB5B /* Controls.m */; };
@@ -283,6 +289,8 @@
 		7AFCD5DD19E9BDC200BCCCDA /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Bridging-Header.h"; path = "Source/Bridging-Header.h"; sourceTree = "<group>"; };
 		8392007918EE8E3300B6C429 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		927F61BF196C771E000F43EF /* GalacticGuardian Android.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GalacticGuardian Android.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B70F40C21A8D245B0016F2A3 /* NovaBombButtonNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NovaBombButtonNode.h; sourceTree = "<group>"; };
+		B70F40C31A8D245B0016F2A3 /* NovaBombButtonNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NovaBombButtonNode.m; sourceTree = "<group>"; };
 		B737893A180761570076A88C /* Published-iOS */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "Published-iOS"; path = "Source/Resources/Published-iOS"; sourceTree = SOURCE_ROOT; };
 		B737893E1807617C0076A88C /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		B7378940180761A80076A88C /* cocos2d.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2d.xcodeproj; path = "Source/libs/cocos2d-iphone/cocos2d.xcodeproj"; sourceTree = SOURCE_ROOT; };
@@ -311,6 +319,8 @@
 		B77F1B4117B978D7009739AE /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		B78A0B0F198AF87200C63841 /* Published-Android */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Published-Android"; sourceTree = "<group>"; };
 		B7B3713D180358F1007369CC /* libObjectiveChipmunk.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libObjectiveChipmunk.a; path = "../libs/cocos2d-iphone/external/Chipmunk/xcode/build/Debug-iphoneos/libObjectiveChipmunk.a"; sourceTree = "<group>"; };
+		B7E4168B1A8C213700825FE5 /* ScoreBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoreBoard.h; sourceTree = "<group>"; };
+		B7E4168C1A8C213700825FE5 /* ScoreBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScoreBoard.m; sourceTree = "<group>"; };
 		D31D3DC81A00108A0085DB5B /* GameController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameController.framework; path = System/Library/Frameworks/GameController.framework; sourceTree = SDKROOT; };
 		D31D3DCA1A00418C0085DB5B /* Controls.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Controls.m; sourceTree = "<group>"; };
 		D31D3DCE1A0041A80085DB5B /* Controls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Controls.h; sourceTree = "<group>"; };
@@ -748,6 +758,10 @@
 				D3EAD2BA1A009F8D002AA0D2 /* PauseScene.m */,
 				758488641A02E3EB005F0B48 /* ShipSelectionScene.h */,
 				7584885F1A02C24A005F0B48 /* ShipSelectionScene.m */,
+				B7E4168B1A8C213700825FE5 /* ScoreBoard.h */,
+				B7E4168C1A8C213700825FE5 /* ScoreBoard.m */,
+				B70F40C21A8D245B0016F2A3 /* NovaBombButtonNode.h */,
+				B70F40C31A8D245B0016F2A3 /* NovaBombButtonNode.m */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -1069,7 +1083,9 @@
 				B748960A1A8BE4670064DB83 /* CCEffectLineSegment.m in Sources */,
 				75058A4919FECF95001AA9C6 /* Bullet.m in Sources */,
 				D3ED617219FF57A100DF3A43 /* PlayerShip.m in Sources */,
+				B70F40C61A8D245B0016F2A3 /* NovaBombButtonNode.m in Sources */,
 				D3450BBD1A01FEAD00E63B3A /* FancyJoystick.m in Sources */,
+				B7E4168F1A8C213700825FE5 /* ScoreBoard.m in Sources */,
 				D3A7E8DC19FDC86000695965 /* NebulaBackground.m in Sources */,
 				D31D3DCD1A00418C0085DB5B /* Controls.m in Sources */,
 				B74896011A8BE4670064DB83 /* CCEffectLine.m in Sources */,
@@ -1103,6 +1119,7 @@
 				75058A3219FEC27F001AA9C6 /* GameScene.m in Sources */,
 				75058A5319FEE7B7001AA9C6 /* EnemyShip.m in Sources */,
 				B74896091A8BE4670064DB83 /* CCEffectLineSegment.m in Sources */,
+				B70F40C51A8D245B0016F2A3 /* NovaBombButtonNode.m in Sources */,
 				D3ED616619FF327C00DF3A43 /* BurnSprite.m in Sources */,
 				5B121030197484FA004C1E1D /* GalacticGuardianActivity.m in Sources */,
 				D3450BBC1A01FEAD00E63B3A /* FancyJoystick.m in Sources */,
@@ -1110,6 +1127,7 @@
 				75058A4819FECF95001AA9C6 /* Bullet.m in Sources */,
 				D3450BCD1A02EB8500E63B3A /* Rocket.m in Sources */,
 				758488611A02C24A005F0B48 /* ShipSelectionScene.m in Sources */,
+				B7E4168E1A8C213700825FE5 /* ScoreBoard.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1123,7 +1141,9 @@
 				B74896081A8BE4670064DB83 /* CCEffectLineSegment.m in Sources */,
 				D3ED616519FF327C00DF3A43 /* BurnSprite.m in Sources */,
 				75058A5219FEE7B7001AA9C6 /* EnemyShip.m in Sources */,
+				B70F40C41A8D245B0016F2A3 /* NovaBombButtonNode.m in Sources */,
 				D31D3DCB1A00418C0085DB5B /* Controls.m in Sources */,
+				B7E4168D1A8C213700825FE5 /* ScoreBoard.m in Sources */,
 				B73789871807631A0076A88C /* main.m in Sources */,
 				75058A4719FECF95001AA9C6 /* Bullet.m in Sources */,
 				B74895FF1A8BE4670064DB83 /* CCEffectLine.m in Sources */,
