@@ -980,9 +980,10 @@ static const float MaxBarWidth = 80.0;
 		[_scrollNode runAction:[CCActionEaseInOut actionWithAction: [CCActionScaleTo actionWithDuration:0.1f scale:1.65f] rate:2.0] ];
 		
 		[self scheduleBlock:^(CCTimer *timer){
-			// Go back to the menu after a short delay.
-			[CCDirector sharedDirector].scheduler.timeScale = 1.0f;
-			[[CCDirector sharedDirector] replaceScene:[[GameScene alloc] initWithShipType:Ship_Herald] withTransition:[BurnTransition burnTransitionWithDuration:1.0]];
+			// Go to 'Made with SB' scene
+            BurnTransition* transition = [BurnTransition burnTransitionWithDuration:0.5];
+            transition.outgoingSceneAnimated = YES;
+            [[CCDirector sharedDirector] replaceScene:[CCBReader loadAsScene:@"Interstitial/MadeWithSB"] withTransition:transition];
 		} delay:1.75f];
 		
 		return NO;
