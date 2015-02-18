@@ -199,16 +199,8 @@
 		// Add the player's ship in the center of the game area.
 		[self createPlayerShipAt: ccp(GameSceneSize/2.0, GameSceneSize/2.0) withArt:ship_fileNames[shipType]];
 		
-		// Schedule a timer to update the points label no more than 60 times a second.
-		__block int lastPoints = _points;
-		CCTimer *pointsTimer = [self scheduleBlock:^(CCTimer *timer) {
-			if(lastPoints != _points){
-                _scoreBoard.score = _points;
-				lastPoints = _points;
-			}
-		} delay:1.0/60.0];
-		
-		pointsTimer.repeatCount = CCTimerRepeatForever;
+		// Pump the update loop once to set the rocket reticle position._
+		[self update:0.0];
 	}
 	
 	return self;
@@ -1028,6 +1020,8 @@ static const float MaxBarWidth = 80.0;
 	
 	int amount = [pickup amount];
 	_points += amount;
+	_scoreBoard.score = _points;
+	
 	self.spaceBucks += amount;
 	if(self.spaceBucks >= _spaceBucksTilNextLevel){
 		[self levelUp];
