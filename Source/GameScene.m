@@ -973,9 +973,12 @@ static const float MaxBarWidth = 80.0;
 		
 		[self scheduleBlock:^(CCTimer *timer){
 			// Go to 'Made with SB' scene
-            BurnTransition* transition = [BurnTransition burnTransitionWithDuration:0.5];
-            transition.outgoingSceneAnimated = YES;
-            [[CCDirector sharedDirector] replaceScene:[CCBReader loadAsScene:@"Interstitial/MadeWithSB"] withTransition:transition];
+			BurnTransition* transition = [BurnTransition burnTransitionWithDuration:0.5];
+#if __CC_PLATFORM_MAC
+			// *Way* to expensive on iOS. Causes a lot of stuttering.
+			transition.outgoingSceneAnimated = YES;
+#endif
+			[[CCDirector sharedDirector] replaceScene:[CCBReader loadAsScene:@"Interstitial/MadeWithSB"] withTransition:transition];
 		} delay:1.75f];
 		
 		return NO;
