@@ -186,7 +186,7 @@ GLKVector4 GLKVector4FromString(NSString *data)
 #if __CC_PLATFORM_MAC
     if (data) _wind = NSPointToCGPoint(NSPointFromString(data));
 #else
-    if (data) _wind = CGPointFromString(data);
+    if (data) _wind = CCCGPointFromString(data);
 #endif
 
 
@@ -194,7 +194,7 @@ GLKVector4 GLKVector4FromString(NSString *data)
 #if __CC_PLATFORM_MAC
     if (data) _gravity = NSPointToCGPoint(NSPointFromString(data));
 #else
-    if (data) _gravity = CGPointFromString(data);
+    if (data) _gravity = CCCGPointFromString(data);
 #endif
 
     data = [dict objectForKey:@"colorStart"];

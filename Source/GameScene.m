@@ -709,7 +709,7 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 	
 	[self addChild:levelUpText];
 	levelUpText.positionType = CCPositionTypeNormalized;
-	levelUpText.position = ccp(0.5, 0.675);
+	levelUpText.position = ccp(0.5, 0.618);
 	levelUpText.anchorPoint = ccp(0.5, 0.5);
 	
 	[levelUpText setScale:2.0f];

@@ -25,6 +25,8 @@
 #import <AndroidKit/AndroidKeyEvent.h>
 
 #import "CCActivity.h"
+#import "MainMenu.h"
+#import "GameScene.h"
 
 BRIDGE_CLASS("com.apportable.GLActivity")
 @interface GalacticGuardianActivity : CCActivity @end
@@ -32,7 +34,8 @@ BRIDGE_CLASS("com.apportable.GLActivity")
 
 - (CCScene *)startScene
 {
-    return [CCBReader loadAsScene:@"MainMenu"];
+    [MainMenu class];
+    return [[GameScene alloc] initWithShipType:Ship_Herald];
 }
 
 - (BOOL)onKeyUp:(int32_t)keyCode keyEvent:(AndroidKeyEvent *)event
