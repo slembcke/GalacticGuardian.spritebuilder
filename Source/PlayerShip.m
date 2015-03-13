@@ -126,13 +126,13 @@ VisitAll(CCNode *node, void (^block)(CCNode *))
 
 // This method is called from [GameScene fixedUpdate:], not directly from Cocos2D.
 // I use a bunch of Chipmunk math functions in here since it's a bit more complete than Cocos's.
--(void)ggFixedUpdate:(CCTime)delta withControls:(Controls *)controls
+-(void)ggFixedUpdate:(CCTime)delta withControls:(Controls *)controls index:(NSUInteger)index
 {
 	CCPhysicsBody *body = self.physicsBody;
 	
 	const float deadZone = 0.25;
 	
-	CGPoint thrust = controls.thrustDirection;
+	CGPoint thrust = (index == 0 ? controls.thrustDirection1 : controls.thrustDirection2);
 	if(cpvlength(thrust) > deadZone){
 		float removeDeadZone = MAX(cpvlength(thrust) - deadZone, 0.0f)/(1.0 - deadZone);
 		CGPoint desiredVelocity = ccpMult(thrust, removeDeadZone*_speed);
@@ -154,7 +154,8 @@ VisitAll(CCNode *node, void (^block)(CCNode *))
 	}
 	
 	// Mix some of the thrust control into the aiming to make it feel more dynamic.
-	CGPoint aimDirection = ccpAdd(controls.aimDirection, ccpMult(thrust, 0.1));
+	CGPoint aim = (index == 0 ? controls.aimDirection1 : controls.aimDirection2);
+	CGPoint aimDirection = ccpAdd(aim, ccpMult(thrust, 0.1));
 	if(cpvlength(aimDirection) > 0.01){
 		const float maxTurn = 360.0*delta;
 		CGPoint relativeDirection = cpTransformVect(cpTransformInverse(body.absoluteTransform), aimDirection);

@@ -32,10 +32,13 @@
 
 #if GameControllerSupported
 @interface Controls()<GameControllerDelegate> {
-	GCExtendedGamepadSnapshot *_gamepad;
+	GCExtendedGamepadSnapshot *_gamepad1;
+	GCControllerDirectionPad *_controllerStick1;
+	GCControllerDirectionPad *_controllerAim1;
 	
-	GCControllerDirectionPad *_controllerStick;
-	GCControllerDirectionPad *_controllerAim;
+	GCExtendedGamepadSnapshot *_gamepad2;
+	GCControllerDirectionPad *_controllerStick2;
+	GCControllerDirectionPad *_controllerAim2;
 }
 
 @end
@@ -117,41 +120,64 @@
 	[GameController removeDelegate:self];
 }
 
--(void)pausePressed
+-(void)pausePressed:(NSUInteger)index
 {
 	[self callHandler:@(ControlPauseButton) value:YES];
 }
 
--(void)snapshotDidChange:(NSData *)snapshotData
+-(void)snapshotDidChange:(NSData *)snapshotData index:(NSUInteger)index
 {
-	_gamepad.snapshotData = snapshotData;
+	NSAssert(index < 2, @"Uh... 3 players?");
+	
+	if(index == 0){
+		_gamepad1.snapshotData = snapshotData;
+	} else {
+		_gamepad2.snapshotData = snapshotData;
+	}
 }
 
--(void)controllerDidConnect
+-(void)controllerDidConnect:(NSUInteger)index
 {
-	_gamepad = [[GCExtendedGamepadSnapshot alloc] init];
+	NSAssert(index < 2, @"Uh... 3 players?");
 	
-	_controllerStick = _gamepad.leftThumbstick;
-	_controllerAim = _gamepad.rightThumbstick;
-	
-	_gamepad.rightShoulder.valueChangedHandler = ^(GCControllerButtonInput *button, float value, BOOL pressed){
-		[self setButtonValue:ControlRocketButton value:pressed];
-	};
-	
-	_gamepad.buttonA.valueChangedHandler = ^(GCControllerButtonInput *button, float value, BOOL pressed){
-		[self setButtonValue:ControlNovaButton value:pressed];
+	if(index == 0){
+		_gamepad1 = [[GCExtendedGamepadSnapshot alloc] init];
 		
-		_novaButtonNode.button.highlighted = pressed;
-	};
-	
-	self.visible = NO;
+		_controllerStick1 = _gamepad1.leftThumbstick;
+		_controllerAim1 = _gamepad1.rightThumbstick;
+		
+		_gamepad1.buttonA.valueChangedHandler = ^(GCControllerButtonInput *button, float value, BOOL pressed){
+			[self setButtonValue:ControlNovaButton value:pressed];
+			
+			_novaButtonNode.button.highlighted = pressed;
+		};
+	} else {
+		_gamepad2 = [[GCExtendedGamepadSnapshot alloc] init];
+		
+		_controllerStick2 = _gamepad2.leftThumbstick;
+		_controllerAim2 = _gamepad2.rightThumbstick;
+		
+		_gamepad2.buttonA.valueChangedHandler = ^(GCControllerButtonInput *button, float value, BOOL pressed){
+			[self setButtonValue:ControlNovaButton value:pressed];
+			
+			_novaButtonNode.button.highlighted = pressed;
+		};
+	}
 }
 
--(void)controllerDidDisconnect
+-(void)controllerDidDisconnect:(NSUInteger)index
 {
-	_gamepad = nil;
-	_controllerStick = nil;
-	_controllerAim = nil;
+	NSAssert(index < 2, @"Uh... 3 players?");
+	
+	if(index == 0){
+		_gamepad1 = nil;
+		_controllerStick1 = nil;
+		_controllerAim1 = nil;
+	} else {
+		_gamepad2 = nil;
+		_controllerStick2 = nil;
+		_controllerAim2 = nil;
+	}
 	
 //	self.visible = YES;
 }
@@ -164,15 +190,15 @@
 	
 	// If a controller is connected, read from that.
 	// Otherwise read from the onscreen joystick.
-	if(_controllerAim){
-		aim = CGPointMake(_controllerAim.xAxis.value, _controllerAim.yAxis.value);
+	if(_controllerAim1){
+		aim = CGPointMake(_controllerAim1.xAxis.value, _controllerAim1.yAxis.value);
 		_virtualAimJoystick.direction = aim;
 	} else {
 		aim = _virtualAimJoystick.direction;
 	}
 	
-	if(_controllerStick){
-		_virtualJoystick.direction = ccp(_controllerStick.xAxis.value, _controllerStick.yAxis.value);
+	if(_controllerStick1){
+		_virtualJoystick.direction = ccp(_controllerStick1.xAxis.value, _controllerStick1.yAxis.value);
 	}
 #else
 	CGPoint aim = _virtualAimJoystick.direction;
@@ -201,36 +227,36 @@
 	}
 }
 
--(CGPoint)thrustDirection
+-(CGPoint)thrustDirection1
 {
-#if GameControllerSupported
-	if(_controllerStick){
-		return cpvclamp(cpv(
-			_controllerStick.xAxis.value,
-			_controllerStick.yAxis.value
-		), 1.0);
-	} else {
-		return _virtualJoystick.direction;
-	}
-#else
-	return _virtualJoystick.direction;
-#endif
+	return cpvclamp(cpv(
+		_controllerStick1.xAxis.value,
+		_controllerStick1.yAxis.value
+	), 1.0);
 }
 
--(CGPoint)aimDirection
+-(CGPoint)aimDirection1
 {
-#if GameControllerSupported
-	if(_controllerAim){
-		return cpvclamp(cpv(
-			_controllerAim.xAxis.value,
-			_controllerAim.yAxis.value
-		), 1.0);
-	} else {
-		return _virtualAimJoystick.direction;
-	}
-#else
-	return _virtualAimJoystick.direction;
-#endif
+	return cpvclamp(cpv(
+		_controllerAim1.xAxis.value,
+		_controllerAim1.yAxis.value
+	), 1.0);
+}
+
+-(CGPoint)thrustDirection2
+{
+	return cpvclamp(cpv(
+		_controllerStick2.xAxis.value,
+		_controllerStick2.yAxis.value
+	), 1.0);
+}
+
+-(CGPoint)aimDirection2
+{
+	return cpvclamp(cpv(
+		_controllerAim2.xAxis.value,
+		_controllerAim2.yAxis.value
+	), 1.0);
 }
 
 -(BOOL)getButton:(ControlButton)button

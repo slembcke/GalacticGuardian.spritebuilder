@@ -29,7 +29,7 @@
 
 #if GameControllerSupported
 
-static GCController *SHARED_CONTROLLER = nil;
+static NSMutableArray *SHARED_CONTROLLERS = nil;
 
 // Immutable array to avoid the need to copy during iteration.
 static NSArray *CONTROLLER_DELEGATES = nil;
@@ -42,6 +42,7 @@ static NSArray *CONTROLLER_DELEGATES = nil;
 	if(NSClassFromString(@"GCController") == nil) return;
 	
 	CONTROLLER_DELEGATES = [NSArray array];
+	SHARED_CONTROLLERS = [NSMutableArray array];
 	
 	// Note that I'm calling CCController and not GCController.
 	// This is a subclass I made that adds support for USB/Bluetooth gamepads on Mac.
@@ -61,25 +62,27 @@ static NSArray *CONTROLLER_DELEGATES = nil;
 
 +(void)activateSharedController:(GCController *)controller
 {
-	if(SHARED_CONTROLLER == nil && controller.extendedGamepad){
+	if(SHARED_CONTROLLERS.count <2 && controller.extendedGamepad){
 		NSLog(@"GameController activated: %@", controller);
-		SHARED_CONTROLLER = controller;
+		
+		NSUInteger index = SHARED_CONTROLLERS.count;
+		[SHARED_CONTROLLERS addObject:controller];
 		
 		for(id<GameControllerDelegate> delegate in CONTROLLER_DELEGATES){
-			if([delegate respondsToSelector:@selector(controllerDidConnect)]) [delegate controllerDidConnect];
+			if([delegate respondsToSelector:@selector(controllerDidConnect:)]) [delegate controllerDidConnect:index];
 		}
 		
-		SHARED_CONTROLLER.controllerPausedHandler = ^(GCController *controller){
+		controller.controllerPausedHandler = ^(GCController *controller){
 			for(id<GameControllerDelegate> delegate in CONTROLLER_DELEGATES){
-				if([delegate respondsToSelector:@selector(pausePressed)]) [delegate pausePressed];
+				if([delegate respondsToSelector:@selector(pausePressed:)]) [delegate pausePressed:index];
 			}
 		};
 		
-		SHARED_CONTROLLER.extendedGamepad.valueChangedHandler = ^(GCExtendedGamepad *gamepad, GCControllerElement *element){
+		controller.extendedGamepad.valueChangedHandler = ^(GCExtendedGamepad *gamepad, GCControllerElement *element){
 			NSData *snapshotData = gamepad.snapshotDataFast;
 			
 			for(id<GameControllerDelegate> delegate in CONTROLLER_DELEGATES){
-				if([delegate respondsToSelector:@selector(snapshotDidChange:)]) [delegate snapshotDidChange:snapshotData];
+				if([delegate respondsToSelector:@selector(snapshotDidChange:index:)]) [delegate snapshotDidChange:snapshotData index:index];
 			}
 		};
 		
@@ -92,11 +95,13 @@ static NSArray *CONTROLLER_DELEGATES = nil;
 	GCController *controller = notification.object;
 	NSLog(@"GameController disconnected: %@", controller);
 	
+	NSUInteger index = [SHARED_CONTROLLERS indexOfObject:controller];
+	
 	for(id<GameControllerDelegate> delegate in [CONTROLLER_DELEGATES copy]){
-		if([delegate respondsToSelector:@selector(controllerDidDisconnect)]) [delegate controllerDidDisconnect];
+		if([delegate respondsToSelector:@selector(controllerDidDisconnect:)]) [delegate controllerDidDisconnect:index];
 	}
 	
-	SHARED_CONTROLLER = nil;
+	[SHARED_CONTROLLERS removeObjectAtIndex:index];
 	
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:GCControllerDidDisconnectNotification object:controller];
 }
@@ -104,7 +109,11 @@ static NSArray *CONTROLLER_DELEGATES = nil;
 +(void)addDelegate:(id<GameControllerDelegate>)delegate
 {
 	CONTROLLER_DELEGATES = [CONTROLLER_DELEGATES arrayByAddingObject:delegate];
-	if(SHARED_CONTROLLER && [delegate respondsToSelector:@selector(controllerDidConnect)]) [delegate controllerDidConnect];
+	
+	for(CCController *controller in SHARED_CONTROLLERS){
+		NSUInteger index = [SHARED_CONTROLLERS indexOfObject:controller];
+		if([delegate respondsToSelector:@selector(controllerDidConnect:)]) [delegate controllerDidConnect:index];
+	}
 }
 
 +(void)removeDelegate:(id<GameControllerDelegate>)delegate
@@ -113,7 +122,10 @@ static NSArray *CONTROLLER_DELEGATES = nil;
 	[arr removeObject:delegate];
 	
 	CONTROLLER_DELEGATES = arr;
-	if(SHARED_CONTROLLER && [delegate respondsToSelector:@selector(controllerDidDisconnect)]) [delegate controllerDidDisconnect];
+	for(CCController *controller in SHARED_CONTROLLERS){
+		NSUInteger index = [SHARED_CONTROLLERS indexOfObject:controller];
+		if([delegate respondsToSelector:@selector(controllerDidDisconnect:)]) [delegate controllerDidDisconnect:index];
+	}
 }
 
 #else

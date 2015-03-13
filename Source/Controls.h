@@ -37,8 +37,12 @@ typedef void (^ControlHandler)(BOOL state);
 @property(nonatomic, assign) BOOL rocketButtonVisible;
 
 // Left/right joystick values.
--(CGPoint)thrustDirection;
--(CGPoint)aimDirection;
+-(CGPoint)thrustDirection1;
+-(CGPoint)aimDirection1;
+
+// Player2 values.
+-(CGPoint)thrustDirection2;
+-(CGPoint)aimDirection2;
 
 // Check if a certain button is pressed.
 -(BOOL)getButton:(ControlButton)button;

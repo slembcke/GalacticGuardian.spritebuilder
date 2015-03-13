@@ -72,7 +72,7 @@
 	[GameController removeDelegate:self];
 }
 
--(void)pausePressed
+-(void)pausePressed:(NSUInteger)index
 {
 	[self dismiss:nil];
 }

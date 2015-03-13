@@ -115,17 +115,17 @@
 	[GameController removeDelegate:self];
 }
 
--(void)pausePressed
+-(void)pausePressed:(NSUInteger)index
 {
 	[self showOptionsMenu];
 }
 
--(void)snapshotDidChange:(NSData *)snapshotData
+-(void)snapshotDidChange:(NSData *)snapshotData index:(NSUInteger)index
 {
 	_gamepad.snapshotData = snapshotData;
 }
 
--(void)controllerDidConnect
+-(void)controllerDidConnect:(NSUInteger)index
 {
 	_gamepad = [[GCExtendedGamepadSnapshot alloc] init];
 	_gamepad.buttonA.valueChangedHandler = ^(GCControllerButtonInput *button, float value, BOOL pressed){
@@ -133,7 +133,7 @@
 	};
 }
 
--(void)controllerDidDisconnect
+-(void)controllerDidDisconnect:(NSUInteger)index
 {
 	_gamepad = nil;
 }

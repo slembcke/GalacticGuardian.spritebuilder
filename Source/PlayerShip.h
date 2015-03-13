@@ -40,7 +40,7 @@
 
 @property(nonatomic) CCSprite *shieldDistortionSprite;
 
--(void)ggFixedUpdate:(CCTime)delta withControls:(Controls *)controls;
+-(void)ggFixedUpdate:(CCTime)delta withControls:(Controls *)controls index:(NSUInteger)index;
 
 -(void)bulletFlash:(CCColor *)color;
 -(BOOL)takeDamage;

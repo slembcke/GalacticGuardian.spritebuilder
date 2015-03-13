@@ -102,12 +102,12 @@ const float ship_powers[] = {30.0f, 80.0f, 100.0f};
 	_gamepad = nil;
 }
 
--(void)snapshotDidChange:(NSData *)snapshotData
+-(void)snapshotDidChange:(NSData *)snapshotData index:(NSUInteger)index
 {
 	_gamepad.snapshotData = snapshotData;
 }
 
--(void)controllerDidConnect
+-(void)controllerDidConnect:(NSUInteger)index
 {
 	_gamepad = [[GCExtendedGamepadSnapshot alloc] init];
 	
@@ -131,7 +131,7 @@ const float ship_powers[] = {30.0f, 80.0f, 100.0f};
 	};
 }
 
--(void)controllerDidDisconnect
+-(void)controllerDidDisconnect:(NSUInteger)index
 {
 	_gamepad = nil;
 }

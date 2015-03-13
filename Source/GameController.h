@@ -32,11 +32,11 @@
 
 @optional
 
--(void)pausePressed;
--(void)snapshotDidChange:(NSData *)snapshotData;
+-(void)pausePressed:(NSUInteger)index;
+-(void)snapshotDidChange:(NSData *)snapshotData index:(NSUInteger)index;
 
--(void)controllerDidConnect;
--(void)controllerDidDisconnect;
+-(void)controllerDidConnect:(NSUInteger)index;
+-(void)controllerDidDisconnect:(NSUInteger)index;
 
 @end
 

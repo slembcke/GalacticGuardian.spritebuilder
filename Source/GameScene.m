@@ -224,7 +224,6 @@
 	
 	__weak typeof(self) _self = self;
 	[_controls setHandler:^(BOOL state) {if(state) [_self pause];} forButton:ControlPauseButton];
-	[_controls setHandler:^(BOOL state) {if(state) [_self fireRocket:_playerShip1];} forButton:ControlRocketButton];
 	[_controls setHandler:^(BOOL state) {if(state) [_self fireNovaBomb];} forButton:ControlNovaButton];
 }
 
@@ -233,10 +232,10 @@
 	_fixedTime += delta;
 	
 	// Send the joystick input to the ship.
-	[_playerShip1 ggFixedUpdate:delta withControls:_controls];
+	[_playerShip1 ggFixedUpdate:delta withControls:_controls index:0];
 	
 	if(_playerShip2){
-		[_playerShip2 ggFixedUpdate:delta withControls:_controls];
+		[_playerShip2 ggFixedUpdate:delta withControls:_controls index:1];
 		
 		_playerPosition = ccpLerp(_playerShip1.position, _playerShip2.position, 0.5);
 	} else {
