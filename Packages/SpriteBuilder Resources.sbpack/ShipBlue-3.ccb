@@ -10,7 +10,7 @@
 		<false/>
 	</dict>
 	<key>UUID</key>
-	<integer>64</integer>
+	<integer>80</integer>
 	<key>centeredOrigin</key>
 	<false/>
 	<key>currentResolution</key>
@@ -186,8 +186,6 @@
 								<real>5</real>
 							</dict>
 						</array>
-						<key>selected</key>
-						<true/>
 					</dict>
 				</array>
 				<key>customClass</key>
@@ -606,7 +604,7 @@
 				<key>displayName</key>
 				<string>ship_blue_lvl3</string>
 				<key>memberVarAssignmentName</key>
-				<string></string>
+				<string>_sprite</string>
 				<key>memberVarAssignmentType</key>
 				<integer>1</integer>
 				<key>properties</key>
@@ -701,6 +699,25 @@
 						<array>
 							<dict>
 								<key>UUID</key>
+								<integer>65</integer>
+								<key>baseClass</key>
+								<string>CCEffectHue</string>
+								<key>className</key>
+								<string>CCBPEffectHue</string>
+								<key>properties</key>
+								<array>
+									<dict>
+										<key>name</key>
+										<string>hue</string>
+										<key>type</key>
+										<string>Float</string>
+										<key>value</key>
+										<real>0.0</real>
+									</dict>
+								</array>
+							</dict>
+							<dict>
+								<key>UUID</key>
 								<integer>43</integer>
 								<key>baseClass</key>
 								<string>CCEffectLighting</string>
@@ -742,6 +759,8 @@
 						</array>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -1182,8 +1201,6 @@
 						<real>0.0</real>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 		</array>
 		<key>customClass</key>

@@ -10,7 +10,7 @@
 		<false/>
 	</dict>
 	<key>UUID</key>
-	<integer>67</integer>
+	<integer>72</integer>
 	<key>centeredOrigin</key>
 	<false/>
 	<key>currentResolution</key>
@@ -301,7 +301,7 @@
 				<key>displayName</key>
 				<string>ship_blue_lvl2</string>
 				<key>memberVarAssignmentName</key>
-				<string></string>
+				<string>_sprite</string>
 				<key>memberVarAssignmentType</key>
 				<integer>1</integer>
 				<key>properties</key>
@@ -394,6 +394,25 @@
 						<string>EffectControl</string>
 						<key>value</key>
 						<array>
+							<dict>
+								<key>UUID</key>
+								<integer>69</integer>
+								<key>baseClass</key>
+								<string>CCEffectHue</string>
+								<key>className</key>
+								<string>CCBPEffectHue</string>
+								<key>properties</key>
+								<array>
+									<dict>
+										<key>name</key>
+										<string>hue</string>
+										<key>type</key>
+										<string>Float</string>
+										<key>value</key>
+										<real>0.0</real>
+									</dict>
+								</array>
+							</dict>
 							<dict>
 								<key>UUID</key>
 								<integer>36</integer>

@@ -122,7 +122,9 @@
 
 -(void)pausePressed:(NSUInteger)index
 {
-	[self callHandler:@(ControlPauseButton) value:YES];
+	if(index == 1){
+		NSLog(@"join?");
+	}
 }
 
 -(void)snapshotDidChange:(NSData *)snapshotData index:(NSUInteger)index
@@ -203,9 +205,6 @@
 #else
 	CGPoint aim = _virtualAimJoystick.direction;
 #endif
-	
-	// Virtual fire button that is pressed when the aim joystick is used.
-	[self setButtonValue:ControlFireButton value:(aim.x*aim.x + aim.y*aim.y) > 0.25];
 }
 
 -(void)setButtonValue:(ControlButton)button value:(BOOL)value
@@ -267,13 +266,6 @@
 -(void)setHandler:(ControlHandler)block forButton:(ControlButton)button
 {
 	_buttonHandlers[@(button)] = block;
-}
-
--(void)fireRocket:(CCButton *)sender
-{
-	// Kind of a hack since CCButton doesn't support continuous events. (yet?)
-	[self setButtonValue:ControlRocketButton value:YES];
-	[self setButtonValue:ControlRocketButton value:NO];
 }
 
 -(void)fireNova:(CCButton *)sender

@@ -29,6 +29,7 @@
 
 @interface PlayerShip : CCNode
 
+@property(nonatomic, readonly) CCSprite *sprite;
 @property(nonatomic, readonly) NSString *debris;
 
 @property(nonatomic, readonly) CGAffineTransform gunPortTransform;

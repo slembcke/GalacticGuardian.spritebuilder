@@ -200,7 +200,9 @@
 		}
 		
 		// Add the player's ship in the center of the game area.
-		_playerShip1 = [self replacePlayerShip:nil position:ccp(GameSceneSize/2.0, GameSceneSize/2.0) withArt:ship_fileNames[shipType]];
+		_playerShip1 = [self replacePlayerShip:nil position:ccp(GameSceneSize/2.0, GameSceneSize/2.0) withArt:ship_fileNames[shipType] shipIndex:0];
+		_playerShip2 = [self replacePlayerShip:nil position:ccp(GameSceneSize/2.0, GameSceneSize/2.0) withArt:ship_fileNames[shipType] shipIndex:1];
+		
 		
 		// Pump the update loop once to set the rocket reticle position._
 		[self update:0.0];
@@ -242,10 +244,15 @@
 		_playerPosition = _playerShip1.position;
 	}
 	
-	// TODO
-	if([_controls getButton:ControlFireButton]){
+	if(ccpLength(_controls.aimDirection1) > 0.25){
 		if(_playerShip1.lastFireTime + (1.0f / _playerShip1.fireRate) < _fixedTime){
 			[self fireBullet:_playerShip1];
+		}
+	}
+	
+	if(ccpLength(_controls.aimDirection2) > 0.25){
+		if(_playerShip2.lastFireTime + (1.0f / _playerShip2.fireRate) < _fixedTime){
+			[self fireBullet:_playerShip2];
 		}
 	}
 }
@@ -681,7 +688,7 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 	[director pushScene:pause withTransition:[CCTransition transitionCrossFadeWithDuration:0.25]];
 }
 
--(PlayerShip *)replacePlayerShip:(PlayerShip *)ship position:(CGPoint)pos withArt:(NSString *)shipArt
+-(PlayerShip *)replacePlayerShip:(PlayerShip *)ship position:(CGPoint)pos withArt:(NSString *)shipArt shipIndex:(NSUInteger)index
 {
 	// Terrible lazy hack...
 	if(shipArt == nil) return nil;
@@ -716,6 +723,11 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 	[self scheduleBlock:^(CCTimer *timer) {
 		[distortion removeFromParent];
 	} delay:5];
+	
+	if(index == 1){
+		CCEffectHue *hue = (CCEffectHue *)[(CCEffectStack *)playerShip.sprite.effect effectAtIndex:0];
+		hue.hue = 120.0;
+	}
 	
 	return playerShip;
 }
@@ -774,8 +786,8 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 			break;
 		case  5:// Ship 2
 			_shipLevel += 1;
-			_playerShip1 = [self replacePlayerShip:_playerShip1 position:_playerShip1.position withArt:_playerShip1.name];
-			_playerShip2 = [self replacePlayerShip:_playerShip2 position:_playerShip2.position withArt:_playerShip2.name];
+			_playerShip1 = [self replacePlayerShip:_playerShip1 position:_playerShip1.position withArt:_playerShip1.name shipIndex:0];
+			_playerShip2 = [self replacePlayerShip:_playerShip2 position:_playerShip2.position withArt:_playerShip2.name shipIndex:1];
 			[self levelUpText:@"Ship Level 2"];
 			break;
 		case  6:// Nova Bomb
@@ -796,8 +808,8 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 			break;
 		case 10://Ship 3
 			_shipLevel += 1;
-			_playerShip1 = [self replacePlayerShip:_playerShip1 position:_playerShip1.position withArt:_playerShip1.name];
-			_playerShip2 = [self replacePlayerShip:_playerShip2 position:_playerShip2.position withArt:_playerShip2.name];
+			_playerShip1 = [self replacePlayerShip:_playerShip1 position:_playerShip1.position withArt:_playerShip1.name shipIndex:0];
+			_playerShip2 = [self replacePlayerShip:_playerShip2 position:_playerShip2.position withArt:_playerShip2.name shipIndex:1];
 			[self levelUpText:@"Ship Level 3"];
 			break;
 		case 11://Bullet 4
