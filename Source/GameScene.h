@@ -43,7 +43,7 @@
 
 @property(nonatomic, readonly) CCNode *distortionNode;
 
-@property(nonatomic, readonly) PlayerShip *playerShip;
+@property(nonatomic, readonly) BOOL playerDead;
 @property(nonatomic, readonly) CGPoint playerPosition;
 
 -(instancetype)initWithShipType:(ShipType) shipType;

@@ -121,7 +121,7 @@ static NSArray *CollisionMask = nil;
 
 -(void)fixedUpdate:(CCTime)delta
 {
-	if(_hp == 0 || _scene.playerShip.isDead) return;
+	if(_hp == 0 || _scene.playerDead) return;
 	
 	CCPhysicsBody *body = self.physicsBody;
 	

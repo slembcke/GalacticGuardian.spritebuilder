@@ -81,6 +81,9 @@
 	
 	// This light is recycled for each explosion.
 	CCLightNode *_glowLight;
+	
+	PlayerShip *_playerShip1;
+	PlayerShip *_playerShip2;
 }
 
 -(instancetype)initWithShipType:(ShipType) shipType
@@ -182,7 +185,7 @@
 		
 		// Skip to level 6 in demo mode.
 		if(!([[NSUserDefaults standardUserDefaults] boolForKey:DefaultsDifficultyHardKey])){
-			self.level = 5;
+			self.level = 9;
 			
 			_spaceBucksTilNextLevel *= pow(SpaceBucksLevelMultiplier, 5.0);
 			
@@ -197,7 +200,7 @@
 		}
 		
 		// Add the player's ship in the center of the game area.
-		_playerShip = [self replacePlayerShip:nil position:ccp(GameSceneSize/2.0, GameSceneSize/2.0) withArt:ship_fileNames[shipType]];
+		_playerShip1 = [self replacePlayerShip:nil position:ccp(GameSceneSize/2.0, GameSceneSize/2.0) withArt:ship_fileNames[shipType]];
 		
 		// Pump the update loop once to set the rocket reticle position._
 		[self update:0.0];
@@ -221,7 +224,7 @@
 	
 	__weak typeof(self) _self = self;
 	[_controls setHandler:^(BOOL state) {if(state) [_self pause];} forButton:ControlPauseButton];
-	[_controls setHandler:^(BOOL state) {if(state) [_self fireRocket];} forButton:ControlRocketButton];
+	[_controls setHandler:^(BOOL state) {if(state) [_self fireRocket:_playerShip1];} forButton:ControlRocketButton];
 	[_controls setHandler:^(BOOL state) {if(state) [_self fireNovaBomb];} forButton:ControlNovaButton];
 }
 
@@ -230,12 +233,20 @@
 	_fixedTime += delta;
 	
 	// Send the joystick input to the ship.
-	[_playerShip ggFixedUpdate:delta withControls:_controls];
-	_playerPosition = _playerShip.position;
+	[_playerShip1 ggFixedUpdate:delta withControls:_controls];
 	
+	if(_playerShip2){
+		[_playerShip2 ggFixedUpdate:delta withControls:_controls];
+		
+		_playerPosition = ccpLerp(_playerShip1.position, _playerShip2.position, 0.5);
+	} else {
+		_playerPosition = _playerShip1.position;
+	}
+	
+	// TODO
 	if([_controls getButton:ControlFireButton]){
-		if(_playerShip.lastFireTime + (1.0f / _playerShip.fireRate) < _fixedTime){
-			[self fireBullet];
+		if(_playerShip1.lastFireTime + (1.0f / _playerShip1.fireRate) < _fixedTime){
+			[self fireBullet:_playerShip1];
 		}
 	}
 }
@@ -264,9 +275,9 @@
 	_scrollNode.anchorPoint = ccpAdd(scrollPosition, ccpMult(offset, 1.0/log(smoothing)));
 }
 
--(CGPoint)rocketAim
+-(CGPoint)rocketAim:(PlayerShip *)playerShip
 {
-	return CGPointApplyAffineTransform(ccp(RocketRange, 0.0), _playerShip.nodeToParentTransform);
+	return CGPointApplyAffineTransform(ccp(RocketRange, 0.0), playerShip.nodeToParentTransform);
 }
 
 -(EnemyShip *)rocketTarget:(CGPoint)aim limit:(float)limit;
@@ -288,10 +299,11 @@ const float RocketAimLimit = 75.0f;
 
 -(void)update:(CCTime)delta
 {
-	self.scrollPosition = _playerShip.position;
+	self.scrollPosition = _playerPosition;
 	
+	// TODO
 	// Update the reticle's position.
-	CGPoint aim = [self rocketAim];
+	CGPoint aim = [self rocketAim:_playerShip1];
 	_rocketReticle.position = aim;
 	
 	EnemyShip *target = [self rocketTarget:aim limit:RocketAimLimit];
@@ -302,8 +314,7 @@ const float RocketAimLimit = 75.0f;
 		_targetLock.visible = NO;
 	}
 
-	
-	if(!_playerShip.isDead){
+	if(!_playerShip1.isDead){
 		CCScheduler *scheduler = [CCDirector sharedDirector].scheduler;
 		scheduler.timeScale = cpflerpconst(scheduler.timeScale, 1.0, 0.25*delta);
 	}
@@ -442,16 +453,18 @@ const float RocketAimLimit = 75.0f;
 	}
 }
 
--(void)fireBullet
+-(void)fireBullet:(PlayerShip *)playerShip
 {
 	// Don't fire bullets if the ship is destroyed.
-	if([_playerShip isDead]) return;
-	_playerShip.lastFireTime = _fixedTime;
+	if([playerShip isDead]) return;
+	
+	// TODO
+	playerShip.lastFireTime = _fixedTime;
 	
 	// This is sort of a fancy math way to figure out where to fire the bullet from.
 	// You could figure this out with more code, but I wanted to have fun with some maths.
 	// This gets the transform of one of the "gunports" that I marked in the CCB file with a special node.
-	CGAffineTransform transform = _playerShip.gunPortTransform;
+	CGAffineTransform transform = playerShip.gunPortTransform;
 	
 	// An affine transform looks like this when written as a matrix:
 	// | a, c, tx |
@@ -481,7 +494,7 @@ const float RocketAimLimit = 75.0f;
 	
 	[_physics addChild:bullet z:Z_BULLET];
 	
-	[_playerShip bulletFlash:bullet.bulletColor];
+	[playerShip bulletFlash:bullet.bulletColor];
 	
 	// Make some noise. Add a little chromatically tuned pitch bending to make it sound more musical.
 	int half_steps = (arc4random()%(2*4 + 1) - 4);
@@ -489,13 +502,13 @@ const float RocketAimLimit = 75.0f;
 	[[OALSimpleAudio sharedInstance] playEffect:@"TempSounds/Laser.wav" volume:0.25 pitch:pitch pan:0.0 loop:NO];
 	
 	if(_rocketReticle.percentage == 100.0){
-		[self fireRocket];
+		[self fireRocket:playerShip];
 	}
 }
 
--(void)fireRocket
+-(void)fireRocket:(PlayerShip *)playerShip
 {
-	EnemyShip *target = [self rocketTarget:[self rocketAim] limit:RocketAimLimit];
+	EnemyShip *target = [self rocketTarget:[self rocketAim:playerShip] limit:RocketAimLimit];
 	
 	if(
 		target == nil ||
@@ -504,13 +517,13 @@ const float RocketAimLimit = 75.0f;
 		// Don't fire until the missile timer is ready.
 		_rocketReticle.percentage < 100.0 ||
 		// don't fire if the player is dead.
-		[_playerShip isDead]
+		[playerShip isDead]
 	){
 		return;
 	}
 	
 	// Apply the same transform trick used in the bullet firing method.
-	CGAffineTransform transform = _playerShip.physicsBody.absoluteTransform;
+	CGAffineTransform transform = playerShip.physicsBody.absoluteTransform;
 	CGPoint position = ccp(transform.tx, transform.ty);
 	CGPoint direction = ccp(transform.a, transform.b);
 	
@@ -518,7 +531,7 @@ const float RocketAimLimit = 75.0f;
 	rocket.position = position;
 	rocket.rotation = -CC_RADIANS_TO_DEGREES(ccpToAngle(direction));
 	
-	CCPhysicsBody *player = _playerShip.physicsBody;
+	CCPhysicsBody *player = playerShip.physicsBody;
 	_rocketLaunchDirection.y *= -1.0;
 	rocket.physicsBody.velocity = cpvadd(player.velocity, cpTransformVect(player.absoluteTransform, _rocketLaunchDirection));
 	
@@ -552,7 +565,7 @@ const float RocketAimLimit = 75.0f;
 -(void)fireNovaBomb
 {
 	// Don't fire if out of ammo or the ship is destroyed.
-	if(self.novaBombs == 0 || [_playerShip isDead]) return;
+	if(self.novaBombs == 0 || [_playerShip1 isDead]) return;
 	self.novaBombs -= 1;
 	
 	[self novaBombAt:_playerPosition];
@@ -671,6 +684,9 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 
 -(PlayerShip *)replacePlayerShip:(PlayerShip *)ship position:(CGPoint)pos withArt:(NSString *)shipArt
 {
+	// Terrible lazy hack...
+	if(shipArt == nil) return nil;
+	
 	float rotation = -90.0f;
 	CGPoint velocity = CGPointZero;
 	if(ship){
@@ -759,7 +775,8 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 			break;
 		case  5:// Ship 2
 			_shipLevel += 1;
-			_playerShip = [self replacePlayerShip:_playerShip position:_playerShip.position withArt:_playerShip.name];
+			_playerShip1 = [self replacePlayerShip:_playerShip1 position:_playerShip1.position withArt:_playerShip1.name];
+			_playerShip2 = [self replacePlayerShip:_playerShip2 position:_playerShip2.position withArt:_playerShip2.name];
 			[self levelUpText:@"Ship Level 2"];
 			break;
 		case  6:// Nova Bomb
@@ -780,7 +797,8 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 			break;
 		case 10://Ship 3
 			_shipLevel += 1;
-			_playerShip = [self replacePlayerShip:_playerShip position:_playerShip.position withArt:_playerShip.name];
+			_playerShip1 = [self replacePlayerShip:_playerShip1 position:_playerShip1.position withArt:_playerShip1.name];
+			_playerShip2 = [self replacePlayerShip:_playerShip2 position:_playerShip2.position withArt:_playerShip2.name];
 			[self levelUpText:@"Ship Level 3"];
 			break;
 		case 11://Bullet 4
@@ -941,7 +959,7 @@ static const float MaxBarWidth = 80.0;
 
 -(void)updateShieldBar
 {
-    float width = _playerShip.health*MaxBarWidth;
+    float width = _playerShip1.health*MaxBarWidth;
     float height = _shieldBar.contentSize.height;
     
     if (width > MaxBarWidth) width = MaxBarWidth;
@@ -967,8 +985,9 @@ static const float MaxBarWidth = 80.0;
 
 -(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair ship:(PlayerShip *)player enemy:(EnemyShip *)enemy
 {
-	if([_playerShip takeDamage]){
-		[_playerShip destroy];
+	if([_playerShip1 takeDamage]){
+		[_playerShip1 destroy];
+		[_playerShip2 destroy];
 		
 		// and zoom in on the player?
 		[_scrollNode runAction:[CCActionEaseInOut actionWithAction: [CCActionScaleTo actionWithDuration:0.1f scale:1.65f] rate:2.0] ];

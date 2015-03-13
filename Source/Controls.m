@@ -144,7 +144,7 @@
 		_novaButtonNode.button.highlighted = pressed;
 	};
 	
-//	self.visible = NO;
+	self.visible = NO;
 }
 
 -(void)controllerDidDisconnect
