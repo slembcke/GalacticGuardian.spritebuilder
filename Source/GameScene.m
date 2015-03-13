@@ -702,11 +702,15 @@ static const float PLAYER_MAX_DIST = 75;
 {
 	if(_playerShip2 == nil) return;
 	
-	[CCPhysicsJoint
-		connectedDistanceJointWithBodyA:_playerShip1.physicsBody bodyB:_playerShip2.physicsBody
-		anchorA:CGPointZero anchorB:CGPointZero
-		minDistance:35 maxDistance:PLAYER_MAX_DIST
-	];
+	// TODO hack to make this work.
+	// It happens inside a collision callback and there is a deferral bug.
+	[self scheduleBlock:^(CCTimer *timer) {
+		[CCPhysicsJoint
+			connectedDistanceJointWithBodyA:_playerShip1.physicsBody bodyB:_playerShip2.physicsBody
+			anchorA:CGPointZero anchorB:CGPointZero
+			minDistance:35 maxDistance:PLAYER_MAX_DIST
+		];
+	} delay:0.0];
 }
 
 -(PlayerShip *)replacePlayerShip:(PlayerShip *)ship position:(CGPoint)pos withArt:(NSString *)shipArt shipIndex:(NSUInteger)index
