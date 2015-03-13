@@ -123,7 +123,8 @@
 -(void)pausePressed:(NSUInteger)index
 {
 	if(index == 1){
-		NSLog(@"join?");
+		[self setButtonValue:ControlJoinButton value:YES];
+		[self setButtonValue:ControlJoinButton value:NO];
 	}
 }
 

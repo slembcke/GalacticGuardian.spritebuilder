@@ -185,7 +185,7 @@
 		
 		// Skip to level 6 in demo mode.
 		if(!([[NSUserDefaults standardUserDefaults] boolForKey:DefaultsDifficultyHardKey])){
-			self.level = 9;
+			self.level = 5;
 			
 			_spaceBucksTilNextLevel *= pow(SpaceBucksLevelMultiplier, 5.0);
 			
@@ -201,8 +201,6 @@
 		
 		// Add the player's ship in the center of the game area.
 		_playerShip1 = [self replacePlayerShip:nil position:ccp(GameSceneSize/2.0, GameSceneSize/2.0) withArt:ship_fileNames[shipType] shipIndex:0];
-		_playerShip2 = [self replacePlayerShip:nil position:ccp(GameSceneSize/2.0, GameSceneSize/2.0) withArt:ship_fileNames[shipType] shipIndex:1];
-		
 		
 		// Pump the update loop once to set the rocket reticle position._
 		[self update:0.0];
@@ -226,6 +224,7 @@
 	
 	__weak typeof(self) _self = self;
 	[_controls setHandler:^(BOOL state) {if(state) [_self pause];} forButton:ControlPauseButton];
+	[_controls setHandler:^(BOOL state) {if(state) [_self joinPlayer2];} forButton:ControlJoinButton];
 	[_controls setHandler:^(BOOL state) {if(state) [_self fireNovaBomb];} forButton:ControlNovaButton];
 }
 
@@ -688,6 +687,28 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 	[director pushScene:pause withTransition:[CCTransition transitionCrossFadeWithDuration:0.25]];
 }
 
+static const float PLAYER_MAX_DIST = 75;
+
+-(void)joinPlayer2
+{
+	if(_playerShip2) return;
+	
+	CGPoint pos = ccpAdd(_playerShip1.position, ccp(PLAYER_MAX_DIST, 0.0));
+	_playerShip2 = [self replacePlayerShip:nil position:pos withArt:_playerShip1.name shipIndex:1];
+	[self connectShips];
+}
+
+-(void)connectShips
+{
+	if(_playerShip2 == nil) return;
+	
+	[CCPhysicsJoint
+		connectedDistanceJointWithBodyA:_playerShip1.physicsBody bodyB:_playerShip2.physicsBody
+		anchorA:CGPointZero anchorB:CGPointZero
+		minDistance:35 maxDistance:PLAYER_MAX_DIST
+	];
+}
+
 -(PlayerShip *)replacePlayerShip:(PlayerShip *)ship position:(CGPoint)pos withArt:(NSString *)shipArt shipIndex:(NSUInteger)index
 {
 	// Terrible lazy hack...
@@ -788,6 +809,7 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 			_shipLevel += 1;
 			_playerShip1 = [self replacePlayerShip:_playerShip1 position:_playerShip1.position withArt:_playerShip1.name shipIndex:0];
 			_playerShip2 = [self replacePlayerShip:_playerShip2 position:_playerShip2.position withArt:_playerShip2.name shipIndex:1];
+			[self connectShips];
 			[self levelUpText:@"Ship Level 2"];
 			break;
 		case  6:// Nova Bomb
@@ -810,6 +832,7 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 			_shipLevel += 1;
 			_playerShip1 = [self replacePlayerShip:_playerShip1 position:_playerShip1.position withArt:_playerShip1.name shipIndex:0];
 			_playerShip2 = [self replacePlayerShip:_playerShip2 position:_playerShip2.position withArt:_playerShip2.name shipIndex:1];
+			[self connectShips];
 			[self levelUpText:@"Ship Level 3"];
 			break;
 		case 11://Bullet 4
@@ -897,6 +920,8 @@ static NSMutableDictionary *OBJECT_POOL = nil;
 {
 	static NSUInteger spawnCounter = 0;
 	NSUInteger maxAllowedEnemies = MIN(20 + _level*4, 60);
+	
+	if(_playerShip2) maxAllowedEnemies *= 2;
 	
 	NSUInteger MinGroupSize = 3;
 	NSUInteger MaxGroupSize = 8;

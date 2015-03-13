@@ -23,6 +23,7 @@
  */
 
 typedef NS_ENUM(NSUInteger, ControlButton){
+	ControlJoinButton,
 	ControlNovaButton,
 	ControlPauseButton,
 };
