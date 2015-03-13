@@ -197,7 +197,7 @@
 		}
 		
 		// Add the player's ship in the center of the game area.
-		[self createPlayerShipAt: ccp(GameSceneSize/2.0, GameSceneSize/2.0) withArt:ship_fileNames[shipType]];
+		_playerShip = [self replacePlayerShip:nil position:ccp(GameSceneSize/2.0, GameSceneSize/2.0) withArt:ship_fileNames[shipType]];
 		
 		// Pump the update loop once to set the rocket reticle position._
 		[self update:0.0];
@@ -669,29 +669,29 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 	[director pushScene:pause withTransition:[CCTransition transitionCrossFadeWithDuration:0.25]];
 }
 
--(void)createPlayerShipAt:(CGPoint)pos withArt:(NSString *)shipArt
+-(PlayerShip *)replacePlayerShip:(PlayerShip *)ship position:(CGPoint)pos withArt:(NSString *)shipArt
 {
 	float rotation = -90.0f;
 	CGPoint velocity = CGPointZero;
-	if(_playerShip){
-		rotation = _playerShip.rotation;
-		velocity = _playerShip.physicsBody.velocity;
+	if(ship){
+		rotation = ship.rotation;
+		velocity = ship.physicsBody.velocity;
 		
-		[_playerShip removeFromParent];
+		[ship removeFromParent];
 	}
 	
-	_playerShip = (PlayerShip *)[CCBReader load:[NSString stringWithFormat:@"%@-%d", shipArt, _shipLevel + 1]];
-	_playerShip.position = pos;
-	_playerShip.rotation = rotation;
-	_playerShip.physicsBody.velocity = velocity;
-	_playerShip.name = shipArt;
-	[_physics addChild:_playerShip z:Z_PLAYER];
-	[_background.distortionNode addChild:_playerShip.shieldDistortionSprite];
+	PlayerShip *playerShip = (PlayerShip *)[CCBReader load:[NSString stringWithFormat:@"%@-%d", shipArt, _shipLevel + 1]];
+	playerShip.position = pos;
+	playerShip.rotation = rotation;
+	playerShip.physicsBody.velocity = velocity;
+	playerShip.name = shipArt;
+	[_physics addChild:playerShip z:Z_PLAYER];
+	[_background.distortionNode addChild:playerShip.shieldDistortionSprite];
 	
 	[self updateShieldBar];
 	
 	// Center the screen on the player.
-	self.scrollPosition = _playerShip.position;
+	self.scrollPosition = playerShip.position;
 	
 	// Warp the space aronud the player as they appear.
 	CCNode *distortion = [CCBReader load:@"DistortionParticles/SmallRing"];
@@ -701,6 +701,8 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 	[self scheduleBlock:^(CCTimer *timer) {
 		[distortion removeFromParent];
 	} delay:5];
+	
+	return playerShip;
 }
 
 -(void)levelUpText:(NSString *)text
@@ -757,7 +759,7 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 			break;
 		case  5:// Ship 2
 			_shipLevel += 1;
-			[self createPlayerShipAt:_playerShip.position withArt:_playerShip.name];
+			_playerShip = [self replacePlayerShip:_playerShip position:_playerShip.position withArt:_playerShip.name];
 			[self levelUpText:@"Ship Level 2"];
 			break;
 		case  6:// Nova Bomb
@@ -778,7 +780,7 @@ InitDebris(CCNode *root, CCNode *node, CGPoint velocity, CCColor *burnColor)
 			break;
 		case 10://Ship 3
 			_shipLevel += 1;
-			[self createPlayerShipAt:_playerShip.position withArt:_playerShip.name];
+			_playerShip = [self replacePlayerShip:_playerShip position:_playerShip.position withArt:_playerShip.name];
 			[self levelUpText:@"Ship Level 3"];
 			break;
 		case 11://Bullet 4
