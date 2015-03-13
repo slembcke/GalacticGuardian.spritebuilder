@@ -40,6 +40,7 @@
 #import "ScoreBoard.h"
 
 #import "CCDirector_Private.h"
+#import "CCTexture_Private.h"
 
 
 @interface GameScene()
@@ -84,6 +85,8 @@
 	
 	PlayerShip *_playerShip1;
 	PlayerShip *_playerShip2;
+	
+	CCSprite *_linkSprite;
 }
 
 -(instancetype)initWithShipType:(ShipType) shipType
@@ -322,6 +325,19 @@ const float RocketAimLimit = 75.0f;
 	if(!_playerShip1.isDead){
 		CCScheduler *scheduler = [CCDirector sharedDirector].scheduler;
 		scheduler.timeScale = cpflerpconst(scheduler.timeScale, 1.0, 0.25*delta);
+	}
+	
+	if(_linkSprite){
+		CGPoint pos = _playerShip1.position;
+		CGPoint dir = ccpSub(_playerShip2.position, pos);
+		
+		_linkSprite.position = pos;
+		_linkSprite.rotation = -CC_RADIANS_TO_DEGREES(ccpToAngle(dir));
+		_linkSprite.scaleX = ccpLength(dir)/_linkSprite.contentSize.width;
+		
+		CGRect rect = _linkSprite.textureRect;
+		rect.origin.x = CCRANDOM_0_1()*rect.size.width;
+		_linkSprite.textureRect = rect;
 	}
 }
 
@@ -708,9 +724,25 @@ static const float PLAYER_MAX_DIST = 75;
 		[CCPhysicsJoint
 			connectedDistanceJointWithBodyA:_playerShip1.physicsBody bodyB:_playerShip2.physicsBody
 			anchorA:CGPointZero anchorB:CGPointZero
-			minDistance:35 maxDistance:PLAYER_MAX_DIST
+			minDistance:5 maxDistance:PLAYER_MAX_DIST
+		];
+		
+		[CCPhysicsJoint
+			connectedSpringJointWithBodyA:_playerShip1.physicsBody bodyB:_playerShip2.physicsBody
+			anchorA:CGPointZero anchorB:CGPointZero
+			restLength:PLAYER_MAX_DIST*0.5 stiffness:20 damping:2
 		];
 	} delay:0.0];
+	
+	if(_linkSprite == nil){
+		CCTexture *electric = [CCTexture textureWithFile:@"electric.png"];
+		[electric setTexParameters:(ccTexParams[]){GL_LINEAR, GL_LINEAR, GL_REPEAT, GL_REPEAT}];
+		
+		_linkSprite = [CCSprite spriteWithTexture:electric];
+		_linkSprite.blendMode = [CCBlendMode addMode];
+		_linkSprite.anchorPoint = ccp(0.0, 0.5);
+		[_physics addChild:_linkSprite z:Z_LINK];
+	}
 }
 
 -(PlayerShip *)replacePlayerShip:(PlayerShip *)ship position:(CGPoint)pos withArt:(NSString *)shipArt shipIndex:(NSUInteger)index
