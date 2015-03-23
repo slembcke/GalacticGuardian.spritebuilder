@@ -22,7 +22,8 @@
  * THE SOFTWARE.
  */
 
-#import "OALSimpleAudio.h"
+//#import "OALSimpleAudio.h"
+#import "CCWwise.h"
 #import "CCPhysics+ObjectiveChipmunk.h"
 
 #import "Constants.h"
@@ -201,7 +202,10 @@ static NSArray *CollisionMask = nil;
 			[distortion removeFromParent];
 		} delay:3.0];
 		
-		[[OALSimpleAudio sharedInstance] playEffect:@"TempSounds/Explosion.wav" volume:2.0 pitch:scene.pitchScale pan:0.0 loop:NO];
+        [[CCWwise sharedManager] registerGameObject:self];
+        [[CCWwise sharedManager] postEvent:@"EnemyExplode" forGameObject:self];
+        
+//		[[OALSimpleAudio sharedInstance] playEffect:@"TempSounds/Explosion.wav" volume:2.0 pitch:scene.pitchScale pan:0.0 loop:NO];
 		[scene glowLight:pos intensity:1.0 duration:0.25];
 		
 		[scene poolObject:self];

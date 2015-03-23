@@ -182,9 +182,9 @@
 		</dict>
 	</dict>
 	<key>versionStr</key>
-	<string>revision : 10891b8575
+	<string>revision : eab2ccace4
 sku : default
-version : 1.4.0
+version : 1.4.8
 </string>
 </dict>
 </plist>

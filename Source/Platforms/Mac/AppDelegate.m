@@ -26,7 +26,7 @@
 
 #import "MainMenu.h"
 #import "GameScene.h"
-
+#import "CCWwise.h"
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>
 
@@ -92,6 +92,12 @@
 	[[CCFileUtils sharedFileUtils] loadFilenameLookupDictionaryFromFile:@"fileLookup.plist"];
 	[[CCSpriteFrameCache sharedSpriteFrameCache] loadSpriteFrameLookupDictionaryFromFile:@"spriteFrameFileList.plist"];
 	
+    
+    CCWwise *w = [CCWwise sharedManager];
+    [w loadBank:@"Init.bnk"];
+    [w loadBank:@"GGSoundbank.bnk"];
+    
+    
 	[MainMenu class];
 	[director runWithScene:[[GameScene alloc] initWithShipType:Ship_Herald]];
 }

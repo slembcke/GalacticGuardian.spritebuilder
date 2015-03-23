@@ -23,6 +23,7 @@
  */
 
 #import "OALSimpleAudio.h"
+#import "CCWwise.h"
 
 #import "Constants.h"
 
@@ -77,6 +78,8 @@ VisitAll(CCNode *node, void (^block)(CCNode *))
 
 -(void)onEnter
 {
+    [[CCWwise sharedManager] registerGameObject:self];
+    
 	CCPhysicsBody *body = self.physicsBody;
 	
 	// This is used to pick which collision delegate method to call, see GameScene.m for more info.
@@ -270,8 +273,12 @@ VisitAll(CCNode *node, void (^block)(CCNode *))
 	
 	// For dramatic effect. Killing the player sets off a nova explosion.
 	[scene novaBombAt:pos];
-	[[OALSimpleAudio sharedInstance] playEffect:@"TempSounds/Explosion.wav" volume:2.0 pitch:scene.pitchScale pan:0.0 loop:NO];
+//	[[OALSimpleAudio sharedInstance] playEffect:@"TempSounds/Explosion.wav" volume:2.0 pitch:scene.pitchScale pan:0.0 loop:NO];
 	
+    
+    [[CCWwise sharedManager] postEvent:@"PlayerExplodes" forGameObject:self];
+    
+    
 	[self removeFromParent];
 }
 

@@ -20,6 +20,72 @@
 		75058A5319FEE7B7001AA9C6 /* EnemyShip.m in Sources */ = {isa = PBXBuildFile; fileRef = 75058A5119FEE7B7001AA9C6 /* EnemyShip.m */; };
 		75058A5419FEE7B7001AA9C6 /* EnemyShip.m in Sources */ = {isa = PBXBuildFile; fileRef = 75058A5119FEE7B7001AA9C6 /* EnemyShip.m */; };
 		75058A6A1A005881001AA9C6 /* SpaceBucks.m in Sources */ = {isa = PBXBuildFile; fileRef = 75058A691A005881001AA9C6 /* SpaceBucks.m */; };
+		751A31691AC0B78F003E8536 /* CCWwise.mm in Sources */ = {isa = PBXBuildFile; fileRef = 751A31681AC0B78F003E8536 /* CCWwise.mm */; };
+		751A316A1AC0B78F003E8536 /* CCWwise.mm in Sources */ = {isa = PBXBuildFile; fileRef = 751A31681AC0B78F003E8536 /* CCWwise.mm */; };
+		751A31821AC0B824003E8536 /* AkDefaultIOHookBlocking.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 751A316D1AC0B824003E8536 /* AkDefaultIOHookBlocking.cpp */; };
+		751A31831AC0B824003E8536 /* AkDefaultIOHookBlocking.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 751A316D1AC0B824003E8536 /* AkDefaultIOHookBlocking.cpp */; };
+		751A31841AC0B824003E8536 /* AkDefaultIOHookDeferred.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 751A316F1AC0B824003E8536 /* AkDefaultIOHookDeferred.cpp */; };
+		751A31851AC0B824003E8536 /* AkDefaultIOHookDeferred.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 751A316F1AC0B824003E8536 /* AkDefaultIOHookDeferred.cpp */; };
+		751A31861AC0B824003E8536 /* AkDefaultLowLevelIODispatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 751A31711AC0B824003E8536 /* AkDefaultLowLevelIODispatcher.cpp */; };
+		751A31871AC0B824003E8536 /* AkDefaultLowLevelIODispatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 751A31711AC0B824003E8536 /* AkDefaultLowLevelIODispatcher.cpp */; };
+		751A31881AC0B824003E8536 /* AkFileLocationBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 751A31741AC0B824003E8536 /* AkFileLocationBase.cpp */; };
+		751A31891AC0B824003E8536 /* AkFileLocationBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 751A31741AC0B824003E8536 /* AkFileLocationBase.cpp */; };
+		751A318A1AC0B824003E8536 /* AkFilePackage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 751A31761AC0B824003E8536 /* AkFilePackage.cpp */; };
+		751A318B1AC0B824003E8536 /* AkFilePackage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 751A31761AC0B824003E8536 /* AkFilePackage.cpp */; };
+		751A318C1AC0B824003E8536 /* AkFilePackageLowLevelIO.inl in Resources */ = {isa = PBXBuildFile; fileRef = 751A31791AC0B824003E8536 /* AkFilePackageLowLevelIO.inl */; };
+		751A318D1AC0B824003E8536 /* AkFilePackageLowLevelIO.inl in Resources */ = {isa = PBXBuildFile; fileRef = 751A31791AC0B824003E8536 /* AkFilePackageLowLevelIO.inl */; };
+		751A318E1AC0B824003E8536 /* AkFilePackageLUT.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 751A317C1AC0B824003E8536 /* AkFilePackageLUT.cpp */; };
+		751A318F1AC0B824003E8536 /* AkFilePackageLUT.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 751A317C1AC0B824003E8536 /* AkFilePackageLUT.cpp */; };
+		751A31901AC0B824003E8536 /* AkMultipleFileLocation.inl in Resources */ = {isa = PBXBuildFile; fileRef = 751A317F1AC0B824003E8536 /* AkMultipleFileLocation.inl */; };
+		751A31911AC0B824003E8536 /* AkMultipleFileLocation.inl in Resources */ = {isa = PBXBuildFile; fileRef = 751A317F1AC0B824003E8536 /* AkMultipleFileLocation.inl */; };
+		751A31921AC0B824003E8536 /* stdafx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 751A31801AC0B824003E8536 /* stdafx.cpp */; };
+		751A31931AC0B824003E8536 /* stdafx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 751A31801AC0B824003E8536 /* stdafx.cpp */; };
+		751A31BA1AC0B8A3003E8536 /* libAkAACDecoder.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 751A31941AC0B8A2003E8536 /* libAkAACDecoder.a */; };
+		751A31BB1AC0B8A3003E8536 /* libAkAudioInputSource.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 751A31951AC0B8A2003E8536 /* libAkAudioInputSource.a */; };
+		751A31BC1AC0B8A3003E8536 /* libAkCompressorFX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 751A31961AC0B8A2003E8536 /* libAkCompressorFX.a */; };
+		751A31BD1AC0B8A3003E8536 /* libAkConvolutionReverbFX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 751A31971AC0B8A2003E8536 /* libAkConvolutionReverbFX.a */; };
+		751A31BE1AC0B8A3003E8536 /* libAkDelayFX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 751A31981AC0B8A2003E8536 /* libAkDelayFX.a */; };
+		751A31BF1AC0B8A3003E8536 /* libAkExpanderFX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 751A31991AC0B8A2003E8536 /* libAkExpanderFX.a */; };
+		751A31C01AC0B8A3003E8536 /* libAkFlangerFX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 751A319A1AC0B8A2003E8536 /* libAkFlangerFX.a */; };
+		751A31C11AC0B8A3003E8536 /* libAkGainFX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 751A319B1AC0B8A2003E8536 /* libAkGainFX.a */; };
+		751A31C21AC0B8A3003E8536 /* libAkGuitarDistortionFX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 751A319C1AC0B8A2003E8536 /* libAkGuitarDistortionFX.a */; };
+		751A31C31AC0B8A3003E8536 /* libAkHarmonizerFX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 751A319D1AC0B8A2003E8536 /* libAkHarmonizerFX.a */; };
+		751A31C41AC0B8A3003E8536 /* libAkMatrixReverbFX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 751A319E1AC0B8A2003E8536 /* libAkMatrixReverbFX.a */; };
+		751A31C51AC0B8A3003E8536 /* libAkMemoryMgr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 751A319F1AC0B8A3003E8536 /* libAkMemoryMgr.a */; };
+		751A31C61AC0B8A3003E8536 /* libAkMeterFX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 751A31A01AC0B8A3003E8536 /* libAkMeterFX.a */; };
+		751A31C71AC0B8A3003E8536 /* libAkMusicEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 751A31A11AC0B8A3003E8536 /* libAkMusicEngine.a */; };
+		751A31C81AC0B8A3003E8536 /* libAkParametricEQFX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 751A31A21AC0B8A3003E8536 /* libAkParametricEQFX.a */; };
+		751A31C91AC0B8A3003E8536 /* libAkPeakLimiterFX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 751A31A31AC0B8A3003E8536 /* libAkPeakLimiterFX.a */; };
+		751A31CA1AC0B8A3003E8536 /* libAkPitchShifterFX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 751A31A41AC0B8A3003E8536 /* libAkPitchShifterFX.a */; };
+		751A31CB1AC0B8A3003E8536 /* libAkRoomVerbFX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 751A31A51AC0B8A3003E8536 /* libAkRoomVerbFX.a */; };
+		751A31CC1AC0B8A3003E8536 /* libAkSilenceSource.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 751A31A61AC0B8A3003E8536 /* libAkSilenceSource.a */; };
+		751A31CD1AC0B8A3003E8536 /* libAkSineSource.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 751A31A71AC0B8A3003E8536 /* libAkSineSource.a */; };
+		751A31CE1AC0B8A3003E8536 /* libAkSoundEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 751A31A81AC0B8A3003E8536 /* libAkSoundEngine.a */; };
+		751A31CF1AC0B8A3003E8536 /* libAkSoundSeedImpactFX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 751A31A91AC0B8A3003E8536 /* libAkSoundSeedImpactFX.a */; };
+		751A31D01AC0B8A3003E8536 /* libAkSoundSeedWind.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 751A31AA1AC0B8A3003E8536 /* libAkSoundSeedWind.a */; };
+		751A31D11AC0B8A3003E8536 /* libAkSoundSeedWoosh.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 751A31AB1AC0B8A3003E8536 /* libAkSoundSeedWoosh.a */; };
+		751A31D21AC0B8A3003E8536 /* libAkStereoDelayFX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 751A31AC1AC0B8A3003E8536 /* libAkStereoDelayFX.a */; };
+		751A31D31AC0B8A3003E8536 /* libAkStreamMgr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 751A31AD1AC0B8A3003E8536 /* libAkStreamMgr.a */; };
+		751A31D41AC0B8A3003E8536 /* libAkSynthOne.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 751A31AE1AC0B8A3003E8536 /* libAkSynthOne.a */; };
+		751A31D51AC0B8A3003E8536 /* libAkTimeStretchFX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 751A31AF1AC0B8A3003E8536 /* libAkTimeStretchFX.a */; };
+		751A31D61AC0B8A3003E8536 /* libAkToneSource.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 751A31B01AC0B8A3003E8536 /* libAkToneSource.a */; };
+		751A31D71AC0B8A3003E8536 /* libAkTremoloFX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 751A31B11AC0B8A3003E8536 /* libAkTremoloFX.a */; };
+		751A31D81AC0B8A3003E8536 /* libAkVorbisDecoder.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 751A31B21AC0B8A3003E8536 /* libAkVorbisDecoder.a */; };
+		751A31D91AC0B8A3003E8536 /* libAstoundsoundExpanderFX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 751A31B31AC0B8A3003E8536 /* libAstoundsoundExpanderFX.a */; };
+		751A31DA1AC0B8A3003E8536 /* libAstoundsoundFolddownFX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 751A31B41AC0B8A3003E8536 /* libAstoundsoundFolddownFX.a */; };
+		751A31DB1AC0B8A3003E8536 /* libAstoundsoundRTIFX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 751A31B51AC0B8A3003E8536 /* libAstoundsoundRTIFX.a */; };
+		751A31DC1AC0B8A3003E8536 /* libAstoundsoundShared.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 751A31B61AC0B8A3003E8536 /* libAstoundsoundShared.a */; };
+		751A31DD1AC0B8A3003E8536 /* libCommunicationCentral.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 751A31B71AC0B8A3003E8536 /* libCommunicationCentral.a */; };
+		751A31DE1AC0B8A3003E8536 /* libMcDSPFutzBoxFX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 751A31B81AC0B8A3003E8536 /* libMcDSPFutzBoxFX.a */; };
+		751A31DF1AC0B8A3003E8536 /* libMcDSPLimiterFX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 751A31B91AC0B8A3003E8536 /* libMcDSPLimiterFX.a */; };
+		751A31E51AC0B96B003E8536 /* Init.bnk in Resources */ = {isa = PBXBuildFile; fileRef = 751A31E11AC0B96B003E8536 /* Init.bnk */; };
+		751A31E61AC0B96B003E8536 /* Init.bnk in Resources */ = {isa = PBXBuildFile; fileRef = 751A31E11AC0B96B003E8536 /* Init.bnk */; };
+		751A31E71AC0B96B003E8536 /* Init.txt in Resources */ = {isa = PBXBuildFile; fileRef = 751A31E21AC0B96B003E8536 /* Init.txt */; };
+		751A31E81AC0B96B003E8536 /* Init.txt in Resources */ = {isa = PBXBuildFile; fileRef = 751A31E21AC0B96B003E8536 /* Init.txt */; };
+		751A321E1AC0CC05003E8536 /* GGSoundbank.bnk in Resources */ = {isa = PBXBuildFile; fileRef = 751A321C1AC0CC05003E8536 /* GGSoundbank.bnk */; };
+		751A321F1AC0CC05003E8536 /* GGSoundbank.txt in Resources */ = {isa = PBXBuildFile; fileRef = 751A321D1AC0CC05003E8536 /* GGSoundbank.txt */; };
+		751A32211AC0CC0B003E8536 /* GGSoundbank.bnk in Resources */ = {isa = PBXBuildFile; fileRef = 751A321C1AC0CC05003E8536 /* GGSoundbank.bnk */; };
+		751A32221AC0CC0B003E8536 /* GGSoundbank.txt in Resources */ = {isa = PBXBuildFile; fileRef = 751A321D1AC0CC05003E8536 /* GGSoundbank.txt */; };
 		751BCCD91A38D9D500F11D3D /* GGLandscape.png in Resources */ = {isa = PBXBuildFile; fileRef = 751BCCD71A38D9D500F11D3D /* GGLandscape.png */; };
 		751BCCDA1A38D9D500F11D3D /* GGPortrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 751BCCD81A38D9D500F11D3D /* GGPortrait.png */; };
 		751BCCEE1A38E0E100F11D3D /* Icon-40.png in Resources */ = {isa = PBXBuildFile; fileRef = 751BCCDB1A38E0E100F11D3D /* Icon-40.png */; };
@@ -256,6 +322,71 @@
 		75058A5119FEE7B7001AA9C6 /* EnemyShip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnemyShip.m; sourceTree = "<group>"; };
 		75058A681A005881001AA9C6 /* SpaceBucks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpaceBucks.h; sourceTree = "<group>"; };
 		75058A691A005881001AA9C6 /* SpaceBucks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpaceBucks.m; sourceTree = "<group>"; };
+		751A31671AC0B78F003E8536 /* CCWwise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCWwise.h; sourceTree = "<group>"; };
+		751A31681AC0B78F003E8536 /* CCWwise.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CCWwise.mm; sourceTree = "<group>"; };
+		751A316D1AC0B824003E8536 /* AkDefaultIOHookBlocking.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AkDefaultIOHookBlocking.cpp; sourceTree = "<group>"; };
+		751A316E1AC0B824003E8536 /* AkDefaultIOHookBlocking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AkDefaultIOHookBlocking.h; sourceTree = "<group>"; };
+		751A316F1AC0B824003E8536 /* AkDefaultIOHookDeferred.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AkDefaultIOHookDeferred.cpp; sourceTree = "<group>"; };
+		751A31701AC0B824003E8536 /* AkDefaultIOHookDeferred.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AkDefaultIOHookDeferred.h; sourceTree = "<group>"; };
+		751A31711AC0B824003E8536 /* AkDefaultLowLevelIODispatcher.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AkDefaultLowLevelIODispatcher.cpp; sourceTree = "<group>"; };
+		751A31721AC0B824003E8536 /* AkDefaultLowLevelIODispatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AkDefaultLowLevelIODispatcher.h; sourceTree = "<group>"; };
+		751A31731AC0B824003E8536 /* AkFileHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AkFileHelpers.h; sourceTree = "<group>"; };
+		751A31741AC0B824003E8536 /* AkFileLocationBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AkFileLocationBase.cpp; sourceTree = "<group>"; };
+		751A31751AC0B824003E8536 /* AkFileLocationBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AkFileLocationBase.h; sourceTree = "<group>"; };
+		751A31761AC0B824003E8536 /* AkFilePackage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AkFilePackage.cpp; sourceTree = "<group>"; };
+		751A31771AC0B824003E8536 /* AkFilePackage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AkFilePackage.h; sourceTree = "<group>"; };
+		751A31781AC0B824003E8536 /* AkFilePackageLowLevelIO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AkFilePackageLowLevelIO.h; sourceTree = "<group>"; };
+		751A31791AC0B824003E8536 /* AkFilePackageLowLevelIO.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AkFilePackageLowLevelIO.inl; sourceTree = "<group>"; };
+		751A317A1AC0B824003E8536 /* AkFilePackageLowLevelIOBlocking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AkFilePackageLowLevelIOBlocking.h; sourceTree = "<group>"; };
+		751A317B1AC0B824003E8536 /* AkFilePackageLowLevelIODeferred.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AkFilePackageLowLevelIODeferred.h; sourceTree = "<group>"; };
+		751A317C1AC0B824003E8536 /* AkFilePackageLUT.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AkFilePackageLUT.cpp; sourceTree = "<group>"; };
+		751A317D1AC0B824003E8536 /* AkFilePackageLUT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AkFilePackageLUT.h; sourceTree = "<group>"; };
+		751A317E1AC0B824003E8536 /* AkMultipleFileLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AkMultipleFileLocation.h; sourceTree = "<group>"; };
+		751A317F1AC0B824003E8536 /* AkMultipleFileLocation.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AkMultipleFileLocation.inl; sourceTree = "<group>"; };
+		751A31801AC0B824003E8536 /* stdafx.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = stdafx.cpp; sourceTree = "<group>"; };
+		751A31811AC0B824003E8536 /* stdafx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stdafx.h; sourceTree = "<group>"; };
+		751A31941AC0B8A2003E8536 /* libAkAACDecoder.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAkAACDecoder.a; path = Source/libs/Wwise/lib/libAkAACDecoder.a; sourceTree = "<group>"; };
+		751A31951AC0B8A2003E8536 /* libAkAudioInputSource.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAkAudioInputSource.a; path = Source/libs/Wwise/lib/libAkAudioInputSource.a; sourceTree = "<group>"; };
+		751A31961AC0B8A2003E8536 /* libAkCompressorFX.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAkCompressorFX.a; path = Source/libs/Wwise/lib/libAkCompressorFX.a; sourceTree = "<group>"; };
+		751A31971AC0B8A2003E8536 /* libAkConvolutionReverbFX.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAkConvolutionReverbFX.a; path = Source/libs/Wwise/lib/libAkConvolutionReverbFX.a; sourceTree = "<group>"; };
+		751A31981AC0B8A2003E8536 /* libAkDelayFX.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAkDelayFX.a; path = Source/libs/Wwise/lib/libAkDelayFX.a; sourceTree = "<group>"; };
+		751A31991AC0B8A2003E8536 /* libAkExpanderFX.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAkExpanderFX.a; path = Source/libs/Wwise/lib/libAkExpanderFX.a; sourceTree = "<group>"; };
+		751A319A1AC0B8A2003E8536 /* libAkFlangerFX.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAkFlangerFX.a; path = Source/libs/Wwise/lib/libAkFlangerFX.a; sourceTree = "<group>"; };
+		751A319B1AC0B8A2003E8536 /* libAkGainFX.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAkGainFX.a; path = Source/libs/Wwise/lib/libAkGainFX.a; sourceTree = "<group>"; };
+		751A319C1AC0B8A2003E8536 /* libAkGuitarDistortionFX.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAkGuitarDistortionFX.a; path = Source/libs/Wwise/lib/libAkGuitarDistortionFX.a; sourceTree = "<group>"; };
+		751A319D1AC0B8A2003E8536 /* libAkHarmonizerFX.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAkHarmonizerFX.a; path = Source/libs/Wwise/lib/libAkHarmonizerFX.a; sourceTree = "<group>"; };
+		751A319E1AC0B8A2003E8536 /* libAkMatrixReverbFX.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAkMatrixReverbFX.a; path = Source/libs/Wwise/lib/libAkMatrixReverbFX.a; sourceTree = "<group>"; };
+		751A319F1AC0B8A3003E8536 /* libAkMemoryMgr.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAkMemoryMgr.a; path = Source/libs/Wwise/lib/libAkMemoryMgr.a; sourceTree = "<group>"; };
+		751A31A01AC0B8A3003E8536 /* libAkMeterFX.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAkMeterFX.a; path = Source/libs/Wwise/lib/libAkMeterFX.a; sourceTree = "<group>"; };
+		751A31A11AC0B8A3003E8536 /* libAkMusicEngine.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAkMusicEngine.a; path = Source/libs/Wwise/lib/libAkMusicEngine.a; sourceTree = "<group>"; };
+		751A31A21AC0B8A3003E8536 /* libAkParametricEQFX.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAkParametricEQFX.a; path = Source/libs/Wwise/lib/libAkParametricEQFX.a; sourceTree = "<group>"; };
+		751A31A31AC0B8A3003E8536 /* libAkPeakLimiterFX.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAkPeakLimiterFX.a; path = Source/libs/Wwise/lib/libAkPeakLimiterFX.a; sourceTree = "<group>"; };
+		751A31A41AC0B8A3003E8536 /* libAkPitchShifterFX.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAkPitchShifterFX.a; path = Source/libs/Wwise/lib/libAkPitchShifterFX.a; sourceTree = "<group>"; };
+		751A31A51AC0B8A3003E8536 /* libAkRoomVerbFX.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAkRoomVerbFX.a; path = Source/libs/Wwise/lib/libAkRoomVerbFX.a; sourceTree = "<group>"; };
+		751A31A61AC0B8A3003E8536 /* libAkSilenceSource.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAkSilenceSource.a; path = Source/libs/Wwise/lib/libAkSilenceSource.a; sourceTree = "<group>"; };
+		751A31A71AC0B8A3003E8536 /* libAkSineSource.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAkSineSource.a; path = Source/libs/Wwise/lib/libAkSineSource.a; sourceTree = "<group>"; };
+		751A31A81AC0B8A3003E8536 /* libAkSoundEngine.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAkSoundEngine.a; path = Source/libs/Wwise/lib/libAkSoundEngine.a; sourceTree = "<group>"; };
+		751A31A91AC0B8A3003E8536 /* libAkSoundSeedImpactFX.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAkSoundSeedImpactFX.a; path = Source/libs/Wwise/lib/libAkSoundSeedImpactFX.a; sourceTree = "<group>"; };
+		751A31AA1AC0B8A3003E8536 /* libAkSoundSeedWind.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAkSoundSeedWind.a; path = Source/libs/Wwise/lib/libAkSoundSeedWind.a; sourceTree = "<group>"; };
+		751A31AB1AC0B8A3003E8536 /* libAkSoundSeedWoosh.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAkSoundSeedWoosh.a; path = Source/libs/Wwise/lib/libAkSoundSeedWoosh.a; sourceTree = "<group>"; };
+		751A31AC1AC0B8A3003E8536 /* libAkStereoDelayFX.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAkStereoDelayFX.a; path = Source/libs/Wwise/lib/libAkStereoDelayFX.a; sourceTree = "<group>"; };
+		751A31AD1AC0B8A3003E8536 /* libAkStreamMgr.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAkStreamMgr.a; path = Source/libs/Wwise/lib/libAkStreamMgr.a; sourceTree = "<group>"; };
+		751A31AE1AC0B8A3003E8536 /* libAkSynthOne.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAkSynthOne.a; path = Source/libs/Wwise/lib/libAkSynthOne.a; sourceTree = "<group>"; };
+		751A31AF1AC0B8A3003E8536 /* libAkTimeStretchFX.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAkTimeStretchFX.a; path = Source/libs/Wwise/lib/libAkTimeStretchFX.a; sourceTree = "<group>"; };
+		751A31B01AC0B8A3003E8536 /* libAkToneSource.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAkToneSource.a; path = Source/libs/Wwise/lib/libAkToneSource.a; sourceTree = "<group>"; };
+		751A31B11AC0B8A3003E8536 /* libAkTremoloFX.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAkTremoloFX.a; path = Source/libs/Wwise/lib/libAkTremoloFX.a; sourceTree = "<group>"; };
+		751A31B21AC0B8A3003E8536 /* libAkVorbisDecoder.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAkVorbisDecoder.a; path = Source/libs/Wwise/lib/libAkVorbisDecoder.a; sourceTree = "<group>"; };
+		751A31B31AC0B8A3003E8536 /* libAstoundsoundExpanderFX.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAstoundsoundExpanderFX.a; path = Source/libs/Wwise/lib/libAstoundsoundExpanderFX.a; sourceTree = "<group>"; };
+		751A31B41AC0B8A3003E8536 /* libAstoundsoundFolddownFX.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAstoundsoundFolddownFX.a; path = Source/libs/Wwise/lib/libAstoundsoundFolddownFX.a; sourceTree = "<group>"; };
+		751A31B51AC0B8A3003E8536 /* libAstoundsoundRTIFX.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAstoundsoundRTIFX.a; path = Source/libs/Wwise/lib/libAstoundsoundRTIFX.a; sourceTree = "<group>"; };
+		751A31B61AC0B8A3003E8536 /* libAstoundsoundShared.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAstoundsoundShared.a; path = Source/libs/Wwise/lib/libAstoundsoundShared.a; sourceTree = "<group>"; };
+		751A31B71AC0B8A3003E8536 /* libCommunicationCentral.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libCommunicationCentral.a; path = Source/libs/Wwise/lib/libCommunicationCentral.a; sourceTree = "<group>"; };
+		751A31B81AC0B8A3003E8536 /* libMcDSPFutzBoxFX.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libMcDSPFutzBoxFX.a; path = Source/libs/Wwise/lib/libMcDSPFutzBoxFX.a; sourceTree = "<group>"; };
+		751A31B91AC0B8A3003E8536 /* libMcDSPLimiterFX.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libMcDSPLimiterFX.a; path = Source/libs/Wwise/lib/libMcDSPLimiterFX.a; sourceTree = "<group>"; };
+		751A31E11AC0B96B003E8536 /* Init.bnk */ = {isa = PBXFileReference; lastKnownFileType = file; path = Init.bnk; sourceTree = "<group>"; };
+		751A31E21AC0B96B003E8536 /* Init.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Init.txt; sourceTree = "<group>"; };
+		751A321C1AC0CC05003E8536 /* GGSoundbank.bnk */ = {isa = PBXFileReference; lastKnownFileType = file; path = GGSoundbank.bnk; sourceTree = "<group>"; };
+		751A321D1AC0CC05003E8536 /* GGSoundbank.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GGSoundbank.txt; sourceTree = "<group>"; };
 		751BCCD71A38D9D500F11D3D /* GGLandscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GGLandscape.png; sourceTree = "<group>"; };
 		751BCCD81A38D9D500F11D3D /* GGPortrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GGPortrait.png; sourceTree = "<group>"; };
 		751BCCDB1A38E0E100F11D3D /* Icon-40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-40.png"; sourceTree = "<group>"; };
@@ -386,6 +517,44 @@
 				7A4036EC19DE3F90007B6E8F /* QuartzCore.framework in Frameworks */,
 				7A4036F119DE3F9C007B6E8F /* Foundation.framework in Frameworks */,
 				7A4036F219DE3F9E007B6E8F /* CoreGraphics.framework in Frameworks */,
+				751A31BA1AC0B8A3003E8536 /* libAkAACDecoder.a in Frameworks */,
+				751A31BB1AC0B8A3003E8536 /* libAkAudioInputSource.a in Frameworks */,
+				751A31BC1AC0B8A3003E8536 /* libAkCompressorFX.a in Frameworks */,
+				751A31BD1AC0B8A3003E8536 /* libAkConvolutionReverbFX.a in Frameworks */,
+				751A31BE1AC0B8A3003E8536 /* libAkDelayFX.a in Frameworks */,
+				751A31BF1AC0B8A3003E8536 /* libAkExpanderFX.a in Frameworks */,
+				751A31C01AC0B8A3003E8536 /* libAkFlangerFX.a in Frameworks */,
+				751A31C11AC0B8A3003E8536 /* libAkGainFX.a in Frameworks */,
+				751A31C21AC0B8A3003E8536 /* libAkGuitarDistortionFX.a in Frameworks */,
+				751A31C31AC0B8A3003E8536 /* libAkHarmonizerFX.a in Frameworks */,
+				751A31C41AC0B8A3003E8536 /* libAkMatrixReverbFX.a in Frameworks */,
+				751A31C51AC0B8A3003E8536 /* libAkMemoryMgr.a in Frameworks */,
+				751A31C61AC0B8A3003E8536 /* libAkMeterFX.a in Frameworks */,
+				751A31C71AC0B8A3003E8536 /* libAkMusicEngine.a in Frameworks */,
+				751A31C81AC0B8A3003E8536 /* libAkParametricEQFX.a in Frameworks */,
+				751A31C91AC0B8A3003E8536 /* libAkPeakLimiterFX.a in Frameworks */,
+				751A31CA1AC0B8A3003E8536 /* libAkPitchShifterFX.a in Frameworks */,
+				751A31CB1AC0B8A3003E8536 /* libAkRoomVerbFX.a in Frameworks */,
+				751A31CC1AC0B8A3003E8536 /* libAkSilenceSource.a in Frameworks */,
+				751A31CD1AC0B8A3003E8536 /* libAkSineSource.a in Frameworks */,
+				751A31CE1AC0B8A3003E8536 /* libAkSoundEngine.a in Frameworks */,
+				751A31CF1AC0B8A3003E8536 /* libAkSoundSeedImpactFX.a in Frameworks */,
+				751A31D01AC0B8A3003E8536 /* libAkSoundSeedWind.a in Frameworks */,
+				751A31D11AC0B8A3003E8536 /* libAkSoundSeedWoosh.a in Frameworks */,
+				751A31D21AC0B8A3003E8536 /* libAkStereoDelayFX.a in Frameworks */,
+				751A31D31AC0B8A3003E8536 /* libAkStreamMgr.a in Frameworks */,
+				751A31D41AC0B8A3003E8536 /* libAkSynthOne.a in Frameworks */,
+				751A31D51AC0B8A3003E8536 /* libAkTimeStretchFX.a in Frameworks */,
+				751A31D61AC0B8A3003E8536 /* libAkToneSource.a in Frameworks */,
+				751A31D71AC0B8A3003E8536 /* libAkTremoloFX.a in Frameworks */,
+				751A31D81AC0B8A3003E8536 /* libAkVorbisDecoder.a in Frameworks */,
+				751A31D91AC0B8A3003E8536 /* libAstoundsoundExpanderFX.a in Frameworks */,
+				751A31DA1AC0B8A3003E8536 /* libAstoundsoundFolddownFX.a in Frameworks */,
+				751A31DB1AC0B8A3003E8536 /* libAstoundsoundRTIFX.a in Frameworks */,
+				751A31DC1AC0B8A3003E8536 /* libAstoundsoundShared.a in Frameworks */,
+				751A31DD1AC0B8A3003E8536 /* libCommunicationCentral.a in Frameworks */,
+				751A31DE1AC0B8A3003E8536 /* libMcDSPFutzBoxFX.a in Frameworks */,
+				751A31DF1AC0B8A3003E8536 /* libMcDSPLimiterFX.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -469,6 +638,46 @@
 				5B121015197483EE004C1E1D /* ic_launcher.png */,
 			);
 			path = "drawable-xxhdpi";
+			sourceTree = "<group>";
+		};
+		751A316C1AC0B824003E8536 /* WWise LowLevelIO */ = {
+			isa = PBXGroup;
+			children = (
+				751A316D1AC0B824003E8536 /* AkDefaultIOHookBlocking.cpp */,
+				751A316E1AC0B824003E8536 /* AkDefaultIOHookBlocking.h */,
+				751A316F1AC0B824003E8536 /* AkDefaultIOHookDeferred.cpp */,
+				751A31701AC0B824003E8536 /* AkDefaultIOHookDeferred.h */,
+				751A31711AC0B824003E8536 /* AkDefaultLowLevelIODispatcher.cpp */,
+				751A31721AC0B824003E8536 /* AkDefaultLowLevelIODispatcher.h */,
+				751A31731AC0B824003E8536 /* AkFileHelpers.h */,
+				751A31741AC0B824003E8536 /* AkFileLocationBase.cpp */,
+				751A31751AC0B824003E8536 /* AkFileLocationBase.h */,
+				751A31761AC0B824003E8536 /* AkFilePackage.cpp */,
+				751A31771AC0B824003E8536 /* AkFilePackage.h */,
+				751A31781AC0B824003E8536 /* AkFilePackageLowLevelIO.h */,
+				751A31791AC0B824003E8536 /* AkFilePackageLowLevelIO.inl */,
+				751A317A1AC0B824003E8536 /* AkFilePackageLowLevelIOBlocking.h */,
+				751A317B1AC0B824003E8536 /* AkFilePackageLowLevelIODeferred.h */,
+				751A317C1AC0B824003E8536 /* AkFilePackageLUT.cpp */,
+				751A317D1AC0B824003E8536 /* AkFilePackageLUT.h */,
+				751A317E1AC0B824003E8536 /* AkMultipleFileLocation.h */,
+				751A317F1AC0B824003E8536 /* AkMultipleFileLocation.inl */,
+				751A31801AC0B824003E8536 /* stdafx.cpp */,
+				751A31811AC0B824003E8536 /* stdafx.h */,
+			);
+			name = "WWise LowLevelIO";
+			path = Source/libs/Wwise/LowLevelIO;
+			sourceTree = "<group>";
+		};
+		751A31E01AC0B96B003E8536 /* WwiseContent */ = {
+			isa = PBXGroup;
+			children = (
+				751A31E11AC0B96B003E8536 /* Init.bnk */,
+				751A31E21AC0B96B003E8536 /* Init.txt */,
+				751A321C1AC0CC05003E8536 /* GGSoundbank.bnk */,
+				751A321D1AC0CC05003E8536 /* GGSoundbank.txt */,
+			);
+			path = WwiseContent;
 			sourceTree = "<group>";
 		};
 		7A40362019DDEF0D007B6E8F /* Platforms */ = {
@@ -597,6 +806,8 @@
 				D3EA632B1A0496EC00325F0F /* UI */,
 				75058A2F19FEC27F001AA9C6 /* GameScene.h */,
 				75058A3019FEC27F001AA9C6 /* GameScene.m */,
+				751A31671AC0B78F003E8536 /* CCWwise.h */,
+				751A31681AC0B78F003E8536 /* CCWwise.mm */,
 				D3E4BCAC1A80AD2400FF2FA5 /* GameController.h */,
 				D3E4BCA61A80AD0900FF2FA5 /* GameController.m */,
 				D31D3DCE1A0041A80085DB5B /* Controls.h */,
@@ -658,6 +869,7 @@
 			children = (
 				B737893C1807616C0076A88C /* Source */,
 				B77F1B4617B978D7009739AE /* Resources */,
+				751A316C1AC0B824003E8536 /* WWise LowLevelIO */,
 				9222E2B918734FF800A246C7 /* libs */,
 				B77F1CCF17B978D8009739AE /* Supporting Files */,
 				B77F1B3017B978D7009739AE /* Frameworks */,
@@ -678,6 +890,44 @@
 		B77F1B3017B978D7009739AE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				751A31941AC0B8A2003E8536 /* libAkAACDecoder.a */,
+				751A31951AC0B8A2003E8536 /* libAkAudioInputSource.a */,
+				751A31961AC0B8A2003E8536 /* libAkCompressorFX.a */,
+				751A31971AC0B8A2003E8536 /* libAkConvolutionReverbFX.a */,
+				751A31981AC0B8A2003E8536 /* libAkDelayFX.a */,
+				751A31991AC0B8A2003E8536 /* libAkExpanderFX.a */,
+				751A319A1AC0B8A2003E8536 /* libAkFlangerFX.a */,
+				751A319B1AC0B8A2003E8536 /* libAkGainFX.a */,
+				751A319C1AC0B8A2003E8536 /* libAkGuitarDistortionFX.a */,
+				751A319D1AC0B8A2003E8536 /* libAkHarmonizerFX.a */,
+				751A319E1AC0B8A2003E8536 /* libAkMatrixReverbFX.a */,
+				751A319F1AC0B8A3003E8536 /* libAkMemoryMgr.a */,
+				751A31A01AC0B8A3003E8536 /* libAkMeterFX.a */,
+				751A31A11AC0B8A3003E8536 /* libAkMusicEngine.a */,
+				751A31A21AC0B8A3003E8536 /* libAkParametricEQFX.a */,
+				751A31A31AC0B8A3003E8536 /* libAkPeakLimiterFX.a */,
+				751A31A41AC0B8A3003E8536 /* libAkPitchShifterFX.a */,
+				751A31A51AC0B8A3003E8536 /* libAkRoomVerbFX.a */,
+				751A31A61AC0B8A3003E8536 /* libAkSilenceSource.a */,
+				751A31A71AC0B8A3003E8536 /* libAkSineSource.a */,
+				751A31A81AC0B8A3003E8536 /* libAkSoundEngine.a */,
+				751A31A91AC0B8A3003E8536 /* libAkSoundSeedImpactFX.a */,
+				751A31AA1AC0B8A3003E8536 /* libAkSoundSeedWind.a */,
+				751A31AB1AC0B8A3003E8536 /* libAkSoundSeedWoosh.a */,
+				751A31AC1AC0B8A3003E8536 /* libAkStereoDelayFX.a */,
+				751A31AD1AC0B8A3003E8536 /* libAkStreamMgr.a */,
+				751A31AE1AC0B8A3003E8536 /* libAkSynthOne.a */,
+				751A31AF1AC0B8A3003E8536 /* libAkTimeStretchFX.a */,
+				751A31B01AC0B8A3003E8536 /* libAkToneSource.a */,
+				751A31B11AC0B8A3003E8536 /* libAkTremoloFX.a */,
+				751A31B21AC0B8A3003E8536 /* libAkVorbisDecoder.a */,
+				751A31B31AC0B8A3003E8536 /* libAstoundsoundExpanderFX.a */,
+				751A31B41AC0B8A3003E8536 /* libAstoundsoundFolddownFX.a */,
+				751A31B51AC0B8A3003E8536 /* libAstoundsoundRTIFX.a */,
+				751A31B61AC0B8A3003E8536 /* libAstoundsoundShared.a */,
+				751A31B71AC0B8A3003E8536 /* libCommunicationCentral.a */,
+				751A31B81AC0B8A3003E8536 /* libMcDSPFutzBoxFX.a */,
+				751A31B91AC0B8A3003E8536 /* libMcDSPLimiterFX.a */,
 				D3416D5E1A7ED2F200BA4018 /* GLActivityKit.framework */,
 				D3416D581A7ED26E00BA4018 /* CoreJava.framework */,
 				D3416D591A7ED26E00BA4018 /* JavaFoundation.framework */,
@@ -707,6 +957,7 @@
 		B77F1B4617B978D7009739AE /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				751A31E01AC0B96B003E8536 /* WwiseContent */,
 				D34E999E1A82ABFD002FE5D9 /* NebulaClouds.png */,
 				D34E999F1A82ABFD002FE5D9 /* Starfield.png */,
 				D3450BC61A0213FD00E63B3A /* TempMusic.aac */,
@@ -940,18 +1191,24 @@
 			files = (
 				D3EAD2C61A00B448002AA0D2 /* NebulaDebug.vsh in Resources */,
 				B74895FE1A8BE4670064DB83 /* CCEffectLine.frag in Resources */,
+				751A318D1AC0B824003E8536 /* AkFilePackageLowLevelIO.inl in Resources */,
+				751A31E61AC0B96B003E8536 /* Init.bnk in Resources */,
 				D3450BC91A0213FD00E63B3A /* TempMusic.aac in Resources */,
 				D3A7E8F419FDCABE00695965 /* Nebula.vsh in Resources */,
 				D3ED616C19FF3B7400DF3A43 /* BurnSprite.fsh in Resources */,
 				D3450BC11A01FEB300E63B3A /* joystick.png in Resources */,
 				D3937FCA19FE1C410074009E /* DistortionParticle.vsh in Resources */,
 				D3937FC419FE1B2A0074009E /* DistortionParticle.fsh in Resources */,
+				751A31E81AC0B96B003E8536 /* Init.txt in Resources */,
+				751A32211AC0CC0B003E8536 /* GGSoundbank.bnk in Resources */,
 				D3450BC01A01FEB300E63B3A /* joystick.plist in Resources */,
 				D3A7E8F819FDCB5E00695965 /* Nebula.fsh in Resources */,
 				D3ED617019FF3B8000DF3A43 /* BurnSprite.vsh in Resources */,
 				7A59498B19E38E4A00F65F90 /* MainMenu.xib in Resources */,
+				751A32221AC0CC0B003E8536 /* GGSoundbank.txt in Resources */,
 				B748960D1A8BE4670064DB83 /* effects.png in Resources */,
 				D3A7E8E419FDC88600695965 /* NebulaDepth.png in Resources */,
+				751A31911AC0B824003E8536 /* AkMultipleFileLocation.inl in Resources */,
 				D34E99A21A82ABFD002FE5D9 /* NebulaClouds.png in Resources */,
 				D3EAD2C31A00B448002AA0D2 /* NebulaDebug.fsh in Resources */,
 				D34E99A51A82ABFD002FE5D9 /* Starfield.png in Resources */,
@@ -1010,6 +1267,7 @@
 				751BCCF71A38E0E100F11D3D /* Icon-Small@3x.png in Resources */,
 				B737893B180761570076A88C /* Published-iOS in Resources */,
 				751BCCF21A38E0E100F11D3D /* Icon-60@3x.png in Resources */,
+				751A318C1AC0B824003E8536 /* AkFilePackageLowLevelIO.inl in Resources */,
 				D3ED616A19FF3B7400DF3A43 /* BurnSprite.fsh in Resources */,
 				B748960B1A8BE4670064DB83 /* effects.png in Resources */,
 				751BCCF91A38E0E100F11D3D /* Icon-72.png in Resources */,
@@ -1019,15 +1277,20 @@
 				D3A7E8F619FDCB5E00695965 /* Nebula.fsh in Resources */,
 				751BCCF01A38E0E100F11D3D /* Icon-40@3x.png in Resources */,
 				D3EAD2C11A00B448002AA0D2 /* NebulaDebug.fsh in Resources */,
+				751A321F1AC0CC05003E8536 /* GGSoundbank.txt in Resources */,
 				D3450BC71A0213FD00E63B3A /* TempMusic.aac in Resources */,
 				751BCCF11A38E0E100F11D3D /* Icon-60@2x.png in Resources */,
 				751BCCEF1A38E0E100F11D3D /* Icon-40@2x.png in Resources */,
+				751A31E51AC0B96B003E8536 /* Init.bnk in Resources */,
 				D3450BB81A01FEA100E63B3A /* joystick.png in Resources */,
 				751BCCF41A38E0E100F11D3D /* Icon-76@2x.png in Resources */,
+				751A31901AC0B824003E8536 /* AkMultipleFileLocation.inl in Resources */,
 				751BCD001A38E0E100F11D3D /* iTunesArtwork@2x.png in Resources */,
+				751A321E1AC0CC05003E8536 /* GGSoundbank.bnk in Resources */,
 				751BCCFB1A38E0E100F11D3D /* Icon-Small-50.png in Resources */,
 				751BCCFD1A38E0E100F11D3D /* Icon.png in Resources */,
 				751BCCF81A38E0E100F11D3D /* Icon-60.png in Resources */,
+				751A31E71AC0B96B003E8536 /* Init.txt in Resources */,
 				D3383ACE1A09BAD900E13478 /* Launch Screen.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1088,12 +1351,16 @@
 				D3450BCE1A02EB8500E63B3A /* Rocket.m in Sources */,
 				75058A5419FEE7B7001AA9C6 /* EnemyShip.m in Sources */,
 				B748960A1A8BE4670064DB83 /* CCEffectLineSegment.m in Sources */,
+				751A31871AC0B824003E8536 /* AkDefaultLowLevelIODispatcher.cpp in Sources */,
+				751A31931AC0B824003E8536 /* stdafx.cpp in Sources */,
 				75058A4919FECF95001AA9C6 /* Bullet.m in Sources */,
 				D3ED617219FF57A100DF3A43 /* PlayerShip.m in Sources */,
 				B70F40C61A8D245B0016F2A3 /* NovaBombButtonNode.m in Sources */,
+				751A31851AC0B824003E8536 /* AkDefaultIOHookDeferred.cpp in Sources */,
 				B795D7261A9410AD008E5B52 /* MadeWithSB.m in Sources */,
 				D3450BBD1A01FEAD00E63B3A /* FancyJoystick.m in Sources */,
 				B7E4168F1A8C213700825FE5 /* ScoreBoard.m in Sources */,
+				751A318F1AC0B824003E8536 /* AkFilePackageLUT.cpp in Sources */,
 				D3A7E8DC19FDC86000695965 /* NebulaBackground.m in Sources */,
 				D31D3DCD1A00418C0085DB5B /* Controls.m in Sources */,
 				B74896011A8BE4670064DB83 /* CCEffectLine.m in Sources */,
@@ -1101,13 +1368,17 @@
 				D3EAD2BD1A00A855002AA0D2 /* PauseScene.m in Sources */,
 				B74896071A8BE4670064DB83 /* CCEffectLineFactory.m in Sources */,
 				758488621A02C24A005F0B48 /* ShipSelectionScene.m in Sources */,
+				751A31891AC0B824003E8536 /* AkFileLocationBase.cpp in Sources */,
 				75058A3419FEC27F001AA9C6 /* GameScene.m in Sources */,
 				D3450BD81A0395F200E63B3A /* SpaceBucks.m in Sources */,
 				7A40360419DDEE84007B6E8F /* main.m in Sources */,
 				D3CCBE0A1A04BBBF0082EA65 /* BurnTransition.m in Sources */,
 				D3ED616719FF327C00DF3A43 /* BurnSprite.m in Sources */,
 				7A59498E19E3941300F65F90 /* AppDelegate.m in Sources */,
+				751A31831AC0B824003E8536 /* AkDefaultIOHookBlocking.cpp in Sources */,
 				D3E4BCA91A80AD0900FF2FA5 /* GameController.m in Sources */,
+				751A318B1AC0B824003E8536 /* AkFilePackage.cpp in Sources */,
+				751A316A1AC0B78F003E8536 /* CCWwise.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1148,12 +1419,16 @@
 				D3450BB61A01FEA100E63B3A /* FancyJoystick.m in Sources */,
 				D3A7E8DA19FDC86000695965 /* NebulaBackground.m in Sources */,
 				B74896081A8BE4670064DB83 /* CCEffectLineSegment.m in Sources */,
+				751A31861AC0B824003E8536 /* AkDefaultLowLevelIODispatcher.cpp in Sources */,
+				751A31921AC0B824003E8536 /* stdafx.cpp in Sources */,
 				D3ED616519FF327C00DF3A43 /* BurnSprite.m in Sources */,
 				75058A5219FEE7B7001AA9C6 /* EnemyShip.m in Sources */,
 				B70F40C41A8D245B0016F2A3 /* NovaBombButtonNode.m in Sources */,
+				751A31841AC0B824003E8536 /* AkDefaultIOHookDeferred.cpp in Sources */,
 				B795D7241A9410AD008E5B52 /* MadeWithSB.m in Sources */,
 				D31D3DCB1A00418C0085DB5B /* Controls.m in Sources */,
 				B7E4168D1A8C213700825FE5 /* ScoreBoard.m in Sources */,
+				751A318E1AC0B824003E8536 /* AkFilePackageLUT.cpp in Sources */,
 				B73789871807631A0076A88C /* main.m in Sources */,
 				75058A4719FECF95001AA9C6 /* Bullet.m in Sources */,
 				B74895FF1A8BE4670064DB83 /* CCEffectLine.m in Sources */,
@@ -1161,13 +1436,17 @@
 				D3EAD2BB1A009F8D002AA0D2 /* PauseScene.m in Sources */,
 				B74896051A8BE4670064DB83 /* CCEffectLineFactory.m in Sources */,
 				758488601A02C24A005F0B48 /* ShipSelectionScene.m in Sources */,
+				751A31881AC0B824003E8536 /* AkFileLocationBase.cpp in Sources */,
 				7A046D8C19E8A20E004C4763 /* MainMenu.m in Sources */,
 				75058A3119FEC27F001AA9C6 /* GameScene.m in Sources */,
 				5B121038197487F2004C1E1D /* AppDelegate.m in Sources */,
 				D3EA63301A04973D00325F0F /* BurnTransition.m in Sources */,
 				75058A4219FECE64001AA9C6 /* PlayerShip.m in Sources */,
 				D3450BCC1A02EB8500E63B3A /* Rocket.m in Sources */,
+				751A31821AC0B824003E8536 /* AkDefaultIOHookBlocking.cpp in Sources */,
 				D3E4BCA71A80AD0900FF2FA5 /* GameController.m in Sources */,
+				751A318A1AC0B824003E8536 /* AkFilePackage.cpp in Sources */,
+				751A31691AC0B78F003E8536 /* CCWwise.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1223,9 +1502,14 @@
 					"Source/libs/cocos2d-iphone/external/Chipmunk/include",
 					"\"Source/libs/cocos2d-iphone/cocos2d-ui\"/**",
 					"\"Source/libs/cocos2d-iphone/external/ObjectAL\"/**",
+					"\"$(SRCROOT)/Source/libs/Wwise/include\"",
 				);
 				INFOPLIST_FILE = Source/Resources/Platforms/Mac/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Source/libs/Wwise/lib",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = (
@@ -1268,9 +1552,14 @@
 					"Source/libs/cocos2d-iphone/external/Chipmunk/include",
 					"\"Source/libs/cocos2d-iphone/cocos2d-ui\"/**",
 					"\"Source/libs/cocos2d-iphone/external/ObjectAL\"/**",
+					"\"$(SRCROOT)/Source/libs/Wwise/include\"",
 				);
 				INFOPLIST_FILE = Source/Resources/Platforms/Mac/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Source/libs/Wwise/lib",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = (

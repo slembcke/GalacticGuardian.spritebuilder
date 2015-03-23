@@ -68,10 +68,10 @@
 		DefaultsSoundKey: @(1.0),
 	}];
 	
-	[OALSimpleAudio sharedInstance].bgVolume = [defaults floatForKey:DefaultsMusicKey];
-	[OALSimpleAudio sharedInstance].effectsVolume = [defaults floatForKey:DefaultsSoundKey];
+//	[OALSimpleAudio sharedInstance].bgVolume = [defaults floatForKey:DefaultsMusicKey];
+//	[OALSimpleAudio sharedInstance].effectsVolume = [defaults floatForKey:DefaultsSoundKey];
 	
-	[[OALSimpleAudio sharedInstance] playBg:@"TempMusic.aac" loop:YES];
+	//[[OALSimpleAudio sharedInstance] playBg:@"TempMusic.aac" loop:YES];
 }
 
 -(void)didLoadFromCCB

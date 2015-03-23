@@ -42,6 +42,7 @@
 #import "CCDirector_Private.h"
 #import "CCTexture_Private.h"
 
+#import "CCWwise.h"
 
 @interface GameScene()
 @property(nonatomic, assign) int novaBombs;
@@ -92,7 +93,11 @@
 -(instancetype)initWithShipType:(ShipType) shipType
 {
 	if((self = [super init])){
-		CCNode *hud = [CCBReader load:@"HUD" owner:self];
+
+        CCWwise *w = [CCWwise sharedManager];
+        [w registerGameObject:self];
+        
+        CCNode *hud = [CCBReader load:@"HUD" owner:self];
 		[self addChild:hud z:Z_HUD];
 		
 		self.spaceBucks = 0;
@@ -518,9 +523,11 @@ const float RocketAimLimit = 75.0f;
 	[playerShip bulletFlash:bullet.bulletColor];
 	
 	// Make some noise. Add a little chromatically tuned pitch bending to make it sound more musical.
-	int half_steps = (arc4random()%(2*4 + 1) - 4);
-	float pitch = pow(2.0f, half_steps/12.0f);
-	[[OALSimpleAudio sharedInstance] playEffect:@"TempSounds/Laser.wav" volume:0.25 pitch:pitch pan:0.0 loop:NO];
+//	int half_steps = (arc4random()%(2*4 + 1) - 4);
+//	float pitch = pow(2.0f, half_steps/12.0f);
+    [[CCWwise sharedManager] postEvent:@"PlayerFireBullet" forGameObject:self];
+//
+//    [[OALSimpleAudio sharedInstance] playEffect:@"TempSounds/Laser.wav" volume:0.25 pitch:pitch pan:0.0 loop:NO];
 	
 	if(_rocketReticle.percentage == 100.0){
 		[self fireRocket:playerShip];
@@ -893,7 +900,8 @@ static const float PLAYER_MAX_DIST = 75;
 			break;
 	}
 	
-	[[OALSimpleAudio sharedInstance] playEffect:@"TempSounds/LevelUp.wav" volume:0.8 pitch:1.0 pan:0.0 loop:NO];
+    [[CCWwise sharedManager] postEvent:@"LevelUp" forGameObject:self];
+
 }
 
 // Find a random position just outside the game area's bounds to spawn a group of enemies.
@@ -1112,7 +1120,9 @@ static const float MaxBarWidth = 80.0;
 	[pickup removeFromParent];
 	
 	[self drawFlash:pickup.position withImage:pickup.flashImage];
-	[[OALSimpleAudio sharedInstance] playEffect:@"TempSounds/Pickup.wav" volume:0.25 pitch:1.0 pan:0.0 loop:NO];
+    [[CCWwise sharedManager] postEvent:@"Pickup" forGameObject:self];
+
+    //[[OALSimpleAudio sharedInstance] playEffect:@"TempSounds/Pickup.wav" volume:0.25 pitch:1.0 pan:0.0 loop:NO];
 	
 	int amount = [pickup amount];
 	_points += amount;

@@ -169,7 +169,7 @@ static const float RocketClusterRange = 25.0;
 	GameScene *scene = (GameScene *)parent.scene;
 	[scene splashDamageAt:pos radius:RocketSplash damage:RocketDamage[_level]];
 	
-	[[OALSimpleAudio sharedInstance] playEffect:@"TempSounds/Explosion.wav" volume:2.0 pitch:scene.pitchScale pan:0.0 loop:NO];
+//	[[OALSimpleAudio sharedInstance] playEffect:@"TempSounds/Explosion.wav" volume:2.0 pitch:scene.pitchScale pan:0.0 loop:NO];
 }
 
 -(void)destroy

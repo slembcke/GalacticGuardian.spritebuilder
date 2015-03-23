@@ -1,0 +1,8 @@
+Event	ID	Name			Wwise Object Path	Notes
+	251872042	PlayerFireBullet			\Default Work Unit\PlayerFireBullet	
+	3978245845	Pickup			\Default Work Unit\Pickup	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	254400515	Pickup	C:\users\crossover\My Documents\WwiseProjects\GalacticGuardianWWise\.cache\Mac\SFX\Pickup_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\Pickup		8256
+	1058943047	Laser	C:\users\crossover\My Documents\WwiseProjects\GalacticGuardianWWise\.cache\Mac\SFX\Laser_DDC98EF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\Laser		11328
+

@@ -82,15 +82,15 @@
 {
 	[[NSUserDefaults standardUserDefaults] setFloat:slider.sliderValue forKey:DefaultsMusicKey];
 	
-	[OALSimpleAudio sharedInstance].bgVolume = slider.sliderValue;
+//	[OALSimpleAudio sharedInstance].bgVolume = slider.sliderValue;
 }
 
 -(void)soundVolumeChanged:(CCSlider *)slider
 {
 	[[NSUserDefaults standardUserDefaults] setFloat:slider.sliderValue forKey:DefaultsSoundKey];
 	
-	[OALSimpleAudio sharedInstance].effectsVolume = slider.sliderValue;
-	[[OALSimpleAudio sharedInstance] playEffect:@"TempSounds/Laser.wav" volume:0.25 pitch:1.0 pan:0.0 loop:NO];
+//	[OALSimpleAudio sharedInstance].effectsVolume = slider.sliderValue;
+//	[[OALSimpleAudio sharedInstance] playEffect:@"TempSounds/Laser.wav" volume:0.25 pitch:1.0 pan:0.0 loop:NO];
 }
 
 -(void)toggleDemoMode:(CCButton *)button
