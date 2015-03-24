@@ -93,10 +93,9 @@
 	[[CCSpriteFrameCache sharedSpriteFrameCache] loadSpriteFrameLookupDictionaryFromFile:@"spriteFrameFileList.plist"];
 	
     
-    CCWwise *w = [CCWwise sharedManager];
+    CCWwise *w = [CCWwise sharedManager];    
     [w loadBank:@"Init.bnk"];
     [w loadBank:@"GGSoundbank.bnk"];
-    
     
 	[MainMenu class];
 	[director runWithScene:[[GameScene alloc] initWithShipType:Ship_Herald]];

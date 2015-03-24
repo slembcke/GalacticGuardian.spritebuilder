@@ -153,7 +153,8 @@ static CCWwise *shared;
         }
         
         NSLog(@"Successfully started wwise.");
-    }
+        
+        }
     
     return shared;
 }

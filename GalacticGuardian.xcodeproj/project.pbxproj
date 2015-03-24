@@ -78,14 +78,6 @@
 		751A31DD1AC0B8A3003E8536 /* libCommunicationCentral.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 751A31B71AC0B8A3003E8536 /* libCommunicationCentral.a */; };
 		751A31DE1AC0B8A3003E8536 /* libMcDSPFutzBoxFX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 751A31B81AC0B8A3003E8536 /* libMcDSPFutzBoxFX.a */; };
 		751A31DF1AC0B8A3003E8536 /* libMcDSPLimiterFX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 751A31B91AC0B8A3003E8536 /* libMcDSPLimiterFX.a */; };
-		751A31E51AC0B96B003E8536 /* Init.bnk in Resources */ = {isa = PBXBuildFile; fileRef = 751A31E11AC0B96B003E8536 /* Init.bnk */; };
-		751A31E61AC0B96B003E8536 /* Init.bnk in Resources */ = {isa = PBXBuildFile; fileRef = 751A31E11AC0B96B003E8536 /* Init.bnk */; };
-		751A31E71AC0B96B003E8536 /* Init.txt in Resources */ = {isa = PBXBuildFile; fileRef = 751A31E21AC0B96B003E8536 /* Init.txt */; };
-		751A31E81AC0B96B003E8536 /* Init.txt in Resources */ = {isa = PBXBuildFile; fileRef = 751A31E21AC0B96B003E8536 /* Init.txt */; };
-		751A321E1AC0CC05003E8536 /* GGSoundbank.bnk in Resources */ = {isa = PBXBuildFile; fileRef = 751A321C1AC0CC05003E8536 /* GGSoundbank.bnk */; };
-		751A321F1AC0CC05003E8536 /* GGSoundbank.txt in Resources */ = {isa = PBXBuildFile; fileRef = 751A321D1AC0CC05003E8536 /* GGSoundbank.txt */; };
-		751A32211AC0CC0B003E8536 /* GGSoundbank.bnk in Resources */ = {isa = PBXBuildFile; fileRef = 751A321C1AC0CC05003E8536 /* GGSoundbank.bnk */; };
-		751A32221AC0CC0B003E8536 /* GGSoundbank.txt in Resources */ = {isa = PBXBuildFile; fileRef = 751A321D1AC0CC05003E8536 /* GGSoundbank.txt */; };
 		751BCCD91A38D9D500F11D3D /* GGLandscape.png in Resources */ = {isa = PBXBuildFile; fileRef = 751BCCD71A38D9D500F11D3D /* GGLandscape.png */; };
 		751BCCDA1A38D9D500F11D3D /* GGPortrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 751BCCD81A38D9D500F11D3D /* GGPortrait.png */; };
 		751BCCEE1A38E0E100F11D3D /* Icon-40.png in Resources */ = {isa = PBXBuildFile; fileRef = 751BCCDB1A38E0E100F11D3D /* Icon-40.png */; };
@@ -110,6 +102,14 @@
 		758488601A02C24A005F0B48 /* ShipSelectionScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 7584885F1A02C24A005F0B48 /* ShipSelectionScene.m */; };
 		758488611A02C24A005F0B48 /* ShipSelectionScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 7584885F1A02C24A005F0B48 /* ShipSelectionScene.m */; };
 		758488621A02C24A005F0B48 /* ShipSelectionScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 7584885F1A02C24A005F0B48 /* ShipSelectionScene.m */; };
+		75AF22BE1AC1B0C2006CD8C8 /* GGSoundbank.bnk in Resources */ = {isa = PBXBuildFile; fileRef = 75AF22BA1AC1B0C2006CD8C8 /* GGSoundbank.bnk */; };
+		75AF22BF1AC1B0C2006CD8C8 /* GGSoundbank.bnk in Resources */ = {isa = PBXBuildFile; fileRef = 75AF22BA1AC1B0C2006CD8C8 /* GGSoundbank.bnk */; };
+		75AF22C01AC1B0C2006CD8C8 /* GGSoundbank.txt in Resources */ = {isa = PBXBuildFile; fileRef = 75AF22BB1AC1B0C2006CD8C8 /* GGSoundbank.txt */; };
+		75AF22C11AC1B0C2006CD8C8 /* GGSoundbank.txt in Resources */ = {isa = PBXBuildFile; fileRef = 75AF22BB1AC1B0C2006CD8C8 /* GGSoundbank.txt */; };
+		75AF22C21AC1B0C2006CD8C8 /* Init.bnk in Resources */ = {isa = PBXBuildFile; fileRef = 75AF22BC1AC1B0C2006CD8C8 /* Init.bnk */; };
+		75AF22C31AC1B0C2006CD8C8 /* Init.bnk in Resources */ = {isa = PBXBuildFile; fileRef = 75AF22BC1AC1B0C2006CD8C8 /* Init.bnk */; };
+		75AF22C41AC1B0C2006CD8C8 /* Init.txt in Resources */ = {isa = PBXBuildFile; fileRef = 75AF22BD1AC1B0C2006CD8C8 /* Init.txt */; };
+		75AF22C51AC1B0C2006CD8C8 /* Init.txt in Resources */ = {isa = PBXBuildFile; fileRef = 75AF22BD1AC1B0C2006CD8C8 /* Init.txt */; };
 		7A046D8C19E8A20E004C4763 /* MainMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = B7378993180767190076A88C /* MainMenu.m */; };
 		7A40360419DDEE84007B6E8F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A40360319DDEE84007B6E8F /* main.m */; };
 		7A4036E819DE3F33007B6E8F /* MainMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = B7378993180767190076A88C /* MainMenu.m */; };
@@ -383,10 +383,6 @@
 		751A31B71AC0B8A3003E8536 /* libCommunicationCentral.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libCommunicationCentral.a; path = Source/libs/Wwise/lib/libCommunicationCentral.a; sourceTree = "<group>"; };
 		751A31B81AC0B8A3003E8536 /* libMcDSPFutzBoxFX.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libMcDSPFutzBoxFX.a; path = Source/libs/Wwise/lib/libMcDSPFutzBoxFX.a; sourceTree = "<group>"; };
 		751A31B91AC0B8A3003E8536 /* libMcDSPLimiterFX.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libMcDSPLimiterFX.a; path = Source/libs/Wwise/lib/libMcDSPLimiterFX.a; sourceTree = "<group>"; };
-		751A31E11AC0B96B003E8536 /* Init.bnk */ = {isa = PBXFileReference; lastKnownFileType = file; path = Init.bnk; sourceTree = "<group>"; };
-		751A31E21AC0B96B003E8536 /* Init.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Init.txt; sourceTree = "<group>"; };
-		751A321C1AC0CC05003E8536 /* GGSoundbank.bnk */ = {isa = PBXFileReference; lastKnownFileType = file; path = GGSoundbank.bnk; sourceTree = "<group>"; };
-		751A321D1AC0CC05003E8536 /* GGSoundbank.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GGSoundbank.txt; sourceTree = "<group>"; };
 		751BCCD71A38D9D500F11D3D /* GGLandscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GGLandscape.png; sourceTree = "<group>"; };
 		751BCCD81A38D9D500F11D3D /* GGPortrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GGPortrait.png; sourceTree = "<group>"; };
 		751BCCDB1A38E0E100F11D3D /* Icon-40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-40.png"; sourceTree = "<group>"; };
@@ -411,6 +407,10 @@
 		7584885F1A02C24A005F0B48 /* ShipSelectionScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShipSelectionScene.m; sourceTree = "<group>"; };
 		758488641A02E3EB005F0B48 /* ShipSelectionScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShipSelectionScene.h; sourceTree = "<group>"; };
 		758488711A04310D005F0B48 /* PauseScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PauseScene.h; sourceTree = "<group>"; };
+		75AF22BA1AC1B0C2006CD8C8 /* GGSoundbank.bnk */ = {isa = PBXFileReference; lastKnownFileType = file; path = GGSoundbank.bnk; sourceTree = "<group>"; };
+		75AF22BB1AC1B0C2006CD8C8 /* GGSoundbank.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GGSoundbank.txt; sourceTree = "<group>"; };
+		75AF22BC1AC1B0C2006CD8C8 /* Init.bnk */ = {isa = PBXFileReference; lastKnownFileType = file; path = Init.bnk; sourceTree = "<group>"; };
+		75AF22BD1AC1B0C2006CD8C8 /* Init.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Init.txt; sourceTree = "<group>"; };
 		7A4035FF19DDEE84007B6E8F /* GalacticGuardian Mac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GalacticGuardian Mac.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A40360219DDEE84007B6E8F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Platforms/Mac/Info.plist; sourceTree = "<group>"; };
 		7A40360319DDEE84007B6E8F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Source/Platforms/Mac/main.m; sourceTree = "<group>"; };
@@ -672,10 +672,10 @@
 		751A31E01AC0B96B003E8536 /* WwiseContent */ = {
 			isa = PBXGroup;
 			children = (
-				751A31E11AC0B96B003E8536 /* Init.bnk */,
-				751A31E21AC0B96B003E8536 /* Init.txt */,
-				751A321C1AC0CC05003E8536 /* GGSoundbank.bnk */,
-				751A321D1AC0CC05003E8536 /* GGSoundbank.txt */,
+				75AF22BA1AC1B0C2006CD8C8 /* GGSoundbank.bnk */,
+				75AF22BB1AC1B0C2006CD8C8 /* GGSoundbank.txt */,
+				75AF22BC1AC1B0C2006CD8C8 /* Init.bnk */,
+				75AF22BD1AC1B0C2006CD8C8 /* Init.txt */,
 			);
 			path = WwiseContent;
 			sourceTree = "<group>";
@@ -1190,24 +1190,24 @@
 			buildActionMask = 2147483647;
 			files = (
 				D3EAD2C61A00B448002AA0D2 /* NebulaDebug.vsh in Resources */,
+				75AF22BF1AC1B0C2006CD8C8 /* GGSoundbank.bnk in Resources */,
 				B74895FE1A8BE4670064DB83 /* CCEffectLine.frag in Resources */,
 				751A318D1AC0B824003E8536 /* AkFilePackageLowLevelIO.inl in Resources */,
-				751A31E61AC0B96B003E8536 /* Init.bnk in Resources */,
 				D3450BC91A0213FD00E63B3A /* TempMusic.aac in Resources */,
 				D3A7E8F419FDCABE00695965 /* Nebula.vsh in Resources */,
 				D3ED616C19FF3B7400DF3A43 /* BurnSprite.fsh in Resources */,
 				D3450BC11A01FEB300E63B3A /* joystick.png in Resources */,
 				D3937FCA19FE1C410074009E /* DistortionParticle.vsh in Resources */,
 				D3937FC419FE1B2A0074009E /* DistortionParticle.fsh in Resources */,
-				751A31E81AC0B96B003E8536 /* Init.txt in Resources */,
-				751A32211AC0CC0B003E8536 /* GGSoundbank.bnk in Resources */,
 				D3450BC01A01FEB300E63B3A /* joystick.plist in Resources */,
+				75AF22C51AC1B0C2006CD8C8 /* Init.txt in Resources */,
 				D3A7E8F819FDCB5E00695965 /* Nebula.fsh in Resources */,
 				D3ED617019FF3B8000DF3A43 /* BurnSprite.vsh in Resources */,
 				7A59498B19E38E4A00F65F90 /* MainMenu.xib in Resources */,
-				751A32221AC0CC0B003E8536 /* GGSoundbank.txt in Resources */,
 				B748960D1A8BE4670064DB83 /* effects.png in Resources */,
 				D3A7E8E419FDC88600695965 /* NebulaDepth.png in Resources */,
+				75AF22C11AC1B0C2006CD8C8 /* GGSoundbank.txt in Resources */,
+				75AF22C31AC1B0C2006CD8C8 /* Init.bnk in Resources */,
 				751A31911AC0B824003E8536 /* AkMultipleFileLocation.inl in Resources */,
 				D34E99A21A82ABFD002FE5D9 /* NebulaClouds.png in Resources */,
 				D3EAD2C31A00B448002AA0D2 /* NebulaDebug.fsh in Resources */,
@@ -1246,6 +1246,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				75AF22C21AC1B0C2006CD8C8 /* Init.bnk in Resources */,
 				D3A7E8E219FDC88600695965 /* NebulaDepth.png in Resources */,
 				D3937FC219FE1B2A0074009E /* DistortionParticle.fsh in Resources */,
 				751BCCFA1A38E0E100F11D3D /* Icon-72@2x.png in Resources */,
@@ -1254,6 +1255,7 @@
 				751BCCDA1A38D9D500F11D3D /* GGPortrait.png in Resources */,
 				751BCCF51A38E0E100F11D3D /* Icon-Small.png in Resources */,
 				D3450BB71A01FEA100E63B3A /* joystick.plist in Resources */,
+				75AF22C41AC1B0C2006CD8C8 /* Init.txt in Resources */,
 				751BCCF61A38E0E100F11D3D /* Icon-Small@2x.png in Resources */,
 				751BCCF31A38E0E100F11D3D /* Icon-76.png in Resources */,
 				D3ED616E19FF3B8000DF3A43 /* BurnSprite.vsh in Resources */,
@@ -1276,21 +1278,19 @@
 				D3EAD2C41A00B448002AA0D2 /* NebulaDebug.vsh in Resources */,
 				D3A7E8F619FDCB5E00695965 /* Nebula.fsh in Resources */,
 				751BCCF01A38E0E100F11D3D /* Icon-40@3x.png in Resources */,
+				75AF22C01AC1B0C2006CD8C8 /* GGSoundbank.txt in Resources */,
 				D3EAD2C11A00B448002AA0D2 /* NebulaDebug.fsh in Resources */,
-				751A321F1AC0CC05003E8536 /* GGSoundbank.txt in Resources */,
 				D3450BC71A0213FD00E63B3A /* TempMusic.aac in Resources */,
 				751BCCF11A38E0E100F11D3D /* Icon-60@2x.png in Resources */,
 				751BCCEF1A38E0E100F11D3D /* Icon-40@2x.png in Resources */,
-				751A31E51AC0B96B003E8536 /* Init.bnk in Resources */,
 				D3450BB81A01FEA100E63B3A /* joystick.png in Resources */,
 				751BCCF41A38E0E100F11D3D /* Icon-76@2x.png in Resources */,
 				751A31901AC0B824003E8536 /* AkMultipleFileLocation.inl in Resources */,
+				75AF22BE1AC1B0C2006CD8C8 /* GGSoundbank.bnk in Resources */,
 				751BCD001A38E0E100F11D3D /* iTunesArtwork@2x.png in Resources */,
-				751A321E1AC0CC05003E8536 /* GGSoundbank.bnk in Resources */,
 				751BCCFB1A38E0E100F11D3D /* Icon-Small-50.png in Resources */,
 				751BCCFD1A38E0E100F11D3D /* Icon.png in Resources */,
 				751BCCF81A38E0E100F11D3D /* Icon-60.png in Resources */,
-				751A31E71AC0B96B003E8536 /* Init.txt in Resources */,
 				D3383ACE1A09BAD900E13478 /* Launch Screen.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

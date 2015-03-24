@@ -97,6 +97,8 @@
         CCWwise *w = [CCWwise sharedManager];
         [w registerGameObject:self];
         
+        [w postEvent:@"GameStart" forGameObject:self];
+
         CCNode *hud = [CCBReader load:@"HUD" owner:self];
 		[self addChild:hud z:Z_HUD];
 		
@@ -312,6 +314,8 @@ const float RocketAimLimit = 75.0f;
 
 -(void)update:(CCTime)delta
 {
+    [[CCWwise sharedManager] RenderAudio];
+       
 	self.scrollPosition = _playerPosition;
 	
 	// TODO
