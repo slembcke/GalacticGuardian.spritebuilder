@@ -128,9 +128,6 @@
 		D3450BBF1A01FEB200E63B3A /* joystick.png in Resources */ = {isa = PBXBuildFile; fileRef = D3450BB31A01FEA100E63B3A /* joystick.png */; };
 		D3450BC01A01FEB300E63B3A /* joystick.plist in Resources */ = {isa = PBXBuildFile; fileRef = D3450BB21A01FEA100E63B3A /* joystick.plist */; };
 		D3450BC11A01FEB300E63B3A /* joystick.png in Resources */ = {isa = PBXBuildFile; fileRef = D3450BB31A01FEA100E63B3A /* joystick.png */; };
-		D3450BC71A0213FD00E63B3A /* TempMusic.aac in Resources */ = {isa = PBXBuildFile; fileRef = D3450BC61A0213FD00E63B3A /* TempMusic.aac */; };
-		D3450BC81A0213FD00E63B3A /* TempMusic.aac in Resources */ = {isa = PBXBuildFile; fileRef = D3450BC61A0213FD00E63B3A /* TempMusic.aac */; };
-		D3450BC91A0213FD00E63B3A /* TempMusic.aac in Resources */ = {isa = PBXBuildFile; fileRef = D3450BC61A0213FD00E63B3A /* TempMusic.aac */; };
 		D3450BCC1A02EB8500E63B3A /* Rocket.m in Sources */ = {isa = PBXBuildFile; fileRef = D3450BCB1A02EB8500E63B3A /* Rocket.m */; };
 		D3450BCD1A02EB8500E63B3A /* Rocket.m in Sources */ = {isa = PBXBuildFile; fileRef = D3450BCB1A02EB8500E63B3A /* Rocket.m */; };
 		D3450BCE1A02EB8500E63B3A /* Rocket.m in Sources */ = {isa = PBXBuildFile; fileRef = D3450BCB1A02EB8500E63B3A /* Rocket.m */; };
@@ -148,6 +145,9 @@
 		D3937FC819FE1C410074009E /* DistortionParticle.vsh in Resources */ = {isa = PBXBuildFile; fileRef = D3937FC719FE1C410074009E /* DistortionParticle.vsh */; };
 		D3937FC919FE1C410074009E /* DistortionParticle.vsh in Resources */ = {isa = PBXBuildFile; fileRef = D3937FC719FE1C410074009E /* DistortionParticle.vsh */; };
 		D3937FCA19FE1C410074009E /* DistortionParticle.vsh in Resources */ = {isa = PBXBuildFile; fileRef = D3937FC719FE1C410074009E /* DistortionParticle.vsh */; };
+		D39E1DFC1AC7A9EE00655201 /* GalacticGuardian.m4a in Resources */ = {isa = PBXBuildFile; fileRef = D39E1DFB1AC7A9EE00655201 /* GalacticGuardian.m4a */; };
+		D39E1DFD1AC7A9EE00655201 /* GalacticGuardian.m4a in Resources */ = {isa = PBXBuildFile; fileRef = D39E1DFB1AC7A9EE00655201 /* GalacticGuardian.m4a */; };
+		D39E1DFE1AC7A9EE00655201 /* GalacticGuardian.m4a in Resources */ = {isa = PBXBuildFile; fileRef = D39E1DFB1AC7A9EE00655201 /* GalacticGuardian.m4a */; };
 		D3A7E8DA19FDC86000695965 /* NebulaBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A7E8D919FDC86000695965 /* NebulaBackground.m */; };
 		D3A7E8DB19FDC86000695965 /* NebulaBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A7E8D919FDC86000695965 /* NebulaBackground.m */; };
 		D3A7E8DC19FDC86000695965 /* NebulaBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A7E8D919FDC86000695965 /* NebulaBackground.m */; };
@@ -341,7 +341,6 @@
 		D3450BB31A01FEA100E63B3A /* joystick.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = joystick.png; sourceTree = "<group>"; };
 		D3450BB41A01FEA100E63B3A /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		D3450BB51A01FEA100E63B3A /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		D3450BC61A0213FD00E63B3A /* TempMusic.aac */ = {isa = PBXFileReference; lastKnownFileType = file; path = TempMusic.aac; sourceTree = "<group>"; };
 		D3450BCB1A02EB8500E63B3A /* Rocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Rocket.m; sourceTree = "<group>"; };
 		D3450BCF1A02EBA100E63B3A /* Rocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rocket.h; sourceTree = "<group>"; };
 		D34E999E1A82ABFD002FE5D9 /* NebulaClouds.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NebulaClouds.png; sourceTree = "<group>"; };
@@ -350,6 +349,7 @@
 		D3937FBD19FDD9AB0074009E /* NebulaBackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NebulaBackground.h; sourceTree = "<group>"; };
 		D3937FC119FE1B2A0074009E /* DistortionParticle.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = DistortionParticle.fsh; sourceTree = "<group>"; };
 		D3937FC719FE1C410074009E /* DistortionParticle.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = DistortionParticle.vsh; sourceTree = "<group>"; };
+		D39E1DFB1AC7A9EE00655201 /* GalacticGuardian.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = GalacticGuardian.m4a; sourceTree = "<group>"; };
 		D3A7E8D919FDC86000695965 /* NebulaBackground.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NebulaBackground.m; sourceTree = "<group>"; };
 		D3A7E8DE19FDC88600695965 /* NebulaDepth.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NebulaDepth.png; sourceTree = "<group>"; };
 		D3A7E8F119FDCABE00695965 /* Nebula.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Nebula.vsh; sourceTree = "<group>"; };
@@ -707,9 +707,9 @@
 		B77F1B4617B978D7009739AE /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D39E1DFB1AC7A9EE00655201 /* GalacticGuardian.m4a */,
 				D34E999E1A82ABFD002FE5D9 /* NebulaClouds.png */,
 				D34E999F1A82ABFD002FE5D9 /* Starfield.png */,
-				D3450BC61A0213FD00E63B3A /* TempMusic.aac */,
 				D3EAD2BF1A00B448002AA0D2 /* NebulaDebug.fsh */,
 				D3EAD2C01A00B448002AA0D2 /* NebulaDebug.vsh */,
 				D3A7E8DE19FDC88600695965 /* NebulaDepth.png */,
@@ -940,7 +940,6 @@
 			files = (
 				D3EAD2C61A00B448002AA0D2 /* NebulaDebug.vsh in Resources */,
 				B74895FE1A8BE4670064DB83 /* CCEffectLine.frag in Resources */,
-				D3450BC91A0213FD00E63B3A /* TempMusic.aac in Resources */,
 				D3A7E8F419FDCABE00695965 /* Nebula.vsh in Resources */,
 				D3ED616C19FF3B7400DF3A43 /* BurnSprite.fsh in Resources */,
 				D3450BC11A01FEB300E63B3A /* joystick.png in Resources */,
@@ -953,6 +952,7 @@
 				B748960D1A8BE4670064DB83 /* effects.png in Resources */,
 				D3A7E8E419FDC88600695965 /* NebulaDepth.png in Resources */,
 				D34E99A21A82ABFD002FE5D9 /* NebulaClouds.png in Resources */,
+				D39E1DFE1AC7A9EE00655201 /* GalacticGuardian.m4a in Resources */,
 				D3EAD2C31A00B448002AA0D2 /* NebulaDebug.fsh in Resources */,
 				D34E99A51A82ABFD002FE5D9 /* Starfield.png in Resources */,
 				7A4036F619DE3FFC007B6E8F /* Published-iOS in Resources */,
@@ -975,12 +975,12 @@
 				D3937FC919FE1C410074009E /* DistortionParticle.vsh in Resources */,
 				D3EAD2C51A00B448002AA0D2 /* NebulaDebug.vsh in Resources */,
 				B74895FD1A8BE4670064DB83 /* CCEffectLine.frag in Resources */,
+				D39E1DFD1AC7A9EE00655201 /* GalacticGuardian.m4a in Resources */,
 				D3A7E8F719FDCB5E00695965 /* Nebula.fsh in Resources */,
 				D3937FC319FE1B2A0074009E /* DistortionParticle.fsh in Resources */,
 				B74896031A8BE4670064DB83 /* CCEffectLine.vert in Resources */,
 				B748960C1A8BE4670064DB83 /* effects.png in Resources */,
 				D3EAD2C21A00B448002AA0D2 /* NebulaDebug.fsh in Resources */,
-				D3450BC81A0213FD00E63B3A /* TempMusic.aac in Resources */,
 				D3450BBF1A01FEB200E63B3A /* joystick.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1019,8 +1019,8 @@
 				D3A7E8F619FDCB5E00695965 /* Nebula.fsh in Resources */,
 				751BCCF01A38E0E100F11D3D /* Icon-40@3x.png in Resources */,
 				D3EAD2C11A00B448002AA0D2 /* NebulaDebug.fsh in Resources */,
-				D3450BC71A0213FD00E63B3A /* TempMusic.aac in Resources */,
 				751BCCF11A38E0E100F11D3D /* Icon-60@2x.png in Resources */,
+				D39E1DFC1AC7A9EE00655201 /* GalacticGuardian.m4a in Resources */,
 				751BCCEF1A38E0E100F11D3D /* Icon-40@2x.png in Resources */,
 				D3450BB81A01FEA100E63B3A /* joystick.png in Resources */,
 				751BCCF41A38E0E100F11D3D /* Icon-76@2x.png in Resources */,

@@ -71,7 +71,7 @@
 	[OALSimpleAudio sharedInstance].bgVolume = [defaults floatForKey:DefaultsMusicKey];
 	[OALSimpleAudio sharedInstance].effectsVolume = [defaults floatForKey:DefaultsSoundKey];
 	
-	[[OALSimpleAudio sharedInstance] playBg:@"TempMusic.aac" loop:YES];
+	[[OALSimpleAudio sharedInstance] playBg:@"GalacticGuardian.m4a" loop:YES];
 }
 
 -(void)didLoadFromCCB

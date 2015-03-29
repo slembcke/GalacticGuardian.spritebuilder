@@ -77,7 +77,7 @@
 		// _novaButton ivar is set by the CCB file, but wrapped in a regular node.
 		_novaButtonNode = (NovaBombButtonNode*)[CCBReader load:@"NovaButton" owner:self];
 		_novaButtonNode.positionType = br;
-		_novaButtonNode.position = ccp(novaButtonOffset, joystickOffset);
+		_novaButtonNode.position = ccp(joystickOffset, joystickOffset);
         _novaButtonNode.scale = joystickScale * 2;
 		[self addChild:_novaButtonNode];
 		
@@ -89,12 +89,14 @@
 		_virtualJoystick.positionType = bl;
 		_virtualJoystick.position = ccp(joystickOffset, joystickOffset);
 		[self addChild:_virtualJoystick];
+		_virtualJoystick.visible = NO;
 		
 		_virtualAimJoystick = [FancyJoystick node];
         _virtualAimJoystick.scale = joystickScale;
 		_virtualAimJoystick.positionType = br;
 		_virtualAimJoystick.position = ccp(joystickOffset, joystickOffset);
 		[self addChild:_virtualAimJoystick];
+		_virtualAimJoystick.visible = NO;
 		
 		_buttonStates = [NSMutableDictionary dictionary];
 		_buttonHandlers = [NSMutableDictionary dictionary];
@@ -122,7 +124,10 @@
 
 -(void)pausePressed:(NSUInteger)index
 {
-	if(index == 1){
+	if(index == 0){
+		[self setButtonValue:ControlPauseButton value:YES];
+		[self setButtonValue:ControlPauseButton value:NO];
+	} else {
 		[self setButtonValue:ControlJoinButton value:YES];
 		[self setButtonValue:ControlJoinButton value:NO];
 	}
