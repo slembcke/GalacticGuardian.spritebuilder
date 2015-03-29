@@ -87,6 +87,9 @@
 	PlayerShip *_playerShip2;
 	
 	CCSprite *_linkSprite;
+	
+	BOOL _autoPlay;
+	CCLabelBMFont *_autoPlayLabel;
 }
 
 -(instancetype)initWithShipType:(ShipType) shipType
@@ -207,6 +210,13 @@
 		
 		// Pump the update loop once to set the rocket reticle position._
 		[self update:0.0];
+		
+		// Set to no on the first input.
+		_autoPlay = YES;
+		_autoPlayLabel = [CCLabelBMFont labelWithString:@"READY PLAYER ONE!" fntFile:@"Fonts/GG.bmfont/GG.fnt"];
+		_autoPlayLabel.positionType = CCPositionTypeNormalized;
+		_autoPlayLabel.position = ccp(0.5, 0.35);
+		[self addChild:_autoPlayLabel z:10000];
 	}
 	
 	return self;
@@ -235,18 +245,45 @@
 {
 	_fixedTime += delta;
 	
+	CGPoint thrust1 = _controls.thrustDirection1;
+	CGPoint aim1 = _controls.aimDirection1;
+	
+	if(_autoPlay){
+		if(ccpLength(thrust1) > 0.5 || ccpLength(aim1) > 0.5){
+			_autoPlay = NO;
+			[_autoPlayLabel removeFromParent];
+		} else {
+			_autoPlayLabel.visible = (fmod(_fixedTime, 0.5) < 0.25);
+		}
+		
+		float closest = INFINITY;
+		CGPoint delta = CGPointZero;
+		for(EnemyShip *enemy in _enemies){
+			float dist = ccpDistance(_playerPosition, enemy.position);
+			if(150.0 > dist && dist < closest){
+				closest = dist;
+				delta = ccpSub(enemy.position, _playerPosition);
+			}
+		}
+		
+		if(!CGPointEqualToPoint(delta, CGPointZero)){
+			aim1 = ccpNormalize(delta);
+			thrust1 = ccpMult(ccpPerp(aim1), 0.6);
+		}
+	}
+	
 	// Send the joystick input to the ship.
-	[_playerShip1 ggFixedUpdate:delta withControls:_controls index:0];
+	[_playerShip1 ggFixedUpdate:delta thrust:thrust1 aim:aim1]; 
 	
 	if(_playerShip2){
-		[_playerShip2 ggFixedUpdate:delta withControls:_controls index:1];
+		[_playerShip2 ggFixedUpdate:delta thrust:_controls.thrustDirection2 aim:_controls.aimDirection2];
 		
 		_playerPosition = ccpLerp(_playerShip1.position, _playerShip2.position, 0.5);
 	} else {
 		_playerPosition = _playerShip1.position;
 	}
 	
-	if(ccpLength(_controls.aimDirection1) > 0.25){
+	if(ccpLength(aim1) > 0.25){
 		if(_playerShip1.lastFireTime + (1.0f / _playerShip1.fireRate) < _fixedTime){
 			[self fireBullet:_playerShip1];
 		}
