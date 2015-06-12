@@ -10,11 +10,15 @@
 #import "GameScene.h"
 #import "BurnTransition.h"
 #import "CCDirector_Private.h"
+#import "CCWwise.h"
 
 @implementation MadeWithSB
 
 - (void) onEnterTransitionDidFinish
 {
+    [[CCWwise sharedManager] postEvent:@"TransitionEnded"];
+
+    [[CCWwise sharedManager] setRTPCValue:@"TimeScale" to:1.0f];
     [CCDirector sharedDirector].scheduler.timeScale = 1.0f;
     
     [self scheduleBlock:^(CCTimer *timer){

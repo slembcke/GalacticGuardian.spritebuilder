@@ -136,7 +136,8 @@ VisitAll(CCNode *node, void (^block)(CCNode *))
 	const float deadZone = 0.25;
 	
 	CGPoint thrust = (index == 0 ? controls.thrustDirection1 : controls.thrustDirection2);
-	if(cpvlength(thrust) > deadZone){
+    float thrustLen = cpvlength(thrust);
+	if(thrustLen > deadZone){
 		float removeDeadZone = MAX(cpvlength(thrust) - deadZone, 0.0f)/(1.0 - deadZone);
 		CGPoint desiredVelocity = ccpMult(thrust, removeDeadZone*_speed);
 		
@@ -146,12 +147,15 @@ VisitAll(CCNode *node, void (^block)(CCNode *))
 		
 		_mainThruster.visible = YES;
 		
+        [[CCWwise sharedManager] setRTPCValue:@"PlayerEngine" to:thrustLen];
 //		if(!_engineNoise){
 //			_engineNoise = [[OALSimpleAudio sharedInstance] playEffect:@"Engine.wav" loop:YES];
 //		}
 //		
 //		_engineNoise.volume = ccpLength(joystickValue);
 	} else {
+        [[CCWwise sharedManager] setRTPCValue:@"PlayerEngine" to:0.0f];
+
 		_mainThruster.visible = NO;
 //		[_engineNoise stop]; _engineNoise = nil;
 	}
@@ -223,6 +227,9 @@ VisitAll(CCNode *node, void (^block)(CCNode *))
 {
 	_hp -= 1;
 	
+    [[CCWwise sharedManager] postEvent:@"PlayerTookDamage" forGameObject:self];
+    [[CCWwise sharedManager] setRTPCValue:@"PlayerHPPercentage" to:self.health];
+
 	[self flashShield];
 	
 	if(_hp == 1){
@@ -273,6 +280,7 @@ VisitAll(CCNode *node, void (^block)(CCNode *))
 	
 	// For dramatic effect. Killing the player sets off a nova explosion.
 	[scene novaBombAt:pos];
+    
 //	[[OALSimpleAudio sharedInstance] playEffect:@"TempSounds/Explosion.wav" volume:2.0 pitch:scene.pitchScale pan:0.0 loop:NO];
 	
     

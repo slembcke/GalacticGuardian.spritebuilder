@@ -97,6 +97,8 @@
         CCWwise *w = [CCWwise sharedManager];
         [w registerGameObject:self];
         
+        [[CCWwise sharedManager] postEvent:@"GameStart" forGameObject:self];
+
         CCNode *hud = [CCBReader load:@"HUD" owner:self];
 		[self addChild:hud z:Z_HUD];
 		
@@ -330,6 +332,7 @@ const float RocketAimLimit = 75.0f;
 	if(!_playerShip1.isDead){
 		CCScheduler *scheduler = [CCDirector sharedDirector].scheduler;
 		scheduler.timeScale = cpflerpconst(scheduler.timeScale, 1.0, 0.25*delta);
+        [[CCWwise sharedManager] setRTPCValue:@"TimeScale" to:scheduler.timeScale];
 	}
 	
 	if(_linkSprite){
@@ -357,6 +360,9 @@ const float RocketAimLimit = 75.0f;
 
 -(void)splashDamageAt:(CGPoint)center radius:(float)radius damage:(int)damage;
 {
+    
+    [[CCWwise sharedManager] postEvent:@"PlayerRocketExplode" forGameObject:self];
+    
 	// Iterate a copy of the array since enemies can be destroyed inside the loop.
 	for(EnemyShip *enemy in [_enemies copy]){
 		float dist = ccpDistance(center, enemy.position);
@@ -526,8 +532,6 @@ const float RocketAimLimit = 75.0f;
 //	int half_steps = (arc4random()%(2*4 + 1) - 4);
 //	float pitch = pow(2.0f, half_steps/12.0f);
     [[CCWwise sharedManager] postEvent:@"PlayerFireBullet" forGameObject:self];
-//
-//    [[OALSimpleAudio sharedInstance] playEffect:@"TempSounds/Laser.wav" volume:0.25 pitch:pitch pan:0.0 loop:NO];
 	
 	if(_rocketReticle.percentage == 100.0){
 		[self fireRocket:playerShip];
@@ -536,7 +540,7 @@ const float RocketAimLimit = 75.0f;
 
 -(void)fireRocket:(PlayerShip *)playerShip
 {
-	EnemyShip *target = [self rocketTarget:[self rocketAim:playerShip] limit:RocketAimLimit];
+    EnemyShip *target = [self rocketTarget:[self rocketAim:playerShip] limit:RocketAimLimit];
 	
 	if(
 		target == nil ||
@@ -573,6 +577,8 @@ const float RocketAimLimit = 75.0f;
 	_rocketReticle.color = [CCColor whiteColor];
 	_rocketReticle.opacity = 0.5;
 	
+    [[CCWwise sharedManager] postEvent:@"PlayerFiredRocket" forGameObject:self];
+    
 	// Use a timer to charge the reticle.
 	[self scheduleBlock:^(CCTimer *timer) {
 		_rocketReticle.percentage += 20.0;
@@ -596,11 +602,14 @@ const float RocketAimLimit = 75.0f;
 	if(self.novaBombs == 0 || [_playerShip1 isDead]) return;
 	self.novaBombs -= 1;
 	
+    [[CCWwise sharedManager] postEvent:@"PlayerDropNovaBomb" forGameObject:self];
+    
 	[self novaBombAt:_playerPosition];
 }
 
 -(void)novaBombAt:(CGPoint)pos
 {
+    
 	CCParticleSystem *distortion = (CCParticleSystem *)[CCBReader load:@"DistortionParticles/LargeRing"];
 	distortion.position = pos;
 	[_background.distortionNode addChild:distortion];
@@ -628,6 +637,7 @@ const float RocketAimLimit = 75.0f;
 	timer.repeatInterval = distortion.life/repeats;
 	
 	[CCDirector sharedDirector].scheduler.timeScale = 0.25;
+    [[CCWwise sharedManager] setRTPCValue:@"TimeScale" to:0.25f];
 }
 
 static NSArray *DebrisCollisionCategories = nil;
@@ -719,6 +729,9 @@ static const float PLAYER_MAX_DIST = 75;
 	CGPoint pos = ccpAdd(_playerShip1.position, ccp(PLAYER_MAX_DIST, 0.0));
 	_playerShip2 = [self replacePlayerShip:nil position:pos withArt:_playerShip1.name shipIndex:1];
 	[self connectShips];
+    
+    [[CCWwise sharedManager] postEvent:@"SecondPlayerJoined" forGameObject:self];
+
 }
 
 -(void)connectShips
@@ -1088,6 +1101,7 @@ static const float MaxBarWidth = 80.0;
 		
 		// Player took damage, the enemy should self destruct.
 		[self enemyDeath: enemy from:nil];
+ 
 		return YES;
 	}
 }
@@ -1096,6 +1110,8 @@ static const float MaxBarWidth = 80.0;
 {
 	[bullet destroy];
 	
+    [[CCWwise sharedManager] postEvent:@"PlayerBulletHitEnemy" forGameObject:self];
+
 	if([enemy takeDamage:1]){
 		[self enemyDeath:enemy from:bullet];
 	}
@@ -1105,12 +1121,16 @@ static const float MaxBarWidth = 80.0;
 
 -(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair bullet:(Bullet *)bullet asteroid:(CCNode *)asteroid
 {
+    [[CCWwise sharedManager] postEvent:@"PlayerBulletAsteroid" forGameObject:self];
+
 	[bullet destroy];
 	return NO;
 }
 
 -(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair rocket:(Rocket *)rocket wildcard:(CCNode *)node
 {
+    [[CCWwise sharedManager] postEvent:@"PlayerBulletHitOther" forGameObject:self];
+
 	[rocket destroy];
 	return NO;
 }
@@ -1121,8 +1141,6 @@ static const float MaxBarWidth = 80.0;
 	
 	[self drawFlash:pickup.position withImage:pickup.flashImage];
     [[CCWwise sharedManager] postEvent:@"Pickup" forGameObject:self];
-
-    //[[OALSimpleAudio sharedInstance] playEffect:@"TempSounds/Pickup.wav" volume:0.25 pitch:1.0 pan:0.0 loop:NO];
 	
 	int amount = [pickup amount];
 	_points += amount;

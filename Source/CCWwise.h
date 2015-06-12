@@ -32,7 +32,12 @@
 + (CCWwise *) sharedManager;
 
 - (void) registerGameObject:(CCNode *) n;
+- (void) unregisterGameObject:(CCNode *) n;
+
+- (void) setRTPCValue:(NSString *) eventName to:(float ) f;
+
 - (void) postEvent:(NSString *) eventName forGameObject:(CCNode *) n;
+- (void) postEvent:(NSString *) eventName;
 - (BOOL) loadBank:(NSString *)soundBankFile;
 - (void) RenderAudio;
 - (void) terminate;

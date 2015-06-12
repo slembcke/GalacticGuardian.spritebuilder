@@ -23,7 +23,7 @@
  */
 
 #include "BurnTransition.h"
-
+#import "CCWwise.h"
 
 @interface CCTransition()
 - (void)startTransition:(CCScene *)scene;
@@ -42,7 +42,10 @@
 - (void)startTransition:(CCScene *)scene
 {
 	[super startTransition:scene];
-	
+
+    [[CCWwise sharedManager] postEvent:@"BurnTransitionStarted"];
+
+    
 	// Force the BurnSprite class to be loaded since we use the shader and global shader uniforms set there.
 	[NSClassFromString(@"BurnSprite") class];
 	

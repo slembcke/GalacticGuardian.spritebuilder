@@ -194,9 +194,6 @@
 		D3450BBF1A01FEB200E63B3A /* joystick.png in Resources */ = {isa = PBXBuildFile; fileRef = D3450BB31A01FEA100E63B3A /* joystick.png */; };
 		D3450BC01A01FEB300E63B3A /* joystick.plist in Resources */ = {isa = PBXBuildFile; fileRef = D3450BB21A01FEA100E63B3A /* joystick.plist */; };
 		D3450BC11A01FEB300E63B3A /* joystick.png in Resources */ = {isa = PBXBuildFile; fileRef = D3450BB31A01FEA100E63B3A /* joystick.png */; };
-		D3450BC71A0213FD00E63B3A /* TempMusic.aac in Resources */ = {isa = PBXBuildFile; fileRef = D3450BC61A0213FD00E63B3A /* TempMusic.aac */; };
-		D3450BC81A0213FD00E63B3A /* TempMusic.aac in Resources */ = {isa = PBXBuildFile; fileRef = D3450BC61A0213FD00E63B3A /* TempMusic.aac */; };
-		D3450BC91A0213FD00E63B3A /* TempMusic.aac in Resources */ = {isa = PBXBuildFile; fileRef = D3450BC61A0213FD00E63B3A /* TempMusic.aac */; };
 		D3450BCC1A02EB8500E63B3A /* Rocket.m in Sources */ = {isa = PBXBuildFile; fileRef = D3450BCB1A02EB8500E63B3A /* Rocket.m */; };
 		D3450BCD1A02EB8500E63B3A /* Rocket.m in Sources */ = {isa = PBXBuildFile; fileRef = D3450BCB1A02EB8500E63B3A /* Rocket.m */; };
 		D3450BCE1A02EB8500E63B3A /* Rocket.m in Sources */ = {isa = PBXBuildFile; fileRef = D3450BCB1A02EB8500E63B3A /* Rocket.m */; };
@@ -472,7 +469,6 @@
 		D3450BB31A01FEA100E63B3A /* joystick.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = joystick.png; sourceTree = "<group>"; };
 		D3450BB41A01FEA100E63B3A /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		D3450BB51A01FEA100E63B3A /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		D3450BC61A0213FD00E63B3A /* TempMusic.aac */ = {isa = PBXFileReference; lastKnownFileType = file; path = TempMusic.aac; sourceTree = "<group>"; };
 		D3450BCB1A02EB8500E63B3A /* Rocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Rocket.m; sourceTree = "<group>"; };
 		D3450BCF1A02EBA100E63B3A /* Rocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rocket.h; sourceTree = "<group>"; };
 		D34E999E1A82ABFD002FE5D9 /* NebulaClouds.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NebulaClouds.png; sourceTree = "<group>"; };
@@ -960,7 +956,6 @@
 				751A31E01AC0B96B003E8536 /* WwiseContent */,
 				D34E999E1A82ABFD002FE5D9 /* NebulaClouds.png */,
 				D34E999F1A82ABFD002FE5D9 /* Starfield.png */,
-				D3450BC61A0213FD00E63B3A /* TempMusic.aac */,
 				D3EAD2BF1A00B448002AA0D2 /* NebulaDebug.fsh */,
 				D3EAD2C01A00B448002AA0D2 /* NebulaDebug.vsh */,
 				D3A7E8DE19FDC88600695965 /* NebulaDepth.png */,
@@ -1237,7 +1232,6 @@
 				B74896031A8BE4670064DB83 /* CCEffectLine.vert in Resources */,
 				B748960C1A8BE4670064DB83 /* effects.png in Resources */,
 				D3EAD2C21A00B448002AA0D2 /* NebulaDebug.fsh in Resources */,
-				D3450BC81A0213FD00E63B3A /* TempMusic.aac in Resources */,
 				D3450BBF1A01FEB200E63B3A /* joystick.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

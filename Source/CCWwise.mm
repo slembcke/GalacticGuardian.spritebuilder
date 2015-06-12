@@ -153,7 +153,9 @@ static CCWwise *shared;
         }
         
         NSLog(@"Successfully started wwise.");
-    }
+
+        AK::SoundEngine::RegisterGameObj( (AkGameObjectID) self, [@"Wwise shared manager" UTF8String] );
+        }
     
     return shared;
 }
@@ -161,6 +163,8 @@ static CCWwise *shared;
 - (void) terminate
 {
     NSLog(@"terminating sound engine.");
+    
+    AK::Comm::Term();
     
     AK::MusicEngine::Term();
     AK::SoundEngine::Term();
@@ -187,9 +191,25 @@ static CCWwise *shared;
      AK::SoundEngine::RegisterGameObj( (AkGameObjectID) n, [n.name UTF8String] );
 }
 
+
+- (void) unregisterGameObject:(CCNode *) n
+{
+    AK::SoundEngine::UnregisterGameObj((AkGameObjectID) n);
+}
+
 - (void) postEvent:(NSString *) eventName forGameObject:(CCNode *) n
 {
     AK::SoundEngine::PostEvent( [eventName UTF8String], (AkGameObjectID) n );
+}
+
+- (void) postEvent:(NSString *) eventName
+{
+    AK::SoundEngine::PostEvent( [eventName UTF8String], (AkGameObjectID) self );
+}
+
+- (void) setRTPCValue:(NSString *) eventName to:(float ) f
+{
+    AK::SoundEngine::SetRTPCValue( [eventName UTF8String], (AkRtpcValue) f );
 }
 
 - (BOOL) loadBank:(NSString *)soundBankFile

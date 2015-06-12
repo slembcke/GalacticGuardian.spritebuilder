@@ -140,7 +140,7 @@ static NSArray *CollisionMask = nil;
 }
 
 -(BOOL) takeDamage:(int)damage
-{
+{    
 	_hp -= damage;
 	return _hp <= 0;
 }
@@ -202,10 +202,8 @@ static NSArray *CollisionMask = nil;
 			[distortion removeFromParent];
 		} delay:3.0];
 		
-        [[CCWwise sharedManager] registerGameObject:self];
-        [[CCWwise sharedManager] postEvent:@"EnemyExplode" forGameObject:self];
+        [[CCWwise sharedManager] postEvent:@"EnemyExplode"];
         
-//		[[OALSimpleAudio sharedInstance] playEffect:@"TempSounds/Explosion.wav" volume:2.0 pitch:scene.pitchScale pan:0.0 loop:NO];
 		[scene glowLight:pos intensity:1.0 duration:0.25];
 		
 		[scene poolObject:self];

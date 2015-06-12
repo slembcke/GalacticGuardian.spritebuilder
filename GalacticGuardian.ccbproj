@@ -39,7 +39,7 @@
 	<key>publishDirectoryAndroid</key>
 	<string>Source/Resources/Published-Android</string>
 	<key>publishEnabledAndroid</key>
-	<true/>
+	<false/>
 	<key>publishEnablediPhone</key>
 	<true/>
 	<key>publishEnvironment</key>
@@ -55,7 +55,7 @@
 	<key>publishResolution_ios_phone</key>
 	<false/>
 	<key>publishResolution_ios_phonehd</key>
-	<true/>
+	<false/>
 	<key>publishResolution_ios_tablet</key>
 	<false/>
 	<key>publishResolution_ios_tablethd</key>
