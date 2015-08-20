@@ -16,3 +16,7 @@ Here is a not-quite-up-to-date video:
 https://www.youtube.com/watch?v=w_V7Yba04Ks
 
 More info to come soon...
+
+## Credits
+
+Art created by Erin Fusco and Rex Ma.
